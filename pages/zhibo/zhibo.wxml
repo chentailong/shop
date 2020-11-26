@@ -1,0 +1,24 @@
+<!--pages/zhibo/zhibo.wxml-->
+<view class="page">
+<include src="/components/common/common"></include>
+  <view class="body">
+    <view class="zuiwai" wx:for="{{zhiboList}}" wx:for-item="item" bindtap="dakai" data-id="{{item.roomid}}">
+      <image class="datu" src="{{item.cover_img}}" />
+      <view class="fj_name">{{item.name}}</view>
+      <view class="neirong">
+        <p wx:if="{{item.live_status==101}}" style="color: rgb(109, 247, 109) !important;">直播中</p>
+        <p wx:elif="{{item.live_status==102}}" style="color: rgb(109, 247, 109) !important;">未开始</p>
+        <p wx:elif="{{item.live_status==103}}" style="color: rgb(109, 247, 109) !important;">重播</p>
+        <p wx:elif="{{item.live_status==105}}" style="color: rgb(109, 247, 109) !important;">暂停</p>
+        <p>房间号：{{item.roomid}}</p>
+        <p>主  播：{{item.anchor_name}}</p>
+      </view>
+    </view>
+    <view class="no-data-tip" wx:if="{{!zhiboList.length}}">
+            <view class="no-data-icon flex-y-center flex-x-center">
+                <image src="../../images/icon-comment-score-1.png" style="width: 81rpx;height: 81rpx"></image>
+            </view>
+            <view>没有直播间。。。。。</view>
+        </view>
+  </view>
+</view>
