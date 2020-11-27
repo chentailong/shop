@@ -44,7 +44,7 @@
             </navigator>
             <view bindtap="showPayment" class="flex-row flex-y-center" style="background: #fff;padding: 0 24rpx;height: 90rpx;border-bottom: 1rpx solid #e3e3e3;margin-bottom: 20rpx;">
                 <view class="flex-grow-1">支付方式</view>
-                <view class="flex-grow-0" wx:if="{{payment==0}}">线上支付</view>
+                <view class="flex-grow-0" wx:if="{{payment==1}}">线上支付</view>
                 <view class="flex-grow-0" wx:if="{{payment==2}}">货到付款</view>
                 <view class="flex-grow-0" wx:if="{{payment==3}}">账户余额支付</view>
                 <view class="flex-grow-0">

@@ -1,4 +1,4 @@
-var interval = 0, page_first_init = !0, timer = 1, fullScreen = !1, page_first = [];
+    var interval = 0, page_first_init = !0, timer = 1, fullScreen = !1, page_first = [];
 
 Page({
     data: {
