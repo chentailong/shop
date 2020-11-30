@@ -3,6 +3,11 @@
   "packOptions": {
     "ignore": []
   },
+  "permissions": {
+    "openapi": [
+      "subscribeMessage"
+    ]
+  },
   "setting": {
     "urlCheck": true,
     "es6": true,

@@ -26,6 +26,7 @@
                 </block>
             </view>
         </form>
+
         <view class="{{show_card?'no-scroll':''}} {{show_shop||show_coupon_picker||show_card?'hidden':''}}" style="padding-bottom: 129rpx">
             <navigator class="flex-row address-picker" url="/pages/address-picker/address-picker" wx:if="{{offline==0}}">
                 <view class="flex-grow-1" wx:if="{{address}}">
