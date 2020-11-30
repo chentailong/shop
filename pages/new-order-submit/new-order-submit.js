@@ -107,6 +107,18 @@ Page({
         }), !1;
         1 == e.data.integral_radio ? a.use_integral = 1 : a.use_integral = 2, a.payment = e.data.payment, 
         a.formId = t.detail.formId, e.order_submit(a, "s");
+        //新增
+        wx.requestSubscribeMessage({
+            tmplIds: ['9_o1f7zU4g42YEIl-8jjkZePvNVoJC_so5Y8GsbOVLA'],
+            success (res) {
+                console.log(res)
+                console.log('成功')
+            },
+            fail(err) {
+                console.log(err)
+                console.log('失败')
+            }
+        })
     },
     onReady: function() {},
     onShow: function(t) {
