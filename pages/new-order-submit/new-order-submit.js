@@ -13,34 +13,48 @@ Page({
         show_payment: !1,
         show_more: !1,
         index: -1,
-        mch_offline: !0
+        mch_offline: !0,
+        _access_token: '',
+        time: ''
     },
-    onLoad: function(t) {
+    onLoad: function (t) {
+        console.log(this.data)
         getApp().page.onLoad(this, t);
         var e = util.formatData(new Date());
         getApp().core.removeStorageSync(getApp().const.INPUT_DATA), this.setData({
             options: t,
             time: e
         }), is_loading_show = !1;
+        var that = this;
+        var appid = 'wx257210a837db11b0';
+        var appsecret = '512c724e265ce71c6868ba0aa0636bd3'
+        var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appid + '&secret=' + appsecret;
+        wx.request({
+            url,
+            success(res) {
+                console.log(res.data.access_token)
+                that.data._access_token = res.data.access_token
+            }
+        })
     },
-    bindContentInput: function(t) {
+    bindContentInput: function (t) {
         this.data.mch_list[t.currentTarget.dataset.index].content = t.detail.value, this.setData({
             mch_list: this.data.mch_list
         });
     },
-    KeyName: function(t) {
+    KeyName: function (t) {
         var e = this.data.mch_list;
         e[t.currentTarget.dataset.index].offline_name = t.detail.value, this.setData({
             mch_list: e
         });
     },
-    KeyMobile: function(t) {
+    KeyMobile: function (t) {
         var e = this.data.mch_list;
         e[t.currentTarget.dataset.index].offline_mobile = t.detail.value, this.setData({
             mch_list: e
         });
     },
-    getOffline: function(t) {
+    getOffline: function (t) {
         var e = this, a = t.currentTarget.dataset.offline, i = t.currentTarget.dataset.index, o = e.data.mch_list;
         o[i].offline = a, e.setData({
             mch_list: o
@@ -50,14 +64,14 @@ Page({
             mch_offline: !0
         }), e.getPrice();
     },
-    dingwei: function() {
+    dingwei: function () {
         var e = this;
         getApp().getauth({
             content: "需要获取您的地理位置授权，请到小程序设置中打开授权",
             author: "scope.userLocation",
-            success: function(t) {
+            success: function (t) {
                 t && (t.authSetting["scope.userLocation"] ? getApp().core.chooseLocation({
-                    success: function(t) {
+                    success: function (t) {
                         longitude = t.longitude, latitude = t.latitude, e.setData({
                             location: t.address
                         }), e.getOrderData(e.data.options);
@@ -69,7 +83,7 @@ Page({
             }
         });
     },
-    orderSubmit: function(t) {
+    orderSubmit: function (t) {
         var e = this, a = {}, i = e.data.mch_list;
         for (var o in i) {
             var s = i[o].form;
@@ -105,14 +119,46 @@ Page({
         } else if (-1 == e.data.payment) return e.setData({
             show_payment: !0
         }), !1;
-        1 == e.data.integral_radio ? a.use_integral = 1 : a.use_integral = 2, a.payment = e.data.payment, 
-        a.formId = t.detail.formId, e.order_submit(a, "s");
+        1 == e.data.integral_radio ? a.use_integral = 1 : a.use_integral = 2, a.payment = e.data.payment,
+            a.formId = t.detail.formId, e.order_submit(a, "s");
         //新增
+        var that = this;
+        var token = that.data._access_token
+        var money = that.data.new_total_price
+        var times = that.data.time
+        console.log(times)
+        var open_Id = 'o7RSe4vjs8_0pVlTTQn8Y8C1VIvo'
+        let url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + token
         wx.requestSubscribeMessage({
-            tmplIds: ['9_o1f7zU4g42YEIl-8jjkZePvNVoJC_so5Y8GsbOVLA'],
-            success (res) {
+            tmplIds: ['9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s'],
+            success(res) {
                 console.log(res)
                 console.log('成功')
+                let jsonData = {
+                    access_token: token,
+                    touser: open_Id,
+                    template_id: '9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s',
+                    page: "pages/new-order-submit/new-order-submit",
+                    data: {
+                        "amount1": {"value": money },
+                        "date2": {"value": times },
+                        "character_string3": {"value": "2351231231"},
+                        "character_string7": {"value": "0"},
+                        "thing8": {"value": "支付成功"},
+                    },
+                    miniprogram_state: 'developer',
+                }
+                wx.request({
+                    url: url,
+                    data: jsonData,
+                    method: 'POST',
+                    success(res) {
+                        console.log(res.data.errcode)
+                    },
+                    complete(e) {
+                        console.log(e)
+                    }
+                })
             },
             fail(err) {
                 console.log(err)
@@ -120,8 +166,9 @@ Page({
             }
         })
     },
-    onReady: function() {},
-    onShow: function(t) {
+    onReady: function () {
+    },
+    onShow: function (t) {
         if (!is_loading_show) {
             is_loading_show = !0, getApp().page.onShow(this);
             var e = this, a = getApp().core.getStorageSync(getApp().const.PICKER_ADDRESS);
@@ -130,21 +177,22 @@ Page({
             }), e.getOrderData(e.data.options);
         }
     },
-    getOrderData: function(t) {
+    getOrderData: function (t) {
         var _ = this, e = {}, a = "";
-        _.data.address && _.data.address.id && (a = _.data.address.id), e.address_id = a, 
-        e.longitude = longitude, e.latitude = latitude, getApp().core.showLoading({
+        _.data.address && _.data.address.id && (a = _.data.address.id), e.address_id = a,
+            e.longitude = longitude, e.latitude = latitude, getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), e.mch_list = t.mch_list, getApp().request({
             url: getApp().api.order.new_submit_preview,
             method: "POST",
             data: e,
-            success: function(t) {
+            success: function (t) {
                 if (getApp().core.hideLoading(), 0 == t.code) {
-                    var e = getApp().core.getStorageSync(getApp().const.INPUT_DATA), a = t.data, i = -1, o = 1, s = a.mch_list, n = [];
-                    for (var r in e && (n = e.mch_list, i = e.payment, o = e.integral_radio), a.integral_radio = o, 
-                    a.pay_type_list) {
+                    var e = getApp().core.getStorageSync(getApp().const.INPUT_DATA), a = t.data, i = -1, o = 1,
+                        s = a.mch_list, n = [];
+                    for (var r in e && (n = e.mch_list, i = e.payment, o = e.integral_radio), a.integral_radio = o,
+                        a.pay_type_list) {
                         if (i == a.pay_type_list[r].payment) {
                             a.payment = i;
                             break;
@@ -156,9 +204,9 @@ Page({
                     }
                     for (var r in s) {
                         var c = {}, p = {};
-                        if (s[r].show = !1, s[r].show_length = s[r].goods_list.length - 1, 0 != n.length) for (var d in n) s[r].mch_id == n[d].mch_id && (s[r].content = n[d].content, 
-                        s[r].form = n[d].form, c = n[d].shop, p = n[d].picker_coupon, s[r].offline_name = n[d].offline_name, 
-                        s[r].offline_mobile = n[d].offline_mobile);
+                        if (s[r].show = !1, s[r].show_length = s[r].goods_list.length - 1, 0 != n.length) for (var d in n) s[r].mch_id == n[d].mch_id && (s[r].content = n[d].content,
+                            s[r].form = n[d].form, c = n[d].shop, p = n[d].picker_coupon, s[r].offline_name = n[d].offline_name,
+                            s[r].offline_mobile = n[d].offline_mobile);
                         for (var d in s[r].shop_list) {
                             if (c && c.id == s[r].shop_list[d].id) {
                                 s[r].shop = c;
@@ -193,7 +241,7 @@ Page({
                     content: t.msg,
                     showCancel: !1,
                     confirmText: "返回",
-                    success: function(t) {
+                    success: function (t) {
                         t.confirm && getApp().core.navigateBack({
                             delta: 1
                         });
@@ -202,7 +250,7 @@ Page({
             }
         });
     },
-    showCouponPicker: function(t) {
+    showCouponPicker: function (t) {
         var e = t.currentTarget.dataset.index, a = this.data.mch_list;
         this.getInputData(), a[e].coupon_list && 0 < a[e].coupon_list.length && this.setData({
             show_coupon_picker: !0,
@@ -210,32 +258,34 @@ Page({
             index: e
         });
     },
-    pickCoupon: function(t) {
-        var e = t.currentTarget.dataset.index, a = this.data.index, i = getApp().core.getStorageSync(getApp().const.INPUT_DATA);
+    pickCoupon: function (t) {
+        var e = t.currentTarget.dataset.index, a = this.data.index,
+            i = getApp().core.getStorageSync(getApp().const.INPUT_DATA);
         getApp().core.removeStorageSync(getApp().const.INPUT_DATA);
         var o = i.mch_list;
-        o[a].picker_coupon = "-1" != e && -1 != e && this.data.coupon_list[e], i.show_coupon_picker = !1, 
-        i.mch_list = o, i.index = -1, this.setData(i), this.getPrice();
+        o[a].picker_coupon = "-1" != e && -1 != e && this.data.coupon_list[e], i.show_coupon_picker = !1,
+            i.mch_list = o, i.index = -1, this.setData(i), this.getPrice();
     },
-    showShop: function(t) {
+    showShop: function (t) {
         var e = t.currentTarget.dataset.index;
         this.getInputData(), this.setData({
             index: e
         }), this.dingwei();
     },
-    pickShop: function(t) {
-        var e = t.currentTarget.dataset.index, a = this.data.index, i = getApp().core.getStorageSync(getApp().const.INPUT_DATA), o = i.mch_list;
-        o[a].shop = "-1" != e && -1 != e && this.data.shop_list[e], i.show_shop = !1, i.mch_list = o, 
-        i.index = -1, this.setData(i), this.getPrice();
+    pickShop: function (t) {
+        var e = t.currentTarget.dataset.index, a = this.data.index,
+            i = getApp().core.getStorageSync(getApp().const.INPUT_DATA), o = i.mch_list;
+        o[a].shop = "-1" != e && -1 != e && this.data.shop_list[e], i.show_shop = !1, i.mch_list = o,
+            i.index = -1, this.setData(i), this.getPrice();
     },
-    integralSwitchChange: function(t) {
+    integralSwitchChange: function (t) {
         0 != t.detail.value ? this.setData({
             integral_radio: 1
         }) : this.setData({
             integral_radio: 2
         }), this.getPrice();
     },
-    integration: function(t) {
+    integration: function (t) {
         var e = this.data.integral.integration;
         getApp().core.showModal({
             title: "积分使用规则",
@@ -243,29 +293,29 @@ Page({
             showCancel: !1,
             confirmText: "我知道了",
             confirmColor: "#ff4544",
-            success: function(t) {
+            success: function (t) {
                 t.confirm;
             }
         });
     },
-    contains: function(t, e) {
-        for (var a = t.length; a--; ) if (t[a] == e) return a;
+    contains: function (t, e) {
+        for (var a = t.length; a--;) if (t[a] == e) return a;
         return -1;
     },
-    getPrice: function() {
-        var o = this, t = o.data.mch_list, e = o.data.integral_radio, a = (o.data.integral, 
-        0), i = 0, s = {}, n = 0;
+    getPrice: function () {
+        var o = this, t = o.data.mch_list, e = o.data.integral_radio, a = (o.data.integral,
+            0), i = 0, s = {}, n = 0;
         for (var r in t) {
             var c = t[r], p = (parseFloat(c.total_price), parseFloat(c.level_price)), d = t[r].goods_list;
-            n = 0, c.picker_coupon && 0 < c.picker_coupon.sub_price && (1 == c.picker_coupon.appoint_type && null != c.picker_coupon.cat_id_list ? d.forEach(function(t, e, a) {
+            n = 0, c.picker_coupon && 0 < c.picker_coupon.sub_price && (1 == c.picker_coupon.appoint_type && null != c.picker_coupon.cat_id_list ? d.forEach(function (t, e, a) {
                 for (var i in t.cat_id) {
                     -1 != o.contains(c.picker_coupon.cat_id_list, t.cat_id[i]) && (n += parseFloat(t.price));
                 }
-            }) : 2 == c.picker_coupon.appoint_type && null != c.picker_coupon.goods_id_list && d.forEach(function(t, e, a) {
+            }) : 2 == c.picker_coupon.appoint_type && null != c.picker_coupon.goods_id_list && d.forEach(function (t, e, a) {
                 -1 != o.contains(c.picker_coupon.goods_id_list, t.goods_id) && (n += parseFloat(t.price));
-            }), c.picker_coupon.sub_price > n && 0 < n ? p -= parseFloat(n) : p -= c.picker_coupon.sub_price), 
-            c.integral && 0 < c.integral.forehead && 1 == e && (p -= parseFloat(c.integral.forehead)), 
-            0 == c.offline && (c.express_price && (p += c.express_price), c.offer_rule && 1 == c.offer_rule.is_allowed && (s = c.offer_rule), 
+            }), c.picker_coupon.sub_price > n && 0 < n ? p -= parseFloat(n) : p -= c.picker_coupon.sub_price),
+            c.integral && 0 < c.integral.forehead && 1 == e && (p -= parseFloat(c.integral.forehead)),
+            0 == c.offline && (c.express_price && (p += c.express_price), c.offer_rule && 1 == c.offer_rule.is_allowed && (s = c.offer_rule),
             1 == c.is_area && (i = 1)), a += parseFloat(p);
         }
         a = 0 <= a ? a : 0, o.setData({
@@ -274,55 +324,57 @@ Page({
             is_area: i
         });
     },
-    cardDel: function() {
+    cardDel: function () {
         this.setData({
             show_card: !1
         }), getApp().core.redirectTo({
             url: "/pages/order/order?status=1"
         });
     },
-    cardTo: function() {
+    cardTo: function () {
         this.setData({
             show_card: !1
         }), getApp().core.redirectTo({
             url: "/pages/card/card"
         });
     },
-    formInput: function(t) {
-        var e = t.currentTarget.dataset.index, a = t.currentTarget.dataset.formId, i = this.data.mch_list, o = i[e].form, s = o.list;
+    formInput: function (t) {
+        var e = t.currentTarget.dataset.index, a = t.currentTarget.dataset.formId, i = this.data.mch_list,
+            o = i[e].form, s = o.list;
         s[a].default = t.detail.value, o.list = s, this.setData({
             mch_list: i
         });
     },
-    selectForm: function(t) {
-        var e = this.data.mch_list, a = t.currentTarget.dataset.index, i = t.currentTarget.dataset.formId, o = t.currentTarget.dataset.k, s = e[a].form, n = s.list, r = n[i].default_list;
+    selectForm: function (t) {
+        var e = this.data.mch_list, a = t.currentTarget.dataset.index, i = t.currentTarget.dataset.formId,
+            o = t.currentTarget.dataset.k, s = e[a].form, n = s.list, r = n[i].default_list;
         if ("radio" == n[i].type) {
             for (var c in r) c == o ? r[o].is_selected = 1 : r[c].is_selected = 0;
             n[i].default_list = r;
         }
-        "checkbox" == n[i].type && (1 == r[o].is_selected ? r[o].is_selected = 0 : r[o].is_selected = 1, 
-        n[i].default_list = r), s.list = n, e[a].form = s, this.setData({
+        "checkbox" == n[i].type && (1 == r[o].is_selected ? r[o].is_selected = 0 : r[o].is_selected = 1,
+            n[i].default_list = r), s.list = n, e[a].form = s, this.setData({
             mch_list: e
         });
     },
-    showPayment: function() {
+    showPayment: function () {
         this.setData({
             show_payment: !0
         });
     },
-    payPicker: function(t) {
+    payPicker: function (t) {
         var e = t.currentTarget.dataset.index;
         this.setData({
             payment: e,
             show_payment: !1
         });
     },
-    payClose: function() {
+    payClose: function () {
         this.setData({
             show_payment: !1
         });
     },
-    getInputData: function() {
+    getInputData: function () {
         var t = this.data.mch_list, e = {
             integral_radio: this.data.integral_radio,
             payment: this.data.payment,
@@ -330,45 +382,46 @@ Page({
         };
         getApp().core.setStorageSync(getApp().const.INPUT_DATA, e);
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this);
         this.getInputData();
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this), getApp().core.removeStorageSync(getApp().const.INPUT_DATA);
     },
-    uploadImg: function(t) {
-        var e = this, a = t.currentTarget.dataset.index, i = t.currentTarget.dataset.formId, o = e.data.mch_list, s = o[a].form;
+    uploadImg: function (t) {
+        var e = this, a = t.currentTarget.dataset.index, i = t.currentTarget.dataset.formId, o = e.data.mch_list,
+            s = o[a].form;
         is_loading_show = !0, getApp().uploader.upload({
-            start: function() {
+            start: function () {
                 getApp().core.showLoading({
                     title: "正在上传",
                     mask: !0
                 });
             },
-            success: function(t) {
+            success: function (t) {
                 0 == t.code ? (s.list[i].default = t.data.url, e.setData({
                     mch_list: o
                 })) : e.showToast({
                     title: t.msg
                 });
             },
-            error: function(t) {
+            error: function (t) {
                 e.showToast({
                     title: t
                 });
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading();
             }
         });
     },
-    goToAddress: function() {
+    goToAddress: function () {
         is_loading_show = !1, getApp().core.navigateTo({
             url: "/pages/address-picker/address-picker"
         });
     },
-    showMore: function(t) {
+    showMore: function (t) {
         var e = this.data.mch_list, a = t.currentTarget.dataset.index;
         e[a].show = !e[a].show, this.setData({
             mch_list: e

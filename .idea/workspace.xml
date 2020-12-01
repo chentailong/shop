@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="界面">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="订阅消息">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,8 @@
       <workItem from="1606437750963" duration="4137000" />
       <workItem from="1606465712428" duration="2021000" />
       <workItem from="1606629591158" duration="2431000" />
-      <workItem from="1606696186584" duration="17674000" />
+      <workItem from="1606696186584" duration="19888000" />
+      <workItem from="1606783378952" duration="16456000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -77,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606716329301</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="订阅消息">
+      <created>1606727833134</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606727833134</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -98,16 +107,21 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新积分商城中分类" />
     <MESSAGE value="界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="界面" />
+    <MESSAGE value="订阅消息" />
+    <option name="LAST_COMMIT_MESSAGE" value="订阅消息" />
   </component>
   <component name="WindowStateProjectService">
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1606726554446">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606726554446" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606716331769">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1606789637136">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606789637136" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606727836293">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606716331769" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606727836293" />
   </component>
 </project>
