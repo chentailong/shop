@@ -13,29 +13,37 @@ Page({
         show_payment: !1,
         show_more: !1,
         index: -1,
-        mch_offline: !0,
-        _access_token: '',
-        time: ''
+        mch_offline: !0
     },
     onLoad: function (t) {
-        console.log(this.data)
+
+        wx.login({
+            success(res) {
+                console.log(12)
+                console.log(res)
+                if (res.code) {
+                    wx.request({
+                        url: getApp().api.passport.login,
+                        data: {
+                            code: res.code
+                        },
+                        method: 'POST',
+                        success(res) {
+                            console.log(1234)
+                            console.log(res)
+                        }
+
+                    })
+                }
+            }
+        })
+        //-------------------------------
         getApp().page.onLoad(this, t);
         var e = util.formatData(new Date());
         getApp().core.removeStorageSync(getApp().const.INPUT_DATA), this.setData({
             options: t,
             time: e
         }), is_loading_show = !1;
-        var that = this;
-        var appid = 'wx257210a837db11b0';
-        var appsecret = '512c724e265ce71c6868ba0aa0636bd3'
-        var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appid + '&secret=' + appsecret;
-        wx.request({
-            url,
-            success(res) {
-                console.log(res.data.access_token)
-                that.data._access_token = res.data.access_token
-            }
-        })
     },
     bindContentInput: function (t) {
         this.data.mch_list[t.currentTarget.dataset.index].content = t.detail.value, this.setData({
@@ -121,50 +129,6 @@ Page({
         }), !1;
         1 == e.data.integral_radio ? a.use_integral = 1 : a.use_integral = 2, a.payment = e.data.payment,
             a.formId = t.detail.formId, e.order_submit(a, "s");
-        //新增
-        var that = this;
-        var token = that.data._access_token
-        var money = that.data.new_total_price
-        var times = that.data.time
-        console.log(times)
-        var open_Id = 'o7RSe4vjs8_0pVlTTQn8Y8C1VIvo'
-        let url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + token
-        wx.requestSubscribeMessage({
-            tmplIds: ['9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s'],
-            success(res) {
-                console.log(res)
-                console.log('成功')
-                let jsonData = {
-                    access_token: token,
-                    touser: open_Id,
-                    template_id: '9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s',
-                    page: "pages/new-order-submit/new-order-submit",
-                    data: {
-                        "amount1": {"value": money },
-                        "date2": {"value": times },
-                        "character_string3": {"value": "2351231231"},
-                        "character_string7": {"value": "0"},
-                        "thing8": {"value": "支付成功"},
-                    },
-                    miniprogram_state: 'developer',
-                }
-                wx.request({
-                    url: url,
-                    data: jsonData,
-                    method: 'POST',
-                    success(res) {
-                        console.log(res.data.errcode)
-                    },
-                    complete(e) {
-                        console.log(e)
-                    }
-                })
-            },
-            fail(err) {
-                console.log(err)
-                console.log('失败')
-            }
-        })
     },
     onReady: function () {
     },

@@ -9,6 +9,7 @@ Page({
         }
     },
     onLoad: function(e) {
+        console.log(e)
         getApp().page.onLoad(this, e);
         var t = this;
         getApp().core.showLoading({
