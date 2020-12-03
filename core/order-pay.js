@@ -184,7 +184,7 @@ var pay = {
                                                                     template_id: '9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s',
                                                                     page: "pages/order/order",
                                                                     data: {
-                                                                        "amount1": {"value": e.data.total_price},
+                                                                        "amount1": {"value": e.data.total_price + '元'},
                                                                         "date2": {"value": e.data.addtime},
                                                                         "character_string3": {"value": e.data.order_no},
                                                                         "character_string7": {"value": e.data.integral.forehead},

@@ -123,9 +123,10 @@
                         </view>
                         <view style="color:#ff4544;text-align:right;font-size:9pt" wx:if="{{item.is_level&&item.is_level==1}}">享受会员折扣</view>
                         <view wx:if="{{item.order_refund_enable==1}}">
-                            <navigator class="flex-y-center refund-btn" url="/pages/order-refund/order-refund?id={{item.order_detail_id}}" wx:if="{{item.is_order_refund==0}}">申请售后
+                            <navigator class="flex-y-center refund-btn" url="/pages/order-refund/order-refund?id={{item.order_detail_id}}" >申请售后
                             </navigator>
-                            <text class="refund-text" wx:if="{{item.is_order_refund==1}}">已申请售后</text>
+
+<!--                            <text class="refund-text" wx:if="{{item.is_order_refund==1}}">已申请售后</text> wx:if="{{item.is_order_refund==0}}" -->
                         </view>
                     </view>
                 </view>
