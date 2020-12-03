@@ -132,15 +132,15 @@ var pay = {
             } else o();
 
             function o() {
-                var appId = 'wx257210a837db11b0'
-                var appSecret = '512c724e265ce71c6868ba0aa0636bd3'
-                var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appId + '&secret=' + appSecret;
-                wx.request({
-                    url,
-                    success: (res) => {
-                        console.log(res.data.access_token)
-                        var _access_token = res.data.access_token
-                        let Message_url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + _access_token
+                // var appId = 'wx257210a837db11b0'
+                // var appSecret = '512c724e265ce71c6868ba0aa0636bd3'
+                // var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appId + '&secret=' + appSecret;
+                // wx.request({
+                //     url,
+                //     success: (res) => {
+                //         console.log(res.data.access_token)
+                //         var _access_token = res.data.access_token
+                //         let Message_url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + _access_token
                         getApp().core.showLoading({
                             title: "正在提交",
                             mask: !0
@@ -163,47 +163,47 @@ var pay = {
                                             },
                                             success: function (e) {
                                                 // h获取订单编号
-                                                getApp().request({
-                                                    url: getApp().api.order.detail,
-                                                    data: {
-                                                        order_id: d
-                                                    },
-                                                    success: function (e) {
-                                                        console.log(e.data)
-                                                        //进行订阅信息弹窗授权
-                                                        var open_Id = 'o7RSe4vjs8_0pVlTTQn8Y8C1VIvo'
+                                                // getApp().request({
+                                                //     url: getApp().api.order.detail,
+                                                //     data: {
+                                                //         order_id: d
+                                                //     },
+                                                //     success: function (e) {
+                                                //         console.log(e.data)
+                                                //         //进行订阅信息弹窗授权
+                                                //         var open_Id = 'o7RSe4vjs8_0pVlTTQn8Y8C1VIvo'
                                                         wx.requestSubscribeMessage({
                                                             tmplIds: ['9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s'],
                                                             success(res) {
                                                                 console.log(res)
                                                                 console.log('成功')
                                                                 //订阅信息数据
-                                                                let jsonData = {
-                                                                    access_token: _access_token,
-                                                                    touser: open_Id,
-                                                                    template_id: '9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s',
-                                                                    page: "pages/order/order",
-                                                                    data: {
-                                                                        "amount1": {"value": e.data.total_price},
-                                                                        "date2": {"value": e.data.addtime},
-                                                                        "character_string3": {"value": e.data.order_no},
-                                                                        "character_string7": {"value": e.data.integral.forehead},
-                                                                        "thing8": {"value": e.data.status},
-                                                                    },
-                                                                    miniprogram_state: 'developer',
-                                                                }
+                                                                // let jsonData = {
+                                                                //     access_token: _access_token,
+                                                                //     touser: open_Id,
+                                                                //     template_id: '9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s',
+                                                                //     page: "pages/order/order",
+                                                                //     data: {
+                                                                //         "amount1": {"value": e.data.total_price},
+                                                                //         "date2": {"value": e.data.addtime},
+                                                                //         "character_string3": {"value": e.data.order_no},
+                                                                //         "character_string7": {"value": e.data.integral.forehead},
+                                                                //         "thing8": {"value": e.data.status},
+                                                                //     },
+                                                                //     miniprogram_state: 'developer',
+                                                                // }
                                                                 //订阅信息发送
-                                                                wx.request({
-                                                                    url: Message_url,
-                                                                    data: jsonData,
-                                                                    method: 'POST',
-                                                                    success(res) {
-                                                                        console.log(res.data.errcode)
-                                                                    },
-                                                                    complete(e) {
-                                                                        console.log(e)
-                                                                    }
-                                                                })
+                                                                // wx.request({
+                                                                //     url: Message_url,
+                                                                //     data: jsonData,
+                                                                //     method: 'POST',
+                                                                //     success(res) {
+                                                                //         console.log(res.data.errcode)
+                                                                //     },
+                                                                //     complete(e) {
+                                                                //         console.log(e)
+                                                                //     }
+                                                                // })
                                                             },
                                                             fail(err) {
                                                                 console.log(err)
@@ -232,8 +232,8 @@ var pay = {
                                                         }) : getApp().core.redirectTo({
                                                             url: u + "?status=-1",
                                                         });
-                                                    }
-                                                })
+                                                //     }
+                                                // })
                                             }
                                         });
                                     };
@@ -344,8 +344,8 @@ var pay = {
                                 }));
                             }
                         });
-                    }
-                })
+                //     }
+                // })
             }
 
         };
