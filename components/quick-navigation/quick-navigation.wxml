@@ -48,12 +48,12 @@
             </view>
         </view>
     </view>
-    <view class="quick-icon {{__device}}" direction="all" wx:else>
-        <view bindtap="cutover" class="flex-col flex-y-center flex-x-center quick-bg">
-            <text class="quick-text">快捷</text>
-            <text class="quick-text">导航</text>
-        </view>
-    </view>
+<!--    <view class="quick-icon {{__device}}" direction="all" wx:else>-->
+<!--        <view bindtap="cutover" class="flex-col flex-y-center flex-x-center quick-bg">-->
+<!--            <text class="quick-text">快捷</text>-->
+<!--            <text class="quick-text">导航</text>-->
+<!--        </view>-->
+<!--    </view>-->
 </view>
 <view class="float-icon" direction="all" wx:if="{{setnavi.type==='1'}}">
     <navigator hoverClass="none" openType="reLaunch" url="/pages/index/index" wx:if="{{!home_icon}}">

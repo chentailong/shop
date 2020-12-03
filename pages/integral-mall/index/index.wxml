@@ -90,6 +90,7 @@
                                         <image class="item-image" src="{{__wxapp_img.integral.all.url}}"></image>
                                         <view>全部</view>
                                     </view>
+
                                     <view bindtap="catGoods" class="scroll-view flex-grow-0" data-cat-id="{{item.id}}" data-index="{{index}}" id="{{item.cat_checked?'cat_name_active':''}}" wx:for="{{catList}}" wx:key="{{item.id}}">
                                         <image class="item-image" src="{{item.pic_url}}"></image>
                                         <view>{{item.name}}</view>
