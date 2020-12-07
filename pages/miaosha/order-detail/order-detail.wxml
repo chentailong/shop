@@ -128,7 +128,7 @@
                     <view>退款申请中</view>
                 </view>
             </view>
-            <view class="order-footer flex-y-center flex-x-right flex-row" wx:if="{{order.is_send==0&&order.is_pay==1}}">
+            <view class="order-footer flex-y-center flex-x-right flex-row" wx:if="{{order.is_send==0&&order.apply_delete==0}}">
                 <view class="play-btn">
                     <view bindtap="orderRevoke" data-id="{{order.order_id}}">申请退款
                     </view>
