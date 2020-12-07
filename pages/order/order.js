@@ -1,4 +1,6 @@
 var app = getApp(), api = getApp().api, is_no_more = !1, is_loading = !1, p = 2;
+var template = 'tWSb-jhRnH-H_zeYqMYRBQmayA2skt545pDX5FPMsSM' //退货模板ID
+var refund_template = 'YP4fG1CGdJsusUTfq3MYlVxfTVBvSgOYZr5wYjNIuOo' //退款模板id
 
 Page({
     data: {
@@ -168,6 +170,17 @@ Page({
                         order_id: e.currentTarget.dataset.id
                     },
                     success: function(t) {
+                        wx.requestSubscribeMessage({
+                            tmplIds: [template,refund_template],
+                            success(res) {
+                                console.log(res)
+                                console.log('成功')
+                            },
+                            fail(err) {
+                                console.log(err)
+                                console.log('失败')
+                            }
+                        });
                         getApp().core.hideLoading(), getApp().core.showModal({
                             title: "提示",
                             content: t.msg,

@@ -126,8 +126,8 @@
                             <navigator class="flex-y-center refund-btn" url="/pages/order-refund/order-refund?id={{item.order_detail_id}}" >申请售后
                             </navigator>
 
-<!--                            <text class="refund-text" wx:if="{{item.is_order_refund==1}}">已申请售后</text> wx:if="{{item.is_order_refund==0}}" -->
                         </view>
+<!--                        <text class="refund-text" wx:if="{{item.is_order_refund==1}}">已申请售后</text>-->
                     </view>
                 </view>
             </view>
