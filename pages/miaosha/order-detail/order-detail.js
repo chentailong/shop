@@ -62,6 +62,7 @@ Page({
                         order_id: t.currentTarget.dataset.id
                     },
                     success: function(e) {
+                        console.log(e)
                         getApp().core.hideLoading(), getApp().core.showModal({
                             title: "提示",
                             content: e.msg,

@@ -16,24 +16,16 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/gitll" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="注释了模拟服务端发送订阅消息的代码，并且将秒杀中一个显示问题的bug修复了">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="aaa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/order-pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/order-pay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/index/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order-detail/order-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-detail/order-detail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/miaosha/order-detail/order-detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-detail/order-detail.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/order-detail/order-detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-detail/order-detail.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/order/order.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order/order.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="gitll" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,7 +59,6 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -86,13 +77,7 @@
       <workItem from="1606696186584" duration="19888000" />
       <workItem from="1606783378952" duration="16456000" />
       <workItem from="1606955688348" duration="2124000" />
-      <workItem from="1606985038019" duration="251000" />
-      <workItem from="1606988845839" duration="689000" />
-      <workItem from="1607042431398" duration="4312000" />
-      <workItem from="1607063436574" duration="2482000" />
-      <workItem from="1607071336577" duration="1205000" />
-      <workItem from="1607248036340" duration="255000" />
-      <workItem from="1607301047986" duration="3081000" />
+      <workItem from="1607307707212" duration="77000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -126,19 +111,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/gitll" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -149,29 +122,33 @@
     <MESSAGE value="更新积分商城中分类" />
     <MESSAGE value="界面" />
     <MESSAGE value="订阅消息" />
-    <MESSAGE value="注释了模拟服务端发送订阅消息的代码，并且将秒杀中一个显示问题的bug修复了" />
-    <option name="LAST_COMMIT_MESSAGE" value="注释了模拟服务端发送订阅消息的代码，并且将秒杀中一个显示问题的bug修复了" />
+    <option name="LAST_COMMIT_MESSAGE" value="订阅消息" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1607248089593">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="686" y="211" key="FileChooserDialogImpl" timestamp="1606960049480">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607046574692" />
-    <state x="2606" y="211" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1607072832399" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1607248089593" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606726554446" />
     <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606960049480" />
     <state x="593" y="255" key="IDE.errors.dialog" timestamp="1606898750590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="593" y="255" key="IDE.errors.dialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606898750590" />
+    <state x="368" y="118" key="MergeDialog" timestamp="1607307742102">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="368" y="118" key="MergeDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307742102" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1606789637136">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606789637136" />
-    <state x="2371" y="183" key="Vcs.Push.Dialog.v2" timestamp="1606976311129">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606727836293">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606727836293" />
-    <state x="2371" y="183" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606976311129" />
+    <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607307720660">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307720660" />
   </component>
 </project>

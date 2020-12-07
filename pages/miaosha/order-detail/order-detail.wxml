@@ -115,11 +115,14 @@
                                 <view style="color: #ff4544">￥：{{item.total_price}}</view>
                             </view>
                         </view>
+
                         <view wx:if="{{item.order_refund_enable==1}}">
-                            <navigator class="flex-y-center refund-btn" url="/pages/miaosha/order-refund/order-refund?id={{order.order_id}}" wx:if="{{item.is_order_refund==0}}">申请售后
+                            <navigator class="flex-y-center refund-btn" url="/pages/miaosha/order-refund/order-refund?id={{order.order_id}}" wx:if="{{item.is_order_refund==1}}">申请售后
                             </navigator>
-                            <text class="refund-text" wx:else>已申请售后</text>
                         </view>
+
+                        <text class="refund-text" wx:if="{{item.is_order_refund==1}}">已申请售后</text>
+
                     </view>
                 </view>
             </view>

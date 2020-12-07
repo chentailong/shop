@@ -2,22 +2,25 @@ var integral_catId = 0, integral_index = -1, page = 1;
 
 Page({
     data: {
-        goods_list: []
+        goods_list: [],
+            oldgoods:[]
     },
-    onLoad: function(t) {
+    onLoad: function (t) {
         getApp().page.onLoad(this, t);
         page = 1, this.getGoodsList(integral_catId);
+
     },
-    onReady: function(t) {
+    onReady: function (t) {
         getApp().page.onReady(this);
     },
-    onShow: function(t) {
+    onShow: function (t) {
+
         getApp().page.onShow(this);
         var a = this;
         getApp().request({
             url: getApp().api.integral.index,
             data: {},
-            success: function(t) {
+            success: function (t) {
                 if (0 == t.code && (t.data.today && a.setData({
                     register_day: 1
                 }), a.setData({
@@ -34,12 +37,12 @@ Page({
                     });
                 }
             },
-            complete: function(t) {
+            complete: function (t) {
                 getApp().core.hideLoading();
             }
         });
     },
-    exchangeCoupon: function(t) {
+    exchangeCoupon: function (t) {
         var a = this, n = a.data.coupon_list, e = t.currentTarget.dataset.index, o = n[e], i = a.data.integral;
         if (parseInt(o.integral) > parseInt(i)) a.setData({
             showModel: !0,
@@ -61,7 +64,7 @@ Page({
             getApp().core.showModal({
                 title: "确认兑换",
                 content: s,
-                success: function(t) {
+                success: function (t) {
                     t.confirm && (0 < parseFloat(o.price) ? (getApp().core.showLoading({
                         title: "提交中"
                     }), getApp().request({
@@ -70,7 +73,7 @@ Page({
                             id: o.id,
                             type: 2
                         },
-                        success: function(e) {
+                        success: function (e) {
                             0 == e.code && getApp().core.requestPayment({
                                 _res: e,
                                 timeStamp: e.data.timeStamp,
@@ -78,10 +81,10 @@ Page({
                                 package: e.data.package,
                                 signType: e.data.signType,
                                 paySign: e.data.paySign,
-                                complete: function(t) {
-                                    "requestPayment:fail" != t.errMsg && "requestPayment:fail cancel" != t.errMsg ? "requestPayment:ok" == t.errMsg && (o.num = parseInt(o.num), 
-                                    o.num += 1, o.total_num = parseInt(o.total_num), o.total_num -= 1, i = parseInt(i), 
-                                    i -= parseInt(o.integral), a.setData({
+                                complete: function (t) {
+                                    "requestPayment:fail" != t.errMsg && "requestPayment:fail cancel" != t.errMsg ? "requestPayment:ok" == t.errMsg && (o.num = parseInt(o.num),
+                                        o.num += 1, o.total_num = parseInt(o.total_num), o.total_num -= 1, i = parseInt(i),
+                                        i -= parseInt(o.integral), a.setData({
                                         showModel: !0,
                                         status: 4,
                                         content: e.msg,
@@ -96,7 +99,7 @@ Page({
                                 }
                             });
                         },
-                        complete: function() {
+                        complete: function () {
                             getApp().core.hideLoading();
                         }
                     })) : (getApp().core.showLoading({
@@ -107,9 +110,9 @@ Page({
                             id: o.id,
                             type: 1
                         },
-                        success: function(t) {
-                            0 == t.code && (o.num = parseInt(o.num), o.num += 1, o.total_num = parseInt(o.total_num), 
-                            o.total_num -= 1, i = parseInt(i), i -= parseInt(o.integral), a.setData({
+                        success: function (t) {
+                            0 == t.code && (o.num = parseInt(o.num), o.num += 1, o.total_num = parseInt(o.total_num),
+                                o.total_num -= 1, i = parseInt(i), i -= parseInt(o.integral), a.setData({
                                 showModel: !0,
                                 status: 4,
                                 content: t.msg,
@@ -117,7 +120,7 @@ Page({
                                 integral: i
                             }));
                         },
-                        complete: function() {
+                        complete: function () {
                             getApp().core.hideLoading();
                         }
                     })));
@@ -125,19 +128,21 @@ Page({
             });
         }
     },
-    hideModal: function() {
+    hideModal: function () {
         this.setData({
             showModel: !1
         });
     },
-    couponInfo: function(t) {
+    couponInfo: function (t) {
+
         var e = t.currentTarget.dataset;
         getApp().core.navigateTo({
             url: "/pages/integral-mall/coupon-info/index?coupon_id=" + e.id
         });
     },
-    goodsAll: function() {
+    goodsAll: function () {
         var t = this.data.goods_list, e = [];
+
         for (var a in t) {
             var n = t[a].goods;
             for (var o in t[a].cat_checked = !1, n) e.push(n[o]);
@@ -147,9 +152,14 @@ Page({
             cat_checked: !0,
             goods_list: t
         });
+
     },
-    catGoods: function(t) {
+    catGoods: function (t) {
         var e = t.currentTarget.dataset, a = this, n = a.data.catList;
+
+            this.setData({
+                cat_list:n
+            })
         integral_catId = e.catId, integral_index = e.index;
         var o = e.index;
         if (-1 === o) {
@@ -162,24 +172,40 @@ Page({
             catList: n,
             goods_list: []
         }), page = 1, a.getGoodsList(integral_catId);
+
+
     },
-    getGoodsList: function(t) {
+    getGoodsList: function (t) {
+
         var a = this;
+
+        if(a.data.oldgoods.length < 1){
+            a.setData({
+                oldgoods:a.data.goods_list
+            })
+        }
         -1 === integral_index && a.setData({
             cat_checked: !0
-        }), getApp().core.showLoading({
+        }),
+            getApp().core.showLoading({
             title: "加载中"
-        }), getApp().request({
+        }),
+            getApp().request({
             url: getApp().api.integral.goods_list,
             data: {
                 page: page,
                 cat_id: t
             },
-            success: function(t) {
+            success: function (t) {
+                console.log('1111111111111111111111111111111111111')
+                console.log(t)
                 if (0 === t.code) {
                     var e = a.data.goods_list;
-                    0 < t.data.list.length && (0 < e.length && (e = e.concat(t.data.list)), 0 === e.length && (e = t.data.list), 
-                    page += 1), 0 === t.data.list.length && getApp().core.showToast({
+
+
+                    console.log(a.data.oldgoods)
+                    0 < t.data.list.length && (0 < e.length && (e = e.concat(t.data.list)), 0 === e.length && (e = t.data.list),
+                        page += 1), 0 === t.data.list.length && getApp().core.showToast({
                         title: "没有更多啦",
                         icon: "none"
                     }), a.setData({
@@ -187,27 +213,27 @@ Page({
                     });
                 }
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading();
             }
         });
     },
-    goodsInfo: function(t) {
+    goodsInfo: function (t) {
         var e = t.currentTarget.dataset.goodsId;
         getApp().core.navigateTo({
             url: "/pages/integral-mall/goods-info/index?goods_id=" + e + "&integral=" + this.data.integral
         });
     },
-    onHide: function(t) {
+    onHide: function (t) {
         getApp().page.onHide(this);
     },
-    onUnload: function(t) {
+    onUnload: function (t) {
         getApp().page.onUnload(this);
     },
-    onPullDownRefresh: function(t) {
+    onPullDownRefresh: function (t) {
         getApp().page.onPullDownRefresh(this);
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         getApp().page.onShareAppMessage(this);
         var t = getApp().getUser(), e = "", a = getApp().core.getStorageSync(getApp().const.WX_BAR_TITLE);
         for (var n in a) if ("pages/integral-mall/index/index" === a[n].url) {
@@ -219,26 +245,26 @@ Page({
             title: e || "积分商城"
         };
     },
-    onReachBottom: function(t) {
+    onReachBottom: function (t) {
         getApp().page.onReachBottom(this);
         this.getGoodsList(integral_catId);
     },
-    shuoming: function() {
+    shuoming: function () {
         getApp().core.navigateTo({
             url: "/pages/integral-mall/shuoming/index"
         });
     },
-    detail: function() {
+    detail: function () {
         getApp().core.navigateTo({
             url: "/pages/integral-mall/detail/index"
         });
     },
-    exchange: function() {
+    exchange: function () {
         getApp().core.navigateTo({
             url: "/pages/integral-mall/exchange/index"
         });
     },
-    register: function() {
+    register: function () {
         getApp().core.navigateTo({
             url: "/pages/integral-mall/register/index"
         });
