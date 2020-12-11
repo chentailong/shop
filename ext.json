@@ -1,0 +1,39 @@
+{
+  "extEnable": true,
+  "extAppid": "wx858e702b0ca36a79",
+  "directCommit": false,
+  "ext": {
+    "name": "wechat",
+    "attr": {
+      "host": "https://shop.hizh.net/getticket.php",
+      "users": [
+        "user_1",
+        "user_2"
+      ]
+    }
+  },
+  "extPages": {
+    "pages/logs/logs": {
+      "navigationBarTitleText": "logs"
+    }
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Demo",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "pagePath": "pages/logs/logs",
+      "text": "日志"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}
