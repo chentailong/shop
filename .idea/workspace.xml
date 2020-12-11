@@ -26,12 +26,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="注释了模拟服务端发送订阅消息的代码，并且将秒杀中一个显示问题的bug修复了">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="增加了订阅信息的授权">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/order-pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/order-pay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/book/submit/submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/submit/submit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/pt/group/details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/group/details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/pt/group/details.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/group/details.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/add-share/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/add-share/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cash/cash.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pond/pond/pond.js" beforeDir="false" afterPath="$PROJECT_DIR$/pond/pond/pond.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +41,14 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="package.json" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -59,13 +67,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../project/wwhm-web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -85,6 +94,11 @@
       <workItem from="1606783378952" duration="16456000" />
       <workItem from="1606955688348" duration="2124000" />
       <workItem from="1607307707212" duration="77000" />
+      <workItem from="1607387415429" duration="2422000" />
+      <workItem from="1607477160946" duration="740000" />
+      <workItem from="1607593847805" duration="754000" />
+      <workItem from="1607612792537" duration="610000" />
+      <workItem from="1607646877908" duration="2994000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -107,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606727833134</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="增加了订阅信息的授权">
+      <created>1607313675982</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1607313675982</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,7 +139,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/gitll" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -129,13 +162,15 @@
     <MESSAGE value="更新积分商城中分类" />
     <MESSAGE value="界面" />
     <MESSAGE value="订阅消息" />
-    <option name="LAST_COMMIT_MESSAGE" value="订阅消息" />
+    <MESSAGE value="增加了订阅信息的授权" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加了订阅信息的授权" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="686" y="211" key="FileChooserDialogImpl" timestamp="1606960049480">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1607612809619">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606726554446" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607330515867" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1607612809619" />
     <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606960049480" />
     <state x="593" y="255" key="IDE.errors.dialog" timestamp="1606898750590">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -149,14 +184,19 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606789637136" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606727836293">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607313677119">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606727836293" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
     <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607307720660">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307720660" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1607320388195">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1607320388195" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1607313308270">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

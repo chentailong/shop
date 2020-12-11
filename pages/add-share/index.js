@@ -1,5 +1,5 @@
 var app = getApp(), api = app.api;
-
+var   audit_template = '6ayhmRgcR5be3UlsfHHT4YJpHdlnUlOjBdk6fhxDkR4'    //审核状态
 Page({
     data: {
         form: {
@@ -64,6 +64,15 @@ Page({
                     method: "POST",
                     data: o,
                     success: function(e) {
+                        wx.requestSubscribeMessage({
+                            tmplIds: [audit_template],
+                            success(res) {
+                                console.log(res)
+                            },
+                            fail(err) {
+                                console.log(err)
+                            }
+                        });
                         0 == e.code ? (a.is_distributor = 2, getApp().setUser(a), getApp().core.redirectTo({
                             url: "/pages/add-share/index"
                         })) : getApp().core.showToast({

@@ -1,4 +1,6 @@
 var app = getApp(), api = getApp().api;
+var template = 'ZODHsYaP_yMbdw8MccvItahiLSvX0j82xMHHCvpKb6g' //提现成功
+var refund_template = '_OCCFoKs19JjAspZNprHufUBLsHOqaRvNH5PAqp_oaI' //提现失败
 
 function min(e, a) {
     return e = parseFloat(e), (a = parseFloat(a)) < e ? a : e;
@@ -96,6 +98,17 @@ Page({
                             content: a.msg,
                             showCancel: !1,
                             success: function(e) {
+                                wx.requestSubscribeMessage({
+                                    tmplIds: [template,refund_template],
+                                    success(res) {
+                                        console.log(res)
+                                        console.log('成功')
+                                    },
+                                    fail(err) {
+                                        console.log(err)
+                                        console.log('失败')
+                                    }
+                                });
                                 e.confirm && 0 == a.code && getApp().core.redirectTo({
                                     url: "/pages/cash-detail/cash-detail"
                                 });
