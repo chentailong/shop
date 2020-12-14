@@ -1,6 +1,6 @@
 {
   "extEnable": true,
-  "extAppid": "wx858e702b0ca36a79",
+  "extAppid": "wx257210a837db11b0",
   "directCommit": false,
   "ext": {
     "name": "wechat",
@@ -22,15 +22,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Demo",
     "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页"
-    }, {
-      "pagePath": "pages/logs/logs",
-      "text": "日志"
-    }]
   },
   "networkTimeout": {
     "request": 10000,

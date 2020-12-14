@@ -19,20 +19,15 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/gitll" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:gitll" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改数据">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bargain/activity/activity.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/activity/activity.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/user.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/user.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ext.json" beforeDir="false" afterPath="$PROJECT_DIR$/ext.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/siteinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +53,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1kovTJiAtU3FWmmrKqoh8WmR75r" />
   <component name="ProjectViewState">
@@ -129,7 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1607313675982</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="修改数据">
+      <created>1607910564028</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607910564028</updated>
+    </task>
+    <task id="LOCAL-00006" summary="修改数据">
+      <created>1607910690522</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607910690522</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +156,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/gitll" />
+                        <option value="gitll" />
                       </list>
                     </value>
                   </entry>
@@ -164,7 +174,8 @@
     <MESSAGE value="界面" />
     <MESSAGE value="订阅消息" />
     <MESSAGE value="增加了订阅信息的授权" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加了订阅信息的授权" />
+    <MESSAGE value="修改数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改数据" />
   </component>
   <component name="WindowStateProjectService">
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1607612809619">
@@ -177,23 +188,37 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="593" y="255" key="IDE.errors.dialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606898750590" />
-    <state x="368" y="118" key="MergeDialog" timestamp="1607307742102">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="294" y="93" key="MergeDialog" timestamp="1607910758055">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="294" y="93" key="MergeDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910758055" />
     <state x="368" y="118" key="MergeDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307742102" />
+    <state x="405" y="173" key="MultipleFileMergeDialog" timestamp="1607910759892">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="405" y="173" key="MultipleFileMergeDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910759892" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1606789637136">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606789637136" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607313677119">
+    <state x="467" y="127" key="VCS.ChangeListViewerDialog" timestamp="1607910719546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606727836293" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
-    <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607307720660">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="467" y="127" key="VCS.ChangeListViewerDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910719546" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607910782087">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910782087" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
+    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607910716025">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910716025" />
     <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307720660" />
+    <state x="483" y="124" key="git4idea.branch.GitSmartOperationDialog" timestamp="1607910508267">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="483" y="124" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910508267" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1607320388195">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
