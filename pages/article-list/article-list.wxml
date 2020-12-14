@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="article-list">
             <navigator class="flex-row article-item" url="/pages/article-detail/article-detail?id={{item.id}}" wx:for="{{article_list}}" wx:key="{{index}}">
@@ -13,5 +13,5 @@
             </navigator>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="bottom-bar" style="display: none">
             <navigator url="/pages/address-edit/address-edit">添加新地址</navigator>
@@ -28,5 +28,5 @@
             </view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

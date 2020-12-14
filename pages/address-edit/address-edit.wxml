@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="bottom-bar">
             <view bindtap="saveAddress">保存</view>
@@ -39,6 +39,6 @@
             <view bindtap="getWechatAddress" class="get-wechat-address" wx:if="{{__platform=='wx'}}">授权一键获取地址</view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
     <include src="./../../components/area-picker/area-picker.wxml"></include>
 </view>

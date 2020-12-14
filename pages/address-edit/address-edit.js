@@ -7,44 +7,47 @@ Page({
         detail: "",
         district: null
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var t = this;
-        t.getDistrictData(function(e) {
+    // t > that  e > address
+    onLoad: function (address) {
+        getApp().page.onLoad(this, address);
+        var that = this;
+        // e > data(数据)
+        that.getDistrictData(function (data) {
             area_picker.init({
-                page: t,
-                data: e
+                page: that,
+                data: data
             });
-        }), t.setData({
-            address_id: e.id
-        }), e.id && (getApp().core.showLoading({
+        }), that.setData({
+            address_id: address.id
+        }), address.id && (getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.user.address_detail,
             data: {
-                id: e.id
+                id: address.id
             },
-            success: function(e) {
-                getApp().core.hideLoading(), 0 == e.code && t.setData(e.data);
+            success: function (e) {
+                getApp().core.hideLoading(), 0 == e.code && that.setData(e.data);
             }
         }));
     },
-    getDistrictData: function(t) {
-        var i = getApp().core.getStorageSync(getApp().const.DISTRICT);
-        if (!i) return getApp().core.showLoading({
+    // i > district
+    getDistrictData: function (t) {
+        var district = getApp().core.getStorageSync(getApp().const.DISTRICT);
+        if (!district) return getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), void getApp().request({
             url: getApp().api.default.district,
-            success: function(e) {
-                getApp().core.hideLoading(), 0 == e.code && (i = e.data, getApp().core.setStorageSync(getApp().const.DISTRICT, i), 
-                t(i));
+            success: function (e) {
+                getApp().core.hideLoading(), 0 == e.code && (district = e.data, getApp().core.setStorageSync(getApp().const.DISTRICT, district),
+                    t(district));
             }
         });
-        t(i);
+        t(district);
     },
-    onAreaPickerConfirm: function(e) {
+    onAreaPickerConfirm: function (e) {
         this.setData({
             district: {
                 province: {
@@ -62,14 +65,16 @@ Page({
             }
         });
     },
-    saveAddress: function() {
-        var t = this;
+    // t  > that
+    saveAddress: function () {
+        var that = this;
         getApp().core.showLoading({
             title: "正在保存",
             mask: !0
         });
-        var e = t.data.district;
-        e || (e = {
+        // e > district
+        var district = that.data.district;
+        district|| (district = {
             province: {
                 id: ""
             },
@@ -83,36 +88,38 @@ Page({
             url: getApp().api.user.address_save,
             method: "post",
             data: {
-                address_id: t.data.address_id || "",
-                name: t.data.name,
-                mobile: t.data.mobile,
-                province_id: e.province.id,
-                city_id: e.city.id,
-                district_id: e.district.id,
-                detail: t.data.detail
+                address_id: that.data.address_id || "",
+                name: that.data.name,
+                mobile: that.data.mobile,
+                province_id: district.province.id,
+                city_id: district.city.id,
+                district_id: district.district.id,
+                detail: that.data.detail
             },
-            success: function(e) {
+            success: function (e) {
                 getApp().core.hideLoading(), 0 == e.code && getApp().core.showModal({
                     title: "提示",
                     content: e.msg,
                     showCancel: !1,
-                    success: function(e) {
+                    success: function (e) {
                         e.confirm && getApp().core.navigateBack();
                     }
-                }), 1 == e.code && t.showToast({
+                }), 1 == e.code && that.showToast({
                     title: e.msg
                 });
             }
         });
     },
-    inputBlur: function(e) {
-        var t = '{"' + e.currentTarget.dataset.name + '":"' + e.detail.value + '"}';
-        this.setData(JSON.parse(t));
+    // t >  message
+    inputBlur: function (e) {
+        var message = '{"' + e.currentTarget.dataset.name + '":"' + e.detail.value + '"}';
+        this.setData(JSON.parse(message));
     },
-    getWechatAddress: function(e) {
-        var i = this;
+    // i > that
+    getWechatAddress: function () {
+        var that = this;
         getApp().core.chooseAddress({
-            success: function(t) {
+            success: function (t) {
                 "chooseAddress:ok" == t.errMsg && (getApp().core.showLoading(), getApp().request({
                     url: getApp().api.user.wechat_district,
                     data: {
@@ -121,26 +128,26 @@ Page({
                         city_name: t.cityName,
                         county_name: t.countyName
                     },
-                    success: function(e) {
+                    success: function (e) {
                         1 == e.code && getApp().core.showModal({
                             title: "提示",
                             content: e.msg,
                             showCancel: !1
-                        }), i.setData({
+                        }), that.setData({
                             name: t.userName || "",
                             mobile: t.telNumber || "",
                             detail: t.detailInfo || "",
                             district: e.data.district
                         });
                     },
-                    complete: function() {
+                    complete: function () {
                         getApp().core.hideLoading();
                     }
                 }));
             }
         });
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this);
     }
 });

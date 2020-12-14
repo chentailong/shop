@@ -2,26 +2,28 @@ Page({
     data: {
         address_list: null
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
+    onLoad: function(addressData) {
+        getApp().page.onLoad(this, addressData);
     },
+    // t > that
     onShow: function() {
         getApp().page.onShow(this);
-        var t = this;
+        var that = this;
         getApp().core.showNavigationBarLoading(), getApp().request({
             url: getApp().api.user.address_list,
             success: function(e) {
-                getApp().core.hideNavigationBarLoading(), 0 == e.code && t.setData({
+                getApp().core.hideNavigationBarLoading(), 0 == e.code && that.setData({
                     address_list: e.data.list
                 });
             }
         });
     },
+    // t > pages(页数)  a > address(地址)
     pickAddress: function(e) {
-        var t = e.currentTarget.dataset.index, a = this.data.address_list[t];
-        getApp().core.setStorageSync(getApp().const.PICKER_ADDRESS, a), getApp().core.navigateBack();
+        var pages = e.currentTarget.dataset.index, address = this.data.address_list[pages];
+        getApp().core.setStorageSync(getApp().const.PICKER_ADDRESS, address), getApp().core.navigateBack();
     },
-    getWechatAddress: function(e) {
+    getWechatAddress: function() {
         getApp().core.chooseAddress({
             success: function(e) {
                 "chooseAddress:ok" == e.errMsg && (getApp().core.showLoading(), getApp().request({

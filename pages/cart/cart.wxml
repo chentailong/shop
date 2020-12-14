@@ -1,6 +1,6 @@
 <view class="page {{__page_classes}}">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="bottom-bar flex-row">
             <view class="flex-y-center flex-grow-1" style="padding: 0 24rpx">
@@ -30,17 +30,20 @@
         <block wx:else>
             <block wx:if="{{cart_list&&cart_list.length}}">
                 <view class="flex flex-row mch-header">
-                    <view bindtap="checkGroup" class="flex-grow-0 flex-y-center" data-index="0" data-type="self" style="padding: 24rpx">
+                    <view bindtap="checkGroup" class="flex-grow-0 flex-y-center" data-index="0" data-type="self"
+                          style="padding: 24rpx">
                         <view class="cart-checkbox {{check_all_self?'active':''}}"></view>
                     </view>
                     <view class="flex-grow-1 flex-y-center">平台自营</view>
                 </view>
                 <view class="cart-list">
                     <view class="cart-item flex-row" wx:for="{{cart_list}}" wx:key="{{item.id}}">
-                        <view class="flex-grow-0 flex-y-center" style="padding: 24rpx" wx:if="{{item.disabled&&!show_cart_edit}}">
+                        <view class="flex-grow-0 flex-y-center" style="padding: 24rpx"
+                              wx:if="{{item.disabled&&!show_cart_edit}}">
                             <view style="width: 40rpx"></view>
                         </view>
-                        <view bindtap="cartCheck" class="flex-grow-0 flex-y-center" data-index="{{index}}" data-mch-index="0" data-type="self" style="padding: 24rpx" wx:else>
+                        <view bindtap="cartCheck" class="flex-grow-0 flex-y-center" data-index="{{index}}"
+                              data-mch-index="0" data-type="self" style="padding: 24rpx" wx:else>
                             <view class="cart-checkbox {{item.checked?'active':''}}"></view>
                         </view>
                         <view class="flex-grow-1">
@@ -53,10 +56,13 @@
                                 <view class="flex-grow-1 flex-col">
                                     <view class="flex-grow-1">
                                         <view class="goods-name">
-                                            <navigator url="/pages/goods/goods?id={{item.goods_id}}">{{item.goods_name}}</navigator>
+                                            <navigator url="/pages/goods/goods?id={{item.goods_id}}">
+                                                {{item.goods_name}}
+                                            </navigator>
                                         </view>
                                         <view class="attr-list">
-                                            <view class="attr-item" wx:for="{{item.attr_list}}" wx:for-item="attr" wx:key="{{item.id}}">
+                                            <view class="attr-item" wx:for="{{item.attr_list}}" wx:for-item="attr"
+                                                  wx:key="{{item.id}}">
                                                 {{attr.attr_group_name}}:{{attr.attr_name}}
                                             </view>
                                         </view>
@@ -65,11 +71,17 @@
                                         <view class="flex-grow-1 price">￥{{item.unitPrice}}</view>
                                         <view>
                                             <view class="flex-row">
-                                                <image bindtap="cartLess" class="image1" id="{{item.cart_id}}" src="{{__wxapp_img.cart.less.url}}" wx:if="{{item.num>1}}"></image>
-                                                <image class="image1" src="{{__wxapp_img.cart.no_less.url}}" wx:else></image>
+                                                <image bindtap="cartLess" class="image1" id="{{item.cart_id}}"
+                                                       src="{{__wxapp_img.cart.less.url}}"
+                                                       wx:if="{{item.num>1}}"></image>
+                                                <image class="image1" src="{{__wxapp_img.cart.no_less.url}}"
+                                                       wx:else></image>
                                                 <view class="row-data">{{item.num}}</view>
-                                                <image class="image1" src="{{__wxapp_img.cart.no_add.url}}" wx:if="{{item.num==item.max_num}}"></image>
-                                                <image bindtap="cartAdd" class="image1" id="{{item.cart_id}}" src="{{__wxapp_img.cart.add.url}}" wx:if="{{item.num!=item.max_num}}"></image>
+                                                <image class="image1" src="{{__wxapp_img.cart.no_add.url}}"
+                                                       wx:if="{{item.num==item.max_num}}"></image>
+                                                <image bindtap="cartAdd" class="image1" id="{{item.cart_id}}"
+                                                       src="{{__wxapp_img.cart.add.url}}"
+                                                       wx:if="{{item.num!=item.max_num}}"></image>
                                             </view>
                                         </view>
                                     </view>
@@ -85,17 +97,20 @@
             <block wx:if="{{mch_list&&mch_list.length}}">
                 <view class="mch-item" wx:for="{{mch_list}}" wx:for-index="mch_index" wx:key="{{item.id}}">
                     <view class="flex flex-row mch-header">
-                        <view bindtap="checkGroup" class="flex-grow-0 flex-y-center" data-index="{{mch_index}}" data-type="mch" style="padding: 24rpx">
+                        <view bindtap="checkGroup" class="flex-grow-0 flex-y-center" data-index="{{mch_index}}"
+                              data-type="mch" style="padding: 24rpx">
                             <view class="cart-checkbox {{item.checked_all?'active':''}}"></view>
                         </view>
                         <view class="flex-grow-1 flex-y-center">{{item.name}}</view>
                     </view>
                     <view class="cart-list">
                         <view class="cart-item flex-row" wx:for="{{item.list}}" wx:key="{{item.id}}">
-                            <view class="flex-grow-0 flex-y-center" style="padding: 24rpx" wx:if="{{item.disabled&&!show_cart_edit}}">
+                            <view class="flex-grow-0 flex-y-center" style="padding: 24rpx"
+                                  wx:if="{{item.disabled&&!show_cart_edit}}">
                                 <view style="width: 40rpx"></view>
                             </view>
-                            <view bindtap="cartCheck" class="flex-grow-0 flex-y-center" data-index="{{index}}" data-mch-index="{{mch_index}}" data-type="mch" style="padding: 24rpx" wx:else>
+                            <view bindtap="cartCheck" class="flex-grow-0 flex-y-center" data-index="{{index}}"
+                                  data-mch-index="{{mch_index}}" data-type="mch" style="padding: 24rpx" wx:else>
                                 <view class="cart-checkbox {{item.checked?'active':''}}"></view>
                             </view>
                             <view class="flex-grow-1">
@@ -106,23 +121,34 @@
                                     <view class="flex-grow-1 flex-col">
                                         <view class="flex-grow-1">
                                             <view class="goods-name">
-                                                <navigator url="/pages/goods/goods?id={{item.goods_id}}">{{item.goods_name}}</navigator>
+                                                <navigator url="/pages/goods/goods?id={{item.goods_id}}">
+                                                    {{item.goods_name}}
+                                                </navigator>
                                             </view>
                                             <view class="attr-list">
-                                                <view class="attr-item" wx:for="{{item.attr_list}}" wx:for-item="attr" wx:key="{{item.id}}">
-                                                        {{attr.attr_group_name}}:{{attr.attr_name}}
-                                                    </view>
+                                                <view class="attr-item" wx:for="{{item.attr_list}}" wx:for-item="attr"
+                                                      wx:key="{{item.id}}">
+                                                    {{attr.attr_group_name}}:{{attr.attr_name}}
+                                                </view>
                                             </view>
                                         </view>
                                         <view class="flex-grow-0 flex-row">
                                             <view class="flex-grow-1 price">￥{{item.unitPrice}}</view>
                                             <view>
                                                 <view class="flex-row">
-                                                    <image bindtap="cartLess" class="image1" data-index="{{index}}" data-mch-index="{{mch_index}}" data-type="mch" id="{{item.cart_id}}" src="{{__wxapp_img.cart.less.url}}" wx:if="{{item.num!=1}}"></image>
-                                                    <image class="image1" src="{{__wxapp_img.cart.no_less.url}}" wx:if="{{item.num==1}}"></image>
+                                                    <image bindtap="cartLess" class="image1" data-index="{{index}}"
+                                                           data-mch-index="{{mch_index}}" data-type="mch"
+                                                           id="{{item.cart_id}}" src="{{__wxapp_img.cart.less.url}}"
+                                                           wx:if="{{item.num!=1}}"></image>
+                                                    <image class="image1" src="{{__wxapp_img.cart.no_less.url}}"
+                                                           wx:if="{{item.num==1}}"></image>
                                                     <view class="row-data">{{item.num}}</view>
-                                                    <image class="image1" src="{{__wxapp_img.cart.no_add.url}}" wx:if="{{item.num==item.max_num}}"></image>
-                                                    <image bindtap="cartAdd" class="image1" data-index="{{index}}" data-mch-index="{{mch_index}}" data-type="mch" id="{{item.cart_id}}" src="{{__wxapp_img.cart.add.url}}" wx:if="{{item.num!=item.max_num}}"></image>
+                                                    <image class="image1" src="{{__wxapp_img.cart.no_add.url}}"
+                                                           wx:if="{{item.num==item.max_num}}"></image>
+                                                    <image bindtap="cartAdd" class="image1" data-index="{{index}}"
+                                                           data-mch-index="{{mch_index}}" data-type="mch"
+                                                           id="{{item.cart_id}}" src="{{__wxapp_img.cart.add.url}}"
+                                                           wx:if="{{item.num!=item.max_num}}"></image>
                                                 </view>
                                             </view>
                                         </view>
@@ -139,5 +165,5 @@
             <view style="height: 109rpx"></view>
         </block>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

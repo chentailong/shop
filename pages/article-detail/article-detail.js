@@ -4,9 +4,10 @@ Page({
     data: {
         version: getApp()._version
     },
+    // t > that
     onLoad: function(e) {
         getApp().page.onLoad(this, e);
-        var t = this;
+        var that = this;
         getApp().request({
             url: getApp().api.default.article_detail,
             data: {
@@ -15,7 +16,7 @@ Page({
             success: function(e) {
                 0 == e.code && (getApp().core.setNavigationBarTitle({
                     title: e.data.title
-                }), WxParse.wxParse("content", "html", e.data.content, t)), 1 == e.code && getApp().core.showModal({
+                }), WxParse.wxParse("content", "html", e.data.content, that)), 1 == e.code && getApp().core.showModal({
                     title: "提示",
                     content: e.msg,
                     showCancel: !1,

@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="no-content" wx:if="{{!list||list.length==0}}">暂无记录</view>
         <view style="padding:72rpx 24rpx 0 24rpx;position:relative" wx:else>
@@ -17,5 +17,5 @@
             </view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

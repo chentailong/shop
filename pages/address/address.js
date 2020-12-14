@@ -5,43 +5,46 @@ Page({
     onLoad: function(e) {
         getApp().page.onLoad(this, e);
     },
+    // t > that
     onShow: function() {
         getApp().page.onShow(this);
-        var t = this;
+        var that = this;
         getApp().core.showNavigationBarLoading(), getApp().request({
             url: getApp().api.user.address_list,
             success: function(e) {
-                getApp().core.hideNavigationBarLoading(), 0 == e.code && t.setData({
+                getApp().core.hideNavigationBarLoading(), 0 == e.code && that.setData({
                     address_list: e.data.list
-                }), t.setData({
-                    show_no_data_tip: 0 == t.data.address_list.length
+                }), that.setData({
+                    show_no_data_tip: 0 == that.data.address_list.length
                 });
             }
         });
     },
+    // a > that, d > pages(当前页数) t > address(地址)  s > site(地点)
     setDefaultAddress: function(e) {
-        var a = this, d = e.currentTarget.dataset.index, t = a.data.address_list[d];
+        var that = this, pages = e.currentTarget.dataset.index, address = that.data.address_list[pages];
         getApp().core.showLoading({
             title: "正在保存",
             mask: !0
         }), getApp().request({
             url: getApp().api.user.address_set_default,
             data: {
-                address_id: t.id
+                address_id: address.id
             },
             success: function(e) {
                 if (getApp().core.hideLoading(), 0 == e.code) {
-                    var t = a.data.address_list;
-                    for (var s in t) t[s].is_default = s == d ? 1 : 0;
-                    a.setData({
-                        address_list: t
+                    var address = that.data.address_list;
+                    for (var site in address) address[site].is_default = site == pages ? 1 : 0;
+                    that.setData({
+                        address_list: address
                     });
                 }
             }
         });
     },
+    // t > id(数据id)
     deleteAddress: function(e) {
-        var t = e.currentTarget.dataset.id;
+        var id = e.currentTarget.dataset.id;
         e.currentTarget.dataset.index;
         getApp().core.showModal({
             title: "提示",
@@ -53,7 +56,7 @@ Page({
                 }), getApp().request({
                     url: getApp().api.user.address_delete,
                     data: {
-                        address_id: t
+                        address_id: id
                     },
                     success: function(e) {
                         0 == e.code && getApp().core.redirectTo({

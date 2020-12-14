@@ -1,3 +1,4 @@
+//成为分销商
 var app = getApp(), api = app.api;
 var   audit_template = '6ayhmRgcR5be3UlsfHHT4YJpHdlnUlOjBdk6fhxDkR4'    //审核状态
 Page({
@@ -10,34 +11,35 @@ Page({
         agree: 0,
         show_modal: !1
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
+    onLoad: function(add_shareData) {
+        getApp().page.onLoad(this, add_shareData);
     },
     onReady: function() {
         getApp().page.onReady(this);
     },
+    // o>that t>user e>share_setting
     onShow: function() {
         getApp().page.onShow(this);
-        var o = this, t = getApp().getUser(), e = getApp().core.getStorageSync(getApp().const.SHARE_SETTING);
+        var that = this, user = getApp().getUser(), share_setting = getApp().core.getStorageSync(getApp().const.SHARE_SETTING);
         getApp().getConfig(function(e) {
-            var t = e.store, a = "分销商";
-            t && t.share_custom_data && (a = t.share_custom_data.words.share_name.name), o.setData({
-                share_name: a
+            var userInfo = e.store, distributor = "分销商";
+            userInfo && userInfo.share_custom_data && (distributor = userInfo.share_custom_data.words.share_name.name), that.setData({
+                share_name: distributor
             }), wx.setNavigationBarTitle({
-                title: "申请成为" + a
+                title: "申请成为" + distributor
             });
         }), getApp().core.showLoading({
             title: "加载中"
-        }), o.setData({
-            share_setting: e
+        }), that.setData({
+            share_setting: share_setting
         }), getApp().request({
             url: getApp().api.share.check,
             method: "POST",
             success: function(e) {
-                0 == e.code && (t.is_distributor = e.data, getApp().setUser(t), 1 == e.data && getApp().core.redirectTo({
+                0 == e.code && (user.is_distributor = e.data, getApp().setUser(user), 1 == e.data && getApp().core.redirectTo({
                     url: "/pages/share/index"
-                })), o.setData({
-                    __user_info: t
+                })), that.setData({
+                    __user_info: user
                 });
             },
             complete: function() {
@@ -51,18 +53,19 @@ Page({
     onUnload: function() {
         getApp().page.onUnload(this);
     },
-    formSubmit: function(e) {
-        var t = this, a = getApp().getUser();
-        if (t.data.form = e.detail.value, null != t.data.form.name && "" != t.data.form.name) if (null != t.data.form.mobile && "" != t.data.form.mobile) {
-            if (/^\+?\d[\d -]{8,12}\d/.test(t.data.form.mobile)) {
-                var o = e.detail.value;
-                o.form_id = e.detail.formId, 0 != t.data.agree ? (getApp().core.showLoading({
+    // t>that  e>data  a>user  o>detail
+    formSubmit: function(data) {
+        var that = this, user = getApp().getUser();
+        if (that.data.form = data.detail.value, null != that.data.form.name && "" != that.data.form.name) if (null != that.data.form.mobile && "" != that.data.form.mobile) {
+            if (/^\+?\d[\d -]{8,12}\d/.test(that.data.form.mobile)) {
+                var detail = data.detail.value;
+                detail.form_id = data.detail.formId, 0 != that.data.agree ? (getApp().core.showLoading({
                     title: "正在提交",
                     mask: !0
                 }), getApp().request({
                     url: getApp().api.share.join,
                     method: "POST",
-                    data: o,
+                    data: detail,
                     success: function(e) {
                         wx.requestSubscribeMessage({
                             tmplIds: [audit_template],
@@ -73,7 +76,7 @@ Page({
                                 console.log(err)
                             }
                         });
-                        0 == e.code ? (a.is_distributor = 2, getApp().setUser(a), getApp().core.redirectTo({
+                        0 == e.code ? (user.is_distributor = 2, getApp().setUser(user), getApp().core.redirectTo({
                             url: "/pages/add-share/index"
                         })) : getApp().core.showToast({
                             title: e.msg,
@@ -105,14 +108,15 @@ Page({
             show_modal: !0
         });
     },
+    // e>that  t>consent
     agree: function() {
-        var e = this, t = e.data.agree;
-        0 == t ? (t = 1, e.setData({
+        var that = this, consent = that.data.agree;
+        0 == consent ? (consent = 1, that.setData({
             img: "/images/img-share-agree.png",
-            agree: t
-        })) : 1 == t && (t = 0, e.setData({
+            agree: consent
+        })) : 1 == consent && (consent = 0, that.setData({
             img: "/images/img-share-un.png",
-            agree: t
+            agree: consent
         }));
     },
     close: function() {

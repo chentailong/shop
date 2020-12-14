@@ -6,23 +6,24 @@ Page({
         show_qrcode: !1,
         status: 1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), t.status && this.setData({
-            status: t.status
+    onLoad: function(cardData) {
+        getApp().page.onLoad(this, cardData), cardData.status && this.setData({
+            status: cardData.status
         }), this.loadData();
     },
+    // e > that, t > res
     loadData: function() {
-        var e = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.user.card,
             data: {
                 page: 1,
-                status: e.data.status
+                status: that.data.status
             },
-            success: function(t) {
-                0 == t.code && e.setData(t.data);
+            success: function(res) {
+                0 == res.code && that.setData(res.data);
             },
             complete: function() {
                 getApp().core.hideLoading();
@@ -32,27 +33,28 @@ Page({
     onReachBottom: function() {
         getApp().page.onReachBottom(this), this.data.page != this.data.page_count && this.loadMore();
     },
+    // a > that; o > page(页数);  t > res;  e > list(列表)
     loadMore: function() {
-        var a = this;
+        var that = this;
         if (!is_loading) {
             is_loading = !0, getApp().core.showLoading({
                 title: "加载中"
             });
-            var o = a.data.page;
+            var page = that.data.page;
             getApp().request({
                 url: getApp().api.user.card,
                 data: {
-                    page: o + 1,
-                    status: a.data.status
+                    page: page + 1,
+                    status: that.data.status
                 },
-                success: function(t) {
-                    if (0 == t.code) {
-                        var e = a.data.list.concat(t.data.list);
-                        a.setData({
-                            list: e,
-                            page_count: t.data.page_count,
-                            row_count: t.data.row_count,
-                            page: o + 1
+                success: function(res) {
+                    if (0 == res.code) {
+                        var list = that.data.list.concat(res.data.list);
+                        that.setData({
+                            list: list,
+                            page_count: res.data.page_count,
+                            row_count: res.data.row_count,
+                            page: page + 1
                         });
                     }
                 },
@@ -62,22 +64,23 @@ Page({
             });
         }
     },
+    // e > that; a > page(页数); o > list(列表)
     getQrcode: function(t) {
-        var e = this, a = t.currentTarget.dataset.index, o = e.data.list[a];
+        var that = this, page = t.currentTarget.dataset.index, list = that.data.list[page];
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.user.card_qrcode,
             data: {
-                user_card_id: o.id
+                user_card_id: list.id
             },
-            success: function(t) {
-                0 == t.code ? e.setData({
+            success: function(e) {
+                0 == e.code ? that.setData({
                     show_qrcode: !0,
-                    qrcode: t.data.url
+                    qrcode: e.data.url
                 }) : getApp().core.showModal({
                     title: "提示",
-                    content: t.msg,
+                    content: e.msg,
                     showCancel: !1
                 });
             },
@@ -91,33 +94,34 @@ Page({
             show_qrcode: !1
         });
     },
-    goto: function(t) {
-        var e = t.currentTarget.dataset.status;
+    // e >  status(状态)
+    goto: function(data) {
+        var status = data.currentTarget.dataset.status;
         getApp().core.redirectTo({
-            url: "/pages/card/card?status=" + e
+            url: "/pages/card/card?status=" + status
         });
     },
     save: function() {
-        var e = this;
+        var that = this;
         getApp().core.saveImageToPhotosAlbum ? (getApp().core.showLoading({
             title: "正在保存图片",
             mask: !1
         }), getApp().core.downloadFile({
-            url: e.data.qrcode,
-            success: function(t) {
+            url: that.data.qrcode,
+            success: function(res) {
                 getApp().core.showLoading({
                     title: "正在保存图片",
                     mask: !1
-                }), e.saveImg(t);
+                }), that.saveImg(res);
             },
-            fail: function(t) {
+            fail: function(error) {
                 getApp().core.showModal({
                     title: "下载失败",
-                    content: t.errMsg + ";" + e.data.goods_qrcode,
+                    content: error.errMsg + ";" + that.data.goods_qrcode,
                     showCancel: !1
                 });
             },
-            complete: function(t) {
+            complete: function() {
                 getApp().core.hideLoading();
             }
         })) : getApp().core.showModal({
@@ -125,10 +129,11 @@ Page({
             content: "当前版本过低，无法使用该功能，请升级到最新版本后重试。"
         });
     },
-    saveImg: function(t) {
-        var a = this;
+    // a -> that; t -> data
+    saveImg: function(data) {
+        var that = this;
         getApp().core.saveImageToPhotosAlbum({
-            filePath: t.tempFilePath,
+            filePath: data.tempFilePath,
             success: function() {
                 getApp().core.showModal({
                     title: "提示",
@@ -136,20 +141,20 @@ Page({
                     showCancel: !1
                 });
             },
-            fail: function(e) {
+            fail: function(error) {
                 getApp().core.getSetting({
-                    success: function(t) {
-                        t.authSetting["scope.writePhotosAlbum"] || getApp().getauth({
+                    success: function(power) {
+                        power.authSetting["scope.writePhotosAlbum"] || getApp().getauth({
                             content: "小程序需要授权保存到相册",
                             author: "scope.writePhotosAlbum",
-                            success: function(t) {
-                                t && a.saveImg(e);
+                            success: function(res) {
+                                res && that.saveImg(error);
                             }
                         });
                     }
                 });
             },
-            complete: function(t) {
+            complete: function() {
                 getApp().core.hideLoading();
             }
         });
