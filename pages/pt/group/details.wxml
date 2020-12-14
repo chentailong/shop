@@ -87,6 +87,7 @@
                     <image src="{{__wxapp_img.share.right.url}}"></image>
                 </view>
             </view>
+
             <view class="goods-list">
                 <view bindtap="goToHome" class="goods-more flex-row flex-y-center">
                     <view class="goods-more-left  flex-grow-1">

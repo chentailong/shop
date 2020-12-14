@@ -1,6 +1,7 @@
 var app = getApp();
 var deliver_template = '_XyGBjtCXpWQgSdZ5lEBa03UCa5vMuc2PJkmUVeXufU' //发货模板id
 var order_template = '9_o1f7zU4g42YEIl-8jjkc7qFciP7UWr_qByz5L4S5s'  //下单模板id
+var pt_template = 'B9lA_l-HCzFWDToCzRmnRkxrVSDBhE2cl144Ohc6gjk'     //拼团发起模板id
 
 function setOnShowScene(e) {
     app.onShowData || (app.onShowData = {}), app.onShowData.scene = e;
@@ -156,7 +157,7 @@ var pay = {
                                     },
                                     success: function (e) {
                                         wx.requestSubscribeMessage({
-                                            tmplIds: [deliver_template,order_template],
+                                            tmplIds: [deliver_template,order_template,pt_template],
                                             success(res) {
                                                 console.log(res)
                                                 console.log('成功')

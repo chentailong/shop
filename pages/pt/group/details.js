@@ -1,4 +1,6 @@
 var _Page;
+var succeed_template = 'l2jNYVkSLHwDyjZniuWIhAeuAIaolk7VD2LAaNyNkts'  //拼团成功
+var defeated_template = '2t1miCFykTAB3ZTf59AnaDjMgcFXAJ498mnGQGs2qLQ'  //拼团失败
 
 function _defineProperty(t, e, o) {
     return e in t ? Object.defineProperty(t, e, {
@@ -20,6 +22,17 @@ Page((_defineProperty(_Page = {
         }
     },
     onLoad: function(t) {
+        wx.requestSubscribeMessage({
+            tmplIds: [succeed_template,defeated_template],
+            success(res) {
+                console.log(res)
+                console.log('成功')
+            },
+            fail(err) {
+                console.log(err)
+                console.log('失败')
+            }
+        });
         getApp().page.onLoad(this, t);
         var e = t.user_id, o = decodeURIComponent(t.scene);
         if (void 0 !== e) e; else if (void 0 !== o) {

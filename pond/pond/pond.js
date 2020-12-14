@@ -1,4 +1,5 @@
 var p_animation, bout, animation;
+var Lottery_template = 'PWiMrpGCoo_JAZjJ9SvupSPWZ_6wJf_GSVKSgXI9Qfw'  //抽奖结果
 
 Page({
     data: {
@@ -93,6 +94,17 @@ Page({
                     });
                 }
             }); else {
+                wx.requestSubscribeMessage({
+                    tmplIds: [Lottery_template],
+                    success(res) {
+                        console.log(res)
+                        console.log('成功')
+                    },
+                    fail(err) {
+                        console.log(err)
+                        console.log('失败')
+                    }
+                });
                 clearInterval(p_animation), animation.translate(0, 0).step(), n.setData({
                     animationData: animation.export(),
                     isRunning: !0,

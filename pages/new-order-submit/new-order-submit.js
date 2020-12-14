@@ -19,7 +19,6 @@ Page({
 
         wx.login({
             success(res) {
-                console.log(12)
                 console.log(res)
                 if (res.code) {
                     wx.request({
@@ -29,10 +28,8 @@ Page({
                         },
                         method: 'POST',
                         success(res) {
-                            console.log(1234)
                             console.log(res)
                         }
-
                     })
                 }
             }

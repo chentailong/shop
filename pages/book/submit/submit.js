@@ -1,4 +1,6 @@
 var utils = require("../../../utils/helper.js");
+var appointment_template = 'k7C5F31pOKHyHLCzsJYUVn8WiNJET4EmQF3tFwxPMtM'  //预约成功
+var defeated_templatte = 'lUL-s-rVssk4IJ4sY1QMYGOKEcV40wpkXYBonlFBD10'    //预约失败
 
 Page({
     data: {
@@ -138,6 +140,17 @@ Page({
                 attr: o
             },
             success: function(t) {
+                wx.requestSubscribeMessage({
+                    tmplIds: [appointment_template,defeated_templatte],
+                    success(res) {
+                        console.log(res)
+                        console.log('成功')
+                    },
+                    fail(err) {
+                        console.log(err)
+                        console.log('失败')
+                    }
+                })
                 if (0 == t.code) {
                     if (1 != t.type) return getApp().core.showLoading({
                         title: "正在提交",
