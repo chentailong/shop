@@ -26,13 +26,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="增加了订阅信息的授权">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改数据">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/add-share/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/add-share/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cash/cash.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pond/pond/pond.js" beforeDir="false" afterPath="$PROJECT_DIR$/pond/pond/pond.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bargain/activity/activity.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/activity/activity.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/user.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/user.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siteinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +54,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="gitll" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

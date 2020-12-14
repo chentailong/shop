@@ -1,7 +1,7 @@
-<import src="/components/common/index"></import>
+<import src="/components/common/index.wxml"></import>
 <view class="page {{__page_classes}}">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <block wx:if="{{template}}">
             <import src="/components/diy/diy.wxml"></import>
@@ -51,5 +51,5 @@
         <template is="act-modal" data="{{__wxapp_img:__wxapp_img,act_modal_list:act_modal_list}}" wx:if="{{act_modal_list&&act_modal_list.length>0}}"></template>
     </view>
     <include src="/components/quick-navigation/quick-navigation.wxml"></include>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>
