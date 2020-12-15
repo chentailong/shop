@@ -1,9 +1,9 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="flex-y-center flex-x-center" style="height: 100rpx;border-bottom: 1rpx solid #e3e3e3;border-top: 1rpx solid #e3e3e3;position: fixed;top: 0;width: 100%;z-index: 999;background: #EFEFF4">
-            <navigator class="flex-y-center flex-x-center fs-sm" style="width: 700rpx;height: 60rpx;background: #fff;border: 1rpx solid #e3e3e3; border-radius: 10rpx;text-align: center;color: #b2b2b2" url="/pages/search/search">
+            <navigator class="flex-y-center flex-x-center fs-sm" style="width: 700rpx;height: 60rpx;background: #fff;border: 1rpx solid #e3e3e3; border-radius: 20px;text-align: center;color: #b2b2b2" url="/pages/search/search">
                 <image src="{{__wxapp_img.search.search.url}}" style="width:24rpx;height: 24rpx;margin-right:10rpx "></image>
                 <text>搜索</text>
             </navigator>
@@ -118,6 +118,7 @@
                         <view class="flex-grow-1" style="color:#ff334b">
                             <block wx:if="{{item.is_negotiable!=1}}">￥</block>{{item.price}}</view>
                         <view class="flex-grow-0 fs-sm" style="color:#999;" wx:if="{{__is_sales}}">已售{{item.sales}}</view>
+                        
                     </view>
                 </view>
             </navigator>
@@ -126,5 +127,5 @@
             <image src="{{__wxapp_img.system.loading.url}}" style="width: 160rpx;height: 80rpx"></image>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

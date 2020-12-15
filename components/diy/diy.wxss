@@ -21,6 +21,7 @@
 
 .rubik-list {
     position: relative;
+    background: #FFFFFF;
     width: 100%;
 }
 

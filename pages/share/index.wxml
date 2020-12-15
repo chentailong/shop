@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber" wx:if="{{__user_info&&__user_info.is_distributor==1}}">
         <view class="info">
             <view class="info-title flex-row">
@@ -92,7 +92,7 @@
                     <image src="{{__wxapp_img.share.tip.url}}" style="width:420rpx;height:240rpx;"></image>
                 </view>
             </view>
-            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">您还不是{{custom.share_name.name}}。请先提交申请！</view>
+            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">您还不是{{custom.words.share_name.name}}。请先提交申请！</view>
             <view class="felx-row flex-x-center">
                 <form bindsubmit="apply" reportSubmit="true">
                     <button class="flex-x-center flex-y-center" formType="submit" style="width:560rpx;height:80rpx;border-radius:40rpx;background-color:#ff4544;color:#fff;">立即前往</button>
@@ -100,5 +100,5 @@
             </view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

@@ -25,27 +25,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改参数">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/add-share/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/add-share/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/add-share/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/add-share/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address-edit/address-edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-edit/address-edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address-edit/address-edit.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-edit/address-edit.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address-picker/address-picker.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-picker/address-picker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address-picker/address-picker.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-picker/address-picker.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address/address.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address/address.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address/address.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/article-detail/article-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/article-detail/article-detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/article-detail/article-detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/article-detail/article-detail.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/article-list/article-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/article-list/article-list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/article-list/article-list.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/article-list/article-list.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/card-clerk/card-clerk.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card-clerk/card-clerk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/card-detail/card-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card-detail/card-detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/card-detail/card-detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card-detail/card-detail.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/card/card.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card/card.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/card/card.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card/card.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cart/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart/cart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cart/cart.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart/cart.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/diy/diy.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cash/cash.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cat/cat.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cat/cat.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share/index.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,6 +99,9 @@
       <workItem from="1607593847805" duration="754000" />
       <workItem from="1607612792537" duration="610000" />
       <workItem from="1607646877908" duration="2994000" />
+      <workItem from="1607949526714" duration="12000" />
+      <workItem from="1607953078061" duration="646000" />
+      <workItem from="1607992762967" duration="12162000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -157,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607910690522</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件">
+      <created>1607935226891</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1607935226891</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,7 +188,8 @@
     <MESSAGE value="订阅消息" />
     <MESSAGE value="增加了订阅信息的授权" />
     <MESSAGE value="修改数据" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改数据" />
+    <MESSAGE value="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件" />
   </component>
   <component name="WindowStateProjectService">
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1607612809619">
@@ -223,15 +219,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="467" y="127" key="VCS.ChangeListViewerDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910719546" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607910782087">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607935228768">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910782087" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607935228768" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
-    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607910716025">
+    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607935131938">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910716025" />
+    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607935131938" />
     <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307720660" />
     <state x="483" y="124" key="git4idea.branch.GitSmartOperationDialog" timestamp="1607910508267">
       <screen x="0" y="0" width="1536" height="824" />
