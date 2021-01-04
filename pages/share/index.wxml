@@ -29,13 +29,17 @@
         <view class="new-block flex-row">
             <view class="flex-grow-1 flex-x-center">
                 <view class="text-more">
-                    <view class="text-more" style="color:#22af19;margin-bottom: 16rpx;">{{custom.words.already_presented.name}}</view>
+                    <view class="text-more" style="color:#22af19;margin-bottom: 16rpx;">
+                        {{custom.words.already_presented.name}}
+                    </view>
                     <view class="text-more">{{cash_price}}元</view>
                 </view>
             </view>
             <view class="flex-grow-1 flex-x-center">
                 <view class="text-more">
-                    <view class="text-more" style="color:#ff8f17;margin-bottom: 16rpx;">{{custom.words.order_money_un.name}}</view>
+                    <view class="text-more" style="color:#ff8f17;margin-bottom: 16rpx;">
+                        {{custom.words.order_money_un.name}}
+                    </view>
                     <view class="text-more">{{order_money_un}}元</view>
                 </view>
             </view>
@@ -47,7 +51,8 @@
                 </view>
                 <view class="list-content text-more">{{custom.menus.money.name}}</view>
                 <view class="flex-x-center list-content">
-                    <view class="list-red">{{total_price}}</view>元</view>
+                    <view class="list-red">{{total_price}}</view>元
+                </view>
             </navigator>
             <navigator class="item border-bottom border-between" url="/pages/share-order/share-order">
                 <view class="list-img flex-x-center">
@@ -55,7 +60,8 @@
                 </view>
                 <view class="list-content text-more">{{custom.menus.order.name}}</view>
                 <view class="flex-x-center list-content">
-                    <view class="list-red">{{order_money}}</view>元</view>
+                    <view class="list-red">{{order_money}}</view>元
+                </view>
             </navigator>
             <navigator class="item border-bottom" url="/pages/cash-detail/cash-detail">
                 <view class="list-img flex-x-center">
@@ -63,7 +69,8 @@
                 </view>
                 <view class="list-content text-more">{{custom.menus.cash.name}}</view>
                 <view class="flex-x-center list-content">
-                    <view class="list-red">{{total_cash}}</view>元</view>
+                    <view class="list-red">{{total_cash}}</view>元
+                </view>
             </navigator>
         </view>
         <view class="list flex-row">
@@ -73,7 +80,8 @@
                 </view>
                 <view class="list-content text-more">{{custom.menus.team.name}}</view>
                 <view class="flex-x-center list-content">
-                    <view class="list-red">{{team_count}}</view>人</view>
+                    <view class="list-red">{{team_count}}</view>人
+                </view>
             </navigator>
             <navigator class="item border-bottom border-between" url="/pages/share-qrcode/share-qrcode">
                 <view class="list-img flex-x-center">
@@ -85,17 +93,24 @@
             <view class="item border-bottom"></view>
         </view>
     </view>
-    <view class="after-navber" style="background-color:#fff;height:100%" wx:if="{{__user_info&&__user_info.is_distributor!=1}}">
+    <view class="after-navber" style="background-color:#fff;height:100%"
+          wx:if="{{__user_info&&__user_info.is_distributor!=1}}">
         <view style="padding-top:150rpx">
             <view class="flex-row flex-x-center">
                 <view class="">
                     <image src="{{__wxapp_img.share.tip.url}}" style="width:420rpx;height:240rpx;"></image>
                 </view>
             </view>
-            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">您还不是{{custom.words.share_name.name}}。请先提交申请！</view>
+            <!--            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">您还不是{{custom.words.share_name.name}}哦。请先提交申请！</view>-->
+            <view class="flex-row flex-x-center" style="padding:80rpx 0 88rpx 0;">
+                您还不是分销商。请先提交申请！
+            </view>
             <view class="felx-row flex-x-center">
                 <form bindsubmit="apply" reportSubmit="true">
-                    <button class="flex-x-center flex-y-center" formType="submit" style="width:560rpx;height:80rpx;border-radius:40rpx;background-color:#ff4544;color:#fff;">立即前往</button>
+                    <button class="flex-x-center flex-y-center" formType="submit"
+                            style="width:560rpx;height:80rpx;border-radius:40rpx;background-color:#ff4544;color:#fff;">
+                        立即前往
+                    </button>
                 </form>
             </view>
         </view>

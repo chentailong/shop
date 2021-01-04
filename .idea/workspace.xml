@@ -25,11 +25,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="更新了DIY模块,已经更新了分销商中数据的显示问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/diy/diy.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cash/cash.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/cat/cat.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cat/cat.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/order-pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/order-pay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-submit/order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-submit/order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-submit/order-submit.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-submit/order-submit.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/share/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share/index.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
@@ -67,7 +70,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../project/wwhm-web" />
+    <property name="last_opened_file_path" value="D:/桌面/文件专用/陈泰龙项目/web源码/wwhm-web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -101,7 +104,22 @@
       <workItem from="1607646877908" duration="2994000" />
       <workItem from="1607949526714" duration="12000" />
       <workItem from="1607953078061" duration="646000" />
-      <workItem from="1607992762967" duration="12162000" />
+      <workItem from="1607992762967" duration="12253000" />
+      <workItem from="1608037121286" duration="89000" />
+      <workItem from="1608098200220" duration="626000" />
+      <workItem from="1608106680859" duration="333000" />
+      <workItem from="1608165912786" duration="3512000" />
+      <workItem from="1608350767693" duration="677000" />
+      <workItem from="1608532677306" duration="1213000" />
+      <workItem from="1608564535509" duration="621000" />
+      <workItem from="1608598085291" duration="4294000" />
+      <workItem from="1608683451661" duration="1259000" />
+      <workItem from="1608879067643" duration="610000" />
+      <workItem from="1608988911328" duration="44000" />
+      <workItem from="1609115864788" duration="1695000" />
+      <workItem from="1609516872004" duration="3315000" />
+      <workItem from="1609576870584" duration="293000" />
+      <workItem from="1609725623811" duration="16575000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -152,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607935226891</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="更新了DIY模块,已经更新了分销商中数据的显示问题">
+      <created>1608026494465</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1608026494465</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,14 +214,20 @@
     <MESSAGE value="增加了订阅信息的授权" />
     <MESSAGE value="修改数据" />
     <MESSAGE value="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了pages下的是个文件，分别是A开头的和C开头的，现在做到Cart(购物车) 文件" />
+    <MESSAGE value="更新了DIY模块,已经更新了分销商中数据的显示问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新了DIY模块,已经更新了分销商中数据的显示问题" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1607612809619">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2404" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608708135432">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2404" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608708135432" />
+    <state x="2606" y="211" key="FileChooserDialogImpl" timestamp="1609143471585">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607330515867" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1607612809619" />
+    <state x="2606" y="211" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609143471585" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1608988946322" />
     <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606960049480" />
     <state x="593" y="255" key="IDE.errors.dialog" timestamp="1606898750590">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -219,10 +250,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="467" y="127" key="VCS.ChangeListViewerDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910719546" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607935228768">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1608026497691">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607935228768" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608026497691" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
     <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607935131938">
       <screen x="0" y="0" width="1536" height="824" />
@@ -238,9 +269,10 @@
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607915975830" />
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1607320388195" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1607313308270">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1609727422802">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1609727422802" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1607313308270" />
   </component>
 </project>

@@ -163,6 +163,7 @@ Page({
             i.scratch_id = a.data.scratch_id, i.step_id = a.data.step_id, i.lottery_id = a.data.lottery_id,
             i.pond_id ? a.order_submit(i, "pond") : i.scratch_id ? a.order_submit(i, "scratch") : i.lottery_id ? a.order_submit(i, "lottery") : i.step_id ? a.order_submit(i, "step") : a.order_submit(i, "s");
     },
+
     onReady: function () {
     },
     onShow: function (t) {

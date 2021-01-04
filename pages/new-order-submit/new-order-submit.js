@@ -13,10 +13,46 @@ Page({
         show_payment: !1,
         show_more: !1,
         index: -1,
-        mch_offline: !0
+        mch_offline: !0,
+        showPayPwdInput: false,  //是否展示密码输入层
+        pwdVal: '',  //输入的密码
+        payFocus: true, //文本框焦点
     },
-    onLoad: function (t) {
+    dataList: {},
+    /**
+     * 显示支付密码输入层
+     */
+    showInputLayer: function () {
+        this.setData({showPayPwdInput: true, payFocus: true});
+    },
+    /**
+     * 隐藏支付密码输入层
+     */
+    hidePayLayer: function(){
+        var val = this.data.pwdVal;
+        this.dataList.password = val
+        this.setData({ showPayPwdInput: false, payFocus: false, pwdVal: '' }, function(){
+        });
+        console.log(this.dataList)
+        this.order_submit(this.dataList, "s");
+    },
+    /**
+     * 获取焦点
+     */
+    getFocus: function () {
+        this.setData({payFocus: true});
+    },
+    /**
+     * 输入密码监听
+     */
+    inputPwd: function (e) {
+        this.setData({pwdVal: e.detail.value});
+        if (e.detail.value.length >= 6) {
+            this.hidePayLayer();
+        }
+    },
 
+    onLoad: function (t) {
         wx.login({
             success(res) {
                 console.log(res)
@@ -34,7 +70,6 @@ Page({
                 }
             }
         })
-        //-------------------------------
         getApp().page.onLoad(this, t);
         var e = util.formatData(new Date());
         getApp().core.removeStorageSync(getApp().const.INPUT_DATA), this.setData({
@@ -42,6 +77,8 @@ Page({
             time: e
         }), is_loading_show = !1;
     },
+
+
     bindContentInput: function (t) {
         this.data.mch_list[t.currentTarget.dataset.index].content = t.detail.value, this.setData({
             mch_list: this.data.mch_list
@@ -89,7 +126,8 @@ Page({
         });
     },
     orderSubmit: function (t) {
-        var e = this, a = {}, i = e.data.mch_list;
+        console.log(t)
+        var that = this, i = that.data.mch_list;
         for (var o in i) {
             var s = i[o].form;
             if (s && 1 == s.is_form && 0 == i[o].mch_id) {
@@ -109,24 +147,28 @@ Page({
                 }), !1;
             }
             if (1 == i.length && 0 == i[o].mch_id && 1 == i[o].offline) ; else {
-                if (!e.data.address) return getApp().core.showModal({
+                if (!that.data.address) return getApp().core.showModal({
                     title: "提示",
                     content: "请选择收货地址",
                     showCancel: !1
                 }), !1;
-                a.address_id = e.data.address.id;
+                that.dataList.address_id = that.data.address.id;
             }
         }
-        if (a.mch_list = JSON.stringify(i), 0 < e.data.pond_id) {
-            if (0 < e.data.express_price && -1 == e.data.payment) return e.setData({
+        if (that.dataList.mch_list = JSON.stringify(i), 0 < that.data.pond_id) {
+            if (0 <that.data.express_price && -1 == that.data.payment) return that.setData({
                 show_payment: !0
             }), !1;
-        } else if (-1 == e.data.payment) return e.setData({
+        } else if (-1 == that.data.payment) return that.setData({
             show_payment: !0
         }), !1;
-        1 == e.data.integral_radio ? a.use_integral = 1 : a.use_integral = 2, a.payment = e.data.payment,
-            a.formId = t.detail.formId, e.order_submit(a, "s");
+        if (that.data.payment == 3) {
+            this.showInputLayer()
+        }
+        1 == that.data.integral_radio ? that.dataList.use_integral = 1 : that.dataList.use_integral = 2, that.dataList.payment = that.data.payment
+            ,that.dataList.formId = t.detail.formId, that.order_submit(that.dataList, "s");
     },
+
     onReady: function () {
     },
     onShow: function (t) {

@@ -8,13 +8,14 @@ function setOnShowScene(e) {
 }
 
 var pay = {
+
     init: function (l, e) {
-        var _ = this, A = getApp().api;
-        _.page = l, app = e;
+        var that = this, A = getApp().api;
+        that.page = l, app = e;
         var m = getApp().core.getStorageSync(getApp().const.PARENT_ID);
-        m || (m = 0), _.page.orderPay = function (e) {
-            var t = e.currentTarget.dataset.index, o = _.page.data.order_list[t], a = new Array();
-            if (void 0 !== _.page.data.pay_type_list) a = _.page.data.pay_type_list; else if (void 0 !== o.pay_type_list) a = o.pay_type_list; else if (void 0 !== o.goods_list[0].pay_type_list) a = o.goods_list[0].pay_type_list; else {
+        m || (m = 0), that.page.orderPay = function (e) {
+            var t = e.currentTarget.dataset.index, o = that.page.data.order_list[t], a = new Array();
+            if (void 0 !== that.page.data.pay_type_list) a = that.page.data.pay_type_list; else if (void 0 !== o.pay_type_list) a = o.pay_type_list; else if (void 0 !== o.goods_list[0].pay_type_list) a = o.goods_list[0].pay_type_list; else {
                 var r = {
                     payment: 0
                 };
@@ -115,7 +116,7 @@ var pay = {
                     }), i(n, c, s)) : e.cancel && d(n, c, s);
                 }
             });
-        }, _.page.order_submit = function (r, g) {
+        }, that.page.order_submit = function (order_list, g) {
             var e = A.order.submit, p = A.order.pay_data, u = "/pages/order/order";
             if ("pt" == g ? (e = A.group.submit, p = A.group.pay_data, u = "/pages/pt/order/order") : "ms" == g ? (e = A.miaosha.submit,
                 p = A.miaosha.pay_data, u = "/pages/miaosha/order/order") : "pond" == g ? (e = A.pond.submit,
@@ -123,15 +124,27 @@ var pay = {
                 p = A.order.pay_data, u = "/pages/order/order") : "lottery" == g ? (e = A.lottery.submit,
                 p = A.order.pay_data, u = "/pages/order/order") : "step" == g ? (e = A.step.submit,
                 p = A.order.pay_data, u = "/pages/order/order") : "s" == g && (e = A.order.new_submit,
-                p = A.order.pay_data, u = "/pages/order/order"), 3 == r.payment) {
-                var t = getApp().getUser();
-                getApp().core.showModal({
-                    title: "当前账户余额：" + t.money,
-                    content: "是否确定使用余额支付",
-                    success: function (e) {
-                        e.confirm && o();
-                    }
-                });
+                p = A.order.pay_data, u = "/pages/order/order"), 3 == order_list.payment) {
+                let password = "123123";
+                var userinfo = getApp().getUser();
+                console.log(order_list)
+                if (order_list.password == password) {
+                     o();
+                }else {
+                    return  wx.showToast({
+                        icon:"none",
+                        title: "请输入密码",
+                    })
+                }
+                //使用余额支付
+                // getApp().core.showModal({
+                //     title: "当前账户余额：" + userinfo.money,
+                //     content: "是否确定使用余额支付",
+                //     success: function (e) {
+                //         console.log(e)
+                //         e.confirm && o();
+                //     }
+                // });
             } else o();
 
             function o() {
@@ -141,7 +154,7 @@ var pay = {
                 }), app.request({
                     url: e,
                     method: "post",
-                    data: r,
+                    data: order_list,
                     success: function (e) {
                         if (0 == e.code) {
                             var t = function () {
@@ -151,13 +164,13 @@ var pay = {
                                         order_id: d,
                                         order_id_list: o,
                                         pay_type: a,
-                                        form_id: r.formId,
+                                        form_id: order_list.formId,
                                         parent_user_id: m,
                                         condition: 2
                                     },
                                     success: function (e) {
                                         wx.requestSubscribeMessage({
-                                            tmplIds: [deliver_template,order_template,pt_template],
+                                            tmplIds: [deliver_template, order_template, pt_template],
                                             success(res) {
                                                 console.log(res)
                                                 console.log('成功')
@@ -180,11 +193,11 @@ var pay = {
                                         });
                                         setTimeout(function () {
                                             getApp().core.hideLoading();
-                                        }, 1e3), "pt" == g ? "ONLY_BUY" == _.page.data.type ? getApp().core.redirectTo({
+                                        }, 1e3), "pt" == g ? "ONLY_BUY" == that.page.data.type ? getApp().core.redirectTo({
                                             url: u + "?status=2"
                                         }) : getApp().core.redirectTo({
                                             url: "/pages/pt/group/details?oid=" + d
-                                        }) : void 0 !== _.page.data.goods_card_list && 0 < _.page.data.goods_card_list.length && 2 != r.payment ? _.page.setData({
+                                        }) : void 0 !== that.page.data.goods_card_list && 0 < that.page.data.goods_card_list.length && 2 != order_list.payment ? that.page.setData({
                                             show_card: !0
                                         }) : getApp().core.redirectTo({
                                             url: u + "?status=-1",
@@ -205,13 +218,13 @@ var pay = {
                                 });
                             }, 2e3);
                             setTimeout(function () {
-                                _.page.setData({
+                                that.page.setData({
                                     options: {}
                                 });
                             }, 1);
                             var d = e.data.order_id || "",
                                 o = e.data.order_id_list ? JSON.stringify(e.data.order_id_list) : "", a = "";
-                            0 == r.payment ? app.request({
+                            0 == order_list.payment ? app.request({
                                 url: p,
                                 data: {
                                     order_id: d,
@@ -229,7 +242,7 @@ var pay = {
                                     } else {
                                         setTimeout(function () {
                                             getApp().core.hideLoading();
-                                        }, 1e3), setOnShowScene("pay"), e.data && 0 == e.data.price ? void 0 !== _.page.data.goods_card_list && 0 < _.page.data.goods_card_list.length ? _.page.setData({
+                                        }, 1e3), setOnShowScene("pay"), e.data && 0 == e.data.price ? void 0 !== that.page.data.goods_card_list && 0 < that.page.data.goods_card_list.length ? that.page.setData({
                                             show_card: !0
                                         }) : getApp().core.redirectTo({
                                             url: u + "?status=1"
@@ -287,22 +300,19 @@ var pay = {
                                         }
                                     }
                                 }
-                            }) : 2 == r.payment ? (a = "HUODAO_PAY", t()) : 3 == r.payment && (a = "BALANCE_PAY",
+                            }) : 2 == order_list.payment ? (a = "HUODAO_PAY", t()) : 3 == order_list.payment && (a = "BALANCE_PAY",
                                 t());
                         }
-                        1 == e.code && (getApp().core.hideLoading(), "活力币不足" == e.msg && _.page.data.store.option.step.currency_name ? getApp().core.showToast({
+                        1 == e.code && (getApp().core.hideLoading(), "活力币不足" == e.msg && that.page.data.store.option.step.currency_name ? getApp().core.showToast({
                             icon: "none",
-                            title: _.page.data.store.option.step.currency_name + "不足"
+                            title: that.page.data.store.option.step.currency_name + "不足"
                         }) : getApp().core.showToast({
                             icon: "none",
                             title: e.msg
                         }));
                     }
                 });
-                //     }
-                // })
             }
-
         };
     }
 };

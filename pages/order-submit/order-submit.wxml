@@ -172,6 +172,7 @@
                         <input bindinput="bindkeyinput" data-mch-index="-1" name="content" placeholder="请填写备注" style="width:100%;" value="{{content}}"></input>
                     </view>
                 </view>
+
                 <view class="address-picker" style="padding:0 24rpx;" wx:if="{{form.is_form==1&&form.list.length>0&&!step_id}}">
                     <view class="form-title text-more">{{form.name?form.name:'表单信息'}}</view>
                     <view class="form-list">
