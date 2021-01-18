@@ -1,0 +1,29 @@
+<view>
+    <view wx:if='{{showPayPwdInput}}'>
+        <view class='input_title'>
+            <text>设置密码</text>
+        </view>
+            <view class='input_row' catchtap='getFocus'>
+                <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+                    <text wx:if='{{pwdVal.length>i}}'></text>
+                </view>
+            </view>
+            <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6'/>
+        </view>
+    <view class="submit" bindtap="submit" wx:if="{{showPayPwdInput}}">下一步</view>
+
+
+    <view wx:if='{{!showPayPwdInput}}'>
+        <view class='input_title'>
+            <text>确认密码</text>
+        </view>
+        <view class='input_row' catchtap='getFocus'>
+            <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+                <text wx:if='{{pwdVal.length>i}}'></text>
+            </view>
+        </view>
+        <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6'/>
+    </view>
+    <view class="submit" bindtap="submit" wx:wx:if="{{!showPayPwdInput}}">确认</view>
+</view>
+

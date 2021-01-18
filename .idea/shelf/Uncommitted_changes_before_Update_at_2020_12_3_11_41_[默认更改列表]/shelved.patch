@@ -1,0 +1,486 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a0dac186-9019-463a-9c2e-c3fb3065d3d9\" name=\"默认更改列表\" comment=\"订阅消息\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/project.config.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/project.config.json\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1kovTJiAtU3FWmmrKqoh8WmR75r\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../../../uni.app/shop\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a0dac186-9019-463a-9c2e-c3fb3065d3d9\" name=\"默认更改列表\" comment=\"\" />\r\n      <created>1606379764423</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1606379764423</updated>\r\n      <workItem from=\"1606379765556\" duration=\"4577000\" />\r\n      <workItem from=\"1606397406491\" duration=\"15000\" />\r\n      <workItem from=\"1606437750963\" duration=\"4137000\" />\r\n      <workItem from=\"1606465712428\" duration=\"2021000\" />\r\n      <workItem from=\"1606629591158\" duration=\"2431000\" />\r\n      <workItem from=\"1606696186584\" duration=\"19888000\" />\r\n      <workItem from=\"1606783378952\" duration=\"16456000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"更新积分商城中分类\">\r\n      <created>1606469250408</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606469250408</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"界面\">\r\n      <created>1606716329300</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606716329301</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"订阅消息\">\r\n      <created>1606727833134</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606727833134</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"更新积分商城中分类\" />\r\n    <MESSAGE value=\"界面\" />\r\n    <MESSAGE value=\"订阅消息\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"订阅消息\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"549\" y=\"167\" key=\"FileChooserDialogImpl\" timestamp=\"1606726554446\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"549\" y=\"167\" key=\"FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824\" timestamp=\"1606726554446\" />\r\n    <state width=\"498\" height=\"446\" key=\"SwitcherDM\" timestamp=\"1606789637136\">\r\n      <screen x=\"1920\" y=\"0\" width=\"1920\" height=\"1040\" />\r\n    </state>\r\n    <state width=\"498\" height=\"446\" key=\"SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040\" timestamp=\"1606789637136\" />\r\n    <state x=\"361\" y=\"145\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1606727836293\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"361\" y=\"145\" key=\"Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824\" timestamp=\"1606727836293\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ .idea/workspace.xml	(date 1606966600771)
+@@ -16,12 +16,27 @@
+         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+       </path>
+     </expand>
+-    <select />
++    <select>
++      <path>
++        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="BRANCH:origin/gitll" type="e8cecc67:BranchNodeDescriptor" />
++      </path>
++    </select>
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="订阅消息">
++    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/core/order-pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/order-pay.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/add-share/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/add-share/index.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/address-edit/address-edit.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-edit/address-edit.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/address-picker/address-picker.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-picker/address-picker.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/address/address.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address/address.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/balance/balance.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/balance/balance.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/balance/detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/balance/detail.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/bangding/bangding.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bangding/bangding.wxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pages/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order/order.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -30,6 +45,11 @@
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="get" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="ProjectId" id="1kovTJiAtU3FWmmrKqoh8WmR75r" />
+@@ -64,6 +84,7 @@
+       <workItem from="1606629591158" duration="2431000" />
+       <workItem from="1606696186584" duration="19888000" />
+       <workItem from="1606783378952" duration="16456000" />
++      <workItem from="1606955729117" duration="3026000" />
+     </task>
+     <task id="LOCAL-00001" summary="更新积分商城中分类">
+       <created>1606469250408</created>
+@@ -97,7 +118,19 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State />
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="origin/gitll" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
+           </value>
+         </entry>
+       </map>
+@@ -123,5 +156,9 @@
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1606727836293" />
++    <state x="2683" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606956669918">
++      <screen x="1920" y="0" width="1920" height="1040" />
++    </state>
++    <state x="2683" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606956669918" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: pages/add-share/index.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <view class=\"{{show_modal?'no-scroll':''}}\">\r\n            <view class=\"step1\" wx:if=\"{{__user_info.is_distributor==0}}\">\r\n                <view class=\"info-bg\">\r\n                    <image class=\"bg\" src=\"{{share_setting.pic_url_1}}\"></image>\r\n                </view>\r\n                <form bindsubmit=\"formSubmit\" reportSubmit=\"true\">\r\n                    <view class=\"info\">\r\n                        <view class=\"info-label flex-row\">\r\n                            <view class=\"flex-y-center\">\r\n                                欢迎加入\r\n                                <view class=\"info-red\" style=\"width:260rpx; overflow: hidden;-webkit-line-clamp: 1;display: -webkit-box;-webkit-box-orient: vertical;\">{{store.name}}</view>请填写申请信息\r\n                            </view>\r\n                        </view>\r\n                        <view class=\"info-label info-content flex-row\">\r\n                            <view class=\"info-left flex-y-center\">邀请人</view>\r\n                            <view class=\"info-right flex-row\">\r\n                                <view class=\"info-red flex-grow-0 flex-y-center\">{{__user_info.parent}}</view>\r\n                                <view class=\"info-gray flex-group-1 flex-y-center\">(请核对)</view>\r\n                            </view>\r\n                        </view>\r\n                        <view class=\"info-label info-content flex-row\">\r\n                            <view class=\"info-left flex-grow-0 flex-y-center required\">姓名</view>\r\n                            <view class=\"info-right flex-grow-1 flex-row flex-y-center\">\r\n                                <input class=\"name-input\" name=\"name\" placeholder=\"请填写真实姓名\" style=\"width:100%\" value=\"{{form.name}}\"></input>\r\n                            </view>\r\n                        </view>\r\n                        <view class=\"info-label info-content flex-row\">\r\n                            <view class=\"info-left flex-grow-0 flex-y-center required\">手机号码</view>\r\n                            <view class=\"info-right flex-grow-1 flex-row flex-y-center\">\r\n                                <input class=\"mobile-input\" name=\"mobile\" placeholder=\"请填写手机号码\" style=\"width:100%\" type=\"number\" value=\"{{form.mobile}}\"></input>\r\n                            </view>\r\n                        </view>\r\n                        <view class=\"info-label info-content flex-row\">\r\n                            <view bindtap=\"agree\" class=\"info-agree flex-row flex-y-center\">\r\n                                <input name=\"agree\" style=\"display:none\" value=\"{{agree}}\"></input>\r\n                                <image src=\"{{img}}\" style=\"width:32rpx;height:32rpx;\"></image>\r\n                                <text style=\"margin-left:10rpx;\">我已经阅读并了解</text>\r\n                                <view bindtap=\"agreement\" style=\"color:#014c8c\">【{{share_name}}申请协议】</view>\r\n                            </view>\r\n                        </view>\r\n                    </view>\r\n                    <view class=\"info-btn flex-row\">\r\n                        <button class=\"flex-y-content info-btn-content\" formType=\"submit\">申请成为{{share_name}}</button>\r\n                    </view>\r\n                </form>\r\n                <view class=\"info\">\r\n                    <view class=\"info-label flex-row\">\r\n                        <view class=\"flex-y-center\">{{share_name}}特权</view>\r\n                    </view>\r\n                    <view class=\"info-label info-height flex-row\" wx:if=\"{{false}}\">\r\n                        <view class=\"flex-y-center\">\r\n                            <image class=\"info-icon\" src=\"{{__wxapp_img.share.shop.url}}\"></image>\r\n                        </view>\r\n                        <view class=\"info-block\">\r\n                            <view class=\"info-top bold\">独立小店</view>\r\n                            <view class=\"info-bottom\">拥有自己的小店及二维码</view>\r\n                        </view>\r\n                    </view>\r\n                    <view class=\"info-label info-height flex-row\">\r\n                        <view class=\"flex-y-center\">\r\n                            <image class=\"info-icon\" src=\"{{__wxapp_img.share.money.url}}\"></image>\r\n                        </view>\r\n                        <view class=\"info-block\">\r\n                            <view class=\"info-top bold\">销售拿佣金</view>\r\n                            <view class=\"info-bottom\">成为{{share_name}}后卖出商品，您可以获得佣金</view>\r\n                        </view>\r\n                    </view>\r\n                    <view class=\"info-label info-height flex-row\">\r\n                        <view class=\"flex-y-center info-block\">{{share_name}}的商品销售统一由厂家直接收款、直接发货，并提供产品的售后服务，分销佣金由厂家统一设置。</view>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n            <view class=\"step2\" wx:else>\r\n                <view class=\"info-bg\" style=\"height:300rpx\">\r\n                    <image class=\"bg\" src=\"{{share_setting.pic_url_2}}\"></image>\r\n                </view>\r\n                <view class=\"info\">\r\n                    <view class=\"info-title\">\r\n                        <image class=\"info-images\" src=\"{{__wxapp_img.share.info.url}}\"></image>\r\n                    </view>\r\n                    <view class=\"info-content\">谢谢您的支持，请等待审核！</view>\r\n                    <view class=\"flex-row info-btn1\">\r\n                        <navigator class=\"flex-y-content btn\" openType=\"redirect\" url=\"/pages/index/index\">去商城逛逛</navigator>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n        </view>\r\n        <view class=\"agree-modal flex-x-center flex-y-center {{show_modal?'':'hidden'}}\">\r\n            <view style=\"width:600rpx;background-color:#fff;border-radius:20rpx;\">\r\n                <view class=\"agree-head flex-x-center flex-y-center\" style=\"height:100rpx;\">分销协议</view>\r\n                <view class=\"agree-body\">\r\n                    <text>{{share_setting.agree}}</text>\r\n                </view>\r\n                <view bindtap=\"close\" class=\"agree-footer flex-x-center flex-y-center\" style=\"\">我已阅读</view>\r\n            </view>\r\n        </view>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/add-share/index.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/add-share/index.wxml	(date 1606959809984)
+@@ -1,3 +1,4 @@
++<!--申请成为分销商-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/balance/detail.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <view class=\"detail-block-1 flex-y-center\">\r\n            <view wx:if=\"{{order_type=='r'}}\">\r\n                <view class=\"flex-row\">\r\n                    <view class=\"flex-grow-0 t-color\">交易金额</view>\r\n                    <view class=\"flex-grow-1 {{list.flag==0?'record-3':'record-4'}}\">{{list.pay_price}}</view>\r\n                </view>\r\n                <view class=\"flex-row\">\r\n                    <view class=\"flex-grow-0 t-color\">赠送金额</view>\r\n                    <view class=\"flex-grow-1 {{list.flag==0?'record-3':'record-4'}}\">{{list.send_price}}</view>\r\n                </view>\r\n            </view>\r\n            <view class=\"flex-row\" wx:else>\r\n                <view class=\"flex-grow-0 t-color\">交易金额</view>\r\n                <view class=\"flex-grow-1 {{list.flag==0?'record-3':'record-4'}}\">{{list.pay_price}}</view>\r\n            </view>\r\n        </view>\r\n        <view class=\"detail-block-1\">\r\n            <view class=\"flex-row\" style=\"margin-top:16rpx;\">\r\n                <view class=\"flex-grow-0 t-color\">交易时间</view>\r\n                <view class=\"flex-grow-1\">{{list.time}}</view>\r\n            </view>\r\n            <view class=\"flex-row\" style=\"margin-top:32rpx;\">\r\n                <view class=\"flex-grow-0 t-color\">交易内容</view>\r\n                <view class=\"flex-grow-1\">{{list.content}}</view>\r\n            </view>\r\n            <view class=\"flex-row\" style=\"margin-top:32rpx;margin-bottom:16rpx;\" wx:if=\"{{list.order_no}}\">\r\n                <view class=\"flex-grow-0 t-color\">交易单号</view>\r\n                <view class=\"flex-grow-1\">{{list.order_no}}</view>\r\n            </view>\r\n            <view class=\"flex-row\" style=\"padding-top:16rpx;margin-bottom:16rpx;\" wx:if=\"{{list.order_refund_no}}\">\r\n                <view class=\"flex-grow-0 t-color\">退款单号</view>\r\n                <view class=\"flex-grow-1\">{{list.order_refund_no}}</view>\r\n            </view>\r\n        </view>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/balance/detail.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/balance/detail.wxml	(date 1606960102551)
+@@ -1,3 +1,4 @@
++<!--交易明细-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/bangding/bangding.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <block wx:if=\"{{binding}}\">\r\n            <view class=\"binding_pic\">\r\n                <image src=\"{{__wxapp_img.store.binding_pic.url}}\" style=\"height:100%;width:288rpx;\"></image>\r\n            </view>\r\n            <view class=\"binding_num\">\r\n                <view clsss=\"fs-b\" style=\"display: flex;justify-content: center;margin-bottom:16rpx;\">已绑定手机</view>\r\n                <view class=\"fs-b\" style=\"display: flex;justify-content: center;\">{{binding_num}}</view>\r\n            </view>\r\n            <button bindtap=\"renewal\" class=\"binding-footer\">更换绑定</button>\r\n        </block>\r\n        <block wx:else>\r\n            <view class=\"binding-header \">\r\n                <view class=\"empower\" style=\"float:left;\">\r\n                    <text bindtap=\"gainPhone\" class=\"binding-phone {{gainPhone?'gainPhone':''}}\">点击授权</text>\r\n                </view>\r\n                <view class=\"empower\" style=\"float:right;\" wx:if=\"{{status}}\">\r\n                    <text bindtap=\"handPhone\" class=\"binding-phone {{handPhone?'handPhone':''}}\">手动授权</text>\r\n                </view>\r\n            </view>\r\n            <view style=\"height:8rpx;background:#f7f7f7;\"></view>\r\n            <view class=\"binding-main flex-row\" wx:if=\"{{gainPhone}}\">\r\n                <view class=\"flex-grow-1\">\r\n                    <input bindinput=\"PhoneInput\" class=\"fs-b binding-btn {{PhoneNumber?'active':''}}\" disabled=\"true\" maxlength=\"11\" name=\"phone\" placeholder=\"授权手机号\" type=\"number\" value=\"{{PhoneNumber}}\"></input>\r\n                </view>\r\n                <view class=\"glex-grow-0\">\r\n                    <button bindgetphonenumber=\"getPhoneNumber\" class=\"fs-b binding-btn\" hoverClass=\"none\" openType=\"getPhoneNumber\" style=\"color:#ff4544;border-left:1rpx solid #e2e2e2;padding-left:50rpx;white-space:nowrap\">点击授权</button>\r\n                </view>\r\n            </view>\r\n            <block wx:if=\"{{status}}\">\r\n                <view class=\"binding-main2\" wx:if=\"{{handPhone}}\">\r\n                    <view style=\"height:100rpx;border-bottom:1rpx solid #e2e2e2;\">\r\n                        <input bindinput=\"HandPhoneInput\" class=\"fs-b binding-btn {{PhoneNumber?'active':''}}\" name=\"phone\" placeholder=\"输入手机号\" style=\"float:left;hieght:100rpx;\" type=\"number\"></input>\r\n                    </view>\r\n                    <view class=\"flex-row\" style=\"height:100rpx;\">\r\n                        <view class=\"flex-grow-1\">\r\n                            <input bindinput=\"CodeInput\" class=\"fs-b binding-btn {{PhoneNumber?'active':''}}\" maxlength=\"6\" name=\"code\" placeholder=\"输入验证码\" type=\"number\"></input>\r\n                        </view>\r\n                        <view class=\"flex-grow-1\">\r\n                            <view class=\"fs-b binding-btn\" style=\"color:#ff4544;border-left:1rpx solid #e2e2e2;padding-left:50rpx;\" wx:if=\"{{timer}}\">{{second}} S</view>\r\n                            <view bindtap=\"nextStep\" class=\"fs-b binding-btn\" style=\"color:#ff4544;border-left:1rpx solid #e2e2e2;padding-left:50rpx;white-space:nowrap\" wx:else>获取验证码</view>\r\n                        </view>\r\n                    </view>\r\n                </view>\r\n            </block>\r\n            <button bindtap=\"onSubmit\" class=\"binding-footer\" wx:if=\"{{handPhone}}\">确认</button>\r\n        </block>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/bangding/bangding.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/bangding/bangding.wxml	(date 1606960124245)
+@@ -1,3 +1,4 @@
++<!--授权手机号-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/balance/balance.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <view class=\"info\">\r\n            <image class=\"bg\" src=\"{{setting.pic_url}}\"></image>\r\n            <view class=\"flex-row\">\r\n                <view class=\"flex-grow-1\" style=\"position:relative;\">\r\n                    <view class=\"info-1\">\r\n                        <view class=\"flex-row\">\r\n                            <view class=\"flex-grow-1 flex-x-center\">账户余额(元)</view>\r\n                        </view>\r\n                    </view>\r\n                    <view class=\"info-2 flex-x-center\">{{user_info.money}}</view>\r\n                    <view class=\"info-3 flex-x-center\">\r\n                        <navigator hoverClass=\"none\" url=\"/pages/recharge/recharge\">\r\n                            <view class=\"info-btn flex-x-center flex-y-center\">充值</view>\r\n                        </navigator>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n            <view bindtap=\"click\" style=\"position:absolute;right:0;top:48rpx;\">\r\n                <image class=\"info-img\" src=\"{{setting.p_pic_url}}\"></image>\r\n            </view>\r\n        </view>\r\n        <view class=\"modal-h flex-y-center flex-x-center {{show?'':'hidden'}}\">\r\n            <view>\r\n                <view class=\"w-100 body-h\">\r\n                    <view class=\"flex-x-center\">充值说明</view>\r\n                    <scroll-view scrollY=\"true\" style=\"color:#666;max-height:250rpx;margin-top:40rpx;\">\r\n                        <text>{{setting.help}}</text>\r\n                    </scroll-view>\r\n                    <view bindtap=\"close\" class=\"flex-x-center\">\r\n                        <view class=\"btn-h flex-x-center flex-y-center\">我知道了</view>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n        </view>\r\n        <view class=\"ad\">\r\n            <navigator class=\"ad\" hoverClass=\"none\" openType=\"navigate\" url=\"{{setting.page_url}}\">\r\n                <image src=\"{{setting.ad_pic_url}}\"></image>\r\n            </navigator>\r\n        </view>\r\n        <view class=\"record\">\r\n            <view class=\"record-time flex-x-center flex-y-center\">\r\n                <view class=\"flex-row\">\r\n                    <view bindtap=\"dateDown\" class=\"flex-grow-0\">\r\n                        <image class=\"record-img\" src=\"{{__wxapp_img.balance.left.url}}\" style=\"margin:0 84rpx;\"></image>\r\n                    </view>\r\n                    <picker bindchange=\"dateChange\" class=\"flex-grow-1\" fields=\"month\" mode=\"date\" value=\"{{date_1}}\">\r\n                        <view>{{date}}</view>\r\n                    </picker>\r\n                    <view bindtap=\"dateUp\" class=\"flex-grow-0\">\r\n                        <image class=\"record-img\" src=\"{{__wxapp_img.balance.right.url}}\" style=\"margin:0 84rpx;\"></image>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n            <view class=\"record-list\">\r\n                <view bindtap=\"GoToDetail\" class=\"record-one flex-row\" data-index=\"{{index}}\" wx:for=\"{{list}}\" wx:key=\"{{item.id}}\">\r\n                    <view class=\"flex-grow-1\">\r\n                        <view style=\"width:500rpx;text-align:left\">\r\n                            <view class=\"record-1 text-more\">{{item.content}}</view>\r\n                            <view class=\"record-2\">{{item.date}}</view>\r\n                        </view>\r\n                    </view>\r\n                    <view class=\"flex-grow-0 flex-y-center {{item.flag!=1?'record-3':'record-4'}}\">{{item.price}}</view>\r\n                </view>\r\n            </view>\r\n        </view>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/balance/balance.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/balance/balance.wxml	(date 1606959963576)
+@@ -1,3 +1,4 @@
++<!--账户余额-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/address-edit/address-edit.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <view class=\"bottom-bar\">\r\n            <view bindtap=\"saveAddress\">保存</view>\r\n        </view>\r\n        <view>\r\n            <view class=\"flex-row flex-y-center edit-row\">\r\n                <view class=\"flex-grow-0 row-label\">收货人</view>\r\n                <view class=\"flex-grow-1\">\r\n                    <input bindinput=\"inputBlur\" data-name=\"name\" placeholder=\"\" value=\"{{name}}\"></input>\r\n                </view>\r\n            </view>\r\n            <view class=\"flex-row flex-y-center edit-row\">\r\n                <view class=\"flex-grow-0 row-label\">联系电话</view>\r\n                <view class=\"flex-grow-1\">\r\n                    <input bindinput=\"inputBlur\" data-name=\"mobile\" placeholder=\"\" type=\"number\" value=\"{{mobile}}\"></input>\r\n                </view>\r\n            </view>\r\n            <view class=\"flex-row flex-y-center edit-row\">\r\n                <view class=\"flex-grow-0 row-label\">所在地区</view>\r\n                <view bindtap=\"showAreaPicker\" class=\"flex-grow-1 flex-row\">\r\n                    <view class=\"flex-grow-1\" style=\"text-align: right;padding-right: 24rpx\">\r\n                        <block wx:if=\"{{district==null}}\">请选择</block>\r\n                        <block wx:else>{{district.province.name}} {{district.city.name}} {{district.district.name}}</block>\r\n                    </view>\r\n                    <view class=\"flex-grow-0 flex-y-center\">\r\n                        <image src=\"{{__wxapp_img.store.jiantou_r.url}}\" style=\"width: 12rpx;height: 22rpx\"></image>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n            <view class=\"flex-row flex-y-center edit-row\">\r\n                <view class=\"flex-grow-0 row-label\">详细地址</view>\r\n                <view class=\"flex-grow-1\">\r\n                    <input bindinput=\"inputBlur\" data-name=\"detail\" placeholder=\"\" value=\"{{detail}}\"></input>\r\n                </view>\r\n            </view>\r\n            <view bindtap=\"getWechatAddress\" class=\"get-wechat-address\" wx:if=\"{{__platform=='wx'}}\">授权一键获取地址</view>\r\n        </view>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n    <include src=\"./../../components/area-picker/area-picker.wxml\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/address-edit/address-edit.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/address-edit/address-edit.wxml	(date 1606959867822)
+@@ -1,3 +1,4 @@
++<!--编辑收货地址-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/address/address.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <view class=\"bottom-bar\">\r\n            <navigator url=\"/pages/address-edit/address-edit\">添加新地址</navigator>\r\n        </view>\r\n        <view class=\"no-data-tip\" wx:if=\"{{show_no_data_tip}}\">暂无收货地址</view>\r\n        <view class=\"address-list\">\r\n            <view class=\"address-item\" wx:for=\"{{address_list}}\" wx:key=\"{{item.id}}\">\r\n                <view class=\"userinfo flex-row\">\r\n                    <view class=\"flex-grow-1\">收货人：{{item.name}}</view>\r\n                    <view class=\"flex-grow-0\">{{item.mobile}}</view>\r\n                </view>\r\n                <view class=\"address-detail\">收货地址：{{item.address}}</view>\r\n                <view class=\"flex-row\">\r\n                    <view class=\"flex-grow-1\">\r\n                        <view style=\"display: inline-block\" wx:if=\"{{item.is_default==1}}\">\r\n                            <view class=\"default-address active flex-row flex-y-center\">\r\n                                <image src=\"{{__wxapp_img.store.checked.url}}\" style=\"width: 40rpx;height: 40rpx;margin-right: 12rpx\"></image>\r\n                                <text>默认地址</text>\r\n                            </view>\r\n                        </view>\r\n                        <view style=\"display: inline-block\" wx:else>\r\n                            <view bindtap=\"setDefaultAddress\" class=\"default-address flex-row flex-y-center\" data-index=\"{{index}}\">\r\n                                <image src=\"{{__wxapp_img.store.uncheck.url}}\" style=\"width: 40rpx;height: 40rpx;margin-right: 12rpx\"></image>\r\n                                <text>设为默认</text>\r\n                            </view>\r\n                        </view>\r\n                    </view>\r\n                    <view class=\"flex-grow-0 flex-row\">\r\n                        <navigator class=\"address-option flex-y-center\" url=\"/pages/address-edit/address-edit?id={{item.id}}\">\r\n                            <image src=\"{{__wxapp_img.store.edit.url}}\"></image>\r\n                            <text>编辑</text>\r\n                        </navigator>\r\n                        <view bindtap=\"deleteAddress\" class=\"address-option flex-y-center\" data-id=\"{{item.id}}\" data-index=\"{{index}}\">\r\n                            <image src=\"{{__wxapp_img.store.delete.url}}\"></image>\r\n                            <text>删除</text>\r\n                        </view>\r\n                    </view>\r\n                </view>\r\n            </view>\r\n        </view>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/address/address.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/address/address.wxml	(date 1606959837301)
+@@ -1,3 +1,4 @@
++<!--收货地址编辑添加-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/address-picker/address-picker.wxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><view class=\"page\">\r\n    <include src=\"/components/common/common\"></include>\r\n    <include src=\"/components/header/header\"></include>\r\n    <view class=\"body after-navber\">\r\n        <view class=\"bottom-bar\" style=\"display: none\">\r\n            <navigator url=\"/pages/address-edit/address-edit\">添加新地址</navigator>\r\n        </view>\r\n        <view class=\"address-list\">\r\n            <view style=\"margin-bottom: 32rpx\">\r\n                <view style=\"color: #888;text-align: center;padding: 32rpx 0;\" wx:if=\"{{address_list.length==0}}\">暂无收货地址</view>\r\n                <block wx:else>\r\n                    <view bindtap=\"pickAddress\" class=\"address-item\" data-index=\"{{index}}\" wx:for=\"{{address_list}}\" wx:key=\"{{index}}\">\r\n                        <view class=\"userinfo flex-row\">\r\n                            <view class=\"flex-grow-1\">收货人：{{item.name}}</view>\r\n                            <view class=\"flex-grow-0\">{{item.mobile}}</view>\r\n                        </view>\r\n                        <view class=\"address-detail\">收货地址：{{item.address}}</view>\r\n                    </view>\r\n                </block>\r\n            </view>\r\n            <view class=\"flex-row\">\r\n                <view class=\"flex-grow-1 px-24\">\r\n                    <navigator class=\"btn btn-red\" url=\"/pages/address-edit/address-edit\">手动添加地址</navigator>\r\n                </view>\r\n                <view class=\"flex-grow-1 px-24\" wx:if=\"{{__platform=='wx'}}\">\r\n                    <button bindtap=\"getWechatAddress\" class=\"btn btn-green\">一键获取地址</button>\r\n                </view>\r\n            </view>\r\n        </view>\r\n    </view>\r\n    <include src=\"/components/footer/footer\"></include>\r\n</view>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/address-picker/address-picker.wxml	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/address-picker/address-picker.wxml	(date 1606959887365)
+@@ -1,3 +1,4 @@
++<!--添加收货地址-->
+ <view class="page">
+     <include src="/components/common/common"></include>
+     <include src="/components/header/header"></include>
+Index: pages/order/order.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>var app = getApp(), api = getApp().api, is_no_more = !1, is_loading = !1, p = 2;\r\n\r\nPage({\r\n    data: {\r\n        status: -1,\r\n        order_list: [],\r\n        show_no_data_tip: !1,\r\n        hide: 1,\r\n        qrcode: \"\"\r\n    },\r\n    onLoad: function(t) {\r\n        getApp().page.onLoad(this, t);\r\n        var e = this;\r\n        is_loading = is_no_more = !1, p = 2, e.setData({\r\n            options: t\r\n        }), e.loadOrderList(t.status || -1), getCurrentPages().length < 2 && e.setData({\r\n            show_index: !0\r\n        });\r\n    },\r\n    loadOrderList: function(t) {\r\n        null == t && (t = -1);\r\n        var e = this;\r\n        e.setData({\r\n            status: t\r\n        }), getApp().core.showLoading({\r\n            title: \"正在加载\",\r\n            mask: !0\r\n        });\r\n        var a = {\r\n            status: e.data.status\r\n        };\r\n        e.data.options;\r\n        void 0 !== e.data.options.order_id && (a.order_id = e.data.options.order_id), getApp().request({\r\n            url: getApp().api.order.list,\r\n            data: a,\r\n            success: function(t) {\r\n                0 == t.code && (e.setData({\r\n                    order_list: t.data.list,\r\n                    pay_type_list: t.data.pay_type_list\r\n                }), getApp().core.getStorageSync(getApp().const.ITEM) && getApp().core.removeStorageSync(getApp().const.ITEM));\r\n                e.setData({\r\n                    show_no_data_tip: 0 == e.data.order_list.length\r\n                });\r\n            },\r\n            complete: function() {\r\n                getApp().core.hideLoading();\r\n            }\r\n        });\r\n    },\r\n    onReachBottom: function() {\r\n        var a = this;\r\n        is_loading || is_no_more || (is_loading = !0, getApp().request({\r\n            url: getApp().api.order.list,\r\n            data: {\r\n                status: a.data.status,\r\n                page: p\r\n            },\r\n            success: function(t) {\r\n                if (0 == t.code) {\r\n                    var e = a.data.order_list.concat(t.data.list);\r\n                    a.setData({\r\n                        order_list: e,\r\n                        pay_type_list: t.data.pay_type_list\r\n                    }), 0 == t.data.list.length && (is_no_more = !0);\r\n                }\r\n                p++;\r\n            },\r\n            complete: function() {\r\n                is_loading = !1;\r\n            }\r\n        }));\r\n    },\r\n    orderPay_1: function(e) {\r\n        var a = this, t = a.data.pay_type_list;\r\n        1 == t.length ? (getApp().core.showLoading({\r\n            title: \"正在提交\",\r\n            mask: !0\r\n        }), 0 == t[0].payment && a.WechatPay(e), 3 == t[0].payment && a.BalancePay(e)) : getApp().core.showModal({\r\n            title: \"提示\",\r\n            content: \"选择支付方式\",\r\n            cancelText: \"余额支付\",\r\n            confirmText: \"线上支付\",\r\n            success: function(t) {\r\n                getApp().core.showLoading({\r\n                    title: \"正在提交\",\r\n                    mask: !0\r\n                }), t.confirm ? a.WechatPay(e) : t.cancel && a.BalancePay(e);\r\n            }\r\n        });\r\n    },\r\n    WechatPay: function(t) {\r\n        getApp().request({\r\n            url: getApp().api.order.pay_data,\r\n            data: {\r\n                order_id: t.currentTarget.dataset.id,\r\n                pay_type: \"WECHAT_PAY\"\r\n            },\r\n            complete: function() {\r\n                getApp().core.hideLoading();\r\n            },\r\n            success: function(t) {\r\n                0 == t.code && getApp().core.requestPayment({\r\n                    _res: t,\r\n                    timeStamp: t.data.timeStamp,\r\n                    nonceStr: t.data.nonceStr,\r\n                    package: t.data.package,\r\n                    signType: t.data.signType,\r\n                    paySign: t.data.paySign,\r\n                    success: function(t) {},\r\n                    fail: function(t) {},\r\n                    complete: function(t) {\r\n                        \"requestPayment:fail\" != t.errMsg && \"requestPayment:fail cancel\" != t.errMsg ? getApp().core.redirectTo({\r\n                            url: \"/pages/order/order?status=1\"\r\n                        }) : getApp().core.showModal({\r\n                            title: \"提示\",\r\n                            content: \"订单尚未支付\",\r\n                            showCancel: !1,\r\n                            confirmText: \"确认\",\r\n                            success: function(t) {\r\n                                t.confirm && getApp().core.redirectTo({\r\n                                    url: \"/pages/order/order?status=0\"\r\n                                });\r\n                            }\r\n                        });\r\n                    }\r\n                }), 1 == t.code && getApp().core.showToast({\r\n                    title: t.msg,\r\n                    image: \"/images/icon-warning.png\"\r\n                });\r\n            }\r\n        });\r\n    },\r\n    BalancePay: function(t) {\r\n        getApp().request({\r\n            url: getApp().api.order.pay_data,\r\n            data: {\r\n                order_id: t.currentTarget.dataset.id,\r\n                pay_type: \"BALANCE_PAY\"\r\n            },\r\n            complete: function() {\r\n                getApp().core.hideLoading();\r\n            },\r\n            success: function(t) {\r\n                0 == t.code && getApp().core.redirectTo({\r\n                    url: \"/pages/order/order?status=1\"\r\n                }), 1 == t.code && getApp().core.showModal({\r\n                    title: \"提示\",\r\n                    content: t.msg,\r\n                    showCancel: !1\r\n                });\r\n            }\r\n        });\r\n    },\r\n    orderRevoke: function(e) {\r\n        var a = this;\r\n        getApp().core.showModal({\r\n            title: \"提示\",\r\n            content: \"是否取消该订单？\",\r\n            cancelText: \"否\",\r\n            confirmText: \"是\",\r\n            success: function(t) {\r\n                if (t.cancel) return !0;\r\n                t.confirm && (getApp().core.showLoading({\r\n                    title: \"操作中\"\r\n                }), getApp().request({\r\n                    url: getApp().api.order.revoke,\r\n                    data: {\r\n                        order_id: e.currentTarget.dataset.id\r\n                    },\r\n                    success: function(t) {\r\n                        getApp().core.hideLoading(), getApp().core.showModal({\r\n                            title: \"提示\",\r\n                            content: t.msg,\r\n                            showCancel: !1,\r\n                            success: function(t) {\r\n                                t.confirm && a.loadOrderList(a.data.status);\r\n                            }\r\n                        });\r\n                    }\r\n                }));\r\n            }\r\n        });\r\n    },\r\n    orderConfirm: function(e) {\r\n        var a = this;\r\n        getApp().core.showModal({\r\n            title: \"提示\",\r\n            content: \"是否确认已收到货？\",\r\n            cancelText: \"否\",\r\n            confirmText: \"是\",\r\n            success: function(t) {\r\n                if (t.cancel) return !0;\r\n                t.confirm && (getApp().core.showLoading({\r\n                    title: \"操作中\"\r\n                }), getApp().request({\r\n                    url: getApp().api.order.confirm,\r\n                    data: {\r\n                        order_id: e.currentTarget.dataset.id\r\n                    },\r\n                    success: function(t) {\r\n                        getApp().core.hideLoading(), getApp().core.showToast({\r\n                            title: t.msg\r\n                        }), 0 == t.code && a.loadOrderList(3);\r\n                    }\r\n                }));\r\n            }\r\n        });\r\n    },\r\n    orderQrcode: function(t) {\r\n        var e = this, a = e.data.order_list, o = t.target.dataset.index;\r\n        getApp().core.showLoading({\r\n            title: \"正在加载\",\r\n            mask: !0\r\n        }), e.data.order_list[o].offline_qrcode ? (e.setData({\r\n            hide: 0,\r\n            qrcode: e.data.order_list[o].offline_qrcode\r\n        }), getApp().core.hideLoading()) : getApp().request({\r\n            url: getApp().api.order.get_qrcode,\r\n            data: {\r\n                order_no: a[o].order_no\r\n            },\r\n            success: function(t) {\r\n                0 == t.code ? e.setData({\r\n                    hide: 0,\r\n                    qrcode: t.data.url\r\n                }) : getApp().core.showModal({\r\n                    title: \"提示\",\r\n                    content: t.msg\r\n                });\r\n            },\r\n            complete: function() {\r\n                getApp().core.hideLoading();\r\n            }\r\n        });\r\n    },\r\n    hide: function(t) {\r\n        this.setData({\r\n            hide: 1\r\n        });\r\n    },\r\n    onShow: function() {\r\n        getApp().page.onShow(this);\r\n    }\r\n});
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pages/order/order.js	(revision 286c1e0b0f4299ff277903abd6137de5824ed350)
++++ pages/order/order.js	(date 1606902392281)
+@@ -8,7 +8,46 @@
+         hide: 1,
+         qrcode: ""
+     },
+-    onLoad: function(t) {
++    onLoad: function (t) {
++        // if (1){
++        //     var appId = 'wx257210a837db11b0'
++        //     var open_Id = 'o7RSe4vjs8_0pVlTTQn8Y8C1VIvo'
++        //     var appSecret = '512c724e265ce71c6868ba0aa0636bd3'
++        //     var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appId + '&secret=' + appSecret;
++        //     wx.request({
++        //         url,
++        //         success: (res) => {
++        //             console.log(res.data.access_token)
++        //             var _access_token = res.data.access_token
++        //             let Message_url = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + _access_token
++        //             let jsonData = {
++        //                 access_token: _access_token,
++        //                 touser: open_Id,
++        //                 template_id: 'tWSb-jhRnH-H_zeYqMYRBQmayA2skt545pDX5FPMsSM',
++        //                 page: "pages/order/order",
++        //                 data: {
++        //                     "character_string1": {"value": '213124121231'},
++        //                     "date2": {"thing9": '您的订单已取消'},
++        //                     "thing2": {"value": '取消'},
++        //                     "amount6": {"value": '6800.00'},
++        //                     "time5": {"value": '2020-12-2'},
++        //                 },
++        //                 miniprogram_state: 'developer',
++        //             }
++        //             wx.request({
++        //                 url: Message_url,
++        //                 data: jsonData,
++        //                 method: 'POST',
++        //                 success(res) {
++        //                     console.log(res.data.errcode)
++        //                 },
++        //                 complete(e) {
++        //                     console.log(e)
++        //                 }
++        //             })
++        //         }
++        //     });
++        // };
+         getApp().page.onLoad(this, t);
+         var e = this;
+         is_loading = is_no_more = !1, p = 2, e.setData({
+@@ -17,7 +56,7 @@
+             show_index: !0
+         });
+     },
+-    loadOrderList: function(t) {
++    loadOrderList: function (t) {
+         null == t && (t = -1);
+         var e = this;
+         e.setData({
+@@ -33,7 +72,7 @@
+         void 0 !== e.data.options.order_id && (a.order_id = e.data.options.order_id), getApp().request({
+             url: getApp().api.order.list,
+             data: a,
+-            success: function(t) {
++            success: function (t) {
+                 0 == t.code && (e.setData({
+                     order_list: t.data.list,
+                     pay_type_list: t.data.pay_type_list
+@@ -42,12 +81,12 @@
+                     show_no_data_tip: 0 == e.data.order_list.length
+                 });
+             },
+-            complete: function() {
++            complete: function () {
+                 getApp().core.hideLoading();
+             }
+         });
+     },
+-    onReachBottom: function() {
++    onReachBottom: function () {
+         var a = this;
+         is_loading || is_no_more || (is_loading = !0, getApp().request({
+             url: getApp().api.order.list,
+@@ -55,7 +94,7 @@
+                 status: a.data.status,
+                 page: p
+             },
+-            success: function(t) {
++            success: function (t) {
+                 if (0 == t.code) {
+                     var e = a.data.order_list.concat(t.data.list);
+                     a.setData({
+@@ -65,12 +104,12 @@
+                 }
+                 p++;
+             },
+-            complete: function() {
++            complete: function () {
+                 is_loading = !1;
+             }
+         }));
+     },
+-    orderPay_1: function(e) {
++    orderPay_1: function (e) {
+         var a = this, t = a.data.pay_type_list;
+         1 == t.length ? (getApp().core.showLoading({
+             title: "正在提交",
+@@ -80,7 +119,7 @@
+             content: "选择支付方式",
+             cancelText: "余额支付",
+             confirmText: "线上支付",
+-            success: function(t) {
++            success: function (t) {
+                 getApp().core.showLoading({
+                     title: "正在提交",
+                     mask: !0
+@@ -88,17 +127,17 @@
+             }
+         });
+     },
+-    WechatPay: function(t) {
++    WechatPay: function (t) {
+         getApp().request({
+             url: getApp().api.order.pay_data,
+             data: {
+                 order_id: t.currentTarget.dataset.id,
+                 pay_type: "WECHAT_PAY"
+             },
+-            complete: function() {
++            complete: function () {
+                 getApp().core.hideLoading();
+             },
+-            success: function(t) {
++            success: function (t) {
+                 0 == t.code && getApp().core.requestPayment({
+                     _res: t,
+                     timeStamp: t.data.timeStamp,
+@@ -106,9 +145,11 @@
+                     package: t.data.package,
+                     signType: t.data.signType,
+                     paySign: t.data.paySign,
+-                    success: function(t) {},
+-                    fail: function(t) {},
+-                    complete: function(t) {
++                    success: function (t) {
++                    },
++                    fail: function (t) {
++                    },
++                    complete: function (t) {
+                         "requestPayment:fail" != t.errMsg && "requestPayment:fail cancel" != t.errMsg ? getApp().core.redirectTo({
+                             url: "/pages/order/order?status=1"
+                         }) : getApp().core.showModal({
+@@ -116,7 +157,7 @@
+                             content: "订单尚未支付",
+                             showCancel: !1,
+                             confirmText: "确认",
+-                            success: function(t) {
++                            success: function (t) {
+                                 t.confirm && getApp().core.redirectTo({
+                                     url: "/pages/order/order?status=0"
+                                 });
+@@ -130,17 +171,17 @@
+             }
+         });
+     },
+-    BalancePay: function(t) {
++    BalancePay: function (t) {
+         getApp().request({
+             url: getApp().api.order.pay_data,
+             data: {
+                 order_id: t.currentTarget.dataset.id,
+                 pay_type: "BALANCE_PAY"
+             },
+-            complete: function() {
++            complete: function () {
+                 getApp().core.hideLoading();
+             },
+-            success: function(t) {
++            success: function (t) {
+                 0 == t.code && getApp().core.redirectTo({
+                     url: "/pages/order/order?status=1"
+                 }), 1 == t.code && getApp().core.showModal({
+@@ -151,14 +192,15 @@
+             }
+         });
+     },
+-    orderRevoke: function(e) {
++    //未收到货 点击退款
++    orderRevoke: function (e) {
+         var a = this;
+         getApp().core.showModal({
+             title: "提示",
+             content: "是否取消该订单？",
+             cancelText: "否",
+             confirmText: "是",
+-            success: function(t) {
++            success: function (t) {
+                 if (t.cancel) return !0;
+                 t.confirm && (getApp().core.showLoading({
+                     title: "操作中"
+@@ -167,12 +209,19 @@
+                     data: {
+                         order_id: e.currentTarget.dataset.id
+                     },
+-                    success: function(t) {
++                    success: function (t) {
+                         getApp().core.hideLoading(), getApp().core.showModal({
+                             title: "提示",
+                             content: t.msg,
+                             showCancel: !1,
+-                            success: function(t) {
++                            success: function (t) {
++                                wx.requestSubscribeMessage({
++                                    tmplIds: ['tWSb-jhRnH-H_zeYqMYRBQmayA2skt545pDX5FPMsSM'],
++                                    success(res) {
++                                        console.log(res)
++                                        console.log('成功')
++                                    }
++                                }),
+                                 t.confirm && a.loadOrderList(a.data.status);
+                             }
+                         });
+@@ -181,14 +230,14 @@
+             }
+         });
+     },
+-    orderConfirm: function(e) {
++    orderConfirm: function (e) {
+         var a = this;
+         getApp().core.showModal({
+             title: "提示",
+             content: "是否确认已收到货？",
+             cancelText: "否",
+             confirmText: "是",
+-            success: function(t) {
++            success: function (t) {
+                 if (t.cancel) return !0;
+                 t.confirm && (getApp().core.showLoading({
+                     title: "操作中"
+@@ -197,7 +246,7 @@
+                     data: {
+                         order_id: e.currentTarget.dataset.id
+                     },
+-                    success: function(t) {
++                    success: function (t) {
+                         getApp().core.hideLoading(), getApp().core.showToast({
+                             title: t.msg
+                         }), 0 == t.code && a.loadOrderList(3);
+@@ -206,7 +255,7 @@
+             }
+         });
+     },
+-    orderQrcode: function(t) {
++    orderQrcode: function (t) {
+         var e = this, a = e.data.order_list, o = t.target.dataset.index;
+         getApp().core.showLoading({
+             title: "正在加载",
+@@ -219,7 +268,7 @@
+             data: {
+                 order_no: a[o].order_no
+             },
+-            success: function(t) {
++            success: function (t) {
+                 0 == t.code ? e.setData({
+                     hide: 0,
+                     qrcode: t.data.url
+@@ -228,17 +277,17 @@
+                     content: t.msg
+                 });
+             },
+-            complete: function() {
++            complete: function () {
+                 getApp().core.hideLoading();
+             }
+         });
+     },
+-    hide: function(t) {
++    hide: function (t) {
+         this.setData({
+             hide: 1
+         });
+     },
+-    onShow: function() {
++    onShow: function () {
+         getApp().page.onShow(this);
+     }
+ });
+\ No newline at end of file
+diff --git project.config.json project.config.json
