@@ -364,6 +364,7 @@
                                     <view class="text-more-2" style="text-align: center">{{item.name}}</view>
                                 </view>
                             </button>
+                            <!-- 清除缓存 -->
                             <view bindtap="clearCache" class="option-item flex-grow-0 style"
                                   wx:elif="{{item.open_type=='no_navigator'}}">
                                 <view>

@@ -128,23 +128,25 @@ var pay = {
                 let password = "123123";
                 var userinfo = getApp().getUser();
                 console.log(order_list)
-                if (order_list.password == password) {
-                     o();
-                }else {
-                    return  wx.showToast({
-                        icon:"none",
-                        title: "请输入密码",
-                    })
-                }
+                // if (order_list.password == password) {
+                //     o();
+                // } else if (order_list.password == null || order_list.password == '') {
+                //     return
+                // } else if (order_list.password != password) {
+                //     return wx.showToast({
+                //         icon: "none",
+                //         title: '密码错误,请重新输入'
+                //     })
+                // }
                 //使用余额支付
-                // getApp().core.showModal({
-                //     title: "当前账户余额：" + userinfo.money,
-                //     content: "是否确定使用余额支付",
-                //     success: function (e) {
-                //         console.log(e)
-                //         e.confirm && o();
-                //     }
-                // });
+                getApp().core.showModal({
+                    title: "当前账户余额：" + userinfo.money,
+                    content: "是否确定使用余额支付",
+                    success: function (e) {
+                        console.log(e)
+                        e.confirm && o();
+                    }
+                });
             } else o();
 
             function o() {

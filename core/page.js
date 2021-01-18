@@ -22,7 +22,8 @@ module.exports = {
         "pages/integral-mall/register/index",
         "pages/article-detail/article-detail",
         "pages/article-list/article-list",
-        "pages/order/order"
+        "pages/order/order",
+        "pages/set-pwd/set-pwd"
     ],
     onLoad: function (t, e) {
         this.currentPage = t, this.currentPageOptions = e;
@@ -255,7 +256,6 @@ module.exports = {
         function t(e) {
             return e <= 0 && (e = 0), e < 10 ? "0" + e : e;
         }
-
         var o = "00", n = "00", a = "00", i = 0, r = "", s = "", c = "";
         if (86400 <= e && (i = parseInt(e / 86400), e %= 86400, r += i + "天", s += i + "天",
             c += i + "天"), e < 86400) {

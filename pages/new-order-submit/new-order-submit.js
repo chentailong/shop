@@ -19,38 +19,6 @@ Page({
         payFocus: true, //文本框焦点
     },
     dataList: {},
-    /**
-     * 显示支付密码输入层
-     */
-    showInputLayer: function () {
-        this.setData({showPayPwdInput: true, payFocus: true});
-    },
-    /**
-     * 隐藏支付密码输入层
-     */
-    hidePayLayer: function(){
-        var val = this.data.pwdVal;
-        this.dataList.password = val
-        this.setData({ showPayPwdInput: false, payFocus: false, pwdVal: '' }, function(){
-        });
-        console.log(this.dataList)
-        this.order_submit(this.dataList, "s");
-    },
-    /**
-     * 获取焦点
-     */
-    getFocus: function () {
-        this.setData({payFocus: true});
-    },
-    /**
-     * 输入密码监听
-     */
-    inputPwd: function (e) {
-        this.setData({pwdVal: e.detail.value});
-        if (e.detail.value.length >= 6) {
-            this.hidePayLayer();
-        }
-    },
 
     onLoad: function (t) {
         wx.login({
@@ -125,6 +93,43 @@ Page({
             }
         });
     },
+    /**
+     * 显示支付密码输入层
+     */
+    showInputLayer: function () {
+        let demo = [1,2,3]
+        demo.forEach(value => {
+            console.log(value)
+        })
+
+        this.setData({showPayPwdInput: true, payFocus: true});
+    },
+    /**
+     * 隐藏支付密码输入层
+     */
+    hidePayLayer: function () {
+        var val = this.data.pwdVal;
+        this.dataList.password = val
+        this.setData({showPayPwdInput: false, payFocus: false, pwdVal: ''}, function () {
+        });
+        this.order_submit(this.dataList, "s");
+    },
+    /**
+     * 获取焦点
+     */
+    getFocus: function () {
+        this.setData({payFocus: true});
+    },
+    /**
+     * 输入密码监听
+     */
+    inputPwd: function (e) {
+        this.setData({pwdVal: e.detail.value});
+        if (e.detail.value.length >= 6) {
+            this.hidePayLayer();
+        }
+    },
+
     orderSubmit: function (t) {
         console.log(t)
         var that = this, i = that.data.mch_list;
@@ -156,17 +161,17 @@ Page({
             }
         }
         if (that.dataList.mch_list = JSON.stringify(i), 0 < that.data.pond_id) {
-            if (0 <that.data.express_price && -1 == that.data.payment) return that.setData({
+            if (0 < that.data.express_price && -1 == that.data.payment) return that.setData({
                 show_payment: !0
             }), !1;
         } else if (-1 == that.data.payment) return that.setData({
             show_payment: !0
         }), !1;
         if (that.data.payment == 3) {
-            this.showInputLayer()
+            // this.showInputLayer()
         }
         1 == that.data.integral_radio ? that.dataList.use_integral = 1 : that.dataList.use_integral = 2, that.dataList.payment = that.data.payment
-            ,that.dataList.formId = t.detail.formId, that.order_submit(that.dataList, "s");
+            , that.dataList.formId = t.detail.formId, that.order_submit(that.dataList, "s");
     },
 
     onReady: function () {

@@ -96,7 +96,9 @@ var api = {
         sms_setting: _api_root + "user/sms-setting",
         authorization_bind: _api_root + "user/authorization-bind",
         check_bind: _api_root + "user/check-bind",
-        card_detail: _api_root + "user/card-detail"
+        card_detail: _api_root + "user/card-detail",
+        set_pay_pas: _api_root + "set-pay-psw",
+        edit_pay_psw: _api_root + "edit-pay-psw"
     },
     share: {
         join: _api_root + "share/join",
