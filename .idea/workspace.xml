@@ -25,16 +25,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="新增设置密码页面">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改了设置密码的设置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/order-pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/order-pay.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ext.json" beforeDir="false" afterPath="$PROJECT_DIR$/ext.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/recharge/recharge.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/recharge/recharge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/recharge/recharge.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/recharge/recharge.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/siteinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
     </list>
@@ -80,7 +75,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -142,7 +137,8 @@
       <workItem from="1611017621206" duration="2990000" />
       <workItem from="1611103683292" duration="9984000" />
       <workItem from="1611140683855" duration="578000" />
-      <workItem from="1611190306198" duration="1191000" />
+      <workItem from="1611190306198" duration="1252000" />
+      <workItem from="1611199548720" duration="3728000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -221,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610950777048</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="修改了设置密码的设置">
+      <created>1611199499246</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1611199499247</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,16 +264,18 @@
     <MESSAGE value="更新了DIY模块,已经更新了分销商中数据的显示问题" />
     <MESSAGE value="增加了密码支付功能" />
     <MESSAGE value="新增设置密码页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增设置密码页面" />
+    <MESSAGE value="修改了设置密码的设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了设置密码的设置" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2404" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608708135432">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2404" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608708135432" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1610092535395">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1234" y="211" key="FileChooserDialogImpl" timestamp="1611201553712">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1234" y="211" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611201553712" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610092535395" />
     <state x="2606" y="211" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609143471585" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1608988946322" />
@@ -288,9 +293,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="405" y="173" key="MultipleFileMergeDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910759892" />
-    <state x="270" y="57" key="SettingsEditor" timestamp="1610953059500">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1582" y="72" key="SettingsEditor" timestamp="1611201605935">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1582" y="72" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611201605935" />
     <state x="270" y="57" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610953059500" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1606789637136">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -300,9 +306,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="467" y="127" key="VCS.ChangeListViewerDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910719546" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1610950782130">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1611199503502">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611199503502" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610950782130" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
     <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607935131938">

@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="info">
             <view class="info-t" style="margin-top:40rpx;">我的账户</view>
@@ -28,7 +28,7 @@
                     </view>
                 </view>
             </view>
-            <view bindtap="click" class="one-type" data-index="-1" wx:if="{{balance.type==1}}">
+            <view bindtap="click" class="one-type" data-index="-1" >
                 <view class="flex-y-center" style="height:100%">
                     <input bindinput="input" class="r-input" placeholder="手动输入充值金额" placeholderClass="r-input-p" type="number" value="{{money}}"></input>
                 </view>
@@ -40,5 +40,5 @@
             </view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

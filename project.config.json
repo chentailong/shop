@@ -9,7 +9,7 @@
     ]
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -44,7 +44,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
-  "appid": "wxe3c3553cb8ff7fa3",
+  "appid": "wx257210a837db11b0",
   "projectname": "tph",
   "cloudfunctionTemplateRoot": "",
   "debugOptions": {

@@ -8,7 +8,7 @@ Page({
     },
     onLoad: function(e) {
         getApp().page.onLoad(this, e);
-        var n = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
@@ -24,7 +24,7 @@ Page({
                             delta: 1
                         });
                     }
-                }), n.setData(e.data);
+                }), that.setData(e.data);
             },
             complete: function(e) {
                 getApp().core.hideLoading();
@@ -49,42 +49,42 @@ Page({
         });
     },
     pay: function(e) {
-        var t = this, n = {}, a = t.data.selected;
-        if (-1 == a) {
-            var o = t.data.money;
-            if (o < .01) return void getApp().core.showModal({
+        var that = this, num = {}, selected = that.data.selected;
+        if (-1 == selected) {
+            var money = that.data.money;
+            if (money < .01) return void getApp().core.showModal({
                 title: "提示",
                 content: "充值金额不能小于0.01",
                 showCancel: !1
             });
-            n.pay_price = o, n.send_price = 0;
+            num.pay_price = money, num.send_price = 0;
         } else {
-            var p = t.data.list;
-            n.pay_price = p[a].pay_price, n.send_price = p[a].send_price;
+            var data_list = that .data.list;
+            num.pay_price = data_list[selected].pay_price, num.send_price = data_list[selected].send_price;
         }
-        n.pay_price ? (n.pay_type = "WECHAT_PAY", getApp().core.showLoading({
+        num.pay_price ? (num.pay_type = "WECHAT_PAY", getApp().core.showLoading({
             title: "提交中"
         }), getApp().request({
             url: getApp().api.recharge.submit,
-            data: n,
+            data: num,
             method: "POST",
-            success: function(e) {
+            success: function(res) {
                 if (getApp().page.bindParent({
                     parent_id: getApp().core.getStorageSync(getApp().const.PARENT_ID),
                     condition: 1
-                }), 0 == e.code) return setTimeout(function() {
+                }), 0 == res.code) return setTimeout(function() {
                     getApp().core.hideLoading();
                 }, 1e3), setOnShowScene("pay"), void getApp().core.requestPayment({
-                    _res: e,
-                    timeStamp: e.data.timeStamp,
-                    nonceStr: e.data.nonceStr,
-                    package: e.data.package,
-                    signType: e.data.signType,
-                    paySign: e.data.paySign,
-                    success: function(e) {},
-                    fail: function(e) {},
-                    complete: function(e) {
-                        "requestPayment:fail" != e.errMsg && "requestPayment:fail cancel" != e.errMsg ? (getApp().page.bindParent({
+                    _res: res,
+                    timeStamp: res.data.timeStamp,
+                    nonceStr: res.data.nonceStr,
+                    package: res.data.package,
+                    signType: res.data.signType,
+                    paySign: res.data.paySign,
+                    success: function(success) {},
+                    fail: function(error) {},
+                    complete: function(lete) {
+                        "requestPayment:fail" != lete.errMsg && "requestPayment:fail cancel" != lete.errMsg ? (getApp().page.bindParent({
                             parent_id: getApp().core.getStorageSync(getApp().const.PARENT_ID),
                             condition: 2
                         }), getApp().core.showModal({
