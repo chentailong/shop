@@ -1,29 +1,62 @@
 <view>
+    <!--   设置密码   -->
     <view wx:if='{{showPayPwdInput}}'>
         <view class='input_title'>
             <text>设置密码</text>
-        </view>
-            <view class='input_row' catchtap='getFocus'>
-                <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
-                    <text wx:if='{{pwdVal.length>i}}'></text>
-                </view>
-            </view>
-            <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6'/>
-        </view>
-    <view class="submit" bindtap="submit" wx:if="{{showPayPwdInput}}">下一步</view>
-
-
-    <view wx:if='{{!showPayPwdInput}}'>
-        <view class='input_title'>
-            <text>确认密码</text>
         </view>
         <view class='input_row' catchtap='getFocus'>
             <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
                 <text wx:if='{{pwdVal.length>i}}'></text>
             </view>
         </view>
-        <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6'/>
+        <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd1' maxlength='6'/>
+        <view class="submit" wx:if='{{showPayPwdInput}}'>下一步</view>
     </view>
-    <view class="submit" bindtap="submit" wx:wx:if="{{!showPayPwdInput}}">确认</view>
+
+    <view wx:if='{{showPayPwdInput2}}'>
+        <view class='input_title'>
+            <text>确认密码</text>
+        </view>
+        <view class='input_row' catchtap='getFocal'>
+            <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+                <text wx:if='{{pwdVal2.length>i}}'></text>
+            </view>
+        </view>
+        <input class='input_control' password type='number' focus='{{focus}}' bindinput='inputPwd2' maxlength='6'/>
+    </view>
+    <view class="submit" bindtap="submit" wx:if="{{showPayPwdInput2}}">确认</view>
+
+
+    <!--   修改密码    -->
+    <view wx:if="{{code}}">
+        <view class="container">
+            <view class="login-from">
+                <!--账号-->
+                <view class="inputView">
+                    <label class="loginLab">旧密码</label>
+                    <input class="inputText" placeholder="请输入旧密码"  value="{{oldPasswords}}"  maxlength='6'  password type="number" bindinput="oldPassword"/>
+                </view>
+                <view class="line"></view>
+
+                <!--密码-->
+                <view class="inputView">
+                    <label class="loginLab">新密码</label>
+                    <input class="inputText" type="number"  value="{{newPasswords}}" password placeholder="请输入新密码" maxlength='6' bindinput="newPassword"/>
+                </view>
+                <view class="line"></view>
+                <!--确认密码-->
+                <view class="inputView">
+                    <label class="loginLab">确认密码</label>
+                    <input class="inputText" type="number"  value="{{affirmPasswords}}" password placeholder="请确认密码" maxlength='6' bindinput="affirmPassword"/>
+                </view>
+                <view class="line"></view>
+                <!--按钮-->
+                <view class="loginBtnView">
+                    <button class="loginBtn" type="primary" bindtap="amend">修改密码  
+                    </button>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>
 

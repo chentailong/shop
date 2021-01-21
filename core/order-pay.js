@@ -8,7 +8,6 @@ function setOnShowScene(e) {
 }
 
 var pay = {
-
     init: function (l, e) {
         var that = this, A = getApp().api;
         that.page = l, app = e;
@@ -215,7 +214,7 @@ var pay = {
                             }) : getApp().core.showToast({
                                 title: "提交成功"
                             }), void setTimeout(function () {
-                                getApp().core.redirectTo({
+                                getApp().coore.redirectTo({
                                     url: "/pages/order/order?status=1"
                                 });
                             }, 2e3);
@@ -256,13 +255,18 @@ var pay = {
                                             signType: e.data.signType,
                                             paySign: e.data.paySign,
                                             success: function (e) {
+                                                console.log(e)
                                             },
                                             fail: function (e) {
+                                                console.log("失败")
+                                                console.log(e)
                                             },
                                             complete: function (e) {
-                                                "requestPayment:fail" != e.errMsg && "requestPayment:fail cancel" != e.errMsg ? "requestPayment:ok" != e.errMsg || (void 0 !== _.page.data.goods_card_list && 0 < _.page.data.goods_card_list.length ? _.page.setData({
+                                                console.log(e)
+                                                console.log("全部")
+                                                "requestPayment:fail" != e.errMsg && "requestPayment:fail cancel" != e.errMsg ? "requestPayment:ok" != e.errMsg || (void 0 !== that.page.data.goods_card_list && 0 < _.page.data.goods_card_list.length ? _.page.setData({
                                                     show_card: !0
-                                                }) : "pt" == g ? "ONLY_BUY" == _.page.data.type ? getApp().core.redirectTo({
+                                                }) : "pt" == g ? "ONLY_BUY" == that.page.data.type ? getApp().core.redirectTo({
                                                     url: u + "?status=2"
                                                 }) : getApp().core.redirectTo({
                                                     url: "/pages/pt/group/details?oid=" + d

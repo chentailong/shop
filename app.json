@@ -98,7 +98,8 @@
     "pages/coupon-detail/coupon-detail",
     "pages/card-detail/card-detail",
     "pages/demo/demo",
-    "pages/zhibo/zhibo"
+    "pages/zhibo/zhibo",
+    "pages/set-pwd/set-pwd"
   ],
   "window": {
     "backgroundTextStyle": "light",
