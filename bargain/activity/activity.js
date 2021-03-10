@@ -1,4 +1,7 @@
-var time = require("../commons/time.js"), app = getApp(), api = getApp().api, setIntval = null, is_loading = !1, is_no_more = !0;
+var time = require("../commons/time.js"),
+    app = getApp(), api = getApp().api,
+    setIntval = null,
+    is_loading = !1, is_no_more = !0;
 
 Page({
     data: {
@@ -10,42 +13,42 @@ Page({
         animationData: null,
         show_modal_a: !1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var a = this;
-        a.setData({
-            order_id: t.order_id
-        }), a.joinBargain(), time.init(a);
+    onLoad: function(res) {
+        getApp().page.onLoad(this, res);
+        var that = this;
+        that.setData({
+            order_id: res.order_id
+        }), that.joinBargain(), time.init(that);
     },
     joinBargain: function() {
-        var a = this;
+        var that = this;
         getApp().request({
             url: getApp().api.bargain.bargain,
             data: {
-                order_id: a.data.order_id
+                order_id: that.data.order_id
             },
             success: function(t) {
-                0 == t.code ? (a.getOrderInfo(), a.setData(t.data)) : (a.showToast({
+                0 == t.code ? (that.getOrderInfo(), that.setData(t.data)) : (that.showToast({
                     title: t.msg
                 }), getApp().core.hideLoading());
             }
         });
     },
     getOrderInfo: function() {
-        var a = this;
+        var that = this;
         getApp().request({
             url: getApp().api.bargain.activity,
             data: {
-                order_id: a.data.order_id,
+                order_id: that.data.order_id,
                 page: 1
             },
             success: function(t) {
-                0 == t.code ? (a.setData(t.data), a.setData({
-                    time_list: a.setTimeList(t.data.reset_time),
+                0 == t.code ? (that.setData(t.data), that.setData({
+                    time_list: that.setTimeList(t.data.reset_time),
                     show: !0
-                }), a.data.bargain_status && a.setData({
+                }), that.data.bargain_status && that.setData({
                     show_modal: !0
-                }), a.setTimeOver(), is_no_more = !1, a.animationCr()) : a.showToast({
+                }), that.setTimeOver(), is_no_more = !1, that.animationCr()) : that.showToast({
                     title: t.msg
                 });
             },
@@ -76,33 +79,33 @@ Page({
         };
     },
     loadData: function() {
-        var e = this;
+        var that = this;
         if (getApp().core.showLoading({
             title: "加载中"
         }), !is_loading) {
             is_loading = !0, getApp().core.showNavigationBarLoading();
-            var i = e.data.p + 1;
+            var i = that.data.p + 1;
             getApp().request({
                 url: getApp().api.bargain.activity,
                 data: {
-                    order_id: e.data.order_id,
+                    order_id: that.data.order_id,
                     page: i
                 },
                 success: function(t) {
                     if (0 == t.code) {
-                        var a = e.data.bargain_info;
-                        a = a.concat(t.data.bargain_info), e.setData({
+                        var a = that.data.bargain_info;
+                        a = a.concat(t.data.bargain_info), that.setData({
                             bargain_info: a,
                             p: i,
                             price: t.data.price,
                             money_per: t.data.money_per,
                             money_per_t: t.data.money_per_t
-                        }), 0 == t.data.bargain_info.length && (is_no_more = !0, i -= 1, e.setData({
+                        }), 0 == t.data.bargain_info.length && (is_no_more = !0, i -= 1, that.setData({
                             show_more_btn: !1,
                             show_more: !0,
                             p: i
                         }));
-                    } else e.showToast({
+                    } else that.showToast({
                         title: t.msg
                     });
                 },
@@ -157,39 +160,39 @@ Page({
         });
     },
     animationCr: function() {
-        var t = this;
-        t.animationT(), setTimeout(function() {
-            t.setData({
+        var that = this;
+        that.animationT(), setTimeout(function() {
+            that.setData({
                 show_modal_a: !0
-            }), t.animationBig(), t.animationS();
+            }), that.animationBig(), that.animationS();
         }, 800);
     },
     animationBig: function() {
-        var t = getApp().core.createAnimation({
+        var create = getApp().core.createAnimation({
             duration: 500,
             transformOrigin: "50% 50%"
-        }), a = this, e = 0;
+        }), that = this, e = 0;
         setInterval(function() {
-            e % 2 == 0 ? t.scale(.9).step() : t.scale(1).step(), a.setData({
-                animationData: t.export()
+            e % 2 == 0 ? create.scale(.9).step() : create.scale(1).step(), that.setData({
+                animationData: create.export()
             }), 500 == ++e && (e = 0);
         }, 500);
     },
     animationS: function() {
-        var t = getApp().core.createAnimation({
+        var create = getApp().core.createAnimation({
             duration: 500
         });
-        t.width("512rpx").height("264rpx").step(), t.rotate(-2).step(), t.rotate(4).step(), 
-        t.rotate(-2).step(), t.rotate(0).step(), this.setData({
-            animationDataHead: t.export()
+        create.width("512rpx").height("264rpx").step(), create.rotate(-2).step(), create.rotate(4).step(),
+            create.rotate(-2).step(), create.rotate(0).step(), this.setData({
+            animationDataHead: create.export()
         });
     },
     animationT: function() {
-        var t = getApp().core.createAnimation({
+        var create = getApp().core.createAnimation({
             duration: 200
         });
-        t.width("500rpx").height("500rpx").step(), this.setData({
-            animationDataT: t.export()
+        create.width("500rpx").height("500rpx").step(), this.setData({
+            animationDataT: create.export()
         });
     }
 });

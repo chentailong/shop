@@ -15,7 +15,7 @@
             <view class="flex-row flex-y-center edit-row">
                 <view class="flex-grow-0 row-label">联系电话</view>
                 <view class="flex-grow-1">
-                    <input bindinput="inputBlur" data-name="mobile" placeholder="" type="number" value="{{mobile}}"></input>
+                    <input bindinput="inputBlur" data-name="mobile" placeholder="" maxlength="{{11}}"  type="number" value="{{mobile}}"></input>
                 </view>
             </view>
             <view class="flex-row flex-y-center edit-row">

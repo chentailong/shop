@@ -22,6 +22,7 @@ Page({
                 route: a.route
             },
             success: function(e) {
+                console.log(e)
                 0 == e.code && t.setData({
                     order: e.data,
                     isPageShow: !0

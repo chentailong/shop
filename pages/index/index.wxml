@@ -2,8 +2,9 @@
 <view class="page {{__page_classes}}">
     <include src="/components/common/common.wxml"></include>
     <include src="/components/header/header.wxml"></include>
+
     <view class="body after-navber">
-        <block wx:if="{{template}}">
+        <block>
             <import src="/components/diy/diy.wxml"></import>
             <view class="diy">
                 <block wx:for="{{template}}" wx:key="{{item.id}}">
@@ -28,7 +29,7 @@
                 <template is="goods-modal" data="{{__wxapp_img:__wxapp_img,show_attr_picker:show_attr_picker,goods:goods,attr_group_list:attr_group_list,form:form}}"></template>
             </view>
         </block>
-        <block wx:else>
+        <block>
             <template is="buy-data" data="{{buy:buy}}"></template>
             <block wx:for="{{module_list}}" wx:key="{{item.id}}">
                 <template is="notice" data="{{notice:notice,param:update_list.notice,__wxapp_img:__wxapp_img,show_notice:show_notice}}" wx:if="{{item.name=='notice'}}"></template>

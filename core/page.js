@@ -25,22 +25,22 @@ module.exports = {
         "pages/order/order",
         "pages/set-pwd/set-pwd"
     ],
-    onLoad: function (t, e) {
-        this.currentPage = t, this.currentPageOptions = e;
-        var o = this;
-        if (this.setUserInfo(), this.setWxappImg(), this.setStore(), this.setParentId(e),
+    onLoad: function (currentPage, currentPageOptions) {
+        this.currentPage = currentPage, this.currentPageOptions = currentPageOptions;
+        var that = this;
+        if (this.setUserInfo(), this.setWxappImg(), this.setStore(), this.setParentId(currentPageOptions),
             this.getNavigationBarColor(), this.setDeviceInfo(), this.setPageClasses(), this.setPageNavbar(),
-            this.setBarTitle(), "function" == typeof t.onSelfLoad && t.onSelfLoad(e), o._setFormIdSubmit(),
-        "undefined" != typeof my && "pages/login/login" != t.route && e && (t.options || (t.options = e),
-            getApp().core.setStorageSync("last_page_options", e)), "lottery/goods/goods" == t.route && e) {
-            if (e.user_id) var n = e.user_id, a = e.id; else if (e.scene && isNaN(e.scene)) {
-                var i = decodeURIComponent(e.scene);
-                if (i && (i = getApp().helper.scene_decode(i)) && i.uid) n = i.uid, a = i.gid;
+            this.setBarTitle(), "function" == typeof currentPage.onSelfLoad && currentPage.onSelfLoad(currentPageOptions), that._setFormIdSubmit(),
+        "undefined" != typeof my && "pages/login/login" != currentPage.route && currentPageOptions && (currentPage.options || (currentPage.options = currentPageOptions),
+            getApp().core.setStorageSync("last_page_options", currentPageOptions)), "lottery/goods/goods" == currentPage.route && currentPageOptions) {
+            if (currentPageOptions.user_id) var user_id = currentPageOptions.user_id, lottery_id = currentPageOptions.id; else if (currentPageOptions.scene && isNaN(currentPageOptions.scene)) {
+                var scene = decodeURIComponent(currentPageOptions.scene);
+                if (scene && (scene = getApp().helper.scene_decode(scene)) && scene.uid) user_id = scene.uid, lottery_id = scene.gid;
             }
             getApp().request({
                 data: {
-                    user_id: n,
-                    lottery_id: a
+                    user_id: user_id,
+                    lottery_id: lottery_id
                 },
                 url: getApp().api.lottery.clerk,
                 success: function (e) {
@@ -48,42 +48,42 @@ module.exports = {
                 }
             });
         }
-        t.navigatorClick = function (e) {
-            o.navigatorClick(e, t);
-        }, t.setData({
+        currentPage.navigatorClick = function (e) {
+            that.navigatorClick(e, currentPage);
+        }, currentPage.setData({
             __platform: getApp().platform
-        }), void 0 === t.showToast && (t.showToast = function (e) {
-            o.showToast(e);
+        }), void 0 === currentPage.showToast && (currentPage.showToast = function (e) {
+            that.showToast(e);
         }), getApp().shareSendCoupon = function (e) {
-            o.shareSendCoupon(e);
-        }, void 0 === t.setTimeList && (t.setTimeList = function (e) {
-            return o.setTimeList(e);
-        }), void 0 === t.showLoading && (t.showLoading = function (e) {
-            o.showLoading(e);
-        }), void 0 === t.hideLoading && (t.hideLoading = function (e) {
-            o.hideLoading(e);
-        }), void 0 === t.modalConfirm && (t.modalConfirm = function (e) {
-            o.modalConfirm(e);
-        }), void 0 === t.modalClose && (t.modalClose = function (e) {
-            o.modalClose(e);
-        }), void 0 === t.modalShow && (t.modalShow = function (e) {
-            o.modalShow(e);
-        }), void 0 === t.myLogin && (t.myLogin = function () {
-            o.myLogin();
-        }), void 0 === t.getUserInfo && (t.getUserInfo = function (e) {
-            o.getUserInfo(e);
-        }), void 0 === t.getPhoneNumber && (t.getPhoneNumber = function (e) {
-            o.getPhoneNumber(e);
-        }), void 0 === t.bindParent && (t.bindParent = function (e) {
-            o.bindParent(e);
-        }), void 0 === t.closeCouponBox && (t.closeCouponBox = function (e) {
-            o.closeCouponBox(e);
-        }), void 0 === t.relevanceSuccess && (t.relevanceSuccess = function (e) {
-            o.relevanceSuccess(e);
-        }), void 0 === t.relevanceError && (t.relevanceError = function (e) {
-            o.relevanceError(e);
-        }), void 0 === t.setUserInfoShowFalse && (t.setUserInfoShowFalse = function () {
-            o.setUserInfoShowFalse();
+            that.shareSendCoupon(e);
+        }, void 0 === currentPage.setTimeList && (currentPage.setTimeList = function (e) {
+            return that.setTimeList(e);
+        }), void 0 === currentPage.showLoading && (currentPage.showLoading = function (e) {
+            that.showLoading(e);
+        }), void 0 === currentPage.hideLoading && (currentPage.hideLoading = function (e) {
+            that.hideLoading(e);
+        }), void 0 === currentPage.modalConfirm && (currentPage.modalConfirm = function (e) {
+            that.modalConfirm(e);
+        }), void 0 === currentPage.modalClose && (currentPage.modalClose = function (e) {
+            that.modalClose(e);
+        }), void 0 === currentPage.modalShow && (currentPage.modalShow = function (e) {
+            that.modalShow(e);
+        }), void 0 === currentPage.myLogin && (currentPage.myLogin = function () {
+            that.myLogin();
+        }), void 0 === currentPage.getUserInfo && (currentPage.getUserInfo = function (e) {
+            that.getUserInfo(e);
+        }), void 0 === currentPage.getPhoneNumber && (currentPage.getPhoneNumber = function (e) {
+            that.getPhoneNumber(e);
+        }), void 0 === currentPage.bindParent && (currentPage.bindParent = function (e) {
+            that.bindParent(e);
+        }), void 0 === currentPage.closeCouponBox && (currentPage.closeCouponBox = function (e) {
+            that.closeCouponBox(e);
+        }), void 0 === currentPage.relevanceSuccess && (currentPage.relevanceSuccess = function (e) {
+            that.relevanceSuccess(e);
+        }), void 0 === currentPage.relevanceError && (currentPage.relevanceError = function (e) {
+            that.relevanceError(e);
+        }), void 0 === currentPage.setUserInfoShowFalse && (currentPage.setUserInfoShowFalse = function () {
+            that.setUserInfoShowFalse();
         });
 
     },
@@ -127,88 +127,88 @@ module.exports = {
         console.log("formSubmit_collect--\x3e", e);
     },
     setUserInfo: function () {
-        var e = this.currentPage, t = getApp().getUser();
-        t && e.setData({
-            __user_info: t
+        var currentPage = this.currentPage, user = getApp().getUser();
+        user && currentPage.setData({
+            __user_info: user
         });
     },
     setWxappImg: function (e) {
-        var t = this.currentPage;
-        getApp().getConfig(function (e) {
-            t.setData({
-                __wxapp_img: e.wxapp_img,
-                store: e.store
+        var currentPage = this.currentPage;
+        getApp().getConfig(function (info) {
+            currentPage.setData({
+                __wxapp_img: info.wxapp_img,
+                store: info.store
             });
         });
     },
     setStore: function (e) {
-        var t = this.currentPage;
-        getApp().getConfig(function (e) {
-            e.store && t.setData({
-                store: e.store,
-                __is_comment: e.store ? e.store.is_comment : 1,
-                __is_sales: e.store ? e.store.is_sales : 1,
-                __is_member_price: e.store ? e.store.is_member_price : 1,
-                __is_share_price: e.store ? e.store.is_share_price : 1,
-                __alipay_mp_config: e.alipay_mp_config
+        var currentPage = this.currentPage;
+        getApp().getConfig(function (info) {
+            info.store && currentPage.setData({
+                store: info.store,
+                __is_comment: info.store ? info.store.is_comment : 1,
+                __is_sales: info.store ? info.store.is_sales : 1,
+                __is_member_price: info.store ? info.store.is_member_price : 1,
+                __is_share_price: info.store ? info.store.is_share_price : 1,
+                __alipay_mp_config: info.alipay_mp_config
             });
         });
     },
-    setParentId: function (e) {
-        var t = this.currentPage;
-        if ("/pages/index/index" == t.route && this.setOfficalAccount(), e) {
-            var o = 0;
-            if (e.user_id) o = e.user_id; else if (e.scene) {
-                if (isNaN(e.scene)) {
-                    var n = decodeURIComponent(e.scene);
-                    n && (n = getApp().helper.scene_decode(n)) && n.uid && (o = n.uid);
-                } else -1 == t.route.indexOf("clerk") && (o = e.scene);
+    setParentId: function (info) {
+        var currentPage = this.currentPage;
+        if ("/pages/index/index" == currentPage.route && this.setOfficalAccount(), info) {
+            var id = 0;
+            if (info.user_id) id = info.user_id; else if (info.scene) {
+                if (isNaN(info.scene)) {
+                    var scene = decodeURIComponent(info.scene);
+                    scene (scene = getApp().helper.scene_decode(scene)) && scene.uid && (id = scene.uid);
+                } else -1 == currentPage.route.indexOf("clerk") && (id = info.scene);
                 this.setOfficalAccount();
             } else if (null !== getApp().query) {
-                var a = getApp().query;
-                o = a.uid;
+                var query = getApp().query;
+                id = query.uid;
             }
-            o && void 0 !== o && (getApp().core.setStorageSync(getApp().const.PARENT_ID, o),
+            id && void 0 !== id && (getApp().core.setStorageSync(getApp().const.PARENT_ID, id),
                 getApp().trigger.remove(getApp().trigger.events.login, "TRY_TO_BIND_PARENT"), getApp().trigger.add(getApp().trigger.events.login, "TRY_TO_BIND_PARENT", function () {
-                t.bindParent({
-                    parent_id: o,
+                currentPage.bindParent({
+                    parent_id: id,
                     condition: 0
                 });
             }));
         }
     },
-    showToast: function (e) {
-        var t = this.currentPage, o = e.duration || 2500, n = e.title || "", a = (e.success,
-            e.fail, e.complete || null);
-        t._toast_timer && clearTimeout(t._toast_timer), t.setData({
+    showToast: function (hint) {
+        var currentPage = this.currentPage, duration = hint.duration || 2500, title = hint.title || "", returned = (hint.success,
+            hint.fail, hint.complete || null);
+        currentPage._toast_timer && clearTimeout(currentPage._toast_timer), currentPage.setData({
             _toast: {
-                title: n
+                title: title
             }
-        }), t._toast_timer = setTimeout(function () {
-            var e = t.data._toast;
-            e.hide = !0, t.setData({
-                _toast: e
-            }), "function" == typeof a && a();
-        }, o);
+        }), currentPage._toast_timer = setTimeout(function () {
+            var toast = currentPage.data._toast;
+            toast.hide = !0, currentPage.setData({
+                _toast: toast
+            }), "function" == typeof returned && a();
+        }, duration);
     },
     setDeviceInfo: function () {
-        var e = this.currentPage, t = [{
+        var currentPage = this.currentPage, phone = [{
             id: "device_iphone_5",
             model: "iPhone 5"
         }, {
             id: "device_iphone_x",
             model: "iPhone X"
-        }], o = getApp().core.getSystemInfoSync();
-        if (o.model) for (var n in 0 <= o.model.indexOf("iPhone X") && (o.model = "iPhone X"),
-            t) t[n].model == o.model && e.setData({
-            __device: t[n].id
+        }], info = getApp().core.getSystemInfoSync();
+        if (info.model) for (var i in 0 <= info.model.indexOf("iPhone X") && (info.model = "iPhone X"),
+            phone) phone[i].model == info.model && currentPage.setData({
+            __device: phone[i].id
         });
     },
     setPageNavbar: function () {
-        var t = this, r = this.currentPage, e = getApp().core.getStorageSync("_navbar");
+        var that = this, r = this.currentPage, e = getApp().core.getStorageSync("_navbar");
         e && a(e);
         var o = !1;
-        for (var n in t.navbarPages) if (r.route == t.navbarPages[n]) {
+        for (var n in that.navbarPages) if (r.route == that.navbarPages[n]) {
             o = !0;
             break;
         }
@@ -219,7 +219,7 @@ module.exports = {
                 var n = e.navs[o].url, a = r.route || r.__route__ || null;
                 for (var i in n = e.navs[o].new_url, r.options) getApp().helper.inArray(i, ["scene", "user_id", "uid"]) || (-1 == a.indexOf("?") ? a += "?" : a += "&",
                     a += i + "=" + r.options[i]);
-                console.log(a), console.log(n), n === "/" + a ? t = e.navs[o].active = !0 : e.navs[o].active = !1;
+                n === "/" + a ? t = e.navs[o].active = !0 : e.navs[o].active = !1;
             }
             t && r.setData({
                 _navbar: e
@@ -230,7 +230,7 @@ module.exports = {
             data: {hideLogin: 1},
             url: getApp().api.default.navbar,
             success: function (e) {
-                0 == e.code && (a(e.data), getApp().core.setStorageSync("_navbar", e.data), t.setPageClasses());
+                0 == e.code && (a(e.data), getApp().core.setStorageSync("_navbar", e.data), that.setPageClasses());
             }
         });
     },
@@ -256,6 +256,7 @@ module.exports = {
         function t(e) {
             return e <= 0 && (e = 0), e < 10 ? "0" + e : e;
         }
+
         var o = "00", n = "00", a = "00", i = 0, r = "", s = "", c = "";
         if (86400 <= e && (i = parseInt(e / 86400), e %= 86400, r += i + "天", s += i + "天",
             c += i + "天"), e < 86400) {

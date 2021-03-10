@@ -1,11 +1,11 @@
-var app = getApp(), api = getApp().api, longitude = "", latitude = "";
+var app = getApp(), api = getApp().api;
 
 let password1 = '';
 let password2 = '';
-let code = false;
 let olds = ''; //旧密码
 let news = ''; //新密码
 let affirm = ''; //确认密码
+let code = false;
 Page({
     data: {
         mch_offline: !0,
@@ -95,6 +95,7 @@ Page({
     getFocal: function () {
         this.setData({focus: true})
     },
+
     /**
      * 输入密码监听
      */
@@ -118,18 +119,21 @@ Page({
      * 修改密码
      */
 
+    //旧密码
     oldPassword: function (e) {
         this.setData({oldPasswords: e.detail.value});
         if (e.detail.value.length >= 6) {
             olds = this.data.oldPasswords;
         }
     },
+    //新密码
     newPassword: function (e) {
         this.setData({newPasswords: e.detail.value});
         if (e.detail.value.length >= 6) {
             news = this.data.newPasswords;
         }
     },
+    //确认密码
     affirmPassword: function (e) {
         this.setData({affirmPasswords: e.detail.value});
         if (e.detail.value.length >= 6) {
@@ -140,17 +144,13 @@ Page({
     /**
      * 发起修改请求
      */
-
     amend: function () {
-        console.log(olds)
-        console.log(affirm)
-        console.log(news)
         if (affirm != news) {
             wx.showToast({
                 icon: "none",
                 title: "密码不一致,请重新输入"
             }),
-                this.setData({oldPasswords: '',affirmPasswords:'',newPasswords:''});
+                this.setData({oldPasswords: '', affirmPasswords: '', newPasswords: ''});
             return
         }
         getApp().core.showLoading({
@@ -164,14 +164,10 @@ Page({
                 new_pay_password: affirm
             },
             success(res) {
-                console.log(olds)
-                console.log(news)
-                console.log(affirm)
-                console.log(res)
                 getApp().core.hideLoading();
                 if (res.code == 1) {
                     wx.showToast({
-                        icon:"none",
+                        icon: "none",
                         title: res.msg
                     })
                 } else {

@@ -1,5 +1,4 @@
 module.exports = function(a) {
-    console.log("a-->",a);
     a.data || (a.data = {});
     var o = this.core,
         e = this.core.getStorageSync(this.const.ACCESS_TOKEN),

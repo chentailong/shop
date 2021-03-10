@@ -17,11 +17,13 @@ Page({
                 date: e.data.date_1 || ""
             },
             success: function(t) {
+                console.log(t)
+                console.log("成功")
                 e.setData({
                     list: t.data.list
                 }), getApp().core.hideLoading(), is_more = !1;
             }
-        });
+        }); 
     },
     onReady: function() {
         getApp().page.onReady(this);
@@ -36,6 +38,7 @@ Page({
         getApp().request({
             url: getApp().api.recharge.index,
             success: function(t) {
+                console.log(t)
                 a.money = t.data.money, getApp().core.setStorageSync(getApp().const.USER_INFO, a), 
                 e.setData({
                     user_info: a,

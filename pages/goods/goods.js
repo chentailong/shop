@@ -1,4 +1,12 @@
-var WxParse = require("../../wxParse/wxParse.js"), shoppingCart = require("../../components/shopping_cart/shopping_cart.js"), specificationsModel = require("../../components/specifications_model/specifications_model.js"), gSpecificationsModel = require("../../components/goods/specifications_model.js"), goodsBanner = require("../../components/goods/goods_banner.js"), goodsInfo = require("../../components/goods/goods_info.js"), goodsBuy = require("../../components/goods/goods_buy.js"), goodsRecommend = require("../../components/goods/goods_recommend.js"), p = 1, is_loading_comment = !1, is_more_comment = !0, share_count = 0;
+var WxParse = require("../../wxParse/wxParse.js"),
+    shoppingCart = require("../../components/shopping_cart/shopping_cart.js"),
+    specificationsModel = require("../../components/specifications_model/specifications_model.js"),
+    gSpecificationsModel = require("../../components/goods/specifications_model.js"),
+    goodsBanner = require("../../components/goods/goods_banner.js"),
+    goodsInfo = require("../../components/goods/goods_info.js"),
+    goodsBuy = require("../../components/goods/goods_buy.js"),
+    goodsRecommend = require("../../components/goods/goods_recommend.js"), p = 1, is_loading_comment = !1,
+    is_more_comment = !0, share_count = 0;
 
 Page({
     data: {
@@ -34,7 +42,7 @@ Page({
         },
         goodNumCount: 0
     },
-    onLoad: function(t) {
+    onLoad: function (t) {
         getApp().page.onLoad(this, t);
         var o = this;
         share_count = 0, is_more_comment = !(is_loading_comment = !(p = 1));
@@ -67,13 +75,13 @@ Page({
             id: t.id
         }), o.getGoods(), o.getCommentList();
     },
-    onReady: function() {
+    onReady: function () {
         getApp().page.onReady(this);
     },
-    onShow: function() {
-        getApp().page.onShow(this), shoppingCart.init(this), specificationsModel.init(this, shoppingCart), 
-        gSpecificationsModel.init(this), goodsBanner.init(this), goodsInfo.init(this), goodsBuy.init(this), 
-        goodsRecommend.init(this);
+    onShow: function () {
+        getApp().page.onShow(this), shoppingCart.init(this), specificationsModel.init(this, shoppingCart),
+            gSpecificationsModel.init(this), goodsBanner.init(this), goodsInfo.init(this), goodsBuy.init(this),
+            goodsRecommend.init(this);
         var t = getApp().core.getStorageSync(getApp().const.ITEM);
         if (t) var o = t.total, e = t.carGoods, a = this.data.goods_num; else o = {
             total_price: 0,
@@ -85,16 +93,16 @@ Page({
             goods_num: a
         });
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this), shoppingCart.saveItemData(this);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this), shoppingCart.saveItemData(this);
     },
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         getApp().page.onPullDownRefresh(this);
     },
-    onReachBottom: function() {
+    onReachBottom: function () {
         getApp().page.onReachBottom(this);
         var t = this;
         "active" == t.data.tab_detail && t.data.drop ? (t.data.drop = !1, t.goods_recommend({
@@ -102,30 +110,30 @@ Page({
             loadmore: !0
         })) : "active" == t.data.tab_comment && t.getCommentList(!0);
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         getApp().page.onShareAppMessage(this);
         var o = this, t = getApp().getUser();
         return {
             path: "/pages/goods/goods?id=" + this.data.id + "&user_id=" + t.id,
-            success: function(t) {
+            success: function (t) {
                 1 == ++share_count && o.shareSendCoupon(o);
             },
             title: o.data.goods.name,
             imageUrl: o.data.goods.pic_list[0]
         };
     },
-    closeCouponBox: function(t) {
+    closeCouponBox: function (t) {
         this.setData({
             get_coupon_list: ""
         });
     },
-    to_dial: function(t) {
+    to_dial: function (t) {
         var o = this.data.store.contact_tel;
         getApp().core.makePhoneCall({
             phoneNumber: o
         });
     },
-    getGoods: function() {
+    getGoods: function () {
         var n = this;
         if (n.data.quick) {
             var t = n.data.carGoods;
@@ -141,7 +149,7 @@ Page({
             data: {
                 id: n.data.id
             },
-            success: function(t) {
+            success: function (t) {
                 if (0 == t.code) {
                     var o = t.data.detail;
                     WxParse.wxParse("detail", "html", o, n);
@@ -162,7 +170,7 @@ Page({
                     title: "提示",
                     content: t.msg,
                     showCancel: !1,
-                    success: function(t) {
+                    success: function (t) {
                         t.confirm && getApp().core.switchTab({
                             url: "/pages/index/index"
                         });
@@ -171,24 +179,24 @@ Page({
             }
         });
     },
-    getCommentList: function(o) {
+    getCommentList: function (o) {
         var e = this;
-        o && "active" != e.data.tab_comment || is_loading_comment || is_more_comment && (is_loading_comment = !0, 
-        getApp().request({
-            url: getApp().api.default.comment_list,
-            data: {
-                goods_id: e.data.id,
-                page: p
-            },
-            success: function(t) {
-                0 == t.code && (is_loading_comment = !1, p++, e.setData({
-                    comment_count: t.data.comment_count,
-                    comment_list: o ? e.data.comment_list.concat(t.data.list) : t.data.list
-                }), 0 == t.data.list.length && (is_more_comment = !1));
-            }
-        }));
+        o && "active" != e.data.tab_comment || is_loading_comment || is_more_comment && (is_loading_comment = !0,
+            getApp().request({
+                url: getApp().api.default.comment_list,
+                data: {
+                    goods_id: e.data.id,
+                    page: p
+                },
+                success: function (t) {
+                    0 == t.code && (is_loading_comment = !1, p++, e.setData({
+                        comment_count: t.data.comment_count,
+                        comment_list: o ? e.data.comment_list.concat(t.data.list) : t.data.list
+                    }), 0 == t.data.list.length && (is_more_comment = !1));
+                }
+            }));
     },
-    tabSwitch: function(t) {
+    tabSwitch: function (t) {
         "detail" == t.currentTarget.dataset.tab ? this.setData({
             tab_detail: "active",
             tab_comment: ""
@@ -197,7 +205,7 @@ Page({
             tab_comment: "active"
         });
     },
-    commentPicView: function(t) {
+    commentPicView: function (t) {
         var o = t.currentTarget.dataset.index, e = t.currentTarget.dataset.picIndex;
         getApp().core.previewImage({
             current: this.data.comment_list[o].pic_list[e],

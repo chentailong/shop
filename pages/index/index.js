@@ -17,37 +17,37 @@ Page({
         },
         time_all: []
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), t.page_id || (t.page_id = -1), this.setData({
-            options: t
-        }), this.loadData(t);
+    onLoad: function(options) {
+        getApp().page.onLoad(this, options), options.page_id || (options.page_id = -1), this.setData({
+            options: options
+        }), this.loadData(options);
     },
     suspension: function() {
-        var o = this;
+        var that = this;
         interval = setInterval(function() {
             getApp().request({
                 url: getApp().api.default.buy_data,
                 data: {
-                    time: o.data.time
+                    time: that.data.time
                 },
                 method: "POST",
-                success: function(t) {
-                    if (0 == t.code) {
+                success: function(res) {
+                    if (0 == res.code) {
                         var a = !1;
-                        o.data.msgHistory == t.md5 && (a = !0);
-                        var e = "", i = t.cha_time, s = Math.floor(i / 60 - 60 * Math.floor(i / 3600));
-                        e = 0 == s ? i % 60 + "秒" : s + "分" + i % 60 + "秒", !a && t.cha_time <= 300 ? o.setData({
+                        that.data.msgHistory == res.md5 && (a = !0);
+                        var time = "", cha_time = res.cha_time, second = Math.floor(cha_time / 60 - 60 * Math.floor(cha_time / 3600));
+                        time = 0 == second ? cha_time % 60 + "秒" : second + "分" + cha_time % 60 + "秒", !a && res.cha_time <= 300 ? that.setData({
                             buy: {
-                                time: e,
-                                type: t.data.type,
-                                url: t.data.url,
-                                user: 5 <= t.data.user.length ? t.data.user.slice(0, 4) + "..." : t.data.user,
-                                avatar_url: t.data.avatar_url,
-                                address: 8 <= t.data.address.length ? t.data.address.slice(0, 7) + "..." : t.data.address,
-                                content: t.data.content
+                                time: time,
+                                type: res.data.type,
+                                url: res.data.url,
+                                user: 5 <= res.data.user.length ? res.data.user.slice(0, 4) + "..." : res.data.user,
+                                avatar_url: res.data.avatar_url,
+                                address: 8 <= res.data.address.length ? res.data.address.slice(0, 7) + "..." : res.data.address,
+                                content: res.data.content
                             },
-                            msgHistory: t.md5
-                        }) : o.setData({
+                            msgHistory: res.md5
+                        }) : that.setData({
                             buy: !1
                         });
                     }
@@ -57,34 +57,35 @@ Page({
         }, 1e4);
     },
     loadData: function() {
-        var i = this, t = {}, s = i.data.options;
-        if (-1 != s.page_id) t.page_id = s.page_id; else {
-            t.page_id = -1;
-            var a = getApp().core.getStorageSync(getApp().const.PAGE_INDEX_INDEX);
-            a && (a.act_modal_list = [], i.setData(a));
+        var that = this, list = {}, options = that.data.options;
+        if (-1 != options.page_id) list.page_id = options.page_id; else {
+            list.page_id = -1;
+            var index = getApp().core.getStorageSync(getApp().const.PAGE_INDEX_INDEX);
+            index && (index.act_modal_list = [], that.setData(index));
         }
-        t.hideLogin=1;
+        list.hideLogin=1;
         getApp().request({
             url: getApp().api.default.index,
-            data: t,
-            success: function(t) {
-                if (0 == t.code) {
-                    if ("diy" == t.data.status) {
-                        var a = t.data.act_modal_list;
-                        -1 != s.page_id && (getApp().core.setNavigationBarTitle({
-                            title: t.data.info
-                        }), i.setData({
-                            title: t.data.info
+            data: list,
+            success: function(res) {
+                if (0 == res.code) {
+                    if ("diy" == res.data.status) {
+                        var act_modal_list = res.data.act_modal_list;
+                        -1 != options.page_id && (getApp().core.setNavigationBarTitle({
+                            title: res.data.info
+                        }), that.setData({
+                            title: res.data.info
                         }));
-                        for (var e = a.length - 1; 0 <= e; e--) void 0 !== a[e].status && 0 != a[e].status || !getApp().helper.inArray(a[e].page_id, page_first) || i.data.user_info_show ? page_first.push(a[e].page_id) : a.splice(e, 1);
-                        i.setData({
-                            template: t.data.template,
-                            act_modal_list: a,
-                            time_all: t.data.time_all
-                        }), i.setTime();
-                    } else page_first_init ? i.data.user_info_show || (page_first_init = !1) : t.data.act_modal_list = [], 
-                    i.setData(t.data), i.miaoshaTimer();
-                    -1 == s.page_id && getApp().core.setStorageSync(getApp().const.PAGE_INDEX_INDEX, t.data);
+                        for (var i = act_modal_list.length - 1; 0 <= i; i--) void 0 !== act_modal_list[i].status && 0 != act_modal_list[i].status || !getApp().helper.inArray(act_modal_list[i].page_id, page_first)
+                        || that.data.user_info_show ? page_first.push(act_modal_list[i].page_id) : act_modal_list.splice(i, 1);
+                        that.setData({
+                            template: res.data.template,
+                            act_modal_list: act_modal_list,
+                            time_all: res.data.time_all
+                        }), that.setTime();
+                    } else page_first_init ? that.data.user_info_show || (page_first_init = !1) : res.data.act_modal_list = [],
+                        that.setData(res.data), that.miaoshaTimer();
+                    -1 == options.page_id && getApp().core.setStorageSync(getApp().const.PAGE_INDEX_INDEX, res.data);
                 }
             },
             complete: function() {
@@ -93,13 +94,13 @@ Page({
         });
     },
     onShow: function() {
-        var e = this;
+        var that = this;
         getApp().page.onShow(this), require("./../../components/diy/diy.js").init(this), 
-        getApp().getConfig(function(t) {
-            var a = t.store;
-            a && a.name && -1 == e.data.options.page_id && getApp().core.setNavigationBarTitle({
-                title: a.name
-            }), a && 1 === a.purchase_frame ? e.suspension(e.data.time) : e.setData({
+        getApp().getConfig(function(res) {
+            var store = res.store;
+            store && store.name && -1 == that.data.options.page_id && getApp().core.setNavigationBarTitle({
+                title: store.name
+            }), store && 1 === store.purchase_frame ? that.suspension(that.data.time) : that.setData({
                 buy_user: ""
             });
         });
@@ -109,38 +110,38 @@ Page({
     },
     onShareAppMessage: function(t) {
         getApp().page.onShareAppMessage(this);
-        var a = this, e = getApp().getUser();
-        return -1 != a.data.options.page_id ? {
-            path: "/pages/index/index?user_id=" + e.id + "&page_id=" + a.data.options.page_id,
-            title: a.data.title
+        var that = this, userInfo = getApp().getUser();
+        return -1 != that.data.options.page_id ? {
+            path: "/pages/index/index?user_id=" + userInfo.id + "&page_id=" + that.data.options.page_id,
+            title: that.data.title
         } : {
-            path: "/pages/index/index?user_id=" + e.id,
-            title: a.data.store.name
+            path: "/pages/index/index?user_id=" + userInfo.id,
+            title: that.data.store.name
         };
     },
-    showshop: function(t) {
-        var a = this, e = t.currentTarget.dataset.id, i = t.currentTarget.dataset;
+    showshop: function(res) {
+        var that = this, id = res.currentTarget.dataset.id, dataset = res.currentTarget.dataset;
         getApp().request({
             url: getApp().api.default.goods,
             data: {
-                id: e
+                id: id
             },
-            success: function(t) {
-                0 == t.code && a.setData({
-                    data: i,
-                    attr_group_list: t.data.attr_group_list,
-                    goods: t.data,
+            success: function(list) {
+                0 == list.code && that.setData({
+                    data: dataset,
+                    attr_group_list: list.data.attr_group_list,
+                    goods: list.data,
                     showModal: !0
                 });
             }
         });
     },
     miaoshaTimer: function() {
-        var t = this;
-        t.data.miaosha && 0 != t.data.miaosha.rest_time && (t.data.miaosha.ms_next || (timer = setInterval(function() {
-            0 < t.data.miaosha.rest_time ? (t.data.miaosha.rest_time = t.data.miaosha.rest_time - 1, 
-            t.data.miaosha.times = t.setTimeList(t.data.miaosha.rest_time), t.setData({
-                miaosha: t.data.miaosha
+        var that = this;
+        that.data.miaosha && 0 != that.data.miaosha.rest_time && (that.data.miaosha.ms_next || (timer = setInterval(function() {
+            0 < that.data.miaosha.rest_time ? (that.data.miaosha.rest_time = that.data.miaosha.rest_time - 1,
+                that.data.miaosha.times = that.setTimeList(that.data.miaosha.rest_time), that.setData({
+                miaosha: that.data.miaosha
             })) : clearInterval(timer);
         }, 1e3)));
     },
@@ -165,27 +166,27 @@ Page({
         });
     },
     to_dial: function() {
-        var t = this.data.store.contact_tel;
+        var contact_tel = this.data.store.contact_tel;
         getApp().core.makePhoneCall({
-            phoneNumber: t
+            phoneNumber: contact_tel
         });
     },
     closeActModal: function() {
-        var a = this, e = a.data.act_modal_list;
-        for (var t in e) {
-            var i = parseInt(t);
-            e[i].show && (e[i].show = !1);
+        var that = this, act_modal_list = that.data.act_modal_list;
+        for (var modal_list in act_modal_list) {
+            var i = parseInt(modal_list);
+            act_modal_list[i].show && (act_modal_list[i].show = !1);
             break;
         }
-        a.setData({
-            act_modal_list: e
+        that.setData({
+            act_modal_list: act_modal_list
         }), setTimeout(function() {
-            for (var t in e) if (e[t].show) {
-                e = e.splice(t, 1).concat(e);
+            for (var modal_list in act_modal_list) if (act_modal_list[modal_list].show) {
+                act_modal_list = act_modal_list.splice(modal_list, 1).concat(act_modal_list);
                 break;
             }
-            a.setData({
-                act_modal_list: e
+            that.setData({
+                act_modal_list: act_modal_list
             });
         }, 500);
     },
@@ -193,17 +194,17 @@ Page({
         getApp().navigatorClick(t, this);
     },
     onPageScroll: function(t) {
-        var a = this;
-        if (!fullScreen && -1 != a.data.play) {
-            var e = getApp().core.getSystemInfoSync().windowHeight;
+        var that = this;
+        if (!fullScreen && -1 != that.data.play) {
+            var windowHeight = getApp().core.getSystemInfoSync().windowHeight;
             "undefined" == typeof my ? getApp().core.createSelectorQuery().select(".video").fields({
                 rect: !0
             }, function(t) {
-                (t.top <= -200 || t.top >= e - 57) && a.setData({
+                (t.top <= -200 || t.top >= windowHeight - 57) && that.setData({
                     play: -1
                 });
             }).exec() : getApp().core.createSelectorQuery().select(".video").boundingClientRect().scrollOffset().exec(function(t) {
-                (t[0].top <= -200 || t[0].top >= e - 57) && a.setData({
+                (t[0].top <= -200 || t[0].top >= windowHeight - 57) && that.setData({
                     play: -1
                 });
             });

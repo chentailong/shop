@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber" wx:if="{{isPageShow}}">
         <view style="overflow-x: hidden">
             <view class="status-bar">
@@ -56,7 +56,7 @@
             <view class="block">
                 <view class="flex-row block-row">
                     <view class="flex-grow-1">商品总额</view>
-                    <view class="flex-grow-0" wx:if="{{order}}">￥{{order.goods_total_price}}</view>
+                    <view class="flex-grow-0" wx:if="{{order}}">￥{{order.pay_price}}</view>
                     <view class="flex-grow-0" wx:else>￥0.00</view>
                 </view>
                 <view class="flex-row block-row">
@@ -142,5 +142,5 @@
             </view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

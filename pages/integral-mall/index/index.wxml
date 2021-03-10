@@ -113,22 +113,25 @@
                                     <view>全部</view>
                                 </view>
 
-<!--                                                                    <block wx:for="{{goods_list}} ">-->
-<!--                                                                        <view  bindtap="catGoods" class="scroll-view flex-grow-0" data-cat-id="{{catitem.id}}" data-index="{{index}}"  id="{{catitem.cat_checked?'cat_name_active':''}}" wx:for="{{catList}}"  wx:for-item="catitem"  wx:key="{{catitem.id}}">-->
-<!--                                                                            <image class="item-image" src="{{catitem.pic_url}}"></image>-->
-<!--                                                                            <view>{{catitem.name}}</view>-->
-<!--                                                                        </view>-->
-<!--                                                                    </block>-->
-
-                                <view wx:for="{{oldgoods}}" wx:for-item="goodsitem" wx:key="{{goodsitem.id}}">
-                                    <view wx:if="{{goodsitem.cat_id === catitem.id }}" bindtap="catGoods"
-                                          class="scroll-view flex-grow-0" data-cat-id="{{catitem.id}}"
-                                          data-index="{{index}}" id="{{catitem.cat_checked?'cat_name_active':''}}"
-                                          wx:for="{{catList}}" wx:for-item="catitem" wx:key="{{catitem.id}}">
+                                <block >
+                                    <view bindtap="catGoods" class="scroll-view flex-grow-0"
+                                          data-cat-id="{{catitem.id}}" data-index="{{index}}"
+                                          id="{{catitem.cat_checked?'cat_name_active':''}}" wx:for="{{catList}}"
+                                          wx:for-item="catitem" wx:key="{{catitem.id}}">
                                         <image class="item-image" src="{{catitem.pic_url}}"></image>
                                         <view>{{catitem.name}}</view>
                                     </view>
-                                </view>
+                                </block>
+
+<!--                                <view wx:for="{{oldgoods}}" wx:for-item="goodsitem" wx:key="{{goodsitem.id}}">-->
+<!--                                    <view wx:if="{{goodsitem.cat_id === catitem.id }}" bindtap="catGoods"-->
+<!--                                          class="scroll-view flex-grow-0" data-cat-id="{{catitem.id}}"-->
+<!--                                          data-index="{{index}}" id="{{catitem.cat_checked?'cat_name_active':''}}"-->
+<!--                                          wx:for="{{catList}}" wx:for-item="catitem" wx:key="{{catitem.id}}">-->
+<!--                                        <image class="item-image" src="{{catitem.pic_url}}"></image>-->
+<!--                                        <view>{{catitem.name}}</view>-->
+<!--                                    </view>-->
+<!--                                </view>-->
 
 
                             </view>

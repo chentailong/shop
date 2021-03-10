@@ -7,11 +7,11 @@ Page({
         detail: "",
         district: null
     },
-    // t > that  e > address
+
     onLoad: function (address) {
         getApp().page.onLoad(this, address);
         var that = this;
-        // e > data(数据)
+
         that.getDistrictData(function (data) {
             area_picker.init({
                 page: that,
@@ -32,7 +32,7 @@ Page({
             }
         }));
     },
-    // i > district
+
     getDistrictData: function (t) {
         var district = getApp().core.getStorageSync(getApp().const.DISTRICT);
         if (!district) return getApp().core.showLoading({
@@ -65,14 +65,13 @@ Page({
             }
         });
     },
-    // t  > that
+    //保存地址
     saveAddress: function () {
         var that = this;
         getApp().core.showLoading({
             title: "正在保存",
             mask: !0
         });
-        // e > district
         var district = that.data.district;
         district|| (district = {
             province: {
@@ -110,12 +109,12 @@ Page({
             }
         });
     },
-    // t >  message
+
     inputBlur: function (e) {
         var message = '{"' + e.currentTarget.dataset.name + '":"' + e.detail.value + '"}';
         this.setData(JSON.parse(message));
     },
-    // i > that
+
     getWechatAddress: function () {
         var that = this;
         getApp().core.chooseAddress({

@@ -64,7 +64,7 @@
 }
 
 .diy-goods-one-4 {
-    width: calc(264rpx - 24rpx);
+    width: calc(300rpx - 24rpx);
 }
 
 .diy-goods-one-1 .diy-goods-border {
@@ -123,12 +123,13 @@
 }
 
 .diy-goods-img-4 {
-    width: 240rpx;
-    height: 240rpx;
+    width: 280rpx;
+    height: 170rpx;
+    border-radius: 10rpx;
 }
 
 .diy-goods-content {
-    padding: 0 24rpx;
+    /*padding: 0 24rpx;*/
     flex-wrap: wrap;
     width: 100%;
     padding-bottom: 24rpx;
@@ -141,7 +142,7 @@
 
 .diy-goods-price {
     color: #ff4544;
-    font-size: 13pt;
+    font-size: 11pt;
 }
 
 .buy-btn {

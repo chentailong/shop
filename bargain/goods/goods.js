@@ -26,8 +26,9 @@ Page({
         }
         this.getGoods(e.goods_id);
     },
+
     getGoods: function(e) {
-        var a = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
@@ -38,14 +39,14 @@ Page({
             },
             success: function(e) {
                 if (0 == e.code) {
-                    var t = e.data.goods.detail;
-                    WxParse.wxParse("detail", "html", t, a), a.setData(e.data), a.setData({
-                        reset_time: a.data.goods.reset_time,
-                        time_list: a.setTimeList(e.data.goods.reset_time),
+                    var detail = e.data.goods.detail;
+                    WxParse.wxParse("detail", "html", detail, that), that.setData(e.data), that.setData({
+                        reset_time: that.data.goods.reset_time,
+                        time_list: that.setTimeList(e.data.goods.reset_time),
                         p: 1,
-                        foreshow_time: a.data.goods.foreshow_time,
-                        foreshow_time_list: a.setTimeList(a.data.goods.foreshow_time)
-                    }), a.setTimeOver(), e.data.bargain_info && a.getUserTime();
+                        foreshow_time: that.data.goods.foreshow_time,
+                        foreshow_time_list: that.setTimeList(a.data.goods.foreshow_time)
+                    }), that.setTimeOver(), e.data.bargain_info && that.getUserTime();
                 } else getApp().core.showModal({
                     title: "提示",
                     content: e.msg,
@@ -62,6 +63,7 @@ Page({
             }
         });
     },
+
     onReady: function() {
         app.page.onReady(this);
     },

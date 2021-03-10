@@ -97,8 +97,8 @@ var api = {
         authorization_bind: _api_root + "user/authorization-bind",
         check_bind: _api_root + "user/check-bind",
         card_detail: _api_root + "user/card-detail",
-        set_pay_pwd: _api_root + "user/setpaypsw",
-        edit_pay_pwd: _api_root + "user/editpaypsw"
+        set_pay_pwd: _api_root + "user/set-pay-psw",
+        edit_pay_pwd: _api_root + "user/edit-pay-psw"
     },
     share: {
         join: _api_root + "share/join",
