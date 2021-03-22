@@ -1,11 +1,11 @@
 {
   "extEnable": true,
-  "extAppid": "wx257210a837db11b0",
+  "extAppid": "wxb786566f5439b790",
   "directCommit": false,
   "ext": {
     "name": "wechat",
     "attr": {
-      "host": "http://www.shop.com//getticket.php",
+      "host": "https://gpyx.gxmuzi.com/getticket.php",
       "users": [
         "user_1",
         "user_2"

@@ -1,17 +1,17 @@
 function time() {
-    var t = Math.round(new Date().getTime() / 1e3);
-    return parseInt(t);
+    var time = Math.round(new Date().getTime() / 1e3);
+    return parseInt(time);
 }
 
-function formatTime(t) {
-    var e = t.getFullYear(), r = t.getMonth() + 1, n = t.getDate(), a = t.getHours(), o = t.getMinutes(), u = t.getSeconds();
-    return [ e, r, n ].map(formatNumber).join("/") + " " + [ a, o, u ].map(formatNumber).join(":");
+function formatTime(time) {
+    var FullYear = time.getFullYear(), Month = time.getMonth() + 1, Date = time.getDate(), Hours = time.getHours(), Minutes = time.getMinutes(), Seconds = time.getSeconds();
+    return [ FullYear, Month, Date ].map(formatNumber).join("/") + " " + [ Hours, Minutes, Seconds ].map(formatNumber).join(":");
 }
 
-function formatData(t) {
-    var e = t.getFullYear(), r = t.getMonth() + 1, n = t.getDate();
-    t.getHours(), t.getMinutes(), t.getSeconds();
-    return [ e, r, n ].map(formatNumber).join("-");
+function formatData(time) {
+    var FullYear = time.getFullYear(), Month = time.getMonth() + 1, Date = time.getDate();
+    time.getHours(), time.getMinutes(), time.getSeconds();
+    return [ FullYear, Month, Date ].map(formatNumber).join("-");
 }
 
 function formatNumber(t) {
@@ -22,28 +22,28 @@ module.exports = {
     formatTime: formatTime,
     formatData: formatData,
     scene_decode: function(t) {
-        var e = (t + "").split(","), r = {};
+        var e = (t + "").split(","), list = {};
         for (var n in e) {
             var a = e[n].split(":");
-            0 < a.length && a[0] && (r[a[0]] = a[1] || null);
+            0 < a.length && a[0] && (list[a[0]] = a[1] || null);
         }
-        return r;
+        return list;
     },
     time: time,
-    objectToUrlParams: function(t, e) {
+    objectToUrlParams: function(time, res) {
         var r = "";
-        for (var n in t) r += "&" + n + "=" + (e ? encodeURIComponent(t[n]) : t[n]);
+        for (var index in time) r += "&" + index + "=" + (res ? encodeURIComponent(time[index]) : time[index]);
         return r.substr(1);
     },
-    inArray: function(e, t) {
-        return t.some(function(t) {
-            return e === t;
+    inArray: function(res, time) {
+        return time.some(function(time) {
+            return res === time;
         });
     },
-    min: function(t, e) {
-        return t = parseFloat(t), (e = parseFloat(e)) < t ? e : t;
+    min: function(time, res) {
+        return time = parseFloat(time), (res = parseFloat(res)) < time ? res : time;
     },
-    max: function(t, e) {
-        return (t = parseFloat(t)) < (e = parseFloat(e)) ? e : t;
+    max: function(time, res) {
+        return (time = parseFloat(time)) < (res = parseFloat(res)) ? res : time;
     }
 };

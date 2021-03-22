@@ -30,37 +30,28 @@
   <component name="ChangeListManager">
     <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="新增设置密码页面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/app.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bargain/activity/activity.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/activity/activity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bargain/commons/time.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/commons/time.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bargain/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/goods/goods.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/diy/diy.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/diy/diy.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/diy/diy.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/const.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/getUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/getUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/order-pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/order-pay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/request.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ext.json" beforeDir="false" afterPath="$PROJECT_DIR$/ext.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address-edit/address-edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-edit/address-edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/address-edit/address-edit.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-edit/address-edit.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/balance/balance.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/balance/balance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/goods/goods.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/integral-mall/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/index/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/order-detail/order-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-detail/order-detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/order-detail/order-detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-detail/order-detail.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/siteinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/index/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/join/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/join/join.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/join/join.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/join/join.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/log/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/log/log.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/log/log.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/log/log.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/rules/rules.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/rules/rules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/rules/rules.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/rules/rules.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/share/share.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/share/share.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/share/share.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/share/share.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/top/top.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/top/top.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/top/top.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/top/top.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxParse/html2json.js" beforeDir="false" afterPath="$PROJECT_DIR$/wxParse/html2json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxParse/wxParse.js" beforeDir="false" afterPath="$PROJECT_DIR$/wxParse/wxParse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wxParse/wxParse.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/wxParse/wxParse.wxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,9 +85,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../uni.app/lotus" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -104,7 +96,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -192,6 +184,15 @@
       <workItem from="1615251921653" duration="443000" />
       <workItem from="1615258962908" duration="17191000" />
       <workItem from="1615338460609" duration="751000" />
+      <workItem from="1615967463587" duration="1835000" />
+      <workItem from="1615974048438" duration="534000" />
+      <workItem from="1616028873633" duration="2923000" />
+      <workItem from="1616048959389" duration="1310000" />
+      <workItem from="1616081607398" duration="513000" />
+      <workItem from="1616123873547" duration="2353000" />
+      <workItem from="1616135747819" duration="780000" />
+      <workItem from="1616136548671" duration="1312000" />
+      <workItem from="1616374437480" duration="9951000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -276,6 +277,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.wxss" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -311,72 +315,5 @@
     <MESSAGE value="增加了密码支付功能" />
     <MESSAGE value="新增设置密码页面" />
     <option name="LAST_COMMIT_MESSAGE" value="新增设置密码页面" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2404" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608708135432">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2404" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608708135432" />
-    <state x="-844" y="185" width="440" height="516" key="FileChooserDialogImpl" timestamp="1612231606008">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-844" y="185" width="440" height="516" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1612231606008" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611623508446" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610092535395" />
-    <state x="2606" y="211" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609143471585" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1608988946322" />
-    <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606960049480" />
-    <state x="593" y="255" key="IDE.errors.dialog" timestamp="1606898750590">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="593" y="255" key="IDE.errors.dialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606898750590" />
-    <state x="294" y="93" key="MergeDialog" timestamp="1607910758055">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="294" y="93" key="MergeDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910758055" />
-    <state x="368" y="118" key="MergeDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307742102" />
-    <state x="405" y="173" key="MultipleFileMergeDialog" timestamp="1607910759892">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="405" y="173" key="MultipleFileMergeDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910759892" />
-    <state x="270" y="57" key="SettingsEditor" timestamp="1611201694055">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="270" y="57" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611201694055" />
-    <state x="270" y="57" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610953059500" />
-    <state width="498" height="398" key="SwitcherDM" timestamp="1615270602719">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1606789637136" />
-    <state width="498" height="398" key="SwitcherDM/0.0.1536.824/1920.2.1920.1040@0.0.1536.824" timestamp="1615270602719" />
-    <state x="467" y="127" key="VCS.ChangeListViewerDialog" timestamp="1607910719546">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="467" y="127" key="VCS.ChangeListViewerDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910719546" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1610950782130">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610950782130" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607313677119" />
-    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607935131938">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="726" y="444" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607935131938" />
-    <state x="907" y="560" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1607307720660" />
-    <state x="483" y="124" key="git4idea.branch.GitSmartOperationDialog" timestamp="1607910508267">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="483" y="124" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607910508267" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1607915975830">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1607915975830" />
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1607320388195" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1615259302228">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610950402209" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.2.1920.1040@0.0.1536.824" timestamp="1615259302228" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1607313308270" />
   </component>
 </project>

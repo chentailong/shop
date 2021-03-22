@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="top">
             <image src="{{__wxapp_img.step.log_bg.url}}"></image>
@@ -43,5 +43,5 @@
         </view>
         <view class="loading" wx:if="{{loading}}">正在加载中...</view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

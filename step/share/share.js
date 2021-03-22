@@ -9,30 +9,30 @@ Page({
         right: !0,
         get: !1
     },
-    tagChoose: function(t) {
-        var e = this, o = t.currentTarget.dataset.id, a = e.data.num;
-        e.setData({
-            currentItem: o
+    tagChoose: function (t) {
+        var that = this, id = t.currentTarget.dataset.id, num = that.data.num;
+        that.setData({
+            currentItem: id
         }), getApp().core.showLoading({
             title: "分享图片生成中...",
             mask: !0
         }), getApp().request({
             url: getApp().api.step.qrcode,
             data: {
-                goods_id: o,
-                num: a
+                goods_id: id,
+                num: num
             },
-            success: function(t) {
-                console.log(t), 0 == t.code ? e.setData({
+            success: function (t) {
+                console.log(t), 0 == t.code ? that.setData({
                     img: t.data.pic_url
                 }) : getApp().core.showModal({
                     content: t.msg,
                     showCancel: !1
-                }), setTimeout(function() {
+                }), setTimeout(function () {
                     getApp().core.hideLoading();
                 }, 1e3);
             },
-            fail: function(t) {
+            fail: function (t) {
                 getApp().core.showModal({
                     content: t.msg,
                     showCancel: !1
@@ -40,30 +40,30 @@ Page({
             }
         });
     },
-    screen: function() {
-        var t = this.data.img;
+    screen: function () {
+        var img = this.data.img;
         getApp().core.previewImage({
-            urls: [ t ]
+            urls: [img]
         });
     },
-    saveImage: function() {
-        var e = this;
+    saveImage: function () {
+        var that = this;
         getApp().core.authorize({
             scope: "scope.writePhotosAlbum",
-            success: function(t) {
+            success: function (t) {
                 "authorize:ok" == t.errMsg && getApp().core.getImageInfo({
-                    src: e.data.img,
-                    success: function(t) {
+                    src: that.data.img,
+                    success: function (t) {
                         getApp().core.saveImageToPhotosAlbum({
                             filePath: t.path,
-                            success: function(t) {
+                            success: function (t) {
                                 getApp().core.showToast({
                                     title: "保存成功，快去发朋友圈吧！",
                                     icon: "success",
                                     duration: 2e3
                                 });
                             },
-                            fail: function(t) {
+                            fail: function (t) {
                                 getApp().core.showModal({
                                     content: "授权失败",
                                     showCancel: !1
@@ -73,27 +73,27 @@ Page({
                     }
                 });
             },
-            fail: function(t) {
+            fail: function (t) {
                 getApp().core.showModal({
                     content: "为确保您的正常使用，请点击下方按钮授权",
                     showCancel: !1
-                }), e.setData({
+                }), that.setData({
                     save: !1,
                     get: !0
                 });
             }
         });
     },
-    openSetting: function() {
-        var e = this;
+    openSetting: function () {
+        var that = this;
         wx.openSetting({
-            success: function(t) {
-                1 == t.authSetting["scope.writePhotosAlbum"] && e.setData({
+            success: function (t) {
+                1 == t.authSetting["scope.writePhotosAlbum"] && that.setData({
                     save: !0,
                     get: !1
                 });
             },
-            fail: function(t) {
+            fail: function (t) {
                 getApp().core.showModal({
                     content: "为确保您的正常使用，请点击下方按钮授权",
                     showCancel: !1
@@ -101,35 +101,35 @@ Page({
             }
         });
     },
-    chooseImg: function(t) {
-        var o = this, a = this.data.page, s = !0, i = !0, e = t.currentTarget.dataset.id;
-        1 == e ? a-- : 2 == e && a++, getApp().request({
+    chooseImg: function (t) {
+        var that = this, page = this.data.page, left = !0, right = !0, id = t.currentTarget.dataset.id;
+        1 == id ? page-- : 2 == id && page++, getApp().request({
             url: getApp().api.step.pic_list,
             data: {
-                page: a
+                page: page
             },
-            success: function(t) {
-                var e = t.data.pic_list;
-                0 == e.length ? (getApp().core.showToast({
+            success: function (t) {
+                var pic_list = t.data.pic_list;
+                0 == pic_list.length ? (getApp().core.showToast({
                     title: "没有更多了",
                     icon: "none",
                     duration: 1e3
-                }), i = !1, o.setData({
-                    right: i
-                })) : (1 == a && (s = !1), e.length < 4 && (i = !1), o.setData({
-                    page: a,
-                    pic_list: e,
-                    left: s,
-                    right: i
+                }), right = !1, that.setData({
+                    right: right
+                })) : (1 == page && (left = !1), pic_list.length < 4 && (right = !1), that.setData({
+                    page: page,
+                    pic_list: pic_list,
+                    left: left,
+                    right: right
                 }));
             }
         });
     },
-    onLoad: function(t) {
+    onLoad: function (t) {
         getApp().page.onLoad(this, t);
-        var a = this, s = 0;
-        t.todayStep && (s = t.todayStep), a.setData({
-            num: s
+        var that = this, num = 0;
+        t.todayStep && (num = t.todayStep), that.setData({
+            num: num
         });
         getApp().core.showLoading({
             title: "分享图片生成中...",
@@ -139,21 +139,21 @@ Page({
             data: {
                 page: 1
             },
-            success: function(t) {
-                var e = t.data.pic_list, o = !0;
-                0 < e[0].pic_url.length ? (e.length < 4 && (o = !1), a.setData({
-                    pic_list: e,
-                    currentItem: e[0].id,
-                    right: o
+            success: function (t) {
+                var pic_list = t.data.pic_list, right = !0;
+                0 < pic_list[0].pic_url.length ? (pic_list.length < 4 && (right = !1), that.setData({
+                    pic_list: pic_list,
+                    currentItem: pic_list[0].id,
+                    right: right
                 }), getApp().request({
                     url: getApp().api.step.qrcode,
                     data: {
-                        goods_id: e[0].id,
-                        num: s
+                        goods_id: pic_list[0].id,
+                        num: num
                     },
-                    success: function(t) {
-                        setTimeout(function() {
-                            0 == t.code ? a.setData({
+                    success: function (t) {
+                        setTimeout(function () {
+                            0 == t.code ? that.setData({
                                 img: t.data.pic_url
                             }) : getApp().core.showModal({
                                 content: t.msg,
@@ -165,7 +165,7 @@ Page({
                     title: "暂无海报模板",
                     icon: "none",
                     duration: 1e3
-                }), setTimeout(function() {
+                }), setTimeout(function () {
                     getApp().core.navigateTo({
                         url: "../index/index"
                     });

@@ -44,11 +44,11 @@ var modules = [{
         _version: "2.8.9",
         platform: platform,
         query: null,
-        onLaunch: function() {
+        onLaunch: function () {
             this.getStoreData();
         },
-        onShow: function(e) {
-            e.scene && (this.onShowData = e), e && e.query && (this.query = e.query), this.getUser() && this.trigger.run(this.trigger.events.login);
+        onShow: function (data) {
+            data.scene && (this.onShowData = data), data && data.query && (this.query = data.query), this.getUser() && this.trigger.run(this.trigger.events.login);
         },
         is_login: !1,
         login_complete: !1,
@@ -56,57 +56,70 @@ var modules = [{
     };
 for (var i in modules) args[modules[i].name] = require(modules[i].file);
 var _web_root = args.api.index.substr(0, args.api.index.indexOf("/index.php"));
-args.webRoot = _web_root, args.getauth = function(t) {
-    var s = this;
-    if ("my" == s.platform) {
-        if (t.success) {
+args.webRoot = _web_root, args.getauth = function (info) {
+    // s = that
+    var that = this;
+    if ("my" == that.platform) {
+        if (info.success) {
             var e = {
                 authSetting: {}
             };
-            e.authSetting[t.author] = !0, t.success(e);
+            e.authSetting[info.author] = !0, info.success(e);
         }
-    } else s.core.getSetting({
-        success: function(e) {
-            console.log(e), void 0 === e.authSetting[t.author] ? s.core.authorize({
-                scope: t.author,
-                success: function(e) {
-                    t.success && (e.authSetting = {}, e.authSetting[t.author] = !0, t.success(e));
+    } else that.core.getSetting({
+        success: function (e) {
+            console.log(e), void 0 === e.authSetting[info.author] ? that.core.authorize({
+                scope: info.author,
+                success: function (e) {
+                    info.success && (e.authSetting = {}, e.authSetting[info.author] = !0, info.success(e));
                 }
-            }) : 0 == e.authSetting[t.author] ? s.core.showModal({
+            }) : 0 == e.authSetting[info.author] ? that.core.showModal({
                 title: "是否打开设置页面重新授权",
-                content: t.content,
+                content: info.content,
                 confirmText: "去设置",
-                success: function(e) {
-                    e.confirm ? s.core.openSetting({
-                        success: function(e) {
-                            t.success && t.success(e);
+                success: function (e) {
+                    e.confirm ? that.core.openSetting({
+                        success: function (e) {
+                            info.success && info.success(e);
                         },
-                        fail: function(e) {
-                            t.fail && t.fail(e);
+                        fail: function (e) {
+                            info.fail && info.fail(e);
                         },
-                        complete: function(e) {
-                            t.complete && t.complete(e);
+                        complete: function (e) {
+                            info.complete && info.complete(e);
                         }
-                    }) : t.cancel && s.getauth(t);
+                    }) : info.cancel && that.getauth(info);
                 }
-            }) : t.success && t.success(e);
+            }) : info.success && info.success(e);
         }
     });
-}, args.getStoreData = function() {
-    var s = this,
-        e = this.api,
-        o = this.core;
-    s.request({
-        data:{
-            hideLogin:1
-        },
-        url: e.default.store,
-        success: function(t) {
-            0 == t.code && (o.setStorageSync(s.const.STORE, t.data.store), o.setStorageSync(s.const.STORE_NAME, t.data.store_name), o.setStorageSync(s.const.SHOW_CUSTOMER_SERVICE, t.data.show_customer_service), o.setStorageSync(s.const.CONTACT_TEL, t.data.contact_tel), o.setStorageSync(s.const.SHARE_SETTING, t.data.share_setting), s.permission_list = t.data.permission_list, o.setStorageSync(s.const.WXAPP_IMG, t.data.wxapp_img), o.setStorageSync(s.const.WX_BAR_TITLE, t.data.wx_bar_title), o.setStorageSync(s.const.ALIPAY_MP_CONFIG, t.data.alipay_mp_config), o.setStorageSync(s.const.STORE_CONFIG, t.data), setTimeout(function(e) {
-                s.config = t.data, s.configReadyCall && s.configReadyCall(t.data);
-            }, 1e3));
-        },
-        complete: function() {}
-    });
-};
+},
+    args.getStoreData = function () {
+        var that = this,
+            api = this.api,
+            core = this.core;
+        that.request({
+            data: {
+                hideLogin: 1
+            },
+            url: api.default.store,
+            success: function (res) {
+                0 == res.code && (core.setStorageSync(that.const.STORE, res.data.store),
+                    core.setStorageSync(that.const.STORE_NAME, res.data.store_name),
+                    core.setStorageSync(that.const.SHOW_CUSTOMER_SERVICE, res.data.show_customer_service),
+                    core.setStorageSync(that.const.CONTACT_TEL, res.data.contact_tel),
+                    core.setStorageSync(that.const.SHARE_SETTING, res.data.share_setting),
+                    that.permission_list = res.data.permission_list,
+                    core.setStorageSync(that.const.WXAPP_IMG, res.data.wxapp_img),
+                    core.setStorageSync(that.const.WX_BAR_TITLE, res.data.wx_bar_title),
+                    core.setStorageSync(that.const.ALIPAY_MP_CONFIG, res.data.alipay_mp_config),
+                    core.setStorageSync(that.const.STORE_CONFIG, res.data),
+                    setTimeout(function (e) {
+                        that.config = res.data, that.configReadyCall && that.configReadyCall(res.data);
+                    }, 1e3));
+            },
+            complete: function () {
+            }
+        });
+    };
 App(args);
