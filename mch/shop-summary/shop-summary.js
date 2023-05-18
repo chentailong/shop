@@ -2,43 +2,47 @@ Page({
     data: {
         markers: []
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), t.mch_id && (this.setData({
-            mch_id: t.mch_id
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), options.mch_id && (this.setData({
+            mch_id: options.mch_id
         }), this.getShopData());
     },
     onShow: function() {
         getApp().page.onShow(this);
     },
     getShopData: function() {
-        var a = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.mch.shop,
             data: {
-                mch_id: a.data.mch_id,
+                mch_id: that.data.mch_id,
                 tab: 0,
                 cat_id: 0
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = t.data.shop, o = [ {
+            success: function(res) {
+                if (0 == res.code) {
+                    var shop = res.data.shop, markers = [ {
                         iconPath: "/mch/images/img-map.png",
                         id: 0,
                         width: 20,
                         height: 43,
-                        longitude: e.longitude,
-                        latitude: e.latitude
+                        longitude: shop.longitude,
+                        latitude: shop.latitude
                     } ];
-                    a.setData({
-                        markers: o,
-                        shop: t.data.shop
+                    that.setData({
+                        markers: markers,
+                        shop: res.data.shop
                     });
                 }
             },
             complete: function() {
-                getApp().core.hideLoading(), a.setData({
+                getApp().core.hideLoading(), that.setData({
                     loading: !1
                 });
             }
@@ -50,17 +54,17 @@ Page({
         });
     },
     map_power: function() {
-        var o = this;
+        var that = this;
         getApp().getConfig(function(t) {
-            var e = o.data.shop;
-            void 0 !== e ? o.map_goto(e) : getApp().core.getSetting({
+            var shop = that.data.shop;
+            void 0 !== shop ? that.map_goto(shop) : getApp().core.getSetting({
                 success: function(t) {
-                    t.authSetting["scope.userLocation"] ? o.map_goto(e) : getApp().getauth({
+                    t.authSetting["scope.userLocation"] ? that.map_goto(shop) : getApp().getauth({
                         content: "需要获取您的地理位置授权，请到小程序设置中打开授权！",
                         cancel: !1,
                         author: "scope.userLocation",
                         success: function(t) {
-                            t.authSetting["scope.userLocation"] && o.map_goto(e);
+                            t.authSetting["scope.userLocation"] && that.map_goto(shop);
                         }
                     });
                 }

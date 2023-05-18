@@ -18,18 +18,22 @@ Page({
         time: !1,
         title: ""
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var a = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().request({
             url: getApp().api.pond.setting,
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = t.data.title;
-                    e && (getApp().core.setNavigationBarTitle({
-                        title: e
-                    }), a.setData({
-                        title: e
+            success: function(res) {
+                if (0 == res.code) {
+                    var title = res.data.title;
+                    title && (getApp().core.setNavigationBarTitle({
+                        title: title
+                    }), that.setData({
+                        title: title
                     }));
                 }
             }
@@ -37,59 +41,59 @@ Page({
     },
     onShow: function() {
         getApp().page.onShow(this);
-        var n = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.pond.index,
-            success: function(t) {
-                n.setData(t.data);
-                for (var e = t.data.list, a = 18, o = 18, i = 0; i < 8; i++) 0 == i ? o = a = 18 : i < 3 ? (a = a, 
-                o = o + 196 + 8) : i < 5 ? (o = o, a = a + 158 + 8) : i < 7 ? (o = o - 196 - 8, 
-                a = a) : i < 8 && (o = o, a = a - 158 - 8), e[i].topAward = a, e[i].leftAward = o;
-                n.setData({
-                    awardList: e
+            success: function(res) {
+                that.setData(res.data);
+                for (var awardList = res.data.list, a = 18, o = 18, i = 0; i < 8; i++) 0 === i ? o = a = 18 : i < 3 ? (a === a,
+                o = o + 196 + 8) : i < 5 ? (o === o, a = a + 158 + 8) : i < 7 ? (o = o - 196 - 8,
+                a === a) : i < 8 && (o === o, a = a - 158 - 8), awardList[i].topAward = a, awardList[i].leftAward = o;
+                that.setData({
+                    awardList: awardList
                 });
             },
             complete: function(t) {
                 getApp().core.hideLoading();
-                for (var e = 4, a = 4, o = [], i = 0; i < 24; i++) {
-                    if (0 == i) e = a = 8; else if (i < 6) a = 4, e += 110; else if (6 == i) a = 8, 
-                    e = 660; else if (i < 12) a += 92, e = 663; else if (12 == i) a = 545, e = 660; else if (i < 18) a = 550, 
-                    e -= 110; else if (18 == i) a = 545, e = 10; else {
+                for (var e = 4, a = 4, topCircle = [], i = 0; i < 24; i++) {
+                    if (0 === i) e = a = 8; else if (i < 6) a = 4, e += 110; else if (6 === i) a = 8,
+                    e = 660; else if (i < 12) a += 92, e = 663; else if (12 === i) a = 545, e = 660; else if (i < 18) a = 550,
+                    e -= 110; else if (18 === i) a = 545, e = 10; else {
                         if (!(i < 24)) return;
                         a -= 92, e = 5;
                     }
-                    o.push({
+                    topCircle.push({
                         topCircle: a,
                         leftCircle: e
                     });
                 }
-                n.setData({
-                    circleList: o
+                that.setData({
+                    circleList: topCircle
                 }), bout = setInterval(function() {
-                    "#FFFFFF" == n.data.colorCircleFirst ? n.setData({
+                    "#FFFFFF" === that.data.colorCircleFirst ? that.setData({
                         colorCircleFirst: "#F12416",
                         colorCircleSecond: "#FFFFFF"
-                    }) : n.setData({
+                    }) : that.setData({
                         colorCircleFirst: "#FFFFFF",
                         colorCircleSecond: "#F12416"
                     });
-                }, 900), n.pond_animation();
+                }, 900), that.pond_animation();
             }
         });
     },
     startGame: function() {
-        var n = this;
-        if (!n.data.isRunning) {
-            var t = "";
-            if (0 == n.data.oppty && (t = "抽奖机会不足"), n.data.integral || (t = "积分不足"), n.data.time || (t = "活动未开始或已经结束"), 
-            t) getApp().core.showModal({
+        var that = this;
+        if (!that.data.isRunning) {
+            var type = "";
+            if (0 === that.data.oppty && (type = "抽奖机会不足"), that.data.integral || (type = "积分不足"), that.data.time || (type = "活动未开始或已经结束"),
+                type) getApp().core.showModal({
                 title: "很抱歉",
-                content: t,
+                content: type,
                 showCancel: !1,
-                success: function(t) {
-                    t.confirm && n.setData({
+                success: function(res) {
+                    res.confirm && that.setData({
                         isRunning: !1
                     });
                 }
@@ -105,46 +109,46 @@ Page({
                         console.log('失败')
                     }
                 });
-                clearInterval(p_animation), animation.translate(0, 0).step(), n.setData({
+                clearInterval(p_animation), animation.translate(0, 0).step(), that.setData({
                     animationData: animation.export(),
                     isRunning: !0,
                     lottert: 0
                 });
-                var e = n.data.indexSelect, a = 0, s = n.data.awardList, r = setInterval(function() {
-                    if (e++, e %= 8, a += 30, n.setData({
-                        indexSelect: e
-                    }), 0 < n.data.lottert && e + 1 == n.data.lottert) {
-                        if (clearInterval(r), n.pond_animation(), 5 == s[e].type) var t = 1; else t = 2;
-                        n.setData({
+                var indexSelect = that.data.indexSelect, time = 0, awardList = that.data.awardList, r = setInterval(function() {
+                    if (indexSelect++, indexSelect %= 8, time += 30, that.setData({
+                        indexSelect: indexSelect
+                    }), 0 < that.data.lottert && indexSelect + 1 === that.data.lottert) {
+                        if (clearInterval(r), that.pond_animation(), 5 === awardList[indexSelect].type) var prize = 1; else prize = 2;
+                        that.setData({
                             isRunning: !1,
-                            name: s[e].name,
-                            num: s[e].id,
-                            prize: t
+                            name: awardList[indexSelect].name,
+                            num: awardList[indexSelect].id,
+                            prize: prize
                         });
                     }
-                }, 200 + a);
+                }, 200 + time);
                 getApp().request({
                     url: getApp().api.pond.lottery,
-                    success: function(o) {
-                        if (1 == o.code) return clearInterval(r), getApp().core.showModal({
+                    success: function(res) {
+                        if (1 == res.code) return clearInterval(r), getApp().core.showModal({
                             title: "很抱歉",
-                            content: o.msg ? o.msg : "网络错误",
+                            content: res.msg ? res.msg : "网络错误",
                             showCancel: !1,
                             success: function(t) {
                                 t.confirm && _this.setData({
                                     isRunning: !1
                                 });
                             }
-                        }), void n.pond_animation();
-                        "积分不足" == o.msg && n.setData({
+                        }), void that.pond_animation();
+                        "积分不足" === res.msg && that.setData({
                             integral: !1
                         });
-                        var i = o.data.id;
-                        s.forEach(function(t, e, a) {
-                            t.id == i && setTimeout(function() {
-                                n.setData({
+                        var id = res.data.id;
+                        res.forEach(function(t, e, a) {
+                            t.id === id && setTimeout(function() {
+                                that.setData({
                                     lottert: e + 1,
-                                    oppty: o.data.oppty
+                                    oppty: res.data.oppty
                                 });
                             }, 2e3);
                         });

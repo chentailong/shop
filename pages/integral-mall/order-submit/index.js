@@ -8,6 +8,10 @@ Page({
         show_payment: !1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         var e = t.goods_info, a = JSON.parse(e);
         a && this.setData({

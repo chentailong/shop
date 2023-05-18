@@ -10,6 +10,10 @@ Page({
         cid_url: !1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         if (this.systemInfo = getApp().core.getSystemInfoSync(), t.cid) {
             t.cid;

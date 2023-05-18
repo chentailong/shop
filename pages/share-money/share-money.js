@@ -10,6 +10,10 @@ Page({
         un_pay: 0
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
     },
     onReady: function() {
@@ -17,21 +21,21 @@ Page({
     },
     onShow: function() {
         getApp().page.onShow(this);
-        var e = this, t = getApp().core.getStorageSync(getApp().const.SHARE_SETTING), a = getApp().core.getStorageSync(getApp().const.CUSTOM);
-        e.setData({
-            share_setting: t,
-            custom: a
+        var that = this, share_setting = getApp().core.getStorageSync(getApp().const.SHARE_SETTING), custom = getApp().core.getStorageSync(getApp().const.CUSTOM);
+        that.setData({
+            share_setting: share_setting,
+            custom: custom
         }), getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.share.get_price,
-            success: function(t) {
-                0 == t.code && e.setData({
-                    total_price: t.data.price.total_price,
-                    price: t.data.price.price,
-                    cash_price: t.data.price.cash_price,
-                    un_pay: t.data.price.un_pay
+            success: function(res) {
+                0 === res.code && that.setData({
+                    total_price: res.data.price.total_price,
+                    price: res.data.price.price,
+                    cash_price: res.data.price.cash_price,
+                    un_pay: res.data.price.un_pay
                 });
             },
             complete: function() {
@@ -40,10 +44,10 @@ Page({
         });
     },
     tapName: function(t) {
-        var e = this, a = "";
-        e.data.block || (a = "active"), e.setData({
-            block: !e.data.block,
-            active: a
+        var that = this, active = "";
+        that.data.block || (active = "active"), that.setData({
+            block: !that.data.block,
+            active: active
         });
     },
     onHide: function() {

@@ -1,0 +1,16 @@
+page {
+    background-color: #f1f1f1;
+}
+.head {
+    background-color: white;
+    width: 100%;
+}
+
+.basic {
+    width: 100%;
+    background-color: white;
+}
+
+.checked {
+    margin: 10px;
+}

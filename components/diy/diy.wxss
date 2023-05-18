@@ -19,6 +19,18 @@
     z-index: 9;
 }
 
+.w-100 .img {
+    width: 94rpx;
+    height: 40rpx;
+}
+
+.member_money {
+    color: red;
+    font-weight: bolder;
+    font-size: 14px;
+    display: flex;
+}
+
 .rubik-list {
     position: relative;
     background: #FFFFFF;

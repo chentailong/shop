@@ -6,9 +6,13 @@ Page({
         loading: !1,
         length: 0
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var n = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().core.showLoading({
             title: "数据加载中...",
             mask: !0
@@ -17,13 +21,13 @@ Page({
             data: {
                 page: 1
             },
-            success: function(t) {
+            success: function(res) {
                 getApp().core.hideLoading();
-                var i = t.data.info, a = t.data.invite_list, e = a.length;
-                n.setData({
-                    info: i,
-                    length: e,
-                    invite_list: a
+                var info = res.data.info, invite_list = res.data.invite_list, length = invite_list.length;
+                that.setData({
+                    info: info,
+                    length: length,
+                    invite_list: invite_list
                 });
             }
         });
@@ -34,23 +38,23 @@ Page({
     onUnload: function() {},
     onPullDownRefresh: function() {},
     onReachBottom: function() {
-        var a = this, e = a.data.over, n = a.data.invite_list;
-        if (!e) {
-            var o = this.data.page;
+        var that = this, over = that.data.over, invite_list = that.data.invite_list;
+        if (!over) {
+            var page = this.data.page;
             this.setData({
                 loading: !0
             }), getApp().request({
                 url: getApp().api.step.invite_detail,
                 data: {
-                    page: o
+                    page: page
                 },
-                success: function(t) {
-                    for (var i = 0; i < t.data.invite_list.length; i++) n.push(t.data.invite_list[i]);
-                    t.data.invite_list.length < 15 && (e = !0), a.setData({
-                        page: o + 1,
-                        over: e,
+                success: function(res) {
+                    for (var i = 0; i < res.data.invite_list.length; i++) invite_list.push(res.data.invite_list[i]);
+                    res.data.invite_list.length < 15 && (over = !0), that.setData({
+                        page: page + 1,
+                        over: over,
                         loading: !1,
-                        invite_list: n
+                        invite_list: invite_list
                     });
                 }
             });

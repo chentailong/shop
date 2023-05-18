@@ -5,6 +5,82 @@
 @import "components/footer/footer.wxss";
 
 @import "components/area-picker/area-picker.wxss";
+/**app.wxss**/
+.container {
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: #f6f5f5;
+}
+
+.tab {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    color: #555;
+    z-index: 2000;
+    border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding-bottom: 65rpx
+}
+
+.tab .tab_icon {
+    box-sizing: border-box;
+    width: 64rpx;
+    height: 64rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.tab_text {
+    box-sizing: border-box;
+    font-size: 8pt;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.flex-row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+}
+
+.tab navigator {
+    height: 115rpx;
+    width: 1%;
+}
+
+.flex-y-center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center;
+}
+
+.flex-grow-1 {
+    min-width: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+}
+
+.tab navigator > view {
+    width: 100%;
+    padding-top: 4px;
+}
 
 button#_formIdSubmit {
     display: block!important;

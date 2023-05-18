@@ -1,0 +1,73 @@
+<view class="container">
+
+    <van-tabs active="{{ active }}" bind:change="change_order"  color="#1989fa" title-active-color="#1989fa">
+        <van-tab title="好评">
+            <view class="tabs">
+                <van-tabs type="card" color="#1989fa" bind:click="cut_pattern">
+                    <van-tab title="未回复">
+                        <block wx:if="{{no_response.length!==0}}">
+                        </block>
+                        <block wx:else>
+                            <van-empty description="没有任何评论哦~"/>
+                        </block>
+                    </van-tab>
+
+                    <van-tab title="已回复">
+                        <block wx:if="{{response.length!==0}}">
+                        </block>
+                        <block wx:else>
+                            <van-empty description="没有任何评论哦~"/>
+                        </block>
+                    </van-tab>
+                </van-tabs>
+            </view>
+        </van-tab>
+
+        <van-tab title="中评">
+            <view class="tabs">
+                <van-tabs type="card" color="#1989fa" bind:click="cut_pattern">
+                    <van-tab title="未回复">
+                        <block wx:if="{{no_response.length!==0}}">
+                        </block>
+                        <block wx:else>
+                            <van-empty description="没有任何评论哦~"/>
+                        </block>
+                    </van-tab>
+
+                    <van-tab title="已回复">
+                        <block wx:if="{{response.length!==0}}">
+                        </block>
+                        <block wx:else>
+                            <van-empty description="没有任何评论哦~"/>
+                        </block>
+                    </van-tab>
+                </van-tabs>
+            </view>
+        </van-tab>
+
+        <van-tab title="差评">
+            <view class="tabs">
+                <van-tabs type="card" color="#1989fa" bind:click="cut_pattern">
+                    <van-tab title="未回复">
+                        <block wx:if="{{no_response.length!==0}}">
+                        </block>
+                        <block wx:else>
+                            <van-empty description="没有任何评论哦~"/>
+                        </block>
+                    </van-tab>
+
+                    <van-tab title="已回复">
+                        <block wx:if="{{response.length!==0}}">
+                        </block>
+                        <block wx:else>
+                            <van-empty description="没有任何评论哦~"/>
+                        </block>
+                    </van-tab>
+                </van-tabs>
+            </view>
+        </van-tab>
+    </van-tabs>
+
+
+</view>
+

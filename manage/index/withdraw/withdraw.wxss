@@ -1,0 +1,8 @@
+.order_class {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.tabs {
+    margin-top: 20px;
+}

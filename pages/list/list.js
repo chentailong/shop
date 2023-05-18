@@ -11,6 +11,10 @@ Page({
         quick_icon: !0
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t), this.loadData(t);
     },
     loadData: function(t) {
@@ -95,12 +99,12 @@ Page({
                 goods_id: a.data.goods_id
             },
             success: function(t) {
-                0 == t.code && (0 == t.data.list.length && (is_no_more = !0), a.setData({
+                0 === t.code && (0 === t.data.list.length && (is_no_more = !0), a.setData({
                     page: e + 1
                 }), a.setData({
                     goods_list: t.data.list
                 })), a.setData({
-                    show_no_data_tip: 0 == a.data.goods_list.length
+                    show_no_data_tip: 0 === a.data.goods_list.length
                 });
             },
             complete: function() {}

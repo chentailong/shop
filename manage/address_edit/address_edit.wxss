@@ -1,0 +1,8 @@
+page {
+    background-color: #f1f1f1;
+}
+
+
+.form_info {
+    margin: 20px 0;
+}

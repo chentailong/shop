@@ -11,35 +11,35 @@ Page({
         success: !1
     },
     onReachBottom: function() {
-        var i = this, s = i.data.over, o = i.data.activity_data, e = void 0, a = void 0, c = void 0;
-        if (!s) {
-            var n = this.data.page;
+        var that = this, over = that.data.over, activity_data = that.data.activity_data, code = void 0, iv = void 0, encrypted_data = void 0;
+        if (!over) {
+            var page = this.data.page;
             this.setData({
                 loading: !0
             }), getApp().core.login({
                 success: function(t) {
-                    e = t.code, getApp().core.getWeRunData({
+                    code = t.code, getApp().core.getWeRunData({
                         success: function(t) {
-                            a = t.iv, c = t.encryptedData, getApp().request({
+                            iv = t.iv, encrypted_data = t.encryptedData, getApp().request({
                                 url: getApp().api.step.activity,
                                 method: "POST",
                                 data: {
-                                    encrypted_data: c,
-                                    iv: a,
-                                    code: e,
+                                    encrypted_data: encrypted_data,
+                                    iv: iv,
+                                    code: code,
                                     user_id: void 0,
-                                    page: n
+                                    page: page
                                 },
                                 success: function(t) {
                                     getApp().core.hideLoading();
-                                    for (var e = 0; e < t.list.activity_data.length; e++) o.push(t.list.activity_data[e]);
-                                    t.list.activity_data.length < 3 && (s = !0);
-                                    for (var a = 0; a < o.length; a++) o[a].date = o[a].open_date.replace("-", "").replace("-", "");
-                                    i.setData({
-                                        page: n + 1,
-                                        over: s,
+                                    for (var e = 0; e < t.list.activity_data.length; e++) activity_data.push(t.list.activity_data[e]);
+                                    t.list.activity_data.length < 3 && (over = !0);
+                                    for (var a = 0; a < activity_data.length; a++) activity_data[a].date = activity_data[a].open_date.replace("-", "").replace("-", "");
+                                    that.setData({
+                                        page: page + 1,
+                                        over: over,
                                         loading: !1,
-                                        activity_data: o
+                                        activity_data: activity_data
                                     });
                                 }
                             });
@@ -50,58 +50,62 @@ Page({
         }
     },
     openSetting: function() {
-        var e = this, a = e.data.user_id;
+        var that = this, user_id = that.data.user_id;
         getApp().core.openSetting({
             success: function(t) {
-                1 == t.authSetting["scope.werun"] && 1 == t.authSetting["scope.userInfo"] && (e.setData({
+                1 === t.authSetting["scope.werun"] && 1 === t.authSetting["scope.userInfo"] && (that.setData({
                     authorize: !0
                 }), getApp().core.showLoading({
                     title: "数据加载中...",
                     mask: !0
-                }), e.activity(a));
+                }), that.activity(user_id));
             },
             fail: function(t) {
-                e.setData({
+                that.setData({
                     authorize: !1
                 }), getApp().core.hideLoading();
             }
         });
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this, a = !1, i = !1, s = void 0;
-        null !== t.user_id && (s = t.user_id), getApp().request({
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this, open_date = !1, join = !1, user_id = void 0;
+        null !== options.user_id && (user_id = options.user_id), getApp().request({
             url: getApp().api.step.setting,
             success: function(t) {
-                0 == t.code && e.setData({
+                0 == t.code && that.setData({
                     title: t.data.title,
                     share_title: t.data.share_title
                 });
             }
         });
-        var o = util.formatTime(new Date()), c = o[0] + o[1] + o[2] + o[3] + o[5] + o[6] + o[8] + o[9];
+        var date = util.formatTime(new Date()), time = date[0] + date[1] + date[2] + date[3] + date[5] + date[6] + date[8] + date[9];
         this.setData({
             page: 2,
-            time: c
-        }), null !== t.open_date && (a = t.open_date), null !== t.join && (i = t.join), 
-        e.setData({
-            join: i,
-            open_date: a
+            time: time
+        }), null !== options.open_date && (open_date = options.open_date), null !== options.join && (join = options.join),
+            that.setData({
+            join: join,
+            open_date: open_date
         }), getApp().core.showLoading({
             title: "数据加载中...",
             mask: !0
         }), getApp().core.getSetting({
             success: function(t) {
-                1 == t.authSetting["scope.werun"] && 1 == t.authSetting["scope.userInfo"] ? e.activity(s) : getApp().core.authorize({
+                1 === t.authSetting["scope.werun"] && 1 === t.authSetting["scope.userInfo"] ? that.activity(user_id) : getApp().core.authorize({
                     scope: "scope.userInfo",
                     success: function(t) {
                         getApp().core.authorize({
                             scope: "scope.werun",
                             success: function(t) {
-                                "authorize:ok" == t.errMsg && e.activity(s);
+                                "authorize:ok" === t.errMsg && that.activity(user_id);
                             },
                             fail: function(t) {
-                                e.setData({
+                                that.setData({
                                     authorize: !1
                                 }), getApp().core.hideLoading();
                             }
@@ -110,40 +114,40 @@ Page({
                 });
             },
             fail: function(t) {
-                e.setData({
+                that.setData({
                     authorize: !1
                 }), getApp().core.hideLoading();
             }
         });
     },
-    activity: function(e) {
-        var p = this, a = void 0, i = void 0, s = void 0;
+    activity: function(user_id) {
+        var that = this, code = void 0, iv = void 0, encrypted_data = void 0;
         getApp().core.login({
             success: function(t) {
-                a = t.code, getApp().core.getWeRunData({
+                code = t.code, getApp().core.getWeRunData({
                     success: function(t) {
-                        i = t.iv, s = t.encryptedData, getApp().request({
+                        iv = t.iv, encrypted_data = t.encryptedData, getApp().request({
                             url: getApp().api.step.activity,
                             method: "POST",
                             data: {
-                                encrypted_data: s,
-                                iv: i,
-                                code: a,
-                                user_id: e
+                                encrypted_data: encrypted_data,
+                                iv: iv,
+                                code: code,
+                                user_id: user_id
                             },
                             success: function(t) {
-                                var e = t.list.run_data;
+                                var step = t.list.run_data;
                                 getApp().core.hideLoading();
-                                var a = t.list.ad_data, i = t.list.activity_data, s = void 0;
-                                if (s = !1, i.length < 1) s = !0; else for (var o = 0; o < i.length; o++) i[o].date = i[o].open_date.replace("-", "").replace("-", "");
-                                var c = !1, n = !1;
-                                null !== a && (c = t.list.ad_data.unit_id, n = !0), p.setData({
-                                    unit_id: c,
-                                    step: e,
-                                    space: s,
-                                    activity_data: i,
-                                    ad_data: a,
-                                    ad: n
+                                var ad_data = t.list.ad_data, activity_data = t.list.activity_data, space = void 0;
+                                if (space = !1, activity_data.length < 1) space = !0; else for (var o = 0; o < activity_data.length; o++) activity_data[o].date = activity_data[o].open_date.replace("-", "").replace("-", "");
+                                var unit_id = !1, ad = !1;
+                                null !== ad_data && (unit_id = t.list.ad_data.unit_id, ad = !0), that.setData({
+                                    unit_id: unit_id,
+                                    step: step,
+                                    space: space,
+                                    activity_data: activity_data,
+                                    ad_data: ad_data,
+                                    ad: ad
                                 });
                             }
                         });
@@ -169,28 +173,28 @@ Page({
         };
     },
     submit: function(t) {
-        var e = void 0, a = void 0, i = void 0;
+        var code = void 0, iv = void 0, encrypted_data = void 0;
         console.log(t);
-        var s = t.currentTarget.dataset.id, o = (t.currentTarget.dataset.step, this), c = this.data.step;
+        var id = t.currentTarget.dataset.id, step = (t.currentTarget.dataset.step, this), num = this.data.step;
         getApp().core.showLoading({
             title: "正在提交...",
             mask: !0
         }), getApp().core.login({
             success: function(t) {
-                e = t.code, getApp().core.getWeRunData({
+                code = t.code, getApp().core.getWeRunData({
                     success: function(t) {
-                        a = t.iv, i = t.encryptedData, getApp().request({
+                        iv = t.iv, id = t.encryptedData, getApp().request({
                             url: getApp().api.step.activity_submit,
                             method: "POST",
                             data: {
-                                code: e,
-                                iv: a,
-                                encrypted_data: i,
-                                num: c,
-                                activity_id: s
+                                code: code,
+                                iv: iv,
+                                encrypted_data: encrypted_data,
+                                num: num,
+                                activity_id: id
                             },
                             success: function(t) {
-                                getApp().core.hideLoading(), 0 == t.code ? o.setData({
+                                getApp().core.hideLoading(), 0 === t.code ? step.setData({
                                     success: !0
                                 }) : getApp().core.showModal({
                                     content: t.msg,
@@ -203,6 +207,7 @@ Page({
             }
         });
     },
+
     success: function() {
         this.setData({
             success: !1

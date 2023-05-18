@@ -3,6 +3,10 @@ var app = getApp(), api = getApp().api;
 Page({
     data: {},
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         if (getApp().page.onLoad(this, t), t.inId) var e = {
             order_id: t.inId,
             type: "IN"

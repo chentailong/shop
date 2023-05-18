@@ -4,9 +4,13 @@ Page({
     data: {
         is_show: !1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
@@ -19,7 +23,7 @@ Page({
                     success: function(t) {
                         t.confirm && getApp().core.navigateBack();
                     }
-                }), e.setData(t.data), e.setData({
+                }), that.setData(t.data), that.setData({
                     is_show: !0
                 })), 1 == t.code && getApp().core.redirectTo({
                     url: "/mch/apply/apply"
@@ -57,11 +61,11 @@ Page({
         });
     },
     copyPcUrl: function() {
-        var e = this;
+        var that = this;
         getApp().core.setClipboardData({
-            data: e.data.pc_url,
+            data: that.data.pc_url,
             success: function(t) {
-                e.showToast({
+                that.showToast({
                     title: "内容已复制"
                 });
             }

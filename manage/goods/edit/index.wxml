@@ -1,0 +1,18 @@
+<view class="content">
+    <van-popup
+            show="{{ selection_sort }}"
+            position="bottom"
+            custom-style="height: 30%;"
+            bind:close="onClose">
+        <van-picker columns="{{ columns }}"
+                    bind:change="onChange"
+                    show-toolbar
+        />
+    </van-popup>
+</view>
+
+<view class="footer">
+    <van-divider borderColor="#1989fa"/>
+    <van-button round type="default" custom-style="width:40%;margin:10px" bind:click="selection">添加分类</van-button>
+    <van-button round type="info" custom-style="width:40%;margin:10px">保存</van-button>
+</view>

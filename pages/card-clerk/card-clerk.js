@@ -2,6 +2,10 @@ Page({
     data: {},
     // t -> user; o -> scene(场景); e -> data
     onLoad: function(data) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, data);
         var user = getApp().getUser();
         this.setData({

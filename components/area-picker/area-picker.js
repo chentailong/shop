@@ -1,47 +1,47 @@
 var area_picker = {
     page: null,
     data: null,
-    old_value: [ 0, 0, 0 ],
-    result: [ null, null, null ],
-    init: function(a) {
-        var l = this;
-        l.page = a.page, l.data = a.data, l.page.showAreaPicker = function() {
-            l.page.setData({
+    old_value: [0, 0, 0],
+    result: [null, null, null],
+    init: function (res) {
+        var that = this;
+        that.page = res.page, that.data = res.data, that.page.showAreaPicker = function () {
+            that.page.setData({
                 area_picker_show: !0
             });
-        }, l.page.hideAreaPicker = function() {
-            l.page.setData({
+        }, that.page.hideAreaPicker = function () {
+            that.page.setData({
                 area_picker_show: !1
             });
         };
-        var r = l.data[0].list || [], s = [];
-        return 0 < r.length && (s = r[0].list || []), l.page.setData({
-            area_picker_province_list: l.data,
-            area_picker_city_list: r,
-            area_picker_district_list: s
-        }), l.result[0] = l.data[0] || null, l.data[0].list && (l.result[1] = l.data[0].list[0], 
-        l.data[0].list[0].list && (l.result[2] = l.data[0].list[0].list[0])), l.page.areaPickerChange = function(a) {
-            var e = a.detail.value[0], t = a.detail.value[1], i = a.detail.value[2];
-            a.detail.value[0] != l.old_value[0] && (i = t = 0, r = l.data[e].list, s = r[0].list, 
-            l.page.setData({
-                area_picker_city_list: [],
-                area_picker_district_list: []
-            }), setTimeout(function() {
-                l.page.setData({
-                    area_picker_city_list: r,
-                    area_picker_district_list: s
+        var list = that.data[0].list || [], district_list = [];
+        return 0 < list.length && (district_list = list[0].list || []), that.page.setData({
+            area_picker_province_list: that.data,
+            area_picker_city_list: list,
+            area_picker_district_list: district_list
+        }), that.result[0] = that.data[0] || null, that.data[0].list && (that.result[1] = that.data[0].list[0],
+        that.data[0].list[0].list && (that.result[2] = that.data[0].list[0].list[0])), that.page.areaPickerChange = function (res) {
+            var value0 = res.detail.value[0], value1 = res.detail.value[1], value2 = res.detail.value[2];
+            res.detail.value[0] != that.old_value[0] && (value2 = value1 = 0, list = that.data[value0].list, district_list = list[0].list,
+                that.page.setData({
+                    area_picker_city_list: [],
+                    area_picker_district_list: []
+                }), setTimeout(function () {
+                that.page.setData({
+                    area_picker_city_list: list,
+                    area_picker_district_list: district_list
                 });
-            }, 0)), a.detail.value[1] != l.old_value[1] && (i = 0, s = l.data[e].list[t].list, 
-            l.page.setData({
-                area_picker_district_list: []
-            }), setTimeout(function() {
-                l.page.setData({
-                    area_picker_district_list: s
+            }, 0)), res.detail.value[1] != that.old_value[1] && (value2 = 0, district_list = that.data[value0].list[value1].list,
+                that.page.setData({
+                    area_picker_district_list: []
+                }), setTimeout(function () {
+                that.page.setData({
+                    area_picker_district_list: district_list
                 });
-            }, 0)), a.detail.value[2], l.old_value[2], l.old_value = [ e, t, i ], l.result[0] = l.data[e], 
-            l.result[1] = l.data[e].list[t], l.result[2] = l.data[e].list[t].list[i];
-        }, l.page.areaPickerConfirm = function() {
-            l.page.hideAreaPicker(), l.page.onAreaPickerConfirm && l.page.onAreaPickerConfirm(l.result);
+            }, 0)), res.detail.value[2], that.old_value[2], that.old_value = [value0, value1, value2], that.result[0] = that.data[value0],
+                that.result[1] = that.data[value0].list[value1], that.result[2] = that.data[value0].list[value1].list[value2];
+        }, that.page.areaPickerConfirm = function () {
+            that.page.hideAreaPicker(), that.page.onAreaPickerConfirm && that.page.onAreaPickerConfirm(that.result);
         }, this;
     }
 };

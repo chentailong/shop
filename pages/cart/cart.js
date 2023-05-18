@@ -9,6 +9,10 @@ Page({
     },
     // t -> data(传输数据)
     onLoad: function (data) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, data);
     },
     onReady: function () {

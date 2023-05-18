@@ -1,4 +1,31 @@
 {
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-switch": "@vant/weapp/switch/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-tree-select": "@vant/weapp/tree-select/index"
+  },
   "pages": [
     "pages/index/index",
     "pages/cart/cart",
@@ -189,6 +216,28 @@
         "log/log",
         "share/share",
         "friend/friend"
+      ]
+    },
+    {
+      "root": "manage/",
+      "pages": [
+        "index/index/index",
+        "order/order",
+        "goods/index/index",
+        "goods/add/add",
+        "setting/setting",
+        "index/order-message/order-message",
+        "index/share/share",
+        "index/withdraw/withdraw",
+        "index/comment/comment",
+        "index/user_manage/user_manage",
+        "goods/edit_goodsClass/edit",
+        "address/address",
+        "address_edit/address_edit",
+        "goods/specification/index",
+        "goods/edit_size/index",
+        "goods/size_detail/index",
+        "tabBar/index"
       ]
     }
   ],

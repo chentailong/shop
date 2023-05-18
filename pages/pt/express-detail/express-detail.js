@@ -1,23 +1,27 @@
 Page({
     data: {},
-    onLoad: function(o) {
-        getApp().page.onLoad(this, o), this.loadData(o);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), this.loadData(options);
     },
-    loadData: function(o) {
-        var t = this;
+    loadData: function(event) {
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载"
         }), getApp().request({
             url: getApp().api.group.order.express_detail,
             data: {
-                order_id: o.id
+                order_id: event.id
             },
-            success: function(o) {
-                getApp().core.hideLoading(), 0 == o.code && t.setData({
-                    data: o.data
-                }), 1 == o.code && getApp().core.showModal({
+            success: function(res) {
+                getApp().core.hideLoading(), 0 === res.code && that.setData({
+                    data: res.data
+                }), 1 === res.code && getApp().core.showModal({
                     title: "提示",
-                    content: o.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(o) {
                         o.confirm && getApp().core.navigateBack();

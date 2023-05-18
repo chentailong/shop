@@ -2,28 +2,32 @@ var WxParse = require("./../../wxParse/wxParse.js");
 
 Page({
     data: {},
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var t = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         if ("undefined" == typeof my) {
-            var o = decodeURIComponent(e.scene);
-            if (void 0 !== o) {
-                var a = getApp().helper.scene_decode(o);
-                a.uid && a.gid && (e.id = a.gid);
+            var scene = decodeURIComponent(options.scene);
+            if (void 0 !== scene) {
+                var scene_decode = getApp().helper.scene_decode(scene);
+                scene_decode.uid && scene_decode.gid && (options.id = scene_decode.gid);
             }
         } else if (null !== getApp().query) {
-            var i = app.query;
-            getApp().query = null, e.id = i.gid;
+            var query = app.query;
+            getApp().query = null, options.id = query.gid;
         }
         getApp().request({
             url: getApp().api.default.topic,
             data: {
-                id: e.id
+                id: options.id
             },
-            success: function(e) {
-                0 == e.code ? (t.setData(e.data), WxParse.wxParse("content", "html", e.data.content, t)) : getApp().core.showModal({
+            success: function(res) {
+                0 === res.code ? (that.setData(res.data), WxParse.wxParse("content", "html", res.data.content, that)) : getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(e) {
                         e.confirm && getApp().core.redirectTo({
@@ -34,12 +38,12 @@ Page({
             }
         });
     },
-    wxParseTagATap: function(e) {
-        if (e.currentTarget.dataset.goods) {
-            var t = e.currentTarget.dataset.src || !1;
-            if (!t) return;
+    wxParseTagATap: function(url) {
+        if (url.currentTarget.dataset.goods) {
+            var src = url.currentTarget.dataset.src || !1;
+            if (!src) return;
             getApp().core.navigateTo({
-                url: t
+                url: src
             });
         }
     },
@@ -47,28 +51,28 @@ Page({
         this.setData({
             quick_icon: !this.data.quick_icon
         });
-        var e = getApp().core.createAnimation({
+        var animation = getApp().core.createAnimation({
             duration: 300,
             timingFunction: "ease-out"
         });
-        this.data.quick_icon ? e.opacity(0).step() : e.translateY(-55).opacity(1).step(), 
+        this.data.quick_icon ? animation.opacity(0).step() : animation.translateY(-55).opacity(1).step(),
         this.setData({
-            animationPlus: e.export()
+            animationPlus: animation.export()
         });
     },
     favoriteClick: function(e) {
-        var t = this, o = e.currentTarget.dataset.action;
+        var that = this, action = e.currentTarget.dataset.action;
         getApp().request({
             url: getApp().api.user.topic_favorite,
             data: {
-                topic_id: t.data.id,
-                action: o
+                topic_id: that.data.id,
+                action: action
             },
-            success: function(e) {
+            success: function(res) {
                 getApp().core.showToast({
-                    title: e.msg
-                }), 0 == e.code && t.setData({
-                    is_favorite: o
+                    title: res.msg
+                }), 0 === res.code && that.setData({
+                    is_favorite: action
                 });
             }
         });
@@ -78,10 +82,10 @@ Page({
     },
     onShareAppMessage: function() {
         getApp().page.onShareAppMessage(this);
-        var e = getApp().getUser(), t = this.data.id;
+        var user = getApp().getUser(), id = this.data.id;
         return {
             title: this.data.title,
-            path: "/pages/topic/topic?id=" + t + "&user_id=" + e.id
+            path: "/pages/topic/topic?id=" + id + "&user_id=" + user.id
         };
     },
     showShareModal: function() {
@@ -95,22 +99,22 @@ Page({
         });
     },
     getGoodsQrcode: function() {
-        var t = this;
-        if (t.setData({
+        var that = this;
+        if (that.setData({
             qrcode_active: "active",
             share_modal_active: ""
-        }), t.data.goods_qrcode) return !0;
+        }), that.data.goods_qrcode) return !0;
         getApp().request({
             url: getApp().api.default.topic_qrcode,
             data: {
-                goods_id: t.data.id
+                goods_id: that.data.id
             },
-            success: function(e) {
-                0 == e.code && t.setData({
-                    goods_qrcode: e.data.pic_url
-                }), 1 == e.code && (t.goodsQrcodeClose(), getApp().core.showModal({
+            success: function(res) {
+                0 === res.code && that.setData({
+                    goods_qrcode: res.data.pic_url
+                }), 1 === res.code && (that.goodsQrcodeClose(), getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(e) {
                         e.confirm;
@@ -120,9 +124,9 @@ Page({
         });
     },
     qrcodeClick: function(e) {
-        var t = e.currentTarget.dataset.src;
+        var src = e.currentTarget.dataset.src;
         getApp().core.previewImage({
-            urls: [ t ]
+            urls: [ src ]
         });
     },
     qrcodeClose: function() {
@@ -137,12 +141,12 @@ Page({
         });
     },
     saveQrcode: function() {
-        var t = this;
+        var that = this;
         getApp().core.saveImageToPhotosAlbum ? (getApp().core.showLoading({
             title: "正在保存图片",
             mask: !1
         }), getApp().core.downloadFile({
-            url: t.data.goods_qrcode,
+            url: that.data.goods_qrcode,
             success: function(e) {
                 getApp().core.showLoading({
                     title: "正在保存图片",
@@ -171,7 +175,7 @@ Page({
             fail: function(e) {
                 getApp().core.showModal({
                     title: "图片下载失败",
-                    content: e.errMsg + ";" + t.data.goods_qrcode,
+                    content: e.errMsg + ";" + that.data.goods_qrcode,
                     showCancel: !1
                 });
             },

@@ -1,0 +1,301 @@
+<include src="/manage/tabBar/index.wxml"></include>
+<view class="orderClass">
+    <van-tabs type="card" color="#1989fa" active="{{ active }}">
+        <van-tab title="普通订单">
+            <view class="search">
+                <van-search
+                        background="Gainsboro"
+                        value="{{ search_text }}"
+                        shape="round"
+                        use-action-slot
+                        placeholder="请输入搜索关键词">
+                    <view slot="action" bind:tap="screen" class="screen">汇总
+                        <van-icon name="arrow-down"/>
+                    </view>
+                </van-search>
+            </view>
+
+            <van-tabs active="{{ actives }}" color="#1989fa" title-active-color="#1989fa" bind:change="change_order"
+                      type="line">
+                <van-tab title="全部">
+                    <block wx:if="{{common_all_list === 0}}">
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                    <block wx:else>
+                        <view class="order">
+                            <view class="order_list" wx:for="{{common_all_list}}" wx:key="index">
+                                <view>
+                                    <text class="top_list_left">订单号: {{item.order_no}}</text>
+                                    <view class="top_list_right">
+                                        <van-tag type="primary" wx:if="{{item.state == 1}}">代发货</van-tag>
+                                        <van-tag type="danger" wx:elif="{{item.state == 4}}">代退款</van-tag>
+                                        <van-tag type="warning" wx:elif="{{item.state == 2}}">代收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 3}}">已收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 5}}">已完成</van-tag>
+                                        <van-tag type="primary" wx:elif="{{item.state == 0}}">代付款</van-tag>
+                                    </view>
+                                    <view class="user_message">
+                                        <text class="name">{{item.name}}</text>
+                                        <text class="name">{{item.phone}}</text>
+                                        <van-icon name="phone-o" size="13px"/>
+                                        <view class="phone" bindtap="cell_up" data-phone="{{item.phone}}">联系收货人
+                                        </view>
+                                    </view>
+                                    <view class="detailed_message">
+                                        <image class="img" src="{{item.goods_list[0].goods_pic}}"></image>
+                                        <view class="order_name">
+                                            <view class="order_message_name">{{item.goods_list[0].goods_name}}</view>
+                                            <view class="order_message">{{item.goods_list[0].attr_list[0].attr_group_name}}:{{item.goods_list[0].attr_list[0].attr_name}}</view>
+                                            <view class="order_message">
+                                                <text>×{{item.goods_list[0].num}}</text>
+                                                <view class="price">￥{{item.goods_list[0].price}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        合计 <text style="color:block">￥{{item.pay_price}}</text>(含运费￥{{item.freight}})
+                                    </view>
+                                    <view class="all_btn">
+                                        <van-button round type="default" size="mini">备注</van-button>
+                                        <van-button round type="default" size="mini">取消订单</van-button>
+                                        <van-button round type="default" size="mini">修改地址</van-button>
+                                        <van-button round plain type="info" size="mini">发货</van-button>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </van-tab>
+                <van-tab title="待付款">
+                    <block wx:if="{{common_obligation_list.length !== 0}}">
+                        <view class="order">
+                            <view class="order_list" wx:for="{{common_obligation_list}}" wx:key="index">
+                                <view>
+                                    <text class="top_list_left">订单号: {{item.order_no}}</text>
+                                    <view class="top_list_right">
+                                        <van-tag type="primary" wx:if="{{item.state == 1}}">代发货</van-tag>
+                                        <van-tag type="danger" wx:elif="{{item.state == 4}}">代退款</van-tag>
+                                        <van-tag type="warning" wx:elif="{{item.state == 2}}">代收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 3}}">已收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 5}}">已完成</van-tag>
+                                        <van-tag type="primary" wx:elif="{{item.state == 0}}">代付款</van-tag>
+                                    </view>
+                                    <view class="user_message">
+                                        <text class="name">{{item.name}}</text>
+                                        <text class="name">{{item.phone}}</text>
+                                        <van-icon name="phone-o" size="13px"/>
+                                        <view class="phone" bindtap="cell_up" data-phone="{{item.phone}}">联系收货人
+                                        </view>
+                                    </view>
+                                    <view class="detailed_message">
+                                        <image class="img" src="{{item.goods_list[0].goods_pic}}"></image>
+                                        <view class="order_name">
+                                            <view class="order_message_name">{{item.goods_list[0].goods_name}}</view>
+                                            <view class="order_message">{{item.goods_list[0].attr_list[0].attr_group_name}}:{{item.goods_list[0].attr_list[0].attr_name}}</view>
+                                            <view class="order_message">
+                                                <text>×{{item.goods_list[0].num}}</text>
+                                                <view class="price">￥{{item.goods_list[0].price}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        合计 <text style="color:block">￥{{item.pay_price}}</text>(含运费￥{{item.freight}})
+                                    </view>
+                                    <view class="all_btn">
+                                        <van-button round type="default" size="mini">备注</van-button>
+                                        <van-button round type="default" size="mini">取消订单</van-button>
+                                        <van-button round type="default" size="mini">修改地址</van-button>
+                                        <van-button round plain type="info" size="mini">发货</van-button>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                </van-tab>
+                <van-tab title="代发货">
+                    <block wx:if="{{common_drop_shipping_list.length !== 0}}">
+                        <view class="order">
+                            <view class="order_list" wx:for="{{common_drop_shipping_list}}" wx:key="index">
+                                <view>
+                                    <text class="top_list_left">订单号: {{item.order_no}}</text>
+                                    <view class="top_list_right">
+                                        <van-tag type="primary" wx:if="{{item.state == 1}}">代发货</van-tag>
+                                        <van-tag type="danger" wx:elif="{{item.state == 4}}">代退款</van-tag>
+                                        <van-tag type="warning" wx:elif="{{item.state == 2}}">代收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 3}}">已收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 5}}">已完成</van-tag>
+                                        <van-tag type="primary" wx:elif="{{item.state == 0}}">代付款</van-tag>
+                                    </view>
+                                    <view class="user_message">
+                                        <text class="name">{{item.name}}</text>
+                                        <text class="name">{{item.phone}}</text>
+                                        <van-icon name="phone-o" size="13px"/>
+                                        <view class="phone" bindtap="cell_up" data-phone="{{item.phone}}">联系收货人
+                                        </view>
+                                    </view>
+                                    <view class="detailed_message">
+                                        <image class="img" src="{{item.goods_list[0].goods_pic}}"></image>
+                                        <view class="order_name">
+                                            <view class="order_message_name">{{item.goods_list[0].goods_name}}</view>
+                                            <view class="order_message">{{item.goods_list[0].attr_list[0].attr_group_name}}:{{item.goods_list[0].attr_list[0].attr_name}}</view>
+                                            <view class="order_message">
+                                                <text>×{{item.goods_list[0].num}}</text>
+                                                <view class="price">￥{{item.goods_list[0].price}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        合计 <text style="color:block">￥{{item.pay_price}}</text>(含运费￥{{item.freight}})
+                                    </view>
+                                    <view class="all_btn">
+                                        <van-button round type="default" size="mini">备注</van-button>
+                                        <van-button round type="default" size="mini">取消订单</van-button>
+                                        <van-button round type="default" size="mini">修改地址</van-button>
+                                        <van-button round plain type="info" size="mini">发货</van-button>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                </van-tab>
+
+                <van-tab title="代收货">
+                    <block wx:if="{{common_wait_receiving.length !== 0}}">
+                        <view class="order">
+                            <view class="order_list" wx:for="{{common_wait_receiving}}" wx:key="index">
+                                <view>
+                                    <text class="top_list_left">订单号: {{item.order_no}}</text>
+                                    <view class="top_list_right">
+                                        <van-tag type="primary" wx:if="{{item.state == 1}}">代发货</van-tag>
+                                        <van-tag type="danger" wx:elif="{{item.state == 4}}">代退款</van-tag>
+                                        <van-tag type="warning" wx:elif="{{item.state == 2}}">代收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 3}}">已收货</van-tag>
+                                        <van-tag type="success" wx:elif="{{item.state == 5}}">已完成</van-tag>
+                                        <van-tag type="primary" wx:elif="{{item.state == 0}}">代付款</van-tag>
+                                    </view>w
+                                    <view class="user_message">
+                                        <text class="name">{{item.name}}</text>
+                                        <text class="name">{{item.phone}}</text>
+                                        <van-icon name="phone-o" size="13px"/>
+                                        <view class="phone" bindtap="cell_up" data-phone="{{item.phone}}">联系收货人
+                                        </view>
+                                    </view>
+                                    <view class="detailed_message">
+                                        <image class="img" src="{{item.goods_list[0].goods_pic}}"></image>
+                                        <view class="order_name">
+                                            <view class="order_message_name">{{item.goods_list[0].goods_name}}</view>
+                                            <view class="order_message">{{item.goods_list[0].attr_list[0].attr_group_name}}:{{item.goods_list[0].attr_list[0].attr_name}}</view>
+                                            <view class="order_message">
+                                                <text>×{{item.goods_list[0].num}}</text>
+                                                <view class="price">￥{{item.goods_list[0].price}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <view class="total">
+                                        合计 <text style="color:block">￥{{item.pay_price}}</text>(含运费￥{{item.freight}})
+                                    </view>
+                                    <view class="all_btn">
+                                        <van-button round type="default" size="mini">备注</van-button>
+                                        <van-button round type="default" size="mini">取消订单</van-button>
+                                        <van-button round type="default" size="mini">修改地址</van-button>
+                                        <van-button round plain type="info" size="mini">发货</van-button>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                </van-tab>
+            </van-tabs>
+        </van-tab>
+
+
+        <van-tab title="维权订单">
+            <!--    搜索框   -->
+            <view class="search">
+                <van-search
+                        background="Gainsboro"
+                        value="{{ search_text }}"
+                        shape="round"
+                        use-action-slot
+                        placeholder="请输入搜索关键词">
+                    <view slot="action" bind:tap="screen" class="screen">汇总
+                        <van-icon name="arrow-down"/>
+                    </view>
+                </van-search>
+            </view>
+            <van-tabs active="{{ active }}" color="#1989fa" bind:change="change_order" type="line">
+                <van-tab title="全部">
+                    <block wx:if="{{protect_all_list.length !== 0}}">
+
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                </van-tab>
+                <van-tab title="待审核">
+                    <block wx:if="{{protect_audit_list.length !== 0}}">
+
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                </van-tab>
+                <van-tab title="待买家处理">
+                    <block wx:if="{{protect_buyer_list.length !== 0}}">
+
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+
+                </van-tab>
+                <van-tab title="待卖家处理">
+                    <block wx:if="{{protect_seller_list.length !== 0}}">
+                    </block>
+                    <block wx:else>
+                        <van-empty description="没有任何订单哦~"/>
+                    </block>
+                </van-tab>
+            </van-tabs>
+        </van-tab>
+    </van-tabs>
+    <!--  搜索框弹窗  -->
+    <van-dialog id="van-dialog"
+                title="筛选时间"
+                use-slot
+                show="{{search_show}}"
+                show-confirm-button="{{false}}"
+                confirm-button-open-type="getUserInfo"
+                bind:close="onClose"
+                close-on-click-overlay="{{true}}"
+                bind:confirm="onConfirm">
+        <view class="dialog_search">
+            <van-button round type="default" bind:click="search_all">汇总</van-button>
+            <van-button round type="default" bind:click="search_day">今日</van-button>
+            <van-button round type="default" bind:click="search_yesterday">昨日</van-button>
+            <van-button round type="default" bind:click="search_7day">7日</van-button>
+            <van-button round type="default" bind:click="search_custom">自定义</van-button>
+        </view>
+    </van-dialog>
+    <van-calendar
+            show="{{ date_show }}"
+            type="range"
+            show-confirm="{{ false }}"
+            bind:close="onClose"
+            bind:confirm="calendar_confirm"/>
+    <van-dialog
+            show-cancel-button
+            title="{{phone}}"
+            show="{{phone_show}}"
+            confirm-button-text="拨打"
+            bind:confirm="phone_dial"/>
+</view>

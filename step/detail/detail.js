@@ -7,55 +7,59 @@ Page({
         over: !1
     },
     tab: function(t) {
-        var e = this, s = t.target.dataset.num;
+        var that = this, num = t.target.dataset.num;
         getApp().core.showLoading({
             title: "数据加载中...",
             mask: !0
         }), getApp().request({
             url: getApp().api.step.log,
             data: {
-                status: s
+                status: num
             },
             success: function(t) {
                 getApp().core.hideLoading();
-                var a = t.data.log;
-                e.setData({
+                var list = t.data.log;
+                that.setData({
                     number: t.data.user.step_currency,
-                    list: a,
-                    _num: s,
+                    list: list,
+                    _num: num,
                     page: 2
                 });
             }
         });
     },
     onReachBottom: function() {
-        var e = this, s = e.data.over;
-        if (!s) {
+        var that = this, over = that.data.over;
+        if (!over) {
             this.data.id;
-            var p = this.data.list, t = this.data._num, o = this.data.page;
+            var list = this.data.list, num = this.data._num, page = this.data.page;
             this.setData({
                 loading: !0
             }), getApp().request({
                 url: getApp().api.step.log,
                 data: {
-                    status: t,
-                    page: o
+                    status: num,
+                    page: page
                 },
-                success: function(t) {
-                    for (var a = 0; a < t.data.log.length; a++) p.push(t.data.log[a]);
-                    t.data.log.length < 6 && (s = !0), e.setData({
-                        list: p,
-                        page: o + 1,
+                success: function(res) {
+                    for (var i = 0; i < res.data.log.length; i++) list.push(res.data.log[i]);
+                    res.data.log.length < 6 && (over = !0), that.setData({
+                        list: list,
+                        page: page + 1,
                         loading: !1,
-                        over: s
+                        over: over
                     });
                 }
             });
         }
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
-        var e = this;
+        var that = this;
         getApp().core.showLoading({
             title: "数据加载中...",
             mask: !0
@@ -68,7 +72,7 @@ Page({
             success: function(t) {
                 getApp().core.hideLoading();
                 var a = t.data.log;
-                e.setData({
+                that.setData({
                     number: t.data.user.step_currency,
                     list: a
                 });

@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view style="position:relative;">
             <image mode="widthFix" src="{{__wxapp_img.scratch.index.scratch_bg.url}}" style="position:absolute;text-align:center;width:100%;"></image>
@@ -83,6 +83,6 @@
             </view>
         </view>
     </view>
-    <include src="/components/save_qrcode/save_qrcode"></include>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/save_qrcode/save_qrcode.wxml"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

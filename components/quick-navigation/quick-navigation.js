@@ -88,21 +88,21 @@ module.exports = {
         });
         getApp().getConfig(function(t) {
             var e = a.data.store, o = -55;
-            a.data.quick_icon ? (e.option && e.option.wxapp && e.option.wxapp.pic_url && (r.translateY(o).opacity(1).step(), 
-            o -= 55), e.show_customer_service && 1 == e.show_customer_service && e.service && (c.translateY(o).opacity(1).step(), 
-            o -= 55), e.option && e.option.web_service && (p.translateY(o).opacity(1).step(), 
-            o -= 55), 1 == e.dial && e.dial_pic && (n.translateY(o).opacity(1).step(), o -= 55), 
-            e.option && 1 == e.option.quick_map.status && (s.translateY(o).opacity(1).step(), 
-            o -= 55), i.translateY(o).opacity(1).step()) : (i.opacity(0).step(), p.opacity(0).step(), 
-            n.opacity(0).step(), c.opacity(0).step(), r.opacity(0).step(), s.opacity(0).step()), 
-            a.setData({
-                animationPlus: i.export(),
-                animationcollect: p.export(),
-                animationPic: n.export(),
-                animationTranspond: c.export(),
-                animationInput: r.export(),
-                animationMapPlus: s.export()
-            });
+            a.data.quick_icon ? (e.option && e.option.wxapp && e.option.wxapp.pic_url && (r.translateY(o).opacity(1).step(),
+                o -= 55), e.show_customer_service && 1 == e.show_customer_service && e.service && (c.translateY(o).opacity(1).step(),
+                o -= 55), e.option && e.option.web_service && (p.translateY(o).opacity(1).step(),
+                o -= 55), 1 == e.dial && e.dial_pic && (n.translateY(o).opacity(1).step(), o -= 55),
+            e.option && 1 == e.option.quick_map.status && (s.translateY(o).opacity(1).step(),
+                o -= 55), i.translateY(o).opacity(1).step()) : (i.opacity(0).step(), p.opacity(0).step(),
+                n.opacity(0).step(), c.opacity(0).step(), r.opacity(0).step(), s.opacity(0).step()),
+                a.setData({
+                    animationPlus: i.export(),
+                    animationcollect: p.export(),
+                    animationPic: n.export(),
+                    animationTranspond: c.export(),
+                    animationInput: r.export(),
+                    animationMapPlus: s.export()
+                });
         });
     }
 };

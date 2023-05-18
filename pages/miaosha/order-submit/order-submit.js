@@ -17,6 +17,10 @@ Page({
         show_payment: !1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         var e = util.formatData(new Date());
         getApp().core.removeStorageSync(getApp().const.INPUT_DATA), this.setData({

@@ -10,38 +10,43 @@ Page({
         hide: 1,
         qrcode: ""
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
-        is_loading = is_no_more = !1, p = 2, e.setData({
-            options: t
-        }), e.loadOrderList(t.status || -1), getCurrentPages().length < 2 && e.setData({
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        is_loading = is_no_more = !1, p = 2, that.setData({
+            options: options
+        }), that.loadOrderList(options.status || -1), getCurrentPages().length < 2 && that.setData({
             show_index: !0
         });
     },
-    loadOrderList: function(t) {
-        null == t && (t = -1);
-        var e = this;
-        e.setData({
-            status: t
+    loadOrderList: function(status) {
+        null == status && (status = -1);
+        var that = this;
+        that.setData({
+            status: status
         }), getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         });
-        var a = {
-            status: e.data.status
+        var data = {
+            status: that.data.status
         };
-        e.data.options;
-        void 0 !== e.data.options.order_id && (a.order_id = e.data.options.order_id), getApp().request({
+        that.data.options;
+        void 0 !== that.data.options.order_id && (data.order_id = that.data.options.order_id), getApp().request({
             url: getApp().api.order.list,
-            data: a,
-            success: function(t) {
-                0 == t.code && (e.setData({
-                    order_list: t.data.list,
-                    pay_type_list: t.data.pay_type_list
+            data: data,
+            success: function(res) {
+                console.log(res)
+                0 === res.code && (that.setData({
+                    order_list: res.data.list,
+                    pay_type_list: res.data.pay_type_list
                 }), getApp().core.getStorageSync(getApp().const.ITEM) && getApp().core.removeStorageSync(getApp().const.ITEM));
-                e.setData({
-                    show_no_data_tip: 0 == e.data.order_list.length
+                that.setData({
+                    show_no_data_tip: 0 === that.data.order_list.length
                 });
             },
             complete: function() {
@@ -50,20 +55,20 @@ Page({
         });
     },
     onReachBottom: function() {
-        var a = this;
+        var that = this;
         is_loading || is_no_more || (is_loading = !0, getApp().request({
             url: getApp().api.order.list,
             data: {
-                status: a.data.status,
+                status: that.data.status,
                 page: p
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = a.data.order_list.concat(t.data.list);
-                    a.setData({
-                        order_list: e,
-                        pay_type_list: t.data.pay_type_list
-                    }), 0 == t.data.list.length && (is_no_more = !0);
+            success: function(res) {
+                if (0 === res.code) {
+                    var order_list = that.data.order_list.concat(res.data.list);
+                    that.setData({
+                        order_list: order_list,
+                        pay_type_list: res.data.pay_type_list
+                    }), 0 === res.data.list.length && (is_no_more = !0);
                 }
                 p++;
             },
@@ -73,11 +78,11 @@ Page({
         }));
     },
     orderPay_1: function(e) {
-        var a = this, t = a.data.pay_type_list;
-        1 == t.length ? (getApp().core.showLoading({
+        var that = this, pay_type_list = that.data.pay_type_list;
+        1 === pay_type_list.length ? (getApp().core.showLoading({
             title: "正在提交",
             mask: !0
-        }), 0 == t[0].payment && a.WechatPay(e), 3 == t[0].payment && a.BalancePay(e)) : getApp().core.showModal({
+        }), 0 === pay_type_list[0].payment && that.WechatPay(e), 3 === pay_type_list[0].payment && that.BalancePay(e)) : getApp().core.showModal({
             title: "提示",
             content: "选择支付方式",
             cancelText: "余额支付",
@@ -86,7 +91,7 @@ Page({
                 getApp().core.showLoading({
                     title: "正在提交",
                     mask: !0
-                }), t.confirm ? a.WechatPay(e) : t.cancel && a.BalancePay(e);
+                }), t.confirm ? that.WechatPay(e) : t.cancel && that.BalancePay(e);
             }
         });
     },
@@ -111,7 +116,7 @@ Page({
                     success: function(t) {},
                     fail: function(t) {},
                     complete: function(t) {
-                        "requestPayment:fail" != t.errMsg && "requestPayment:fail cancel" != t.errMsg ? getApp().core.redirectTo({
+                        "requestPayment:fail" !== t.errMsg && "requestPayment:fail cancel" !== t.errMsg ? getApp().core.redirectTo({
                             url: "/pages/order/order?status=1"
                         }) : getApp().core.showModal({
                             title: "提示",
@@ -154,7 +159,7 @@ Page({
         });
     },
     orderRevoke: function(e) {
-        var a = this;
+        var that = this;
         getApp().core.showModal({
             title: "提示",
             content: "是否取消该订单？",
@@ -178,7 +183,6 @@ Page({
                             },
                             fail(err) {
                                 console.log(err)
-                                console.log('失败')
                             }
                         });
                         getApp().core.hideLoading(), getApp().core.showModal({
@@ -186,7 +190,7 @@ Page({
                             content: t.msg,
                             showCancel: !1,
                             success: function(t) {
-                                t.confirm && a.loadOrderList(a.data.status);
+                                t.confirm && that.loadOrderList(that.data.status);
                             }
                         });
                     }
@@ -195,7 +199,7 @@ Page({
         });
     },
     orderConfirm: function(e) {
-        var a = this;
+        var that = this;
         getApp().core.showModal({
             title: "提示",
             content: "是否确认已收到货？",
@@ -213,32 +217,32 @@ Page({
                     success: function(t) {
                         getApp().core.hideLoading(), getApp().core.showToast({
                             title: t.msg
-                        }), 0 == t.code && a.loadOrderList(3);
+                        }), 0 == t.code && that.loadOrderList(3);
                     }
                 }));
             }
         });
     },
     orderQrcode: function(t) {
-        var e = this, a = e.data.order_list, o = t.target.dataset.index;
+        var that = this, order_list = that.data.order_list, index = t.target.dataset.index;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
-        }), e.data.order_list[o].offline_qrcode ? (e.setData({
+        }), that.data.order_list[index].offline_qrcode ? (that.setData({
             hide: 0,
-            qrcode: e.data.order_list[o].offline_qrcode
+            qrcode: that.data.order_list[index].offline_qrcode
         }), getApp().core.hideLoading()) : getApp().request({
             url: getApp().api.order.get_qrcode,
             data: {
-                order_no: a[o].order_no
+                order_no: order_list[index].order_no
             },
-            success: function(t) {
-                0 == t.code ? e.setData({
+            success: function(res) {
+                0 === res.code ? that.setData({
                     hide: 0,
-                    qrcode: t.data.url
+                    qrcode: res.data.url
                 }) : getApp().core.showModal({
                     title: "提示",
-                    content: t.msg
+                    content: res.msg
                 });
             },
             complete: function() {

@@ -6,6 +6,10 @@ Page({
         }
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
         var t = this, o = "";
         if ("undefined" == typeof my) o = e.scene; else if (null !== getApp().query) {

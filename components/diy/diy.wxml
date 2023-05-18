@@ -204,6 +204,7 @@
             <view class="flex-grow-0 diy-goods-one diy-goods-one-{{param.list_style}} flex-row diy-goods-border diy-goods-border-{{param.style}}"
                   wx:for="{{param.list[param.cat_index].goods_list}}" wx:for-index="key" wx:for-item="value"
                   wx:key="{{value.id}}">
+                <!--       图片显示样式         -->
                 <view class="flex-grow-0 diy-goods-img-{{param.list_style}}"
                       style="position:relative;{{param.list_style==0&&param.per==1?'height: 466rpx;':''}}">
                     <form bindsubmit="_formIdSubmit" data-type="navigate" data-url="{{value.page_url}}"
@@ -226,11 +227,16 @@
                         </view>
                     </view>
                 </view>
+                <!--       加入购物车样式         -->
                 <view class="flex-row flex-grow-0 diy-goods-content diy-goods-content-{{param.list_style}}">
                     <block wx:if="{{param.list_style==1&&(type=='miaosha'||type=='bargain'||type=='lottery')&&param.time==1}}">
+                        <!--  文字显示  -->
                         <navigator class="w-100" hoverClass="none" style="text-align:left" url="{{value.page_url}}">
                             <view class="pt-24 text-more {{param.style>=2&&param.list_style!=1?'text-center':''}}"
                                   style="width:100%;height:auto;" wx:if="{{param.name==1}}">{{value.name}}
+                            </view>
+                            <view class="member_money"><image class="img" src="https://gpyx.gxmuzi.com/web/statics/wxapp/images/member_price.png"></image>
+                              <text>  ￥{{value.attr[0].member1}}</text>
                             </view>
                         </navigator>
                         <view class="flex-row flex-y-center w-100 miaosha-time-{{param.list_style}}">
@@ -244,10 +250,14 @@
                             </view>
                         </view>
                     </block>
+                    <!--                    -->
                     <navigator class="w-100" hoverClass="none" style="text-align:left" url="{{value.page_url}}" wx:else>
                         <view class="pt-24 {{param.list_style==0?'text-more':'text-more-2'}} {{param.style>=2&&param.list_style!=1?'text-center':''}}"
-                              style="width:{{param.price==0&&param.buy==1&&param.list_style==0?'calc(100% - 50rpx)':'100%'}};height:{{param.list_style==0?'auto':'3.6em'}};"
+                              style="width:{{param.price==0&&param.buy==1&&param.list_style==0?'calc(100% - 50rpx)':'100%'}};height:{{param.list_style==0?'auto':'2em'}};"
                               wx:if="{{param.name==1}}">{{value.name}}
+                        </view>
+                        <view class="member_money"><image class="img" src="https://gpyx.gxmuzi.com/web/statics/wxapp/images/member_price.png"></image>
+                            <text>  ￥{{value.attr[0].member1}}</text>
                         </view>
                     </navigator>
                     <navigator class="flex-grow-1" hoverClass="none" url="{{value.page_url}}"

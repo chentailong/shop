@@ -1,45 +1,45 @@
 module.exports = {
     currentPage: null,
     init: function(e) {
-        var t = this;
-        void 0 === (t.currentPage = e).onGoodsImageClick && (e.onGoodsImageClick = function(e) {
-            t.onGoodsImageClick(e);
+        var that = this;
+        void 0 === (that.currentPage = e).onGoodsImageClick && (e.onGoodsImageClick = function(e) {
+            that.onGoodsImageClick(e);
         }), void 0 === e.hide && (e.hide = function(e) {
-            t.hide(e);
+            that.hide(e);
         }), void 0 === e.play && (e.play = function(e) {
-            t.play(e);
+            that.play(e);
         }), void 0 === e.close && (e.close = function(e) {
-            t.close(e);
+            that.close(e);
         });
     },
     onGoodsImageClick: function(e) {
-        var t = this.currentPage, i = [], o = e.currentTarget.dataset.index;
-        for (var a in t.data.goods.pic_list) i.push(t.data.goods.pic_list[a]);
+        var currentPage = this.currentPage, urls = [], index = e.currentTarget.dataset.index;
+        for (var pic_index in currentPage.data.goods.pic_list) urls.push(currentPage.data.goods.pic_list[pic_index]);
         getApp().core.previewImage({
-            urls: i,
-            current: i[o]
+            urls: urls,
+            current: urls[index]
         });
     },
     hide: function(e) {
-        var t = this.currentPage;
-        0 == e.detail.current ? t.setData({
+        var currentPage = this.currentPage;
+        0 == e.detail.current ? currentPage.setData({
             img_hide: ""
-        }) : t.setData({
+        }) : currentPage.setData({
             img_hide: "hide"
         });
     },
     play: function(e) {
-        var t = this.currentPage, i = e.target.dataset.url;
-        t.setData({
-            url: i,
+        var currentPage = this.currentPage, url = e.target.dataset.url;
+        currentPage.setData({
+            url: url,
             hide: "",
             show: !0
         }), getApp().core.createVideoContext("video").play();
     },
     close: function(e) {
-        var t = this.currentPage;
+        var currentPage = this.currentPage;
         if ("video" == e.target.id) return !0;
-        t.setData({
+        currentPage.setData({
             hide: "hide",
             show: !1
         }), getApp().core.createVideoContext("video").pause();

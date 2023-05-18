@@ -3,6 +3,10 @@ Page({
     // e -> data（传输数据）; t -> that; a -> cardId(卡券id)
 
     onLoad: function(data) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, data);
         var that = this, cardId = data.user_card_id;
         cardId && (getApp().core.showLoading({

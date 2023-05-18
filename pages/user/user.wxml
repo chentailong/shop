@@ -183,6 +183,7 @@
                 </view>
 
                 <!--   自定义内容化主键-->
+
                 <view class="option-list" wx:if="{{style.menu==0&&wallet.is_menu==1}}">
                     <block wx:for="{{menus}}" wx:key="{{item.id}}">
                         <block wx:if="{{item.open_type=='navigator'}}">
@@ -298,6 +299,16 @@
                 </view>
                 <view class="options-list" style="background-color: #fff;" wx:if="{{style.menu==1&&wallet.is_menu==1}}">
                     <view class="flex-row" style="flex-wrap: wrap">
+
+                        <!--商城管理-->
+                        <view bindtap="store" class="option-item flex-grow-0 style">
+                            <view>
+                                <view class="flex-x-center">
+                                    <image class="option-icon" src="../../images/manger.png"></image>
+                                </view>
+                                <view class="text-more-2" style="text-align: center">商城管理</view>
+                            </view>
+                        </view>
                         <block wx:for="{{menus}}" wx:key="{{item.id}}">
                             <block wx:if="{{item.open_type=='navigator'}}">
                                 <block wx:if="{{item.id=='fenxiao'}}">
@@ -364,6 +375,7 @@
                                     <view class="text-more-2" style="text-align: center">{{item.name}}</view>
                                 </view>
                             </button>
+
                             <!-- 清除缓存 -->
                             <view bindtap="clearCache" class="option-item flex-grow-0 style"
                                   wx:elif="{{item.open_type=='no_navigator'}}">

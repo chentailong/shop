@@ -23,7 +23,7 @@ Page({
                 num: num
             },
             success: function (t) {
-                console.log(t), 0 == t.code ? that.setData({
+                console.log(t), 0 === t.code ? that.setData({
                     img: t.data.pic_url
                 }) : getApp().core.showModal({
                     content: t.msg,
@@ -51,7 +51,7 @@ Page({
         getApp().core.authorize({
             scope: "scope.writePhotosAlbum",
             success: function (t) {
-                "authorize:ok" == t.errMsg && getApp().core.getImageInfo({
+                "authorize:ok" === t.errMsg && getApp().core.getImageInfo({
                     src: that.data.img,
                     success: function (t) {
                         getApp().core.saveImageToPhotosAlbum({
@@ -88,7 +88,7 @@ Page({
         var that = this;
         wx.openSetting({
             success: function (t) {
-                1 == t.authSetting["scope.writePhotosAlbum"] && that.setData({
+                1 === t.authSetting["scope.writePhotosAlbum"] && that.setData({
                     save: !0,
                     get: !1
                 });
@@ -110,13 +110,13 @@ Page({
             },
             success: function (t) {
                 var pic_list = t.data.pic_list;
-                0 == pic_list.length ? (getApp().core.showToast({
+                0 === pic_list.length ? (getApp().core.showToast({
                     title: "没有更多了",
                     icon: "none",
                     duration: 1e3
                 }), right = !1, that.setData({
                     right: right
-                })) : (1 == page && (left = !1), pic_list.length < 4 && (right = !1), that.setData({
+                })) : (1 === page && (left = !1), pic_list.length < 4 && (right = !1), that.setData({
                     page: page,
                     pic_list: pic_list,
                     left: left,
@@ -126,6 +126,10 @@ Page({
         });
     },
     onLoad: function (t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         var that = this, num = 0;
         t.todayStep && (num = t.todayStep), that.setData({

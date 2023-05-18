@@ -1,0 +1,28 @@
+<view class="content">
+    <view class="basic">
+        <van-button icon="plus" type="info" plain round bind:click="addSizeValue"
+                    custom-style="height:35px;margin-top:6px">
+            增加规格值
+        </van-button>
+    </view>
+    <view wx:for="{{sizeValueList}}" wx:key="index">
+        <view wx:if="{{item.show}}" class="size">
+            <van-cell-group>
+                <van-field
+                        value="{{ item.sizeValue }}"
+                        placeholder="请输入规格值"
+                        border="{{ false }}"
+                        data-id="{{item.id}}"
+                        bind:input="sizeValue">
+                    <van-icon slot="left-icon" name="close" color="red" bindtap="deleteSizeValue"
+                              custom-style="font-size:20px;margin-right:10px" data-id="{{item.id}}"/>
+                </van-field>
+            </van-cell-group>
+        </view>
+    </view>
+</view>
+
+<view class="footer">
+    <van-button round size="large" type="info" custom-style="width:94%;height:40px;margin-top:20px" bind:click="save">保存
+    </van-button>
+</view>

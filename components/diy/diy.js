@@ -1,6 +1,7 @@
 module.exports = {
     currentPage: null,
     gSpecificationsModel: null,
+    member_price : wx.getStorageSync("WXAPP_IMG"),
     init: function (state) {
         this.currentPage = state;
         var that = this;
@@ -66,7 +67,7 @@ module.exports = {
                 id: index
             },
             success: function (res) {
-                getApp().core.hideLoading(), 0 == res.code ? currentPage.setData({
+                getApp().core.hideLoading(), 0 === res.code ? currentPage.setData({
                     get_coupon_list: res.data.list,
                     coupon_list: res.data.coupon_list
                 }) : (getApp().core.showToast({
@@ -95,7 +96,7 @@ module.exports = {
             templates = res.currentTarget.dataset.template,
             cat = res.currentTarget.dataset.cat, goods = res.currentTarget.dataset.goods,
             goods_list = template[templates].param.list[cat].goods_list[goods];
-        "goods" == template[templates].type ? (goods_list.id = goods_list.goods_id, currentPage.setData({
+        "goods" === template[templates].type ? (goods_list.id = goods_list.goods_id, currentPage.setData({
             goods: goods_list,
             show_attr_picker: !0,
             attr_group_list: goods_list.attr_group_list,
@@ -123,25 +124,25 @@ module.exports = {
         });
     },
     template_time: null,
-    setTime: function (res) {
-        var currentPage = this.currentPage, time_all = currentPage.data.time_all;
-        this["template_time_" + currentPage.data.options.page_id] && clearInterval(this["template_time_" + currentPage.data.options.page_id]),
-            this["template_time_" + currentPage.data.options.page_id] = setInterval(function () {
-                for (var time in time_all) if ("time" == time_all[time].type && (0 < time_all[time].param.start_time ? (time_all[time].param.start_time--,
-                    time_all[time].param.end_time--, time_all[time].param.time_list = currentPage.setTimeList(time_all[time].param.start_time)) : 0 < time_all[time].param.end_time && (time_all[time].param.end_time--,
-                    time_all[time].param.time_list = currentPage.setTimeList(time_all[time].param.end_time))), "miaosha" == time_all[time].type || "bargain" == time_all[time].type || "lottery" == time_all[time].type) {
-                    var cat_index = time_all[time].param.cat_index;
-                    for (var goods_list in time_all[time].param.list[cat_index].goods_list) 0 < time_all[time].param.list[cat_index].goods_list[goods_list].time ? (time_all[time].param.list[cat_index].goods_list[goods_list].time--,
-                        time_all[time].param.list[cat_index].goods_list[goods_list].time_list = currentPage.setTimeList(time_all[time].param.list[cat_index].goods_list[goods_list].time),
-                    0 < time_all[time].param.list[cat_index].goods_list[goods_list].time_end && (time_all[time].param.list[cat_index].goods_list[goods_list].time_end--,
-                    1 == time_all[time].param.list[cat_index].goods_list[goods_list].time && (time_all[time].param.list[cat_index].goods_list[goods_list].is_start = 1,
-                        time_all[time].param.list[cat_index].goods_list[goods_list].time = time_all[time].param.list[cat_index].goods_list[goods_list].time_end,
-                        time_all[time].param.list[cat_index].goods_list[goods_list].time_end = 0, time_all[time].param.list[cat_index].goods_list[goods_list].time_content = 1 == time_all[t].param.list_style ? "仅剩" : "距结束仅剩"))) : (time_all[time].param.list[cat_index].goods_list[goods_list].is_start = 1,
-                        time_all[time].param.list[cat_index].goods_list[goods_list].time = 0, time_all[time].param.list[cat_index].goods_list[goods_list].time_content = "活动已结束",
-                        time_all[time].param.list[cat_index].goods_list[goods_list].time_list = {});
+    setTime: function(t) {
+        var o = this.currentPage, i = o.data.time_all;
+        this["template_time_" + o.data.options.page_id] && clearInterval(this["template_time_" + o.data.options.page_id]),
+            this["template_time_" + o.data.options.page_id] = setInterval(function() {
+                for (var t in i) if ("time" === i[t].type && (0 < i[t].param.start_time ? (i[t].param.start_time--,
+                    i[t].param.end_time--, i[t].param.time_list = o.setTimeList(i[t].param.start_time)) : 0 < i[t].param.end_time && (i[t].param.end_time--,
+                    i[t].param.time_list = o.setTimeList(i[t].param.end_time))), "miaosha" == i[t].type || "bargain" == i[t].type || "lottery" == i[t].type) {
+                    var e = i[t].param.cat_index;
+                    for (var a in i[t].param.list[e].goods_list) 0 < i[t].param.list[e].goods_list[a].time ? (i[t].param.list[e].goods_list[a].time--,
+                        i[t].param.list[e].goods_list[a].time_list = o.setTimeList(i[t].param.list[e].goods_list[a].time),
+                    0 < i[t].param.list[e].goods_list[a].time_end && (i[t].param.list[e].goods_list[a].time_end--,
+                    1 == i[t].param.list[e].goods_list[a].time && (i[t].param.list[e].goods_list[a].is_start = 1,
+                        i[t].param.list[e].goods_list[a].time = i[t].param.list[e].goods_list[a].time_end,
+                        i[t].param.list[e].goods_list[a].time_end = 0, i[t].param.list[e].goods_list[a].time_content = 1 == i[t].param.list_style ? "仅剩" : "距结束仅剩"))) : (i[t].param.list[e].goods_list[a].is_start = 1,
+                        i[t].param.list[e].goods_list[a].time = 0, i[t].param.list[e].goods_list[a].time_content = "活动已结束",
+                        i[t].param.list[e].goods_list[a].time_list = {});
                 }
-                currentPage.setData({
-                    time_all: time_all
+                o.setData({
+                    time_all: i
                 });
             }, 1e3);
     },

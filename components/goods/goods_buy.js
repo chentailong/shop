@@ -1,54 +1,54 @@
 module.exports = {
     currentPage: null,
-    init: function(t) {
-        var a = this;
-        void 0 === (a.currentPage = t).favoriteAdd && (t.favoriteAdd = function(t) {
-            a.favoriteAdd(t);
-        }), void 0 === t.favoriteRemove && (t.favoriteRemove = function(t) {
-            a.favoriteRemove(t);
-        }), void 0 === t.kfMessage && (t.kfMessage = function(t) {
-            a.kfMessage(t);
-        }), void 0 === t.callPhone && (t.callPhone = function(t) {
-            a.callPhone(t);
-        }), void 0 === t.addCart && (t.addCart = function(t) {
-            a.addCart(t);
-        }), void 0 === t.buyNow && (t.buyNow = function(t) {
-            a.buyNow(t);
-        }), void 0 === t.goHome && (t.goHome = function(t) {
-            a.goHome(t);
+    init: function(init) {
+        var that = this;
+        void 0 === (that.currentPage = init).favoriteAdd && (init.favoriteAdd = function(t) {
+            that.favoriteAdd(t);
+        }), void 0 === init.favoriteRemove && (init.favoriteRemove = function(t) {
+            that.favoriteRemove(t);
+        }), void 0 === init.kfMessage && (init.kfMessage = function(t) {
+            that.kfMessage(t);
+        }), void 0 === init.callPhone && (init.callPhone = function(t) {
+            that.callPhone(t);
+        }), void 0 === init.addCart && (init.addCart = function(t) {
+            that.addCart(t);
+        }), void 0 === init.buyNow && (init.buyNow = function(t) {
+            that.buyNow(t);
+        }), void 0 === init.goHome && (init.goHome = function(t) {
+            that.goHome(t);
         });
     },
     favoriteAdd: function() {
-        var e = this.currentPage;
+        var currentPage = this.currentPage;
         getApp().request({
             url: getApp().api.user.favorite_add,
             method: "post",
             data: {
-                goods_id: e.data.goods.id
+                goods_id: currentPage.data.goods.id
             },
             success: function(t) {
                 if (0 == t.code) {
-                    var a = e.data.goods;
-                    a.is_favorite = 1, e.setData({
-                        goods: a
+                    var goods = currentPage.data.goods;
+                    goods.is_favorite = 1, currentPage.setData({
+                        goods: goods
                     });
                 }
             }
         });
     },
     favoriteRemove: function() {
-        var e = this.currentPage;
+        var currentPage = this.currentPage;
         getApp().request({
             url: getApp().api.user.favorite_remove,
             method: "post",
             data: {
-                goods_id: e.data.goods.id
+                goods_id: currentPage.data.goods.id
             },
             success: function(t) {
                 if (0 == t.code) {
-                    var a = e.data.goods;
-                    a.is_favorite = 0, e.setData({
-                        goods: a
+                    var goods = currentPage.data.goods;
+                    goods.is_favorite = 0, currentPage.setData({
+                        goods: goods
                     });
                 }
             }
@@ -71,37 +71,38 @@ module.exports = {
         this.currentPage.data.btn && this.submit("BUY_NOW");
     },
     submit: function(t) {
-        var a = this.currentPage;
-        if (!a.data.show_attr_picker) return a.setData({
+        var currentPage = this.currentPage;
+        if (!currentPage.data.show_attr_picker) return currentPage.setData({
             show_attr_picker: !0
         }), !0;
-        if (a.data.miaosha_data && 0 < a.data.miaosha_data.rest_num && a.data.form.number > a.data.miaosha_data.rest_num) return getApp().core.showToast({
+        if (currentPage.data.miaosha_data && 0 < currentPage.data.miaosha_data.rest_num
+            && currentPage.data.form.number > currentPage.data.miaosha_data.rest_num) return getApp().core.showToast({
             title: "商品库存不足，请选择其它规格或数量",
             image: "/images/icon-warning.png"
         }), !0;
-        if (a.data.form.number > a.data.goods.num) return getApp().core.showToast({
+        if (currentPage.data.form.number > currentPage.data.goods.num) return getApp().core.showToast({
             title: "商品库存不足，请选择其它规格或数量",
             image: "/images/icon-warning.png"
         }), !0;
-        var e = a.data.attr_group_list, o = [];
-        for (var r in e) {
-            var i = !1;
-            for (var s in e[r].attr_list) if (e[r].attr_list[s].checked) {
-                i = {
-                    attr_id: e[r].attr_list[s].attr_id,
-                    attr_name: e[r].attr_list[s].attr_name
+        var attr_group_list = currentPage.data.attr_group_list, list = [];
+        for (var group_index in attr_group_list) {
+            var attrs = !1;
+            for (var attr_list in attr_group_list[group_index].attr_list) if (attr_group_list[group_index].attr_list[attr_list].checked) {
+                attrs = {
+                    attr_id: attr_group_list[group_index].attr_list[attr_list].attr_id,
+                    attr_name: attr_group_list[group_index].attr_list[attr_list].attr_name
                 };
                 break;
             }
-            if (!i) return getApp().core.showToast({
-                title: "请选择" + e[r].attr_group_name,
+            if (!attrs) return getApp().core.showToast({
+                title: "请选择" + attr_group_list[group_index].attr_group_name,
                 image: "/images/icon-warning.png"
             }), !0;
-            o.push({
-                attr_group_id: e[r].attr_group_id,
-                attr_group_name: e[r].attr_group_name,
-                attr_id: i.attr_id,
-                attr_name: i.attr_name
+            list.push({
+                attr_group_id: attr_group_list[group_index].attr_group_id,
+                attr_group_name: attr_group_list[group_index].attr_group_name,
+                attr_id: attrs.attr_id,
+                attr_name: attrs.attr_name
             });
         }
         if ("ADD_CART" == t && (getApp().core.showLoading({
@@ -111,44 +112,44 @@ module.exports = {
             url: getApp().api.cart.add_cart,
             method: "POST",
             data: {
-                goods_id: a.data.goods.id,
-                attr: JSON.stringify(o),
-                num: a.data.form.number
+                goods_id: currentPage.data.goods.id,
+                attr: JSON.stringify(list),
+                num: currentPage.data.form.number
             },
             success: function(t) {
                 getApp().core.hideLoading(), getApp().core.showToast({
                     title: t.msg,
                     duration: 1500
-                }), a.setData({
+                }), currentPage.setData({
                     show_attr_picker: !1
                 });
             }
         })), "BUY_NOW" == t) {
-            a.setData({
+            currentPage.setData({
                 show_attr_picker: !1
             });
-            var n = [];
-            n.push({
-                goods_id: a.data.id,
-                num: a.data.form.number,
-                attr: o
+            var goods_list = [];
+            goods_list.push({
+                goods_id: currentPage.data.id,
+                num: currentPage.data.form.number,
+                attr: list
             });
-            var d = a.data.goods, g = 0;
-            null != d.mch && (g = d.mch.id);
-            var u = [];
-            u.push({
-                mch_id: g,
-                goods_list: n
+            var goods = currentPage.data.goods, mch_id = 0;
+            null != goods.mch && (mch_id = goods.mch.id);
+            var pic = [];
+            pic.push({
+                mch_id: mch_id,
+                goods_list: goods_list
             }), getApp().core.redirectTo({
-                url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(u)
+                url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(pic)
             });
         }
     },
     goHome: function(t) {
-        var a = this.currentPage.data.pageType;
-        if ("PINTUAN" === a) var e = "/pages/pt/index/index"; else if ("BOOK" === a) e = "/pages/book/index/index"; else e = "/pages/index/index";
+        var pageType = this.currentPage.data.pageType;
+        if ("PINTUAN" === pageType) var url = "/pages/pt/index/index"; else if ("BOOK" === pageType) url = "/pages/book/index/index"; else url = "/pages/index/index";
         getApp().core.redirectTo({
-            url: e
+            url: url
         });
     }
 };

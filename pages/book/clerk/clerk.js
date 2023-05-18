@@ -6,6 +6,10 @@ Page({
         qrcode: ""
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e), this.getOrderDetails(e);
     },
     onReady: function(e) {

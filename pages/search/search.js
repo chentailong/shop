@@ -18,8 +18,12 @@ Page({
         cats: [],
         default_cat: []
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), this.cats();
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), this.cats();
     },
     onReady: function(t) {
         getApp().page.onReady(this);
@@ -32,41 +36,41 @@ Page({
     },
     onReachBottom: function() {
         getApp().page.onReachBottom(this);
-        var t = this, a = t.data.page + 1;
-        a <= t.data.pageCount && (t.setData({
-            page: a
-        }), t.getGoodsList());
+        var that = this, page = that.data.page + 1;
+        page <= that.data.pageCount && (that.setData({
+            page: page
+        }), that.getGoodsList());
     },
     cats: function() {
-        var a = this;
+        var that = this;
         getApp().request({
             url: getApp().api.default.cats,
-            success: function(t) {
-                0 == t.code && a.setData({
-                    cats: t.data.list,
-                    default_cat: t.data.default_cat
+            success: function(res) {
+                0 === res.code && that.setData({
+                    cats: res.data.list,
+                    default_cat: res.data.default_cat
                 });
             }
         });
     },
     change_cat: function(t) {
-        var a = this.data.cats, e = t.currentTarget.dataset.id;
-        for (var s in a) if (e === a[s].id) var i = {
-            id: a[s].id,
-            name: a[s].name,
-            key: a[s].key,
-            url: a[s].url
+        var cats = this.data.cats, id = t.currentTarget.dataset.id;
+        for (var s in cats) if (id === cats[s].id) var default_cat = {
+            id: cats[s].id,
+            name: cats[s].name,
+            key: cats[s].key,
+            url: cats[s].url
         };
         this.setData({
-            default_cat: i
+            default_cat: default_cat
         });
     },
     pullDown: function() {
-        var t = this, a = t.data.cats, e = t.data.default_cat;
-        for (var s in a) a[s].id === e.id ? a[s].is_active = !0 : a[s].is_active = !1;
-        t.setData({
-            is_show: !t.data.is_show,
-            cats: a
+        var that = this, cats = that.data.cats, default_cat = that.data.default_cat;
+        for (var s in cats) cats[s].id === default_cat.id ? cats[s].is_active = !0 : cats[s].is_active = !1;
+        that.setData({
+            is_show: !that.data.is_show,
+            cats: cats
         });
     },
     inputFocus: function() {
@@ -76,21 +80,21 @@ Page({
         });
     },
     inputBlur: function() {
-        var t = this;
-        0 < t.data.goods_list.length && setTimeout(function() {
-            t.setData({
+        var that = this;
+        0 < that.data.goods_list.length && setTimeout(function() {
+            that.setData({
                 show_history: !1,
                 show_result: !0
             });
         }, 300);
     },
     inputConfirm: function(t) {
-        var a = this, e = t.detail.value;
-        0 != e.length && (a.setData({
+        var that = this, value = t.detail.value;
+        0 != value.length && (that.setData({
             page: 1,
-            keyword: e,
+            keyword: value,
             goods_list: []
-        }), a.setHistory(e), a.getGoodsList());
+        }), that.setHistory(value), that.getGoodsList());
     },
     searchCancel: function() {
         getApp().core.navigateBack({
@@ -98,42 +102,42 @@ Page({
         });
     },
     historyClick: function(t) {
-        var a = t.currentTarget.dataset.value;
-        0 != a.length && (this.setData({
+        var value = t.currentTarget.dataset.value;
+        0 != value.length && (this.setData({
             page: 1,
-            keyword: a,
+            keyword: value,
             goods_list: []
         }), this.getGoodsList());
     },
     getGoodsList: function() {
-        var e = this;
-        e.setData({
+        var that = this;
+        that.setData({
             show_history: !1,
             show_result: !0,
             is_search: !0
         });
-        var t = {};
-        e.data.cat_id && (t.cat_id = e.data.cat_id, e.setActiveCat(t.cat_id)), e.data.keyword && (t.keyword = e.data.keyword), 
-        t.defaultCat = JSON.stringify(e.data.default_cat), t.page = e.data.page, e.showLoadingBar(), 
-        e.is_loading = !0, getApp().request({
+        var data = {};
+        that.data.cat_id && (data.cat_id = that.data.cat_id, that.setActiveCat(data.cat_id)), that.data.keyword && (data.keyword = that.data.keyword),
+            data.defaultCat = JSON.stringify(that.data.default_cat), data.page = that.data.page, that.showLoadingBar(),
+            that.is_loading = !0, getApp().request({
             url: getApp().api.default.search,
-            data: t,
-            success: function(t) {
-                if (0 == t.code) {
-                    var a = e.data.goods_list.concat(t.data.list);
-                    e.setData({
-                        goods_list: a,
-                        pageCount: t.data.page_count
-                    }), 0 == t.data.list.length ? e.setData({
+            data: data,
+            success: function(res) {
+                if (0 === res.code) {
+                    var list = that.data.goods_list.concat(res.data.list);
+                    that.setData({
+                        goods_list: list,
+                        pageCount: res.data.page_count
+                    }), 0 === res.data.list.length ? that.setData({
                         is_search: !1
-                    }) : e.setData({
+                    }) : that.setData({
                         is_search: !0
                     });
                 }
-                t.code;
+                res.code;
             },
             complete: function() {
-                e.hideLoadingBar(), e.is_loading = !1;
+                that.hideLoadingBar(), that.is_loading = !1;
             }
         });
     },
@@ -156,35 +160,35 @@ Page({
         getApp().core.setStorageSync(getApp().const.SEARCH_HISTORY_LIST, a);
     },
     getMoreGoodsList: function() {
-        var s = this, i = {};
-        s.data.cat_id && (i.cat_id = s.data.cat_id, s.setActiveCat(i.cat_id)), s.data.keyword && (i.keyword = s.data.keyword), 
-        i.page = s.data.page || 1, s.showLoadingMoreBar(), s.setData({
+        var that = this, data = {};
+        that.data.cat_id && (data.cat_id = that.data.cat_id, that.setActiveCat(data.cat_id)), that.data.keyword && (data.keyword = that.data.keyword),
+            data.page = that.data.page || 1, that.showLoadingMoreBar(), that.setData({
             is_loading: !0
-        }), s.setData({
-            load_more_count: s.data.load_more_count + 1
-        }), i.page = s.data.page + 1, i.defaultCat = s.data.default_cat, s.setData({
-            page: i.page
-        }), i.defaultCat = JSON.stringify(s.data.default_cat), getApp().request({
+        }), that.setData({
+            load_more_count: that.data.load_more_count + 1
+        }), data.page = that.data.page + 1, data.defaultCat = that.data.default_cat, that.setData({
+            page: data.page
+        }), data.defaultCat = JSON.stringify(that.data.default_cat), getApp().request({
             url: getApp().api.default.search,
-            data: i,
+            data: data,
             success: function(t) {
                 if (0 == t.code) {
-                    var a = s.data.goods_list;
+                    var goods_list = that.data.goods_list;
                     if (0 < t.data.list.length) {
-                        for (var e in t.data.list) a.push(t.data.list[e]);
-                        s.setData({
-                            goods_list: a
+                        for (var e in t.data.list) goods_list.push(t.data.list[e]);
+                        that.setData({
+                            goods_list: goods_list
                         });
-                    } else s.setData({
-                        page: i.page - 1
+                    } else that.setData({
+                        page: data.page - 1
                     });
                 }
                 t.code;
             },
             complete: function() {
-                s.setData({
+                that.setData({
                     is_loading: !1
-                }), s.hideLoadingMoreBar();
+                }), that.hideLoadingMoreBar();
             }
         });
     },

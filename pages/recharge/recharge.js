@@ -6,16 +6,20 @@ Page({
     data: {
         selected: -1
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
         var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.recharge.list,
-            success: function(e) {
-                var t = e.data;
-                t.balance && 0 != t.balance.status || getApp().core.showModal({
+            success: function(res) {
+                var data = res.data;
+                data.balance && 0 !== data.balance.status || getApp().core.showModal({
                     title: "提示",
                     content: "充值功能未开启，请联系管理员！",
                     showCancel: !1,
@@ -24,7 +28,7 @@ Page({
                             delta: 1
                         });
                     }
-                }), that.setData(e.data);
+                }), that.setData(res.data);
             },
             complete: function(e) {
                 getApp().core.hideLoading();
@@ -50,7 +54,7 @@ Page({
     },
     pay: function(e) {
         var that = this, num = {}, selected = that.data.selected;
-        if (-1 == selected) {
+        if (-1 === selected) {
             var money = that.data.money;
             if (money < .01) return void getApp().core.showModal({
                 title: "提示",
@@ -84,7 +88,7 @@ Page({
                     success: function(success) {},
                     fail: function(error) {},
                     complete: function(lete) {
-                        "requestPayment:fail" != lete.errMsg && "requestPayment:fail cancel" != lete.errMsg ? (getApp().page.bindParent({
+                        "requestPayment:fail" !== lete.errMsg && "requestPayment:fail cancel" !== lete.errMsg ? (getApp().page.bindParent({
                             parent_id: getApp().core.getStorageSync(getApp().const.PARENT_ID),
                             condition: 2
                         }), getApp().core.showModal({

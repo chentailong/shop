@@ -2,92 +2,97 @@ var app = getApp(), api = getApp().api, is_loading = !1, is_no_more = !0;
 
 Page({
     data: {
-        p: 1,
+        page: 1,
         naver: "list"
     },
-    onLoad: function(o) {
-        app.page.onLoad(this, o);
-        void 0 !== o.order_id && getApp().core.navigateTo({
-            url: "/bargain/activity/activity?order_id=" + o.order_id + "&user_id=" + o.user_id
-        }), void 0 !== o.goods_id && getApp().core.navigateTo({
-            url: "/bargain/goods/goods?goods_id=" + o.goods_id + "&user_id=" + o.user_id
-        }), this.loadDataFirst(o);
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        app.page.onLoad(this, options);
+        void 0 !== options.order_id && getApp().core.navigateTo({
+            url: "/bargain/activity/activity?order_id=" + options.order_id + "&user_id=" + options.user_id
+        }), void 0 !== options.goods_id && getApp().core.navigateTo({
+            url: "/bargain/goods/goods?goods_id=" + options.goods_id + "&user_id=" + options.user_id
+        }), this.loadDataFirst(options);
     },
-    loadDataFirst: function(t) {
-        var a = this;
+    loadDataFirst: function (t) {
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.bargain.index,
             type: "get",
-            success: function(o) {
-                0 == o.code && (a.setData(o.data), a.setData({
-                    p: 2
-                }), 0 < o.data.goods_list.length && (is_no_more = !1));
+            success: function (res) {
+                0 == res.code && (that.setData(res.data), that.setData({
+                    page: 2
+                }), 0 < res.data.goods_list.length && (is_no_more = !1));
             },
-            complete: function(o) {
+            complete: function (o) {
                 void 0 === t.order_id && getApp().core.hideLoading(), getApp().core.stopPullDownRefresh();
             }
         });
     },
-    onReady: function() {
+    onReady: function () {
         getApp().page.onReady(this);
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this);
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this);
     },
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         this.loadDataFirst({});
     },
-    onReachBottom: function() {
+    onReachBottom: function () {
         is_no_more || this.loadData();
     },
-    loadData: function() {
+    loadData: function () {
         if (!is_loading) {
             is_loading = !0, getApp().core.showLoading({
                 title: "加载中"
             });
-            var a = this, i = a.data.p;
+            var that = this, page = that.data.page;
             app.request({
                 url: api.bargain.index,
                 data: {
-                    page: i
+                    page: page
                 },
-                success: function(o) {
+                success: function (o) {
                     if (0 == o.code) {
-                        var t = a.data.goods_list;
-                        0 == o.data.goods_list.length && (is_no_more = !0), t = t.concat(o.data.goods_list), 
-                        a.setData({
-                            goods_list: t,
-                            p: i + 1
-                        });
-                    } else a.showToast({
+                        var t = that.data.goods_list;
+                        0 == o.data.goods_list.length && (is_no_more = !0), t = t.concat(o.data.goods_list),
+                            that.setData({
+                                goods_list: t,
+                                page: page + 1
+                            });
+                    } else that.showToast({
                         title: o.msg
                     });
                 },
-                complete: function(o) {
+                complete: function (o) {
                     getApp().core.hideLoading(), is_loading = !1;
                 }
             });
         }
     },
-    goToGoods: function(o) {
-        var t = o.currentTarget.dataset.index;
+    goToGoods: function (res) {
+        var index = res.currentTarget.dataset.index;
         getApp().core.navigateTo({
-            url: "/bargain/goods/goods?goods_id=" + t
+            url: "/bargain/goods/goods?goods_id=" + index
         });
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         getApp().page.onShareAppMessage(this);
         return {
             path: "/bargain/list/list?user_id=" + this.data.__user_info.id,
-            success: function(o) {}
+            success: function (o) {
+            }
         };
     }
 });

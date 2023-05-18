@@ -1,0 +1,29 @@
+<view class="container">
+    <van-search
+            value="{{ search }}"
+            shape="round"
+            background="#e2e2e2"
+            input-align="center"
+            placeholder="请输入订单号/店铺名/昵称搜索"/>
+    <view class="tabs">
+        <van-tabs type="card" color="#1989fa" bind:click="cut_pattern">
+            <van-tab title="未审核">
+                <block wx:if="{{audit.length!==0}}">
+                </block>
+                <block wx:else>
+                    <van-empty description="没有任何申请哦~" wx:if="{{!order_amount}}"/>
+                </block>
+            </van-tab>
+
+            <van-tab title="未打款">
+                <block wx:if="{{remit.length!==0}}">
+                </block>
+                <block wx:else>
+                    <van-empty description="没有任何申请哦~" wx:if="{{!order_amount}}"/>
+                </block>
+            </van-tab>
+        </van-tabs>
+    </view>
+
+</view>
+

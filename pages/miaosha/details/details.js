@@ -31,6 +31,10 @@ Page({
         }
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t), is_more_comment = !(is_loading_comment = !(p = 1));
         share_count = 0;
         var e = t.user_id, a = decodeURIComponent(t.scene), o = 0;

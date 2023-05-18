@@ -3,6 +3,10 @@ Page({
         address_list: []
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
     },
     // t > that

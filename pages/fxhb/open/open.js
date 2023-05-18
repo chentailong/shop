@@ -8,6 +8,10 @@ Page({
         }
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         var o = this;
         getApp().page.onLoad(this, e), getApp().core.showLoading({
             title: "加载中",

@@ -2,6 +2,19 @@
     background: #f7f7f7;
 }
 
+.member_money .img {
+    width: 94rpx;
+    height: 40rpx;
+}
+
+.member_money {
+    margin-top: -10px;
+    color: red;
+    font-weight: bolder;
+    font-size: 14px;
+    display: flex;
+}
+
 .cat-list .cat-item {
     height: 106rpx;
     text-align: center;

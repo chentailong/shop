@@ -7,6 +7,10 @@ Page({
         express_index: null
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
         var o = this;
         getApp().core.showLoading({

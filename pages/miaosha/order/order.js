@@ -9,6 +9,10 @@ Page({
         qrcode: ""
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         is_loading = is_no_more = !1, p = 2, this.loadOrderList(t.status || 0), getCurrentPages().length < 2 && this.setData({
             show_index: !0

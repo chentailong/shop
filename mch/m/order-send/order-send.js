@@ -4,23 +4,27 @@ Page({
     data: {
         order: {}
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var t = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.mch.order.detail,
             data: {
-                id: e.id
+                id: options.id
             },
-            success: function(e) {
-                0 == e.code ? t.setData({
-                    order: e.data.order
+            success: function(res) {
+                0 == res.code ? that.setData({
+                    order: res.data.order
                 }) : getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(e) {
                         e.confirm && getApp().core.navigateBack();
@@ -47,10 +51,10 @@ Page({
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     expressChange: function(e) {
-        var t = this;
-        t.data.order.default_express = t.data.order.express_list[e.detail.value].express, 
-        t.setData({
-            order: t.data.order
+        var that = this;
+        that.data.order.default_express = that.data.order.express_list[e.detail.value].express,
+            that.setData({
+            order: that.data.order
         });
     },
     expressInput: function(e) {

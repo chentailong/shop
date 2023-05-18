@@ -1,9 +1,10 @@
-var siteinfo = require("../siteinfo.js"), _api_root = "";
+var siteinfo = require("../siteinfo.js"), _api_root = "",_mch_root = "";
 
 if (-1 != siteinfo.acid) {
     var siteroot = siteinfo.siteroot.substr(0, siteinfo.siteroot.indexOf("app/index.php"));
     _api_root = _api_root = siteroot + "addons/zjhj_mall/core/web/index.php?_acid=" + siteinfo.acid + "&r=api/";
-} else _api_root = siteinfo.apiroot;
+    _mch_root = _mch_root = siteroot +  "addons/zjhj_mall/core/web/index.php?_acid=" + siteinfo.acid + "&r=mch/";
+} else _api_root = siteinfo.apiroot, _mch_root = "https://gpyx.gxmuzi.com/web/index.php?store_id=1&r=mch/";
 
 var api = {
     index: _api_root + "default/index",
@@ -36,6 +37,7 @@ var api = {
         topic_qrcode: _api_root + "default/topic-qrcode",
         form_id: _api_root + "default/form-id"
     },
+    //分类
     cart: {
         list: _api_root + "cart/list",
         add_cart: _api_root + "cart/add-cart",
@@ -46,6 +48,7 @@ var api = {
         login: _api_root + "passport/login",
         on_login: _api_root + "passport/on-login"
     },
+    //订单
     order: {
         submit_preview: _api_root + "order/submit-preview",
         submit: _api_root + "order/submit",
@@ -69,6 +72,7 @@ var api = {
         new_submit_preview: _api_root + "order/new-submit-preview",
         new_submit: _api_root + "order/new-submit"
     },
+    //用户信息
     user: {
         address_list: _api_root + "user/address-list",
         address_detail: _api_root + "user/address-detail",
@@ -98,8 +102,9 @@ var api = {
         check_bind: _api_root + "user/check-bind",
         card_detail: _api_root + "user/card-detail",
         set_pay_pwd: _api_root + "user/set-pay-psw",
-        edit_pay_pwd: _api_root + "user/edit-pay-psw"
+        edit_pay_pwd: _api_root + "user/edit-pay-psw",
     },
+    //分销商
     share: {
         join: _api_root + "share/join",
         check: _api_root + "share/check",
@@ -169,6 +174,7 @@ var api = {
         goods_qrcode: _api_root + "group/index/goods-qrcode",
         search: _api_root + "group/index/search"
     },
+    //预约
     book: {
         index: _api_root + "book/index/index",
         list: _api_root + "book/index/good-list",
@@ -208,6 +214,7 @@ var api = {
         record: _api_root + "recharge/record",
         detail: _api_root + "recharge/detail"
     },
+    //多商户
     mch: {
         apply: _api_root + "mch/index/apply",
         apply_submit: _api_root + "mch/index/apply-submit",

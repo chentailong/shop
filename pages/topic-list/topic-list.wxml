@@ -1,6 +1,6 @@
 <view class="page {{__page_classes}}">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber">
         <view class="container">
             <scroll-view class="nnavbar fs-sm-13" scrollIntoView="{{toView}}" scrollLeft="{{scrollNavbarLeft}}" scrollWithAnimation="true" scrollX="true" wx:if="{{navigation}}">
@@ -53,5 +53,5 @@
             </scroll-view>
         </view>
     </view>
-    <include src="/components/footer/footer"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

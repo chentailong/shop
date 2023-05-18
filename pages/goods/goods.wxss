@@ -16,6 +16,22 @@
 
 @import "../../components/quick-navigation/quick-navigation.wxss";
 
+/* 返回顶部 */
+.goTop{
+    background: rgba(114, 110, 110, 0.7);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80rpx;
+    position: fixed;
+    bottom: 140rpx;
+    height: 80rpx;
+    width: 80rpx;
+    color: white;
+    right: 30rpx;
+    z-index: 999;
+}
+
+
 view {
     overflow: visible;
 }

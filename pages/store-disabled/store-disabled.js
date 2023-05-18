@@ -1,6 +1,10 @@
 Page({
     data: {},
-    onLoad: function(a) {
-        getApp().page.onLoad(this, a);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
     }
 });

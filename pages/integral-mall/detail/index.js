@@ -7,6 +7,10 @@ Page({
         status: 1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t), is_loading = is_no_more = !1;
         t.status && this.setData({
             status: t.status

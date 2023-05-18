@@ -6,6 +6,10 @@ Page({
             oldgoods:[]
     },
     onLoad: function (t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         page = 1, this.getGoodsList(integral_catId);
 

@@ -1,54 +1,54 @@
-var hj = null;
+var cores = null;
 
-if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj = swan; else {
-    hj = my;
+if ("undefined" != typeof wx) cores = wx; else if ("undefined" != typeof swan) cores = swan; else {
+    cores = my;
     var getSystemInfoSync = my.getSystemInfoSync;
-    hj.getSystemInfoSync = function() {
+    cores.getSystemInfoSync = function() {
         return getSystemInfoSync();
     };
     var setStorageSync = my.setStorageSync;
-    hj.setStorageSync = function(e, t) {
+    cores.setStorageSync = function(key, data) {
         return setStorageSync({
-            key: e,
-            data: t
+            key: key,
+            data: data
         });
     };
     var getStorageSync = my.getStorageSync;
-    hj.getStorageSync = function(e) {
-        var t = getStorageSync({
-            key: e
+    cores.getStorageSync = function(key) {
+        var key = getStorageSync({
+            key: key
         });
-        return t ? t.data : t;
+        return key ? key.data : key;
     };
     var removeStorageSync = my.removeStorageSync;
-    hj.removeStorageSync = function(e) {
+    cores.removeStorageSync = function(key) {
         removeStorageSync({
-            key: e
+            key: key
         });
-    }, hj.request = function(e) {
-        if ("get" == e.method.toLowerCase() && e.data) {
-            var t = getApp().helper.objectToUrlParams(e.data, !0);
-            e.url += "&" + t, e.data = null;
+    }, cores.request = function(res) {
+        if ("get" == res.method.toLowerCase() && res.data) {
+            var helper = getApp().helper.objectToUrlParams(res.data, !0);
+            res.url += "&" + helper, res.data = null;
         }
-        my.httpRequest(e);
-    }, hj.setNavigationBarColor = function(e) {}, hj.setNavigationBarTitle = function(e) {
+        my.httpRequest(res);
+    }, cores.setNavigationBarColor = function(e) {}, cores.setNavigationBarTitle = function(e) {
         e.title && my.setNavigationBar({
             title: e.title
         });
     };
     var toast = my.showToast;
-    hj.showToast = function(e) {
+    cores.showToast = function(e) {
         if (e.title) return toast({
             type: "none",
             content: e.title
         });
     };
     var previewImage = my.previewImage;
-    hj.previewImage = function(e) {
+    cores.previewImage = function(e) {
         if (e.current) {
-            var t = e.urls.indexOf(e.current);
-            return -1 == t && (t = 0), previewImage({
-                current: t,
+            var current = e.urls.indexOf(e.current);
+            return -1 == current && (current = 0), previewImage({
+                current: current,
                 urls: e.urls
             });
         }
@@ -57,14 +57,14 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
         });
     };
     var animation = my.createAnimation;
-    hj.createAnimation = function(e) {
+    cores.createAnimation = function(e) {
         return animation({
             duration: e.duration ? e.duration : 400,
             timeFunction: e.timingFunction ? e.timingFunction : "linear",
             delay: e.delay ? e.delay : 0,
             transformOrigin: e.transformOrigin ? e.transformOrigin : "50% 50% 0"
         });
-    }, hj.showModal = function(t) {
+    }, cores.showModal = function(t) {
         0 == t.showCancel ? my.alert({
             title: t.title,
             content: t.content,
@@ -94,7 +94,7 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
             fail: t.fail,
             complete: t.complete
         });
-    }, hj.requestPayment = function(n) {
+    }, cores.requestPayment = function(n) {
         my.tradePay({
             tradeNO: n._res.data.trade_no || "",
             success: function(e) {},
@@ -102,36 +102,36 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
             complete: function(e) {
                 var t = {};
                 switch (e.resultCode = parseInt(e.resultCode), e.resultCode) {
-                  case 9e3:
-                    "function" == typeof n.success && n.success({
-                        errMsg: "requestPayment:ok"
-                    }), t.errMsg = "requestPayment:ok";
-                    break;
+                    case 9e3:
+                        "function" == typeof n.success && n.success({
+                            errMsg: "requestPayment:ok"
+                        }), t.errMsg = "requestPayment:ok";
+                        break;
 
-                  case 6001:
-                  case 6002:
-                    "function" == typeof n.fail && n.fail({
-                        errMsg: "requestPayment:fail cancel"
-                    }), t.errMsg = "requestPayment:fail cancel";
-                    break;
+                    case 6001:
+                    case 6002:
+                        "function" == typeof n.fail && n.fail({
+                            errMsg: "requestPayment:fail cancel"
+                        }), t.errMsg = "requestPayment:fail cancel";
+                        break;
 
-                  default:
-                    "function" == typeof n.fail && n.fail({
-                        errMsg: "requestPayment:fail"
-                    }), t.errMsg = "requestPayment:fail";
+                    default:
+                        "function" == typeof n.fail && n.fail({
+                            errMsg: "requestPayment:fail"
+                        }), t.errMsg = "requestPayment:fail";
                 }
                 "function" == typeof n.complete && n.complete(t);
             }
         });
-    }, hj.setClipboardData = function(e) {
+    }, cores.setClipboardData = function(e) {
         e.text = e.data || "", my.setClipboard(e);
     };
     var makePhoneCall = my.makePhoneCall;
-    hj.makePhoneCall = function(e) {
+    cores.makePhoneCall = function(e) {
         e.number = e.phoneNumber || "", makePhoneCall(e);
-    }, hj.getSetting = function(e) {};
+    }, cores.getSetting = function(e) {};
     var saveImage = my.saveImage;
-    hj.saveImageToPhotosAlbum = function(t) {
+    cores.saveImageToPhotosAlbum = function(t) {
         saveImage({
             url: t.filePath,
             success: t.success,
@@ -142,7 +142,7 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
         });
     };
     var downloadFile = my.downloadFile;
-    hj.downloadFile = function(t) {
+    cores.downloadFile = function(t) {
         downloadFile({
             url: t.url,
             success: function(e) {
@@ -153,7 +153,7 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
             fail: t.fail,
             complete: t.complete
         });
-    }, hj.setClipboardData = function(e) {
+    }, cores.setClipboardData = function(e) {
         my.setClipboard({
             text: e.data,
             success: e.success,
@@ -162,7 +162,7 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
         });
     };
     var chooseImage = my.chooseImage;
-    hj.chooseImage = function(a) {
+    cores.chooseImage = function(a) {
         chooseImage({
             success: function(e) {
                 if ("function" == typeof a.success) {
@@ -185,7 +185,7 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
         });
     };
     var showActionSheet = my.showActionSheet;
-    hj.showActionSheet = function(t) {
+    cores.showActionSheet = function(t) {
         showActionSheet({
             items: t.itemList || [],
             success: function(e) {
@@ -196,9 +196,9 @@ if ("undefined" != typeof wx) hj = wx; else if ("undefined" != typeof swan) hj =
         });
     };
     var uploadFile = my.uploadFile;
-    hj.uploadFile = function(e) {
+    cores.uploadFile = function(e) {
         e.fileName = e.name || "", e.fileType = e.fileType || "image", uploadFile(e);
     };
 }
 
-module.exports = hj;
+module.exports = cores;

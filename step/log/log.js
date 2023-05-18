@@ -43,6 +43,10 @@ Page({
         }
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         var that = this, time = util.formatTime(new Date()), date = time[0] + time[1] + time[2] + time[3] + time[5] + time[6] + time[8] + time[9];
         getApp().core.showLoading({

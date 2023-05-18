@@ -1,0 +1,14 @@
+<view class="container">
+    <van-search
+            value="{{ search }}"
+            shape="round"
+            background="#e1e1e1"
+            input-align="center"
+            placeholder="请输入店铺名称搜索"/>
+    <block wx:if="{{apply.length!==0}}">
+    </block>
+    <block wx:else>
+        <van-empty description="没有任何消息哦~" wx:if="{{!order_amount}}"/>
+    </block>
+</view>
+

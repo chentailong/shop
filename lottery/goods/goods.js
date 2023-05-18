@@ -1,4 +1,5 @@
-var lotteryInter, options_id, timer, luckyTimer, utils = getApp().helper, videoContext = "", WxParse = require("../../wxParse/wxParse.js");
+var lotteryInter, options_id, timer, luckyTimer, utils = getApp().helper, videoContext = "",
+    WxParse = require("../../wxParse/wxParse.js");
 
 Page({
     data: {
@@ -15,269 +16,277 @@ Page({
         animationTranslottery: {},
         award_bg: !1
     },
-    onLoad: function(t) {
-        if (getApp().page.onLoad(this, t), t.user_id && this.buyZero(), "undefined" == typeof my) {
-            var e = decodeURIComponent(t.scene);
-            if (void 0 !== e) {
-                var o = utils.scene_decode(e);
-                o.gid && (t.id = o.gid);
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        if (getApp().page.onLoad(this, options), options.user_id && this.buyZero(), "undefined" == typeof my) {
+            var scene = decodeURIComponent(options.scene);
+            if (void 0 !== scene) {
+                var decode = utils.scene_decode(scene);
+                decode.gid && (options.id = decode.gid);
             }
         } else if (null !== getApp().query) {
-            var a = app.query;
-            getApp().query = null, t.id = a.gid;
+            var query = app.query;
+            getApp().query = null, options.id = query.gid;
         }
-        options_id = t.id;
+        options_id = options.id;
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this), this.getGoods({
             id: options_id
         });
     },
-    getGoods: function(t) {
-        var e = t.id;
-        console.log(t), getApp().core.showLoading({
+    getGoods: function (res) {
+        var id = res.id;
+        console.log(res), getApp().core.showLoading({
             title: "加载中"
         });
-        var a = this;
+        var that = this;
         getApp().request({
             url: getApp().api.lottery.goods,
             data: {
-                id: e,
-                user_id: t.user_id,
+                id: id,
+                user_id: res.user_id,
                 page: 1
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = t.data.goods.detail, o = t.data.lottery_info.end_time;
-                    a.setTimeStart(o), WxParse.wxParse("detail", "html", e, a), a.setData(t.data);
+            success: function (res) {
+                if (0 == res.code) {
+                    var detail = res.data.goods.detail, end_time = res.data.lottery_info.end_time;
+                    that.setTimeStart(end_time), WxParse.wxParse("detail", "html", detail, that), that.setData(res.data);
                 } else getApp().core.showModal({
                     title: "提示",
-                    content: t.msg,
+                    content: res.msg,
                     showCancel: !1,
-                    success: function(t) {
+                    success: function (t) {
                         t.confirm && getApp().core.redirectTo({
                             url: "/lottery/index/index"
                         });
                     }
                 });
             },
-            complete: function(t) {
+            complete: function (t) {
                 getApp().core.hideLoading();
             }
         });
     },
-    catchTouchMove: function(t) {
+    catchTouchMove: function (t) {
         return !1;
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this), clearInterval(timer);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this), clearInterval(timer);
     },
-    setTimeStart: function(t) {
-        var r = this, e = new Date(), s = parseInt(t - e.getTime() / 1e3);
-        clearInterval(timer), timer = setInterval(function() {
-            var t = 0, e = 0, o = 0, a = 0;
-            0 < s && (t = Math.floor(s / 86400), e = Math.floor(s / 3600) - 24 * t, o = Math.floor(s / 60) - 24 * t * 60 - 60 * e, 
-            a = Math.floor(s) - 24 * t * 60 * 60 - 60 * e * 60 - 60 * o);
+
+    //计算抽奖时间
+    setTimeStart: function (date) {
+        var that = this, time = new Date(), s = parseInt(date - time.getTime() / 1e3);
+        clearInterval(timer), timer = setInterval(function () {
+            var day = 0, hour = 0, minute = 0, second = 0;
+            0 < s && (day = Math.floor(s / 86400), hour = Math.floor(s / 3600) - 24 * day, minute = Math.floor(s / 60) - 24 * day * 60 - 60 * hour,
+                second = Math.floor(s) - 24 * day * 60 * 60 - 60 * hour * 60 - 60 * minute);
             var i = {
-                day: t,
-                hour: e,
-                minute: o,
-                second: a
+                day: day,
+                hour: hour,
+                minute: minute,
+                second: second
             };
-            r.setData({
+            that.setData({
                 time_list: i
             }), s--;
         }, 1e3), s <= 0 && clearInterval(timer);
     },
-    buyZero: function() {
-        var t = this, e = !t.data.award_bg;
-        t.setData({
-            award_bg: e
+
+    buyZero: function () {
+        var that = this, award_bg = !that.data.award_bg;
+        that.setData({
+            award_bg: award_bg
         });
-        var o = getApp().core.createAnimation({
+        var Animation = getApp().core.createAnimation({
             duration: 1e3,
             timingFunction: "linear",
             transformOrigin: "50% 50%"
         });
-        t.data.award_bg ? o.width("360rpx").height("314rpx").step() : o.scale(0, 0).opacity(0).step(), 
-        t.setData({
-            animationTranslottery: o.export()
-        });
-        var a = 0;
-        lotteryInter = setInterval(function() {
-            a % 2 == 0 ? o.scale(.9).opacity(1).step() : o.scale(1).opacity(1).step(), t.setData({
-                animationTranslottery: o.export()
-            }), 500 == ++a && (a = 0);
+        that.data.award_bg ? Animation.width("360rpx").height("314rpx").step() : Animation.scale(0, 0).opacity(0).step(),
+            that.setData({
+                animationTranslottery: Animation.export()
+            });
+        var time = 0;
+        lotteryInter = setInterval(function () {
+            time % 2 == 0 ? Animation.scale(.9).opacity(1).step() : Animation.scale(1).opacity(1).step(), that.setData({
+                animationTranslottery: Animation.export()
+            }), 500 == ++time && (time = 0);
         }, 500);
     },
-    submitTime: function() {
-        var t = getApp().core.createAnimation({
+
+    submitTime: function () {
+        var Animation = getApp().core.createAnimation({
             duration: 500,
             transformOrigin: "50% 50%"
-        }), e = this, o = 0;
-        lotteryInter = setInterval(function() {
-            o % 2 == 0 ? t.scale(2.3, 2.3).opacity(1).step() : t.scale(2.5, 2.5).opacity(1).step(), 
-            e.setData({
-                animationTranslottery: t.export()
-            }), 500 == ++o && (o = 0);
+        }), that = this, time = 0;
+        lotteryInter = setInterval(function () {
+            time % 2 == 0 ? Animation.scale(2.3, 2.3).opacity(1).step() : Animation.scale(2.5, 2.5).opacity(1).step(),
+                that.setData({
+                    animationTranslottery: Animation.export()
+                }), 500 == ++time && (time = 0);
         }, 500);
     },
-    submit: function(t) {
-        var e = t.detail.formId, o = t.currentTarget.dataset.lottery_id;
+    submit: function (t) {
+        var formId = t.detail.formId, lottery_id = t.currentTarget.dataset.lottery_id;
         getApp().core.navigateTo({
-            url: "/lottery/detail/detail?lottery_id=" + o + "&form_id=" + e
+            url: "/lottery/detail/detail?lottery_id=" + lottery_id + "&form_id=" + formId
         }), clearInterval(lotteryInter), this.setData({
             award_bg: !1
         });
     },
-    play: function(t) {
-        var e = t.target.dataset.url;
+    play: function (t) {
+        var url = t.target.dataset.url;
         this.setData({
-            url: e,
+            url: url,
             hide: "",
             show: !0
         }), (videoContext = getApp().core.createVideoContext("video")).play();
     },
-    close: function(t) {
+    close: function (t) {
         if ("video" == t.target.id) return !0;
         this.setData({
             hide: "hide",
             show: !1
         }), videoContext.pause();
     },
-    onGoodsImageClick: function(t) {
-        var e = [], o = t.currentTarget.dataset.index;
-        for (var a in this.data.goods.pic_list) e.push(this.data.goods.pic_list[a].pic_url);
+    onGoodsImageClick: function (t) {
+        var urls = [], index = t.currentTarget.dataset.index;
+        for (var i in this.data.goods.pic_list) urls.push(this.data.goods.pic_list[i].pic_url);
         getApp().core.previewImage({
-            urls: e,
-            current: e[o]
+            urls: urls,
+            current: urls[index]
         });
     },
-    hide: function(t) {
+    hide: function (t) {
         0 == t.detail.current ? this.setData({
             img_hide: ""
         }) : this.setData({
             img_hide: "hide"
         });
     },
-    buyNow: function(t) {
-        var e = [], o = {
+    buyNow: function (t) {
+        var goods_list = [], list = {
             goods_id: this.data.goods.id,
             num: 1,
             attr: JSON.parse(this.data.lottery_info.attr)
         };
-        e.push(o);
-        var a = [];
-        a.push({
+        goods_list.push(list);
+        var lists = [];
+        lists.push({
             mch_id: 0,
-            goods_list: e
+            goods_list: goods_list
         }), getApp().core.navigateTo({
-            url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(a)
+            url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(lists)
         });
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         getApp().page.onShareAppMessage(this);
-        var t = getApp().getUser(), e = this.data.lottery_info.id;
+        var user = getApp().getUser(), id = this.data.lottery_info.id;
         return {
             imageUrl: this.data.goods.pic_list[0].pic_url,
-            path: "/lottery/goods/goods?id=" + e + "&user_id=" + t.id
+            path: "/lottery/goods/goods?id=" + id + "&user_id=" + user.id
         };
     },
-    showShareModal: function() {
+    showShareModal: function () {
         this.setData({
             share_modal_active: "active"
         });
     },
-    shareModalClose: function() {
+    shareModalClose: function () {
         this.setData({
             share_modal_active: ""
         });
     },
-    getGoodsQrcode: function() {
-        var e = this;
-        if (e.setData({
+    getGoodsQrcode: function () {
+        var that = this;
+        if (that.setData({
             qrcode_active: "active",
             share_modal_active: ""
-        }), e.data.goods_qrcode) return !0;
+        }), that.data.goods_qrcode) return !0;
         getApp().request({
             url: getApp().api.lottery.qrcode,
             data: {
-                goods_id: e.data.lottery_info.id
+                goods_id: that.data.lottery_info.id
             },
-            success: function(t) {
-                0 == t.code && e.setData({
+            success: function (t) {
+                0 == t.code && that.setData({
                     goods_qrcode: t.data.pic_url
-                }), 1 == t.code && (e.goodsQrcodeClose(), getApp().core.showModal({
+                }), 1 == t.code && (that.goodsQrcodeClose(), getApp().core.showModal({
                     title: "提示",
                     content: t.msg,
                     showCancel: !1,
-                    success: function(t) {
+                    success: function (t) {
                         t.confirm;
                     }
                 }));
             }
         });
     },
-    qrcodeClick: function(t) {
-        var e = t.currentTarget.dataset.src;
+    qrcodeClick: function (t) {
+        var src = t.currentTarget.dataset.src;
         getApp().core.previewImage({
-            urls: [ e ]
+            urls: [src]
         });
     },
-    qrcodeClose: function() {
+    qrcodeClose: function () {
         this.setData({
             qrcode_active: ""
         });
     },
-    goodsQrcodeClose: function() {
+    goodsQrcodeClose: function () {
         this.setData({
             goods_qrcode_active: "",
             no_scroll: !1
         });
     },
-    saveQrcode: function() {
-        var e = this;
+    saveQrcode: function () {
+        var that = this;
         getApp().core.saveImageToPhotosAlbum ? (getApp().core.showLoading({
             title: "正在保存图片",
             mask: !1
         }), getApp().core.downloadFile({
-            url: e.data.goods_qrcode,
-            success: function(t) {
+            url: that.data.goods_qrcode,
+            success: function (t) {
                 getApp().core.showLoading({
                     title: "正在保存图片",
                     mask: !1
                 }), getApp().core.saveImageToPhotosAlbum({
                     filePath: t.tempFilePath,
-                    success: function() {
+                    success: function () {
                         getApp().core.showModal({
                             title: "提示",
                             content: "商品海报保存成功",
                             showCancel: !1
                         });
                     },
-                    fail: function(t) {
+                    fail: function (t) {
                         getApp().core.showModal({
                             title: "图片保存失败",
                             content: t.errMsg,
                             showCancel: !1
                         });
                     },
-                    complete: function(t) {
+                    complete: function (t) {
                         getApp().core.hideLoading();
                     }
                 });
             },
-            fail: function(t) {
+            fail: function (t) {
                 getApp().core.showModal({
                     title: "图片下载失败",
-                    content: t.errMsg + ";" + e.data.goods_qrcode,
+                    content: t.errMsg + ";" + that.data.goods_qrcode,
                     showCancel: !1
                 });
             },
-            complete: function(t) {
+            complete: function (t) {
                 getApp().core.hideLoading();
             }
         })) : getApp().core.showModal({

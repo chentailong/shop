@@ -6,7 +6,7 @@ var time = require("../commons/time.js"),
 Page({
     data: {
         show_more: !0,
-        p: 1,
+        page: 1,
         show_modal: !1,
         show: !1,
         show_more_btn: !0,
@@ -14,6 +14,10 @@ Page({
         show_modal_a: !1
     },
     onLoad: function(res) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, res);
         var that = this;
         that.setData({
@@ -71,11 +75,11 @@ Page({
     },
     onShareAppMessage: function() {
         getApp().page.onShareAppMessage(this);
-        var t = this;
+        var that = this;
         return {
-            path: "/bargain/activity/activity?order_id=" + t.data.order_id + "&user_id=" + t.data.__user_info.id,
+            path: "/bargain/activity/activity?order_id=" + that.data.order_id + "&user_id=" + that.data.__user_info.id,
             success: function(t) {},
-            title: t.data.share_title || null
+            title: that.data.share_title || null
         };
     },
     loadData: function() {
@@ -84,29 +88,29 @@ Page({
             title: "加载中"
         }), !is_loading) {
             is_loading = !0, getApp().core.showNavigationBarLoading();
-            var i = that.data.p + 1;
+            var page = that.data.page + 1;
             getApp().request({
                 url: getApp().api.bargain.activity,
                 data: {
                     order_id: that.data.order_id,
-                    page: i
+                    page: page
                 },
-                success: function(t) {
-                    if (0 == t.code) {
-                        var a = that.data.bargain_info;
-                        a = a.concat(t.data.bargain_info), that.setData({
-                            bargain_info: a,
-                            p: i,
-                            price: t.data.price,
-                            money_per: t.data.money_per,
-                            money_per_t: t.data.money_per_t
-                        }), 0 == t.data.bargain_info.length && (is_no_more = !0, i -= 1, that.setData({
+                success: function(res) {
+                    if (0 == res.code) {
+                        var bargain_info = that.data.bargain_info;
+                        bargain_info = bargain_info.concat(res.data.bargain_info), that.setData({
+                            bargain_info: bargain_info,
+                            page: page,
+                            price: res.data.price,
+                            money_per: res.data.money_per,
+                            money_per_t: res.data.money_per_t
+                        }), 0 == res.data.bargain_info.length && (is_no_more = !0, page -= 1, that.setData({
                             show_more_btn: !1,
                             show_more: !0,
-                            p: i
+                            page: page
                         }));
                     } else that.showToast({
-                        title: t.msg
+                        title: res.msg
                     });
                 },
                 complete: function(t) {
@@ -125,11 +129,11 @@ Page({
         });
     },
     orderSubmit: function() {
-        var t = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().core.redirectTo({
-            url: "/bargain/goods/goods?goods_id=" + t.data.goods_id
+            url: "/bargain/goods/goods?goods_id=" + that.data.goods_id
         });
     },
     close: function() {
@@ -138,18 +142,18 @@ Page({
         });
     },
     buyNow: function() {
-        var a = [], t = [];
-        t.push({
+        var list = [], goods_list = [];
+        goods_list.push({
             bargain_order_id: this.data.order_id
-        }), a.push({
+        }), list.push({
             mch_id: 0,
-            goods_list: t
+            goods_list: goods_list
         }), getApp().core.showModal({
             title: "提示",
             content: "是否确认购买？",
             success: function(t) {
                 t.confirm && getApp().core.redirectTo({
-                    url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(a)
+                    url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(list)
                 });
             }
         });

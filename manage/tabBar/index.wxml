@@ -1,0 +1,30 @@
+<view class="tab flex-row">
+    <navigator class="flex-y-center flex-grow-1" role="navigator" url="/manage/index/index/index">
+        <view>
+            <image class="tab_icon" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2302042128,241023711&fm=26&gp=0.jpg"></image>
+            <view class="tab_text">首页</view>
+        </view>
+    </navigator>
+
+    <navigator class="flex-y-center flex-grow-1" role="navigator" url="/manage/order/order">
+        <view>
+            <image class="tab_icon" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=57709239,4059634794&fm=26&gp=0.jpg"></image>
+            <view class="tab_text">订单</view>
+        </view>
+    </navigator>
+
+    <navigator class="flex-y-center flex-grow-1" role="navigator" url="/manage/goods/index/index">
+        <view>
+            <image class="tab_icon" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fku.90sjimg.com%2Felement_origin_min_pic%2F01%2F52%2F67%2F775746a238ef514.jpg&refer=http%3A%2F%2Fku.90sjimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1621045766&t=4f0ceb64b0912dcfe805ec38931a703a"></image>
+            <view class="tab_text">商品</view>
+        </view>
+    </navigator>
+
+    <navigator class="flex-y-center flex-grow-1" role="navigator" url="/manage/setting/setting">
+        <view>
+            <image class="tab_icon" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3057765882,2800171213&fm=26&gp=0.jpg"></image>
+            <view class="tab_text">设置</view>
+        </view>
+    </navigator>
+
+</view>

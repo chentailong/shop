@@ -20,6 +20,10 @@ Page({
         rest_time_str: "--:--:--"
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         var a = this;
         getApp().page.onLoad(this, e);
         var t = e.id;

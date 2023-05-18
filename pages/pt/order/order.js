@@ -7,16 +7,20 @@ Page({
         scrollLeft: 0,
         scrollTop: 0
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), this.systemInfo = getApp().core.getSystemInfoSync();
-        var e = getApp().core.getStorageSync(getApp().const.STORE);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), this.systemInfo = getApp().core.getSystemInfoSync();
+        var store = getApp().core.getStorageSync(getApp().const.STORE);
         this.setData({
-            store: e
+            store: store
         });
-        is_loading = is_no_more = !1, p = 2, this.loadOrderList(t.status || -1);
-        var o = 0;
-        o = 2 <= t.status ? 600 : 0, this.setData({
-            scrollLeft: o
+        is_loading = is_no_more = !1, p = 2, this.loadOrderList(options.status || -1);
+        var scrollLeft = 0;
+        scrollLeft = 2 <= options.status ? 600 : 0, this.setData({
+            scrollLeft: scrollLeft
         });
     },
     onReady: function(t) {
@@ -34,25 +38,25 @@ Page({
     onPullDownRefresh: function(t) {
         getApp().page.onPullDownRefresh(this);
     },
-    loadOrderList: function(e) {
-        null == e && (e = -1);
-        var o = this;
-        o.setData({
-            status: e
+    loadOrderList: function(status) {
+        null == status && (status = -1);
+        var that = this;
+        that.setData({
+            status: status
         }), getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.group.order.list,
             data: {
-                status: o.data.status
+                status: that.data.status
             },
-            success: function(t) {
-                0 == t.code && o.setData({
-                    order_list: t.data.list
-                }), o.setData({
-                    show_no_data_tip: 0 == t.data.list.length
-                }), 4 != e && o.countDown();
+            success: function(res) {
+                0 == res.code && that.setData({
+                    order_list: res.data.list
+                }), that.setData({
+                    show_no_data_tip: 0 === res.data.list.length
+                }), 4 !== status && that.countDown();
             },
             complete: function() {
                 getApp().core.hideLoading();
@@ -60,19 +64,21 @@ Page({
         });
     },
     countDown: function() {
-        var s = this;
+        var that = this;
         setInterval(function() {
-            var t = s.data.order_list;
-            for (var e in t) {
-                var o = new Date(t[e].limit_time_ms[0], t[e].limit_time_ms[1] - 1, t[e].limit_time_ms[2], t[e].limit_time_ms[3], t[e].limit_time_ms[4], t[e].limit_time_ms[5]) - new Date(), a = parseInt(o / 1e3 / 60 / 60 / 24, 10), i = parseInt(o / 1e3 / 60 / 60 % 24, 10), r = parseInt(o / 1e3 / 60 % 60, 10), n = parseInt(o / 1e3 % 60, 10);
-                a = s.checkTime(a), i = s.checkTime(i), r = s.checkTime(r), n = s.checkTime(n), 
-                t[e].limit_time = {
-                    days: a,
-                    hours: 0 < i ? i : "00",
-                    mins: 0 < r ? r : "00",
-                    secs: 0 < n ? n : "00"
-                }, s.setData({
-                    order_list: t
+            var order_list = that.data.order_list;
+            for (var e in order_list) {
+                var time = new Date(order_list[e].limit_time_ms[0], order_list[e].limit_time_ms[1] - 1, order_list[e].limit_time_ms[2], order_list[e].limit_time_ms[3],
+                    order_list[e].limit_time_ms[4], order_list[e].limit_time_ms[5]) - new Date(), days = parseInt(time / 1e3 / 60 / 60 / 24, 10),
+                    hours = parseInt(time / 1e3 / 60 / 60 % 24, 10), mins = parseInt(time / 1e3 / 60 % 60, 10), secs = parseInt(time / 1e3 % 60, 10);
+                days = that.checkTime(days), hours = thatcheckTime(hours), mins = that.checkTime(mins), secs = that.checkTime(secs),
+                    order_list[e].limit_time = {
+                    days: days,
+                    hours: 0 < hours ? hours : "00",
+                    mins: 0 < mins ? mins : "00",
+                    secs: 0 < secs ? secs : "00"
+                }, that.setData({
+                    order_list: order_list
                 });
             }
         }, 1e3);
@@ -82,19 +88,19 @@ Page({
     },
     onReachBottom: function(t) {
         getApp().page.onReachBottom(this);
-        var o = this;
+        var that = this;
         is_loading || is_no_more || (is_loading = !0, getApp().request({
             url: getApp().api.group.order.list,
             data: {
-                status: o.data.status,
+                status: that.data.status,
                 page: p
             },
             success: function(t) {
                 if (0 == t.code) {
-                    var e = o.data.order_list.concat(t.data.list);
-                    o.setData({
-                        order_list: e
-                    }), 0 == t.data.list.length && (is_no_more = !0);
+                    var order_list = that.data.order_list.concat(t.data.list);
+                    that.setData({
+                        order_list: order_list
+                    }), 0 === t.data.list.length && (is_no_more = !0);
                 }
                 p++;
             },
@@ -108,31 +114,31 @@ Page({
             url: "/pages/pt/index/index"
         });
     },
-    orderPay_1: function(t) {
+    orderPay_1: function(event) {
         getApp().core.showLoading({
             title: "正在提交",
             mask: !0
         }), getApp().request({
             url: getApp().api.group.pay_data,
             data: {
-                order_id: t.currentTarget.dataset.id,
+                order_id: event.currentTarget.dataset.id,
                 pay_type: "WECHAT_PAY"
             },
             complete: function() {
                 getApp().core.hideLoading();
             },
-            success: function(t) {
-                0 == t.code && getApp().core.requestPayment({
-                    _res: t,
-                    timeStamp: t.data.timeStamp,
-                    nonceStr: t.data.nonceStr,
-                    package: t.data.package,
-                    signType: t.data.signType,
-                    paySign: t.data.paySign,
+            success: function(res) {
+                0 === res.code && getApp().core.requestPayment({
+                    _res: res,
+                    timeStamp: res.data.timeStamp,
+                    nonceStr: res.data.nonceStr,
+                    package: res.data.package,
+                    signType: res.data.signType,
+                    paySign: res.data.paySign,
                     success: function(t) {},
                     fail: function(t) {},
                     complete: function(t) {
-                        "requestPayment:fail" != t.errMsg && "requestPayment:fail cancel" != t.errMsg ? getApp().core.redirectTo({
+                        "requestPayment:fail" !== t.errMsg && "requestPayment:fail cancel" !== t.errMsg ? getApp().core.redirectTo({
                             url: "/pages/pt/order/order?status=1"
                         }) : getApp().core.showModal({
                             title: "提示",
@@ -146,8 +152,8 @@ Page({
                             }
                         });
                     }
-                }), 1 == t.code && getApp().core.showToast({
-                    title: t.msg,
+                }), 1 === event.code && getApp().core.showToast({
+                    title: event.msg,
                     image: "/images/icon-warning.png"
                 });
             }
@@ -159,7 +165,7 @@ Page({
         });
     },
     getOfflineQrcode: function(t) {
-        var e = this;
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
@@ -169,7 +175,7 @@ Page({
                 order_no: t.currentTarget.dataset.id
             },
             success: function(t) {
-                0 == t.code ? e.setData({
+                0 == t.code ? that.setData({
                     hide: 0,
                     qrcode: t.data.url
                 }) : getApp().core.showModal({
@@ -188,7 +194,7 @@ Page({
         });
     },
     goToCancel: function(e) {
-        var o = this;
+        var that = this;
         getApp().core.showModal({
             title: "提示",
             content: "是否取消该订单？",
@@ -209,7 +215,7 @@ Page({
                             content: t.msg,
                             showCancel: !1,
                             success: function(t) {
-                                t.confirm && o.loadOrderList(o.data.status);
+                                t.confirm && that.loadOrderList(that.data.status);
                             }
                         });
                     }
@@ -218,15 +224,15 @@ Page({
         });
     },
     switchNav: function(t) {
-        var e = t.currentTarget.dataset.status;
+        var status = t.currentTarget.dataset.status;
         getApp().core.redirectTo({
-            url: "/pages/pt/order/order?status=" + e
+            url: "/pages/pt/order/order?status=" + status
         });
     },
     goToRefundDetail: function(t) {
-        var e = t.currentTarget.dataset.refund_id;
+        var refund_id = t.currentTarget.dataset.refund_id;
         getApp().core.navigateTo({
-            url: "/pages/pt/order-refund-detail/order-refund-detail?id=" + e
+            url: "/pages/pt/order-refund-detail/order-refund-detail?id=" + refund_id
         });
     }
 });

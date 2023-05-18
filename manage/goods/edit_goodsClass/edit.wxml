@@ -1,0 +1,33 @@
+<view class="content">
+    <view class="selectContent" wx:for="{{goods_class}}" wx:key="index">
+        <van-tag
+                closeable
+                plain
+                round
+                size="large"
+                type="primary"
+                id="{{item.id}}"
+                wx:if="{{item.id}}"
+                bind:close="onClose">
+            {{item.name}}
+        </van-tag>
+
+    </view>
+    <van-popup
+            show="{{ selection_sort }}"
+            position="bottom"
+            custom-style="height: 30%;"
+            bind:close="onClose">
+        <van-picker columns="{{ columns }}"
+                    bind:change="onChange"
+                    bind:confirm="addClass"
+                    show-toolbar
+        />
+    </van-popup>
+</view>
+
+<view class="footer">
+    <van-divider borderColor="#1989fa"/>
+    <van-button round type="default" custom-style="width:40%;margin:10px" bind:click="selection">添加分类</van-button>
+    <van-button round type="info" custom-style="width:40%;margin:10px">保存</van-button>
+</view>

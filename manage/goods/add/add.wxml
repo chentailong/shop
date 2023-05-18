@@ -1,0 +1,221 @@
+<view class="content">
+    <view class="title">基本信息</view>
+    <view class="basic">
+        <view class="img_title">
+            <text class="img_label">商品图片</text>
+            <text class="img_labels">(最多9张,可推拽改变顺序)</text>
+        </view>
+        <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead"/>
+        <van-cell-group>
+            <van-field
+                    model:value="{{ goods_list.goods_name }}"
+                    label="商品名称"
+                    bind:input="goods_value"
+                    placeholder="请输入商品名称"
+                    bind:click-icon="onClickIcon"/>
+            <van-field
+                    value=""
+                    readonly
+                    label="商品分类" bindtap="addClass">
+                <label slot="right-icon">未选择</label>
+                <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+            </van-field>
+            <van-field
+                    value="件"
+                    label="单位"
+                    border="{{ false }}"
+            />
+        </van-cell-group>
+    </view>
+
+    <view class="title">规格、价格及库存</view>
+    <view class="basic">
+        <van-cell title="多规格">
+            <van-switch checked="{{ specification }}" bind:change="switch" size="24px" active-color="green"/>
+        </van-cell>
+        <block wx:if="{{!specification}}">
+            <van-cell-group>
+                <van-field
+                        value="默认规格"
+                        label="规格"
+                        border="{{ false }}"/>
+                <van-field
+                        value="{{goods_list.cost_price}}"
+                        placeholder="请输入成本价"
+                        label="成本价">
+                    <label slot="right-icon">元</label>
+                </van-field>
+                <van-field
+                        value="{{goods_list.original_cost}}"
+                        placeholder="请输入原价"
+                        label="原价">
+                    <label slot="right-icon">元</label>
+                </van-field>
+                <van-field
+                        value="{{goods_list.selling_price}}"
+                        placeholder="请输入售价"
+                        label="售价">
+                    <label slot="right-icon">元</label>
+                </van-field>
+                <van-field
+                        value="{{goods_list.inventory}}"
+                        placeholder="请输入库存"
+                        label="库存">
+                    <label slot="right-icon">件</label>
+                </van-field>
+                <van-field
+                        value="{{goods_list.article}}"
+                        placeholder="请输入货号"
+                        label="货号"/>
+                <van-field
+                        value="{{goods_list.weights}}"
+                        placeholder="请输入重量"
+                        label="重量">
+                    <label slot="right-icon">g</label>
+                </van-field>
+            </van-cell-group>
+        </block>
+        <block wx:else>
+            <van-cell-group>
+                <van-field
+                        value=""
+                        readonly
+                        bindtap="specification"
+                        label="商品分类">
+                    <label slot="right-icon">未设置,点击设置</label>
+                    <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+                </van-field>
+
+                <van-field
+                        value="{{goods_list.cost_price}}"
+                        placeholder="请输入成本价"
+                        label="成本价">
+                    <label slot="right-icon">元</label>
+                </van-field>
+                <van-field
+                        value="{{goods_list.original_cost}}"
+                        placeholder="请输入原价"
+                        label="原价">
+                    <label slot="right-icon">元</label>
+                </van-field>
+                <van-field
+                        value="{{goods_list.selling_price}}"
+                        placeholder="请输入售价"
+                        label="售价">
+                    <label slot="right-icon">元</label>
+                </van-field>
+            </van-cell-group>
+        </block>
+    </view>
+
+    <view class="title">运费、包邮及限购</view>
+    <view class="basic">
+        <van-field
+                value=""
+                readonly
+                bindtap="carriage_show"
+                label="运费设置">
+            <label slot="right-icon">未选择</label>
+            <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+        </van-field>
+        <van-field
+                value="{{goods_list.pinkage}}"
+                placeholder="请输入包邮件数"
+                label="满件包邮">
+            <label slot="right-icon">件</label>
+        </van-field>
+        <van-field
+                value="{{goods_list.pinkage_money}}"
+                placeholder="请输入包邮金额"
+                label="满件额包邮">
+            <label slot="right-icon">元</label>
+        </van-field>
+        <van-cell title="限购">
+            <van-switch checked="{{ restriction }}" bind:change="restriction" size="24px" active-color="green"/>
+        </van-cell>
+        <block wx:if="{{!restriction}}">
+        </block>
+        <block wx:else>
+            <van-cell-group>
+                <van-field
+                        value="{{goods_list.restriction_number}}"
+                        placeholder="请输入限购数量"
+                        label="限购数量">
+                    <label slot="right-icon">件</label>
+                </van-field>
+            </van-cell-group>
+        </block>
+    </view>
+
+    <view class="title">商品图文描述</view>
+    <view class="basic">
+        <van-field
+                value=""
+                readonly
+                label="商品图文描述">
+            <label slot="right-icon">未添加</label>
+            <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+        </van-field>
+    </view>
+
+    <view class="title">积分设置</view>
+    <view class="basic">
+        <van-field
+                value="{{ goods_list.integral }}"
+                label="积分赠送"
+                border="{{ false }}"/>
+        <van-divider />
+        <van-field
+                value="{{ goods_list.discount }}"
+                label="积分折扣"
+                border="{{ false }}"/>
+    </view>
+
+    <view class="title">卡券</view>
+    <view class="basic">
+        <van-field
+                readonly
+                label="卡券">
+            <label slot="right-icon">未选择</label>
+            <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+        </van-field>
+    </view>
+
+    <view class="title">服务内容</view>
+    <view class="basic">
+        <van-cell title="默认服务">
+            <van-switch checked="{{ services }}" bind:change="services" size="24px" active-color="green"/>
+        </van-cell>
+        <block wx:if="{{services}}"> </block>
+        <block wx:else>
+            <van-field
+                    value=""
+                    readonly
+                    label="服务内容">
+                <label slot="right-icon">未设置</label>
+                <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+            </van-field>
+        </block>
+    </view>
+
+    <view class="btn">
+        <van-button round type="default" custom-style="width:40%;margin:0 10px" bind:click="save">保存</van-button>
+        <van-button round type="info" custom-style="width:40%;margin:0 10px" bind:click="up_shelf">上架</van-button>
+    </view>
+
+
+    <van-popup
+            show="{{ carriage_show }}"
+            position="bottom"
+            custom-style="height: 30%;"
+            bind:close="onClose">
+        <van-tree-select
+                items="{{ items }}"
+                main-active-index="{{ mainActiveIndex }}"
+                active-id="{{ activeId }}"
+                max="{{ max }}"
+                bind:click-nav="onClickNav"
+                bind:click-item="onClickItem"
+        />
+    </van-popup>
+</view>

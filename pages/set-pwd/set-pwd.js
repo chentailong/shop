@@ -22,6 +22,10 @@ Page({
     },
 
     onLoad: function () {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         this.code = wx.getStorageSync('code')
         if (this.code) {
             this.setData({showPayPwdInput: false, showPayPwdInput2: false, code: true}, function () {

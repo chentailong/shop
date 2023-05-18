@@ -1,139 +1,142 @@
-var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
+var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
     return typeof t;
-} : function(t) {
+} : function (t) {
     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
 };
 
 module.exports = {
     currentPage: null,
-    init: function(t) {
-        var e = this;
-        void 0 === (e.currentPage = t).switchTab && (t.switchTab = function(t) {
-            e.switchTab(t);
-        }), void 0 === t.descInput && (t.descInput = function(t) {
-            e.descInput(t);
-        }), void 0 === t.chooseImage && (t.chooseImage = function(t) {
-            e.chooseImage(t);
-        }), void 0 === t.deleteImage && (t.deleteImage = function(t) {
-            e.deleteImage(t);
-        }), void 0 === t.refundSubmit && (t.refundSubmit = function(t) {
-            e.refundSubmit(t);
+    init: function (t) {
+        var that = this;
+        void 0 === (that.currentPage = t).switchTab && (t.switchTab = function (t) {
+            that.switchTab(t);
+        }), void 0 === t.descInput && (t.descInput = function (t) {
+            that.descInput(t);
+        }), void 0 === t.chooseImage && (t.chooseImage = function (t) {
+            that.chooseImage(t);
+        }), void 0 === t.deleteImage && (t.deleteImage = function (t) {
+            that.deleteImage(t);
+        }), void 0 === t.refundSubmit && (t.refundSubmit = function (t) {
+            that.refundSubmit(t);
         });
     },
-    switchTab: function(t) {
-        var e = this.currentPage;
-        1 == t.currentTarget.dataset.id ? e.setData({
+    switchTab: function (t) {
+        var currentPage = this.currentPage;
+        1 == t.currentTarget.dataset.id ? currentPage.setData({
             switch_tab_1: "active",
             switch_tab_2: ""
-        }) : e.setData({
+        }) : currentPage.setData({
             switch_tab_1: "",
             switch_tab_2: "active"
         });
     },
-    descInput: function(t) {
-        var e = this.currentPage, a = t.currentTarget.dataset.type, i = t.detail.value;
-        if (1 == a) {
-            var o = e.data.refund_data_1;
-            o.desc = i, e.setData({
-                refund_data_1: o
+    descInput: function (t) {
+        var currentPage = this.currentPage, type = t.currentTarget.dataset.type, value = t.detail.value;
+        if (1 == type) {
+            var refund_data_1 = currentPage.data.refund_data_1;
+            refund_data_1.desc = value, currentPage.setData({
+                refund_data_1: refund_data_1
             });
         }
-        if (2 == a) {
-            var c = e.data.refund_data_2;
-            c.desc = i, e.setData({
-                refund_data_2: c
+        if (2 == type) {
+            var refund_data_2 = currentPage.data.refund_data_2;
+            refund_data_2.desc = value, currentPage.setData({
+                refund_data_2: refund_data_2
             });
         }
     },
-    chooseImage: function(t) {
-        var e = this.currentPage, a = t.currentTarget.dataset.type;
-        if (1 == a) {
-            var i = e.data.refund_data_1, o = 0;
-            i.pic_list && (o = i.pic_list.length || 0);
-            var c = 6 - o;
+    chooseImage: function (t) {
+        var currentPage = this.currentPage, type = t.currentTarget.dataset.type;
+        if (1 == type) {
+            var refund_data_1 = currentPage.data.refund_data_1, pic_list = 0;
+            refund_data_1.pic_list && (pic_list = refund_data_1.pic_list.length || 0);
+            var count = 6 - pic_list;
             getApp().core.chooseImage({
-                count: c,
-                success: function(t) {
-                    i.pic_list || (i.pic_list = []), i.pic_list = i.pic_list.concat(t.tempFilePaths), 
-                    e.setData({
-                        refund_data_1: i
-                    });
+                count: count,
+                success: function (t) {
+                    refund_data_1.pic_list || (refund_data_1.pic_list = []), refund_data_1.pic_list = refund_data_1.pic_list.concat(t.tempFilePaths),
+                        currentPage.setData({
+                            refund_data_1: refund_data_1
+                        });
                 }
             });
         }
-        if (2 == a) {
-            var n = e.data.refund_data_2;
-            o = 0;
-            n.pic_list && (o = n.pic_list.length || 0);
-            c = 6 - o;
+        if (2 == type) {
+            var refund_data_2 = currentPage.data.refund_data_2;
+            pic_list = 0;
+            refund_data_2.pic_list && (pic_list = refund_data_2.pic_list.length || 0);
+            count = 6 - pic_list;
             getApp().core.chooseImage({
-                count: c,
-                success: function(t) {
-                    n.pic_list || (n.pic_list = []), n.pic_list = n.pic_list.concat(t.tempFilePaths), 
-                    e.setData({
-                        refund_data_2: n
-                    });
+                count: count,
+                success: function (t) {
+                    refund_data_2.pic_list || (refund_data_2.pic_list = []), refund_data_2.pic_list = refund_data_2.pic_list.concat(t.tempFilePaths),
+                        currentPage.setData({
+                            refund_data_2: refund_data_2
+                        });
                 }
             });
         }
     },
-    deleteImage: function(t) {
-        var e = this.currentPage, a = t.currentTarget.dataset.type, i = t.currentTarget.dataset.index;
-        if (1 == a) {
-            var o = e.data.refund_data_1;
-            o.pic_list.splice(i, 1), e.setData({
-                refund_data_1: o
+    deleteImage: function (t) {
+        var currentPage = this.currentPage, type = t.currentTarget.dataset.type, index = t.currentTarget.dataset.index;
+        if (1 == type) {
+            var refund_data_1 = currentPage.data.refund_data_1;
+            refund_data_1.pic_list.splice(index, 1), currentPage.setData({
+                refund_data_1: refund_data_1
             });
         }
-        if (2 == a) {
-            var c = e.data.refund_data_2;
-            c.pic_list.splice(i, 1), e.setData({
-                refund_data_2: c
+        if (2 == type) {
+            var refund_data_2 = currentPage.data.refund_data_2;
+            refund_data_2.pic_list.splice(index, 1), currentPage.setData({
+                refund_data_2: refund_data_2
             });
         }
     },
-    refundSubmit: function(t) {
-        var i = this.currentPage, e = t.currentTarget.dataset.type, o = t.detail.formId, c = [], n = 0, a = i.data.pageType, d = getApp().api.order.refund, r = "", s = "";
-        if ("STORE" === a) r = "/pages/order/order?status=4", s = "STORE"; else if ("PINTUAN" === a) r = "/pages/pt/order/order?status=4", 
-        s = "PINTUAN"; else {
-            if ("MIAOSHA" !== a) return void getApp().core.showModal({
+
+    refundSubmit: function (t) {
+        var currentPage = this.currentPage, type = t.currentTarget.dataset.type, formId = t.detail.formId,
+            pic_list = [], n = 0,
+            pageType = currentPage.data.pageType, refund = getApp().api.order.refund, url = "", orderType = "";
+        if ("STORE" === pageType) url = "/pages/order/order?status=4", orderType = "STORE"; else if ("PINTUAN" === pageType) url = "/pages/pt/order/order?status=4",
+            orderType = "PINTUAN"; else {
+            if ("MIAOSHA" !== pageType) return void getApp().core.showModal({
                 title: "提示",
                 content: "pageType变量未定义或变量值不是预期的"
             });
-            r = "/pages/miaosha/order/order?status=4", s = "MIAOSHA";
+            url = "/pages/miaosha/order/order?status=4", orderType = "MIAOSHA";
         }
-        if (1 == e) {
-            var p = function() {
-                var a = function() {
+        if (1 == type) {
+            var p = function () {
+                var submit = function () {
                     getApp().core.showLoading({
                         title: "正在提交",
                         mask: !0
                     }), getApp().request({
-                        url: d,
+                        url: refund,
                         method: "post",
                         data: {
                             type: 1,
-                            order_detail_id: i.data.goods.order_detail_id,
+                            order_detail_id: currentPage.data.goods.order_detail_id,
                             desc: u,
-                            pic_list: JSON.stringify(c),
-                            form_id: o,
-                            orderType: s
+                            pic_list: JSON.stringify(pic_list),
+                            form_id: formId,
+                            orderType: orderType
                         },
-                        success: function(t) {
+                        success: function (t) {
                             getApp().core.hideLoading(), 0 == t.code && getApp().core.showModal({
                                 title: "提示",
                                 content: t.msg,
                                 showCancel: !1,
-                                success: function(t) {
+                                success: function (t) {
                                     t.confirm && getApp().core.redirectTo({
-                                        url: r
+                                        url: url
                                     });
                                 }
-                            }), 1 == t.code && getApp().core.showModal({
+                            }), 1 === t.code && getApp().core.showModal({
                                 title: "提示",
                                 content: t.msg,
                                 showCancel: !1,
-                                success: function(t) {
+                                success: function (t) {
                                     t.confirm && getApp().core.navigateBack({
                                         delta: 2
                                     });
@@ -142,60 +145,61 @@ module.exports = {
                         }
                     });
                 };
-                if (0 == (u = i.data.refund_data_1.desc || "").length) return getApp().core.showToast({
+                if (0 == (u = currentPage.data.refund_data_1.desc || "").length) return getApp().core.showToast({
                     title: "请填写退款原因",
                     image: "/images/icon-warning.png"
                 }), {
                     v: void 0
                 };
-                if (i.data.refund_data_1.pic_list && 0 < i.data.refund_data_1.pic_list.length) for (l in getApp().core.showLoading({
+                if (currentPage.data.refund_data_1.pic_list && 0 < currentPage.data.refund_data_1.pic_list.length) for (l in getApp().core.showLoading({
                     title: "正在上传图片",
                     mask: !0
-                }), i.data.refund_data_1.pic_list) !function(e) {
+                }), currentPage.data.refund_data_1.pic_list) !function (e) {
                     getApp().core.uploadFile({
                         url: getApp().api.default.upload_image,
-                        filePath: i.data.refund_data_1.pic_list[e],
+                        filePath: currentPage.data.refund_data_1.pic_list[e],
                         name: "image",
-                        success: function(t) {},
-                        complete: function(t) {
-                            n++, 200 == t.statusCode && 0 == (t = JSON.parse(t.data)).code && (c[e] = t.data.url), 
-                            n == i.data.refund_data_1.pic_list.length && (getApp().core.hideLoading(), a());
+                        success: function (t) {
+                        },
+                        complete: function (t) {
+                            n++, 200 == t.statusCode && 0 == (t = JSON.parse(t.data)).code && (pic_list[e] = t.data.url),
+                            n == currentPage.data.refund_data_1.pic_list.length && (getApp().core.hideLoading(), submit());
                         }
                     });
-                }(l); else a();
+                }(l); else submit();
             }();
             if ("object" === (void 0 === p ? "undefined" : _typeof(p))) return p.v;
         }
-        if (2 == e) {
-            var u, l, f = function() {
-                var a = function() {
+        if (2 == type) {
+            var u, l, f = function () {
+                var a = function () {
                     getApp().core.showLoading({
                         title: "正在提交",
                         mask: !0
                     }), getApp().request({
-                        url: d,
+                        url: refund,
                         method: "post",
                         data: {
                             type: 2,
-                            order_detail_id: i.data.goods.order_detail_id,
+                            order_detail_id: currentPage.data.goods.order_detail_id,
                             desc: u,
-                            pic_list: JSON.stringify(c)
+                            pic_list: JSON.stringify(pic_list)
                         },
-                        success: function(t) {
+                        success: function (t) {
                             getApp().core.hideLoading(), 0 == t.code && getApp().core.showModal({
                                 title: "提示",
                                 content: t.msg,
                                 showCancel: !1,
-                                success: function(t) {
+                                success: function (t) {
                                     t.confirm && getApp().core.redirectTo({
-                                        url: r
+                                        url: url
                                     });
                                 }
                             }), 1 == t.code && getApp().core.showModal({
                                 title: "提示",
                                 content: t.msg,
                                 showCancel: !1,
-                                success: function(t) {
+                                success: function (t) {
                                     t.confirm && getApp().core.navigateBack({
                                         delta: 2
                                     });
@@ -204,24 +208,25 @@ module.exports = {
                         }
                     });
                 };
-                if (0 == (u = i.data.refund_data_2.desc || "").length) return getApp().core.showToast({
+                if (0 == (u = currentPage.data.refund_data_2.desc || "").length) return getApp().core.showToast({
                     title: "请填写换货说明",
                     image: "/images/icon-warning.png"
                 }), {
                     v: void 0
                 };
-                if (c = [], n = 0, i.data.refund_data_2.pic_list && 0 < i.data.refund_data_2.pic_list.length) for (l in getApp().core.showLoading({
+                if (pic_list = [], n = 0, currentPage.data.refund_data_2.pic_list && 0 < currentPage.data.refund_data_2.pic_list.length) for (l in getApp().core.showLoading({
                     title: "正在上传图片",
                     mask: !0
-                }), i.data.refund_data_2.pic_list) !function(e) {
+                }), currentPage.data.refund_data_2.pic_list) !function (e) {
                     getApp().core.uploadFile({
                         url: getApp().api.default.upload_image,
-                        filePath: i.data.refund_data_2.pic_list[e],
+                        filePath: currentPage.data.refund_data_2.pic_list[e],
                         name: "image",
-                        success: function(t) {},
-                        complete: function(t) {
-                            n++, 200 == t.statusCode && 0 == (t = JSON.parse(t.data)).code && (c[e] = t.data.url), 
-                            n == i.data.refund_data_2.pic_list.length && (getApp().core.hideLoading(), a());
+                        success: function (t) {
+                        },
+                        complete: function (t) {
+                            n++, 200 == t.statusCode && 0 == (t = JSON.parse(t.data)).code && (pic_list[e] = t.data.url),
+                            n == currentPage.data.refund_data_2.pic_list.length && (getApp().core.hideLoading(), a());
                         }
                     });
                 }(l); else a();

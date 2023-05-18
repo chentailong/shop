@@ -4,11 +4,15 @@ Page({
         page: 1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
     },
     onShow: function() {
         getApp().page.onShow(this);
-        var a = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
@@ -17,7 +21,7 @@ Page({
                 page: 1
             },
             success: function(t) {
-                0 == t.code && a.setData({
+                0 === t.code && that.setData({
                     list: t.data
                 });
             },
@@ -28,29 +32,29 @@ Page({
     },
     onReachBottom: function() {
         getApp().page.onReachBottom(this);
-        var a = this;
-        if (!a.data.args) {
-            var e = a.data.page + 1;
+        var that = this;
+        if (!that.data.args) {
+            var page = that.data.page + 1;
             getApp().request({
                 url: getApp().api.scratch.prize,
                 data: {
-                    page: e
+                    page: page
                 },
                 success: function(t) {
-                    0 == t.code ? a.setData({
-                        list: a.data.list.concat(t.data),
-                        page: e
-                    }) : a.data.args = !0;
+                    0 == t.code ? that.setData({
+                        list: that.data.list.concat(t.data),
+                        page: page
+                    }) : that.data.args = !0;
                 }
             });
         }
     },
     submit: function(t) {
-        var a = t.currentTarget.dataset.gift, e = JSON.parse(t.currentTarget.dataset.attr), o = t.currentTarget.dataset.id;
+        var goods_id = t.currentTarget.dataset.gift, attr = JSON.parse(t.currentTarget.dataset.attr), id = t.currentTarget.dataset.id;
         getApp().core.navigateTo({
-            url: "/pages/order-submit/order-submit?scratch_id=" + o + "&goods_info=" + JSON.stringify({
-                goods_id: a,
-                attr: e,
+            url: "/pages/order-submit/order-submit?scratch_id=" + id + "&goods_info=" + JSON.stringify({
+                goods_id: goods_id,
+                attr: attr,
                 num: 1
             })
         });

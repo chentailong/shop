@@ -10,6 +10,10 @@ Page({
         order_money: 0
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
         this.setData({
             custom: getApp().core.getStorageSync(getApp().const.CUSTOM)
@@ -20,30 +24,30 @@ Page({
     },
     onShow: function() {
         getApp().page.onShow(this);
-        var e = this, t = getApp().core.getStorageSync(getApp().const.SHARE_SETTING), a = e.data.__user_info;
-        e.setData({
-            share_setting: t
-        }), a && 1 == a.is_distributor ? e.checkUser() : e.loadData();
+        var that = this, setting = getApp().core.getStorageSync(getApp().const.SHARE_SETTING), user_info = that.data.__user_info;
+        that.setData({
+            share_setting: setting
+        }), user_info && 1 === user_info.is_distributor ? that.checkUser() : that.loadData();
     },
     checkUser: function() {
-        var t = this;
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.share.get_info,
-            success: function(e) {
-                0 == e.code && (t.setData({
-                    total_price: e.data.price.total_price,
-                    price: e.data.price.price,
-                    cash_price: e.data.price.cash_price,
-                    total_cash: e.data.price.total_cash,
-                    team_count: e.data.team_count,
-                    order_money: e.data.order_money,
-                    custom: e.data.custom,
-                    order_money_un: e.data.order_money_un
-                }), getApp().core.setStorageSync(getApp().const.CUSTOM, e.data.custom), t.loadData()), 
-                1 == e.code && (__user_info.is_distributor = e.data.is_distributor, t.setData({
+            success: function(res) {
+                0 === res.code && (that.setData({
+                    total_price: res.data.price.total_price,
+                    price: res.data.price.price,
+                    cash_price: res.data.price.cash_price,
+                    total_cash: res.data.price.total_cash,
+                    team_count: res.data.team_count,
+                    order_money: res.data.order_money,
+                    custom: res.data.custom,
+                    order_money_un: res.data.order_money_un
+                }), getApp().core.setStorageSync(getApp().const.CUSTOM, res.data.custom), that.loadData()),
+                1 === res.code && (__user_info.is_distributor = res.data.is_distributor, that.setData({
                     __user_info: __user_info
                 }), getApp().setUser(__user_info));
             },
@@ -53,7 +57,7 @@ Page({
         });
     },
     loadData: function() {
-        var a = this;
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
@@ -61,9 +65,9 @@ Page({
             url: getApp().api.share.index,
             success: function(e) {
                 if (0 == e.code) {
-                    if (e.data.share_setting) var t = e.data.share_setting; else t = e.data;
-                    getApp().core.setStorageSync(getApp().const.SHARE_SETTING, t), a.setData({
-                        share_setting: t
+                    if (e.data.share_setting) var share_setting = e.data.share_setting; else share_setting = e.data;
+                    getApp().core.setStorageSync(getApp().const.SHARE_SETTING, share_setting), that.setData({
+                        share_setting: share_setting
                     });
                 }
             },
@@ -81,10 +85,10 @@ Page({
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     apply: function(t) {
-        var a = getApp().core.getStorageSync(getApp().const.SHARE_SETTING), o = getApp().getUser();
-        1 == a.share_condition ? getApp().core.navigateTo({
+        var share = getApp().core.getStorageSync(getApp().const.SHARE_SETTING), user = getApp().getUser();
+        1 === share.share_condition ? getApp().core.navigateTo({
             url: "/pages/add-share/index"
-        }) : 0 != a.share_condition && 2 != a.share_condition || (0 == o.is_distributor ? getApp().core.showModal({
+        }) : 0 !== share.share_condition && 2 !== share.share_condition || (0 === user.is_distributor ? getApp().core.showModal({
             title: "申请成为" + (this.data.custom.share_name || "分销商"),
             content: "是否申请？",
             success: function(e) {
@@ -98,11 +102,11 @@ Page({
                         form_id: t.detail.formId
                     },
                     success: function(e) {
-                        0 == e.code && (0 == a.share_condition ? (o.is_distributor = 2, getApp().core.navigateTo({
+                        0 === e.code && (0 === share.share_condition ? (user.is_distributor = 2, getApp().core.navigateTo({
                             url: "/pages/add-share/index"
-                        })) : (o.is_distributor = 1, getApp().core.redirectTo({
+                        })) : (user.is_distributor = 1, getApp().core.redirectTo({
                             url: "/pages/share/index"
-                        })), getApp().setUser(o));
+                        })), getApp().setUser(user));
                     },
                     complete: function() {
                         getApp().core.hideLoading();

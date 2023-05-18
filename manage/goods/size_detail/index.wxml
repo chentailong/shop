@@ -1,0 +1,38 @@
+<view class="content">
+ <view class="head">
+     <van-dropdown-menu active-color="#1989fa">
+         <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+     </van-dropdown-menu>
+ </view>
+    <view class="checked">
+        <van-checkbox value="{{ checked }}" bind:change="checked">复选框</van-checkbox>
+    </view>
+    <view class="basic">
+        <van-cell-group>
+            <van-field
+                    value=""
+                    placeholder="请输入售价"
+                    label="售价">
+                <label slot="right-icon">元</label>
+            </van-field>
+            <van-field
+                    value=""
+                    placeholder="请输入库存"
+                    label="库存">
+                <label slot="right-icon">件</label>
+            </van-field>
+            <van-field
+                    value=""
+                    placeholder="请输入货号"
+                    label="货号">
+                <label slot="right-icon"></label>
+            </van-field>
+            <van-field
+                    value=""
+                    placeholder="请输入重量"
+                    label="重量">
+                <label slot="right-icon">g</label>
+            </van-field>
+        </van-cell-group>
+    </view>
+</view>

@@ -1,0 +1,181 @@
+<view>
+    <van-tabs active="{{ active }}" bind:change="onChange" color="#1989fa" title-active-color="#1989fa">
+        <van-tab title="全部用户">
+            <van-search
+                    value="{{ search_user }}"
+                    shape="round"
+                    background="#e2e2e2"
+                    input-align="center"
+                    placeholder="请输入昵称或备注名搜索"/>
+
+            <view class="sort">
+                <view class="sort_deal" bindtap="deal">
+                    <text>交易额</text>
+                    <view class="sort_icon">
+                        <view class="{{sort_deal? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{sort_deal? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="sort_order" bindtap="sort_order">
+                    <text>订单数</text>
+                    <view class="sort_icon">
+                        <view class="{{sort_order? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{sort_order? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <block wx:if="{{user_list.length !== 0}}">
+                <view class="user_list" wx:for="{{user_list}}" wx:key="index">
+                    <view>
+                        <image class="user_img" src="{{item.img}}"></image>
+                        <view class="user_info">
+                            <text class="user_info_name">{{item.user_name}}</text>
+                            <text class="user_info_phone">{{item.member}}</text>
+                        </view>
+                    </view>
+                    <view class="label">
+                        <view class="label-list">
+                            <van-tag color="#ADA9A9">交易额</van-tag>
+                            <text class="label_money">￥{{item.price_sum}}</text>
+                        </view>
+                        <van-tag color="#ADA9A9">积分</van-tag>
+                        <text class="label_integral">￥{{item.integral}}</text>
+                    </view>
+                    <view class="label">
+                        <view class="label-list">
+                            <van-tag color="#ADA9A9">订单数</van-tag>
+                            <text class="label_money">￥{{item.order}}</text>
+                        </view>
+                        <van-tag color="#ADA9A9">余额</van-tag>
+                        <text class="label_integral">￥{{item.balance}}</text>
+                    </view>
+                    <view class="all_btn">
+                        <van-button round type="default" size="small">修改信息</van-button>
+                        <van-button round type="default" size="small">扣除</van-button>
+                        <van-button round plain type="info" size="small">充值</van-button>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <van-empty description="没有任何用户哦~"/>
+            </block>
+        </van-tab>
+
+        <van-tab title="分销商">
+            <van-search
+                    value="{{search_distributor}}"
+                    shape="round"
+                    background="#e2e2e2"
+                    input-align="center"
+                    placeholder="请输入昵称搜索"/>
+            <view class="sort">
+                <view class="sort_deal" bindtap="accruing">
+                    <text>累计金额</text>
+                    <view class="sort_icon">
+                        <view class="{{sort_accruing? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{sort_accruing? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="sort_order" bindtap="withdraw">
+                    <text>可提现金额</text>
+                    <view class="sort_icon">
+                        <view class="{{sort_withdraw? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{sort_withdraw? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <block wx:if="{{distributor_list.length !== 0}}">
+                <view class="distributor_list" wx:for="{{distributor_list}}" wx:key="index">
+                    <image class="distributor_img" src="{{item.img}}"></image>
+                    <view class="distributor_info">
+                        <view>{{item.distributor_name}}</view>
+                        <view class="distributor_label">
+                            <van-tag color="#ADA9A9">累计金额</van-tag>
+                            <text>￥{{item.price_amounts}}</text>
+                        </view>
+                        <view class="distributor_label">
+                            <van-tag color="#ADA9A9">可提现金额</van-tag>
+                            <text>￥{{item.withdraw}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <van-empty description="没有任何用户哦~"/>
+            </block>
+        </van-tab>
+
+        <van-tab title="核销员">
+            <van-search
+                    value="{{ search_cancel }}"
+                    shape="round"
+                    background="#e2e2e2"
+                    input-align="center"
+                    placeholder="请输入昵称/门店搜索"/>
+
+            <view class="sort">
+                <view class="sort_reimburse" bindtap="reimburse_order">
+                    <text>订单数</text>
+                    <view class="sort_icon">
+                        <view class="{{reimburse_order? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{reimburse_order? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="sort_reimburse" bindtap="reimburse_money">
+                    <text>金额</text>
+                    <view class="sort_icon">
+                        <view class="{{reimburse_money? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{reimburse_money? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+
+                <view class="sort_reimburse" bindtap="reimburse_coupon">
+                    <text>卡券数</text>
+                    <view class="sort_icon">
+                        <view class="{{reimburse_coupon? 'click_sort_up': 'sort_up'}}">
+                            <van-icon name="arrow-up"/>
+                        </view>
+                        <view class="{{reimburse_coupon? 'sort_down': 'click_sort_down'}}">
+                            <van-icon name="arrow-down"/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <block wx:if="{{cancel_list.length !== 0}}">
+            </block>
+            <block wx:else>
+                <van-empty description="没有任何用户哦~"/>
+            </block>
+        </van-tab>
+    </van-tabs>
+</view>
+

@@ -1,0 +1,45 @@
+<view class="container">
+    <van-cell-group>
+        <van-field
+                model:value="{{ distinguish }}"
+                center
+                clearable
+                placeholder="复制收货信息(格式：姓名：电话：地址：)"
+                border="{{ false }}"
+                use-button-slot>
+            <van-button slot="button" size="small" plain type="warning" bind:click="identification">
+                自动识别
+            </van-button>
+        </van-field>
+    </van-cell-group>
+
+    <view class="form_info">
+        <van-cell-group>
+            <van-field
+                    model:value="{{ consignee }}"
+                    label="收货人"/>
+            <van-field
+                    model:value="{{ phone }}"
+                    type="number"
+                    maxlength="11"
+                    error-message=""
+                    label="联系电话"/>
+            <van-cell title="所在地区" title-width="5em">
+                <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                    <view class="picker">
+                        <label wx:if="{{region ==='' || region === null}}">请选择</label>
+                        <label wx:else>{{region}}</label>
+                        <van-icon name="arrow"/>
+                    </view>
+                </picker>
+
+            </van-cell>
+            <van-field
+                    model:value="{{ address }}"
+                    label="详细地址"/>
+        </van-cell-group>
+    </view>
+    <van-button type="danger" bind:click="saveAddress" round size="large"
+                custom-style="margin:0 20px;height:40px;width:90%">保存地址
+    </van-button>
+</view>

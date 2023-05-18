@@ -1,0 +1,44 @@
+<view class="container">
+    <view class="search">
+        <van-search
+                value="{{ search }}"
+                input-align="center"
+                shape="round"
+                placeholder="请输入收货人或联系电话搜索"
+        />
+    </view>
+    <view class="address-list">
+        <view class="address-item" wx:for="{{address_list}}" wx:key="index">
+            <view class="userinfo flex-row">
+                <view class="flex-grow-1">收货人：{{item.name}}</view>
+                <view class="flex-grow-0">{{item.mobile}}</view>
+            </view>
+            <view class="address-detail">收货地址：{{item.address}}</view>
+            <view class="flex-row">
+                <view class="flex-grow-1">
+                </view>
+                <view class="flex-grow-0 flex-row" style="color:gray">
+                    <navigator class="address-option flex-y-center"
+                               url="/pages/address-edit/address-edit?id={{item.id}}">
+                        <van-icon name="edit" size="20px" custom-style="position:relative;top:5px"/>
+                        <text>编辑</text>
+                    </navigator>
+                    <view bindtap="deleteAddress" class="address-option flex-y-center" data-id="{{item.id}}"
+                          data-index="{{index}}">
+                        <van-icon name="delete-o" size="22px" custom-style="position:relative;top:5px"/>
+                        <text>删除</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="gain_address">
+        <van-button round plain type="primary" bind:click="Add_Address" custom-style="width:45%;margin-right:10px">
+            <van-icon name="add-o"/>手动添加
+        </van-button>
+        <van-button round type="primary" custom-style="width:45%" bind:click="getUserAddress">
+            <van-icon name="star-o"/>自动获取
+        </van-button>
+    </view>
+</view>

@@ -16,12 +16,12 @@ Page({
         getApp().page.onUnload(this);
     },
     loginSubmit: function() {
-        var e = this.options.scene || !1;
+        var scene = this.options.scene || !1;
         if ("undefined" != typeof my && null !== getApp().query) {
-            var n = getApp().query;
-            getApp().query = null, e = n.token;
+            var query = getApp().query;
+            getApp().query = null, scene = query.token;
         }
-        if (!e) return getApp().core.showModal({
+        if (!scene) return getApp().core.showModal({
             title: "提示",
             content: "无效的Token，请刷新页面后重新扫码登录",
             showCancel: !1,
@@ -35,7 +35,7 @@ Page({
             title: "正在处理",
             mask: !0
         }), getApp().request({
-            url: getApp().api.user.web_login + "&token=" + e,
+            url: getApp().api.user.web_login + "&token=" + scene,
             success: function(e) {
                 getApp().core.hideLoading(), getApp().core.showModal({
                     title: "提示",

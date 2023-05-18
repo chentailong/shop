@@ -4,20 +4,24 @@ Page({
     data: {
         qrcode_pic: ""
     },
-    onLoad: function(o) {
-        getApp().page.onLoad(this, o);
-        var e = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().request({
             url: getApp().api.mch.user.shop_qrcode,
-            success: function(o) {
-                0 == o.code ? e.setData({
-                    header_bg: o.data.header_bg,
-                    shop_logo: o.data.shop_logo,
-                    shop_name: o.data.shop_name,
-                    qrcode_pic: o.data.qrcode_pic
+            success: function(res) {
+                0 === res.code ? that.setData({
+                    header_bg: res.data.header_bg,
+                    shop_logo: res.data.shop_logo,
+                    shop_name: res.data.shop_name,
+                    qrcode_pic: res.data.qrcode_pic
                 }) : getApp().core.showModal({
                     title: "提示",
-                    content: o.msg,
+                    content: res.msg,
                     success: function() {}
                 });
             }

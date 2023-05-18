@@ -15,6 +15,10 @@ Page({
         catheight: 120
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         var a = this;
         getApp().page.onLoad(a, t);
         var e = getApp().core.getStorageSync(getApp().const.STORE), o = t.cat_id;
@@ -71,6 +75,7 @@ Page({
         getApp().request({
             url: getApp().api.default.cat_list,
             success: function(t) {
+                console.log(t)
                 if (0 == t.code) {
                     var a = !0;
                     for (var e in t.data.list) for (var o in t.data.list[e].id == i && (a = !1, s.data.current_cat = t.data.list[e], 
@@ -179,6 +184,7 @@ Page({
                 page: o
             },
             success: function(t) {
+                console.log(t)
                 0 == t.code && (getApp().core.hideLoading(), 0 == t.data.list.length && (is_no_more = !0), 
                 e.setData({
                     page: o + 1

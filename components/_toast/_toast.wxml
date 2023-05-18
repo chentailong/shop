@@ -10,7 +10,9 @@
 </view>
 <view class="new-modal" wx:if="{{user_info_show}}">
     <view class="new-modal-content">
-        <view class="new-modal-header" style="padding:30rpx 0;line-height:60rpx;border-bottom: 1rpx solid #eee;">需要您的授权</view>
+        <view class="new-modal-header" style="padding:30rpx 0;line-height:60rpx;border-bottom: 1rpx solid #eee;">
+            需要您的授权
+        </view>
         <view class="new-modal-body" style="min-height:0;margin-bottom:0;max-height:none">
             <view style="padding:32rpx 0 0 0;text-align: center">
                 <view>为了提供更好的服务</view>
@@ -20,12 +22,26 @@
                 <image src="/images/icon-login-index.png" style="width:500rpx;height:460rpx;"></image>
             </view>
             <view class="flex-x-center">
+
+                <!--                <view>-->
+                <!--                    <button bindtap="getUserInfo" class="btn new-modal-btn"  -->
+                <!--                  openType="getUserInfo"  style="background-color:#04be01;width:240rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;margin-right:20rpx">-->
+                <!--                        同意授权-->
+                <!--                    </button>-->
+                <!--                </view>-->
+
                 <view>
-                    <button bindgetuserinfo="getUserInfo" bindtap="myLogin" class="btn new-modal-btn" openType="getUserInfo" style="background-color:#04be01;width:240rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;margin-right:20rpx">同意授权</button>
+                    <button bindtap="getUserProfile" class="btn new-modal-btn"
+                            style="background-color:#04be01;width:240rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;margin-right:20rpx">
+                        同意授权
+                    </button>
                 </view>
 
                 <view>
-                    <button  bindtap="setUserInfoShowFalse" class="btn new-modal-btn" style="background-color:#cccccc;width:240rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;margin-left:20rpx">取消授权</button>
+                    <button bindtap="setUserInfoShowFalse" class="btn new-modal-btn"
+                            style="background-color:#cccccc;width:240rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;margin-left:20rpx">
+                        取消授权
+                    </button>
                 </view>
             </view>
         </view>
@@ -34,10 +50,13 @@
 <block wx:if="{{user_bind_show}}">
     <view class="new-modal" wx:if="{{!__user_info.binding&&store.option.phone_auth==1}}">
         <view class="new-modal-content">
-            <view class="new-modal-header" style="padding:30rpx 0;line-height:60rpx;font-size:11pt;border-bottom: 1rpx solid #eee;">授权获取手机号</view>
+            <view class="new-modal-header"
+                  style="padding:30rpx 0;line-height:60rpx;font-size:11pt;border-bottom: 1rpx solid #eee;">授权获取手机号
+            </view>
             <view class="new-modal-body" style="min-height:0;margin-bottom:0;">
                 <view style="padding:32rpx 0 40rpx 0;text-align: center">
-                    <image src="{{__wxapp_img.system.wechatapp.url}}" style="width: 88rpx;height: 88rpx;" wx:if="{{__platform=='wx'}}"></image>
+                    <image src="{{__wxapp_img.system.wechatapp.url}}" style="width: 88rpx;height: 88rpx;"
+                           wx:if="{{__platform=='wx'}}"></image>
                     <image src="{{__wxapp_img.system.alipay.url}}" style="width: 88rpx;height: 88rpx;" wx:else></image>
                 </view>
                 <view style="padding:0 41rpx;">
@@ -45,7 +64,11 @@
                 </view>
                 <view class="flex-x-center">
                     <view>
-                        <button bindgetphonenumber="getPhoneNumber" class="btn new-modal-btn" hoverClass="none" openType="getPhoneNumber" style="background-color:#04be01;width:500rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;">确认</button>
+                        <button bindgetphonenumber="getPhoneNumber" class="btn new-modal-btn" hoverClass="none"
+                                openType="getPhoneNumber"
+                                style="background-color:#04be01;width:500rpx;height:80rpx;border-radius:80rpx;color:#fff;margin-bottom:40rpx;">
+                            确认
+                        </button>
                     </view>
                 </view>
             </view>

@@ -7,6 +7,10 @@ Page({
         show_no_data_tip: !1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         app.page.onLoad(this, t);
         is_loading = is_no_more = !1, p = 2, this.LoadCashList(t.status || -1);
     },

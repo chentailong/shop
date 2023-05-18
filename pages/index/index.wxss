@@ -12,6 +12,28 @@
     height: 360rpx;
 }
 
+.float {
+    position: fixed;
+    bottom: 130px;
+    right: 0px;
+    z-index: 999;
+}
+.service_button {
+    background: none !important;
+    width: 60px;
+    height: 40px;
+}
+
+button::after {
+    border: none;
+}
+
+.image_service {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 .banner navigator {
     font-size: 0;
     position: relative;

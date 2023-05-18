@@ -1,13 +1,17 @@
 Page({
     data: {},
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().request({
             url: getApp().api.scratch.setting,
-            success: function(t) {
-                0 == t.code && e.setData({
-                    rule: t.data.setting.rule
+            success: function (res) {
+                0 === res.code && that.setData({
+                    rule: res.data.setting.rule
                 });
             }
         });

@@ -9,15 +9,19 @@ Page({
         page: 1,
         is_show: 0
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e), this.systemInfo = getApp().core.getSystemInfoSync();
-        var a = getApp().core.getStorageSync(getApp().const.STORE);
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), this.systemInfo = getApp().core.getSystemInfoSync();
+        var store = getApp().core.getStorageSync(getApp().const.STORE);
         this.setData({
-            store: a
+            store: store
         });
-        var o = this;
-        if (e.cid) {
-            e.cid;
+        var that = this;
+        if (options.cid) {
+            options.cid;
             return this.setData({
                 pt_url: !1
             }), getApp().core.showLoading({
@@ -26,25 +30,25 @@ Page({
             }), void getApp().request({
                 url: getApp().api.group.index,
                 method: "get",
-                success: function(a) {
-                    if (o.switchNav({
+                success: function (res) {
+                    if (that.switchNav({
                         currentTarget: {
                             dataset: {
-                                id: e.cid
+                                id: options.cid
                             }
                         }
-                    }), 0 == a.code) {
-                        var t = {
+                    }), 0 === res.code) {
+                        var block = {
                             data: {
-                                pic_list: a.data.ad
+                                pic_list: res.data.ad
                             }
                         };
-                        o.setData({
-                            banner: a.data.banner,
-                            ad: a.data.ad,
-                            page: a.data.goods.page,
-                            page_count: a.data.goods.page_count,
-                            block: t
+                        that.setData({
+                            banner: res.data.banner,
+                            ad: res.data.ad,
+                            page: res.data.goods.page,
+                            page_count: res.data.goods.page_count,
+                            block: block
                         });
                     }
                 }
@@ -54,36 +58,37 @@ Page({
             pt_url: !0
         }), this.loadIndexInfo(this);
     },
-    onReady: function(a) {
+    onReady: function (a) {
         getApp().page.onReady(this);
     },
-    onShow: function(a) {
+    onShow: function (a) {
         getApp().page.onShow(this);
     },
-    onHide: function(a) {
+    onHide: function (a) {
         getApp().page.onHide(this);
     },
-    onUnload: function(a) {
+    onUnload: function (a) {
         getApp().page.onUnload(this);
     },
-    onPullDownRefresh: function(a) {
+    onPullDownRefresh: function (a) {
         getApp().page.onPullDownRefresh(this);
     },
-    onReachBottom: function(a) {
+    onReachBottom: function (a) {
         getApp().page.onReachBottom(this);
-        var t = this;
-        t.setData({
+        var that = this;
+        that.setData({
             show_loading_bar: 1
-        }), t.data.page < t.data.page_count ? (t.setData({
-            page: t.data.page + 1
-        }), t.getGoods(t)) : t.setData({
+        }), that.data.page < that.data.page_count ? (that.setData({
+            page: that.data.page + 1
+        }), that.getGoods(that)) : that.setData({
             is_show: 1,
             emptyGoods: 1,
             show_loading_bar: 0
         });
     },
-    loadIndexInfo: function(a) {
-        var e = a;
+
+    loadIndexInfo: function (event) {
+        var data = event;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
@@ -91,33 +96,34 @@ Page({
             url: getApp().api.group.index,
             method: "get",
             data: {
-                page: e.data.page
+                page: data.data.page
             },
-            success: function(a) {
-                if (0 == a.code) {
+            success: function (res) {
+                if (0 === res.code) {
                     getApp().core.hideLoading();
-                    var t = {
+                    var block = {
                         data: {
-                            pic_list: a.data.ad
+                            pic_list: res.data.ad
                         }
                     };
-                    e.setData({
-                        cat: a.data.cat,
-                        banner: a.data.banner,
-                        ad: a.data.ad,
-                        goods: a.data.goods.list,
-                        page: a.data.goods.page,
-                        page_count: a.data.goods.page_count,
-                        block: t
-                    }), a.data.goods.row_count <= 0 && e.setData({
+                    data.setData({
+                        cat: res.data.cat,
+                        banner: res.data.banner,
+                        ad: res.data.ad,
+                        goods: res.data.goods.list,
+                        page: res.data.goods.page,
+                        page_count: res.data.goods.page_count,
+                        block: block
+                    }), res.data.goods.row_count <= 0 && data.setData({
                         emptyGoods: 1
                     });
                 }
             }
         });
     },
-    getGoods: function(a) {
-        var t = a;
+
+    getGoods: function (data) {
+        var list = data;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
@@ -125,49 +131,50 @@ Page({
             url: getApp().api.group.list,
             method: "get",
             data: {
-                page: t.data.page,
-                cid: t.data.cid
+                page: list.data.page,
+                cid: list.data.cid
             },
-            success: function(a) {
-                0 == a.code && (getApp().core.hideLoading(), t.data.goods = t.data.goods.concat(a.data.list), 
-                t.setData({
-                    goods: t.data.goods,
-                    page: a.data.page,
-                    page_count: a.data.page_count,
-                    show_loading_bar: 0
-                }));
+            success: function (res) {
+                0 === res.code && (getApp().core.hideLoading(), list.data.goods = list.data.goods.concat(res.data.list),
+                    list.setData({
+                        goods: list.data.goods,
+                        page: res.data.page,
+                        page_count: res.data.page_count,
+                        show_loading_bar: 0
+                    }));
             }
         });
     },
-    switchNav: function(a) {
-        var e = this;
+    switchNav: function (event) {
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         });
-        var t = a.currentTarget.dataset.id;
-        if (e.setData({
-            cid: t
+        var id = event.currentTarget.dataset.id;
+        if (that.setData({
+            cid: id
         }), "undefined" == typeof my) {
-            var o = this.systemInfo.windowWidth, d = a.currentTarget.offsetLeft, p = this.data.scrollLeft;
-            p = o / 2 < d ? d : 0, e.setData({
-                scrollLeft: p
+            var width = this.systemInfo.windowWidth, offLeft = event.currentTarget.offsetLeft,
+                scrollLeft = this.data.scrollLeft;
+            scrollLeft = width / 2 < offLeft ? offLeft : 0, that.setData({
+                scrollLeft: scrollLeft
             });
         } else {
-            for (var s = e.data.cat, n = !0, g = 0; g < s.length; ++g) if (s[g].id === a.currentTarget.id) {
-                n = !1, 1 <= g ? e.setData({
-                    toView: s[g - 1].id
-                }) : e.setData({
+            for (var cat = that.data.cat, n = !0, g = 0; g < cat.length; ++g) if (cat[g].id === event.currentTarget.id) {
+                n = !1, 1 <= g ? that.setData({
+                    toView: cat[g - 1].id
+                }) : that.setData({
                     toView: "0"
                 });
                 break;
             }
-            n && e.setData({
+            n && that.setData({
                 toView: "0"
             });
         }
-        e.setData({
-            cid: t,
+        that.setData({
+            cid: id,
             page: 1,
             scrollTop: 0,
             emptyGoods: 0,
@@ -178,48 +185,48 @@ Page({
             url: getApp().api.group.list,
             method: "get",
             data: {
-                cid: t
+                cid: id
             },
-            success: function(a) {
-                if (getApp().core.hideLoading(), 0 == a.code) {
-                    var t = a.data.list;
-                    a.data.page_count >= a.data.page ? e.setData({
-                        goods: t,
-                        page: a.data.page,
-                        page_count: a.data.page_count,
-                        row_count: a.data.row_count,
+            success: function (res) {
+                if (getApp().core.hideLoading(), 0 === res.code) {
+                    var goods = res.data.list;
+                    res.data.page_count >= res.data.page ? that.setData({
+                        goods: goods,
+                        page: res.data.page,
+                        page_count: res.data.page_count,
+                        row_count: res.data.row_count,
                         show_loading_bar: 0
-                    }) : e.setData({
+                    }) : that.setData({
                         emptyGoods: 1
                     });
                 }
             }
         });
     },
-    pullDownLoading: function(a) {
-        var e = this;
-        if (1 != e.data.emptyGoods && 1 != e.data.show_loading_bar) {
-            e.setData({
+    pullDownLoading: function (a) {
+        var that = this;
+        if (1 !== that.data.emptyGoods && 1 !== that.data.show_loading_bar) {
+            that.setData({
                 show_loading_bar: 1
             });
-            var t = parseInt(e.data.page + 1), o = e.data.cid;
+            var page = parseInt(that.data.page + 1), cid = that.data.cid;
             getApp().request({
                 url: getApp().api.group.list,
                 method: "get",
                 data: {
-                    page: t,
-                    cid: o
+                    page: page,
+                    cid: cid
                 },
-                success: function(a) {
-                    if (0 == a.code) {
-                        var t = e.data.goods;
-                        a.data.page > e.data.page && Array.prototype.push.apply(t, a.data.list), a.data.page_count >= a.data.page ? e.setData({
-                            goods: t,
-                            page: a.data.page,
-                            page_count: a.data.page_count,
-                            row_count: a.data.row_count,
+                success: function (res) {
+                    if (0 === res.code) {
+                        var goods = that.data.goods;
+                        res.data.page > that.data.page && Array.prototype.push.apply(goods, res.data.list), res.data.page_count >= res.data.page ? that.setData({
+                            goods: goods,
+                            page: res.data.page,
+                            page_count: res.data.page_count,
+                            row_count: res.data.row_count,
                             show_loading_bar: 0
-                        }) : e.setData({
+                        }) : that.setData({
                             emptyGoods: 1
                         });
                     }
@@ -227,29 +234,31 @@ Page({
             });
         }
     },
-    navigatorClick: function(a) {
-        var t = a.currentTarget.dataset.open_type, e = a.currentTarget.dataset.url;
-        return "wxapp" != t || ((e = function(a) {
+    navigatorClick: function (a) {
+        var open_type = a.currentTarget.dataset.open_type, url = a.currentTarget.dataset.url;
+        return "wxapp" !== open_type || ((url = function (a) {
             var t = /([^&=]+)=([\w\W]*?)(&|$|#)/g, e = /^[^\?]+\?([\w\W]+)$/.exec(a), o = {};
-            if (e && e[1]) for (var d, p = e[1]; null != (d = t.exec(p)); ) o[d[1]] = d[2];
+            if (e && e[1]) for (var d, p = e[1]; null != (d = t.exec(p));) o[d[1]] = d[2];
             return o;
-        }(e)).path = e.path ? decodeURIComponent(e.path) : "", getApp().core.navigateToMiniProgram({
-            appId: e.appId,
-            path: e.path,
-            complete: function(a) {}
+        }(url)).path = url.path ? decodeURIComponent(url.path) : "", getApp().core.navigateToMiniProgram({
+            appId: url.appId,
+            path: url.path,
+            complete: function (a) {
+            }
         }), !1);
     },
-    to_dial: function() {
-        var a = this.data.store.contact_tel;
+    to_dial: function () {
+        var contact_tel = this.data.store.contact_tel;
         getApp().core.makePhoneCall({
-            phoneNumber: a
+            phoneNumber: contact_tel
         });
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         getApp().page.onShareAppMessage(this);
         return {
             path: "/pages/pt/index/index?user_id=" + this.data.__user_info.id,
-            success: function(a) {}
+            success: function (a) {
+            }
         };
     }
 });

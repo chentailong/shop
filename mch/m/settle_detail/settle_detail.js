@@ -7,6 +7,10 @@ Page({
         no_more: !1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         this.setData({
             settle_type: t.settle_type
@@ -35,38 +39,38 @@ Page({
         getApp().page.onShareAppMessage(this);
     },
     getSettleList: function() {
-        var e = this;
-        if (!e.data.loading && !e.data.no_more) {
-            e.setData({
+        var that = this;
+        if (!that.data.loading && !that.data.no_more) {
+            that.setData({
                 loading: !0
             });
-            var t = e.data.settle_type, a = e.data.page;
+            var settle_type = that.data.settle_type, page = that.data.page;
             getApp().core.showLoading({
                 title: "正在加载",
                 mask: !0
             }), getApp().request({
                 url: getApp().api.mch.user.settle_log,
                 data: {
-                    settle_type: t,
-                    page: a
+                    settle_type: settle_type,
+                    page: page
                 },
-                success: function(t) {
-                    0 == t.code ? 0 < t.data.list.length ? e.setData({
-                        settleList: e.data.settleList.concat(t.data.list),
-                        page: a + 1
-                    }) : e.setData({
+                success: function(res) {
+                    0 == res.code ? 0 < res.data.list.length ? that.setData({
+                        settleList: that.data.settleList.concat(res.data.list),
+                        page: page + 1
+                    }) : that.setData({
                         no_more: !0
                     }) : getApp().core.showModal({
                         title: "提示",
-                        content: t.msg,
+                        content: res.msg,
                         showCancel: !1,
-                        success: function(t) {
-                            t.confirm && getApp().core.navigateBack();
+                        success: function(res) {
+                            res.confirm && getApp().core.navigateBack();
                         }
                     });
                 },
                 complete: function() {
-                    getApp().core.hideLoading(), e.setData({
+                    getApp().core.hideLoading(), that.setData({
                         loading: !1
                     });
                 }

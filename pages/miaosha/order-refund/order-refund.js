@@ -12,6 +12,10 @@ Page({
         refund_data_2: {}
     },
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
         var t = this;
         getApp().request({

@@ -1,4 +1,12 @@
-var WxParse = require("../../wxParse/wxParse.js"), shoppingCart = require("../../components/shopping_cart/shopping_cart.js"), specificationsModel = require("../../components/specifications_model/specifications_model.js"), gSpecificationsModel = require("../../components/goods/specifications_model.js"), goodsBanner = require("../../components/goods/goods_banner.js"), goodsInfo = require("../../components/goods/goods_info.js"), goodsBuy = require("../../components/goods/goods_buy.js"), quickNavigation = require("../../components/quick-navigation/quick-navigation.js"), p = 1, is_loading_comment = !1, is_more_comment = !0, share_count = 0;
+var WxParse = require("../../wxParse/wxParse.js"),
+    shoppingCart = require("../../components/shopping_cart/shopping_cart.js"),
+    specificationsModel = require("../../components/specifications_model/specifications_model.js"),
+    gSpecificationsModel = require("../../components/goods/specifications_model.js"),
+    goodsBanner = require("../../components/goods/goods_banner.js"),
+    goodsInfo = require("../../components/goods/goods_info.js"),
+    goodsBuy = require("../../components/goods/goods_buy.js"),
+    quickNavigation = require("../../components/quick-navigation/quick-navigation.js"), p = 1, is_loading_comment = !1,
+    is_more_comment = !0, share_count = 0;
 
 Page({
     data: {
@@ -34,141 +42,146 @@ Page({
         },
         goodNumCount: 0
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         share_count = 0, is_more_comment = !(is_loading_comment = !(p = 1));
-        var o = t.quick;
-        if (o) {
-            var a = getApp().core.getStorageSync(getApp().const.ITEM);
-            if (a) var i = a.total, s = a.carGoods; else i = {
+        var quick = options.quick;
+        if (quick) {
+            var list = getApp().core.getStorageSync(getApp().const.ITEM);
+            if (list) var total = list.total, carGoods = list.carGoods; else total = {
                 total_price: 0,
                 total_num: 0
-            }, s = [];
-            e.setData({
-                quick: o,
-                quick_list: a.quick_list,
-                total: i,
-                carGoods: s,
-                quick_hot_goods_lists: a.quick_hot_goods_lists
+            }, carGoods = [];
+            that.setData({
+                quick: quick,
+                quick_list: list.quick_list,
+                total: total,
+                carGoods: carGoods,
+                quick_hot_goods_lists: list.quick_hot_goods_lists
             });
         }
         if ("undefined" == typeof my) {
-            var r = decodeURIComponent(t.scene);
-            if (void 0 !== r) {
-                var n = getApp().helper.scene_decode(r);
-                n.uid && n.gid && (t.id = n.gid);
+            var scene = decodeURIComponent(options.scene);
+            if (void 0 !== scene) {
+                var scene_decode = getApp().helper.scene_decode(scene);
+                scene_decode.uid && scene_decode.gid && (options.id = scene_decode.gid);
             }
         } else if (null !== getApp().query) {
-            var d = app.query;
-            getApp().query = null, t.id = d.gid;
+            var query = app.query;
+            getApp().query = null, options.id = query.gid;
         }
-        e.setData({
-            id: t.goods_id,
-            user_id: t.user_id
-        }), e.getGoods();
+        that.setData({
+            id: options.goods_id,
+            user_id: options.user_id
+        }), that.getGoods();
     },
-    onReady: function() {
+
+    onReady: function () {
         getApp().page.onReady(this);
     },
-    onShow: function() {
-        getApp().page.onShow(this), shoppingCart.init(this), specificationsModel.init(this, shoppingCart), 
-        gSpecificationsModel.init(this), goodsBanner.init(this), goodsInfo.init(this), goodsBuy.init(this), 
-        quickNavigation.init(this);
-        var t = getApp().core.getStorageSync(getApp().const.ITEM);
-        if (t) var e = t.total, o = t.carGoods, a = this.data.goods_num; else e = {
+    onShow: function () {
+        getApp().page.onShow(this), shoppingCart.init(this), specificationsModel.init(this, shoppingCart),
+            gSpecificationsModel.init(this), goodsBanner.init(this), goodsInfo.init(this), goodsBuy.init(this),
+            quickNavigation.init(this);
+        var item = getApp().core.getStorageSync(getApp().const.ITEM);
+        if (item) var total = item.total, carGoods = item.carGoods, goods_num = this.data.goods_num; else total = {
             total_price: 0,
             total_num: 0
-        }, o = [], a = 0;
+        }, carGoods = [], goods_num = 0;
         this.setData({
-            total: e,
-            carGoods: o,
-            goods_num: a
+            total: total,
+            carGoods: carGoods,
+            goods_num: goods_num
         });
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this), shoppingCart.saveItemData(this);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this), shoppingCart.saveItemData(this);
     },
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         getApp().page.onPullDownRefresh(this);
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         getApp().page.onShareAppMessage(this);
-        var e = this, t = getApp().getUser();
+        var that = this, info = getApp().getUser();
         return {
-            path: "/step/goods/goods?goods_id=" + this.data.id + "&user_id=" + t.id,
-            success: function(t) {
-                1 == ++share_count && e.shareSendCoupon(e);
+            path: "/step/goods/goods?goods_id=" + this.data.id + "&user_id=" + info.id,
+            success: function (t) {
+                1 === ++share_count && that.shareSendCoupon(that);
             },
-            title: e.data.goods.name,
-            imageUrl: e.data.goods.pic_list[0]
+            title: that.data.goods.name,
+            imageUrl: that.data.goods.pic_list[0]
         };
     },
-    play: function(t) {
-        var e = t.target.dataset.url;
+    play: function (t) {
+        var url = t.target.dataset.url;
         this.setData({
-            url: e,
+            url: url,
             hide: "",
             show: !0
         }), getApp().core.createVideoContext("video").play();
     },
-    close: function(t) {
-        if ("video" == t.target.id) return !0;
+    close: function (t) {
+        if ("video" === t.target.id) return !0;
         this.setData({
             hide: "hide",
             show: !1
         }), getApp().core.createVideoContext("video").pause();
     },
-    closeCouponBox: function(t) {
+    closeCouponBox: function (t) {
         this.setData({
             get_coupon_list: ""
         });
     },
-    to_dial: function(t) {
-        var e = this.data.store.contact_tel;
+    to_dial: function (t) {
+        var contact_tel = this.data.store.contact_tel;
         getApp().core.makePhoneCall({
-            phoneNumber: e
+            phoneNumber: contact_tel
         });
     },
-    getGoods: function() {
-        var r = this;
-        if (r.data.quick) {
-            var t = r.data.carGoods;
-            if (t) {
-                for (var e = t.length, o = 0, a = 0; a < e; a++) t[a].goods_id == r.data.id && (o += parseInt(t[a].num));
-                r.setData({
-                    goods_num: o
+    getGoods: function () {
+        var that = this;
+        if (that.data.quick) {
+            var carGoods = that.data.carGoods;
+            if (carGoods) {
+                for (var i = carGoods.length, goods_num = 0, index = 0; index < i; index++) carGoods[index].goods_id === that.data.id && (goods_num += parseInt(carGoods[index].num));
+                that.setData({
+                    goods_num: goods_num
                 });
             }
         }
         getApp().request({
             url: getApp().api.step.goods,
             data: {
-                goods_id: r.data.id,
-                user_id: r.data.user_id
+                goods_id: that.data.id,
+                user_id: that.data.user_id
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = t.data.goods.detail;
-                    WxParse.wxParse("detail", "html", e, r);
-                    var o = t.data.goods;
-                    o.attr_pic = t.data.goods.attr_pic, o.cover_pic = t.data.goods.pic_list[0].pic_url;
-                    var a = o.pic_list, i = [];
-                    for (var s in a) i.push(a[s].pic_url);
-                    o.pic_list = i, r.setData({
-                        goods: o,
-                        attr_group_list: t.data.goods.attr_group_list,
+            success: function (res) {
+                if (0 === res.code) {
+                    var detail = res.data.goods.detail;
+                    WxParse.wxParse("detail", "html", detail, that);
+                    var goods = res.data.goods;
+                    goods.attr_pic = res.data.goods.attr_pic, goods.cover_pic = res.data.goods.pic_list[0].pic_url;
+                    var pic_list = goods.pic_list, list = [];
+                    for (var s in pic_list) list.push(pic_list[s].pic_url);
+                    goods.pic_list = list, that.setData({
+                        goods: goods,
+                        attr_group_list: res.data.goods.attr_group_list,
                         btn: !0
-                    }), r.selectDefaultAttr();
+                    }), that.selectDefaultAttr();
                 }
-                1 == t.code && getApp().core.showModal({
+                1 === res.code && getApp().core.showModal({
                     title: "提示",
-                    content: t.msg,
+                    content: res.msg,
                     showCancel: !1,
-                    success: function(t) {
+                    success: function (t) {
                         t.confirm && getApp().core.switchTab({
                             url: "/pages/index/index"
                         });
@@ -177,8 +190,8 @@ Page({
             }
         });
     },
-    tabSwitch: function(t) {
-        "detail" == t.currentTarget.dataset.tab ? this.setData({
+    tabSwitch: function (t) {
+        "detail" === t.currentTarget.dataset.tab ? this.setData({
             tab_detail: "active",
             tab_comment: ""
         }) : this.setData({
@@ -186,52 +199,52 @@ Page({
             tab_comment: "active"
         });
     },
-    commentPicView: function(t) {
-        var e = t.currentTarget.dataset.index, o = t.currentTarget.dataset.picIndex;
+    commentPicView: function (t) {
+        var index = t.currentTarget.dataset.index, picIndex = t.currentTarget.dataset.picIndex;
         getApp().core.previewImage({
-            current: this.data.comment_list[e].pic_list[o],
-            urls: this.data.comment_list[e].pic_list
+            current: this.data.comment_list[index].pic_list[picIndex],
+            urls: this.data.comment_list[index].pic_list
         });
     },
-    exchangeGoods: function() {
-        var t = this;
-        if (!t.data.show_attr_picker) return t.setData({
+    exchangeGoods: function () {
+        var that = this;
+        if (!that.data.show_attr_picker) return that.setData({
             show_attr_picker: !0
         }), !0;
-        var e = t.data.attr_group_list, o = [];
-        for (var a in e) {
+        var attr_group_list = that.data.attr_group_list, attr = [];
+        for (var a in attr_group_list) {
             var i = !1;
-            for (var s in e[a].attr_list) if (e[a].attr_list[s].checked) {
+            for (var s in attr_group_list[a].attr_list) if (attr_group_list[a].attr_list[s].checked) {
                 i = {
-                    attr_id: e[a].attr_list[s].attr_id,
-                    attr_name: e[a].attr_list[s].attr_name
+                    attr_id: attr_group_list[a].attr_list[s].attr_id,
+                    attr_name: attr_group_list[a].attr_list[s].attr_name
                 };
                 break;
             }
             if (!i) return getApp().core.showToast({
-                title: "请选择" + e[a].attr_group_name,
+                title: "请选择" + attr_group_list[a].attr_group_name,
                 image: "/images/icon-warning.png"
             }), !0;
-            o.push({
-                attr_group_id: e[a].attr_group_id,
-                attr_group_name: e[a].attr_group_name,
+            attr.push({
+                attr_group_id: attr_group_list[a].attr_group_id,
+                attr_group_name: attr_group_list[a].attr_group_name,
                 attr_id: i.attr_id,
                 attr_name: i.attr_name
             });
         }
-        var r = t.data.form.number;
-        if (r <= 0) return getApp().core.showToast({
+        var number = that.data.form.number;
+        if (number <= 0) return getApp().core.showToast({
             title: "商品库存不足!",
             image: "/images/icon-warning.png"
         }), !0;
-        var n = t.data.goods;
-        t.setData({
+        var goods = that.data.goods;
+        that.setData({
             show_attr_picker: !1
         }), getApp().core.navigateTo({
-            url: "/pages/order-submit/order-submit?step_id=" + n.id + "&goods_info=" + JSON.stringify({
-                goods_id: n.id,
-                attr: o,
-                num: r
+            url: "/pages/order-submit/order-submit?step_id=" + goods.id + "&goods_info=" + JSON.stringify({
+                goods_id: goods.id,
+                attr: attr,
+                num: number
             })
         });
     }

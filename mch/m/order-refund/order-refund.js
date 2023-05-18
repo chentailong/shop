@@ -2,113 +2,117 @@ var app = getApp(), api = getApp().api;
 
 Page({
     data: {},
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var t = this;
-        t.setData({
-            id: e.id || 0
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        that.setData({
+            id: options.id || 0
         }), getApp().core.showLoading({
             title: "加载中",
             mask: !0
         }), getApp().request({
             url: getApp().api.mch.order.refund_detail,
             data: {
-                id: t.data.id
+                id: that.data.id
             },
-            success: function(e) {
-                0 == e.code && t.setData(e.data), 1 == e.code && getApp().core.showModal({
+            success: function (res) {
+                0 === res.code && that.setData(res.data), 1 === res.code && getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1
                 });
             },
-            complete: function(e) {
+            complete: function (e) {
                 getApp().core.hideLoading();
             }
         });
     },
-    onReady: function() {
+    onReady: function () {
         getApp().page.onReady(this);
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this);
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this);
     },
-    showPicList: function(e) {
+    showPicList: function (e) {
         getApp().core.previewImage({
             urls: this.data.pic_list,
             current: this.data.pic_list[e.currentTarget.dataset.pindex]
         });
     },
-    refundPass: function(e) {
-        var t = this, o = t.data.id, p = t.data.type;
+    refundPass: function (event) {
+        var that = this, id = that.data.id, type = that.data.type;
         getApp().core.showModal({
             title: "提示",
-            content: "确认同意" + (1 == p ? "退款？资金将原路返回！" : "换货？"),
-            success: function(e) {
-                e.confirm && (getApp().core.showLoading({
+            content: "确认同意" + (1 == type ? "退款？资金将原路返回！" : "换货？"),
+            success: function (res) {
+                res.confirm && (getApp().core.showLoading({
                     title: "正在处理",
                     mask: !0
                 }), getApp().request({
                     url: getApp().api.mch.order.refund,
                     method: "post",
                     data: {
-                        id: o,
+                        id: id,
                         action: "pass"
                     },
-                    success: function(e) {
+                    success: function (res) {
                         getApp().core.showModal({
                             title: "提示",
-                            content: e.msg,
+                            content: res.msg,
                             showCancel: !1,
-                            success: function(e) {
+                            success: function (e) {
                                 getApp().core.redirectTo({
-                                    url: "/" + t.route + "?" + getApp().helper.objectToUrlParams(t.options)
+                                    url: "/" + that.route + "?" + getApp().helper.objectToUrlParams(that.options)
                                 });
                             }
                         });
                     },
-                    complete: function() {
+                    complete: function () {
                         getApp().core.hideLoading();
                     }
                 }));
             }
         });
     },
-    refundDeny: function(e) {
-        var t = this, o = t.data.id;
+    refundDeny: function (e) {
+        var that = this, id = that.data.id;
         getApp().core.showModal({
             title: "提示",
             content: "确认拒绝？",
-            success: function(e) {
-                e.confirm && (getApp().core.showLoading({
+            success: function (res) {
+                res.confirm && (getApp().core.showLoading({
                     title: "正在处理",
                     mask: !0
                 }), getApp().request({
                     url: getApp().api.mch.order.refund,
                     method: "post",
                     data: {
-                        id: o,
+                        id: id,
                         action: "deny"
                     },
-                    success: function(e) {
+                    success: function (res) {
                         getApp().core.showModal({
                             title: "提示",
-                            content: e.msg,
+                            content: res.msg,
                             showCancel: !1,
-                            success: function(e) {
+                            success: function (e) {
                                 getApp().core.redirectTo({
-                                    url: "/" + t.route + "?" + getApp().helper.objectToUrlParams(t.options)
+                                    url: "/" + that.route + "?" + getApp().helper.objectToUrlParams(that.options)
                                 });
                             }
                         });
                     },
-                    complete: function() {
+                    complete: function () {
                         getApp().core.hideLoading();
                     }
                 }));

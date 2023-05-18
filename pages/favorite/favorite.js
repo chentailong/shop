@@ -15,6 +15,10 @@ Page({
         }
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t), this.loadGoodsList({
             reload: !0,
             page: 1

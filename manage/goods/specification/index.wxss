@@ -1,0 +1,35 @@
+page {
+    background-color: #f1f1f1;
+}
+
+.basic {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+.basics {
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    line-height: 60px;
+    text-align: center;
+    background-color: white;
+}
+
+.title {
+    margin: 10px;
+    color: gray;
+}
+
+.footer {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 25px;
+}
+
+.size {
+    margin-bottom: 10px;
+}

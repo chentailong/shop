@@ -9,12 +9,16 @@ Page({
         is_loading: !1
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         is_loading = is_no_more = !1, p = 2, this.GetList(t.status || -1);
     },
     GetList: function(t) {
-        var a = this;
-        a.setData({
+        var that = this;
+        that.setData({
             status: parseInt(t || -1)
         }), getApp().core.showLoading({
             title: "正在加载",
@@ -22,12 +26,12 @@ Page({
         }), getApp().request({
             url: getApp().api.share.get_order,
             data: {
-                status: a.data.status
+                status: that.data.status
             },
             success: function(t) {
-                a.setData({
+                that.setData({
                     list: t.data
-                }), 0 == t.data.length && a.setData({
+                }), 0 == t.data.length && that.setData({
                     is_no_more: !0
                 });
             },
@@ -50,34 +54,34 @@ Page({
     },
     onPullDownRefresh: function() {},
     click: function(t) {
-        var a = t.currentTarget.dataset.index;
+        var index = t.currentTarget.dataset.index;
         this.setData({
-            hidden: this.data.hidden == a ? -1 : a
+            hidden: this.data.hidden === index ? -1 : index
         });
     },
     onReachBottom: function() {
-        var e = this;
-        is_loading || is_no_more || (is_loading = !0, e.setData({
+        var that = this;
+        is_loading || is_no_more || (is_loading = !0, that.setData({
             is_loading: is_loading
         }), getApp().request({
             url: getApp().api.share.get_order,
             data: {
-                status: e.data.status,
+                status: that.data.status,
                 page: p
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    var a = e.data.list.concat(t.data);
-                    e.setData({
-                        list: a
-                    }), 0 == t.data.length && (is_no_more = !0, e.setData({
+            success: function(res) {
+                if (0 === res.code) {
+                    var list = that.data.list.concat(res.data);
+                    that.setData({
+                        list: list
+                    }), 0 === res.data.length && (is_no_more = !0, that.setData({
                         is_no_more: is_no_more
                     }));
                 }
                 p++;
             },
             complete: function() {
-                is_loading = !1, e.setData({
+                is_loading = !1, that.setData({
                     is_loading: is_loading
                 });
             }

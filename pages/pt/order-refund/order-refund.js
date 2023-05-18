@@ -11,20 +11,24 @@ Page({
         refund_data_1: {},
         refund_data_2: {}
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var o = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().request({
             url: getApp().api.group.order.refund_preview,
             data: {
-                order_id: e.id
+                order_id: options.id
             },
-            success: function(e) {
-                0 == e.code && o.setData({
-                    goods: e.data
-                }), 1 == e.code && getApp().core.showModal({
+            success: function(res) {
+                0 === res.code && that.setData({
+                    goods: res.data
+                }), 1 === res.code && getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     image: "/images/icon-warning.png",
                     success: function(e) {
                         e.confirm && getApp().core.navigateBack();

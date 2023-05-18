@@ -10,6 +10,10 @@ Page({
         animationData: {}
     },
     onLoad: function(o) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         app.page.onLoad(this, o);
         this.loadMoreGoodsList(), is_no_more = is_loading_more = !1;
     },
@@ -25,27 +29,27 @@ Page({
     },
     onPullDownRefresh: function() {},
     loadMoreGoodsList: function() {
-        var t = this;
+        var that = this;
         if (!is_loading_more) {
-            t.setData({
+            that.setData({
                 show_loading_bar: !0
             }), is_loading_more = !0;
-            var i = t.data.page;
+            var page = that.data.page;
             app.request({
                 url: api.default.video_list,
                 data: {
-                    page: i
+                    page: page
                 },
-                success: function(o) {
-                    0 == o.data.list.length && (is_no_more = !0);
-                    var a = t.data.video_list.concat(o.data.list);
-                    t.setData({
-                        video_list: a,
-                        page: i + 1
+                success: function(res) {
+                    0 === res.data.list.length && (is_no_more = !0);
+                    var video_list = that.data.video_list.concat(res.data.list);
+                    that.setData({
+                        video_list: video_list,
+                        page: page + 1
                     });
                 },
                 complete: function() {
-                    is_loading_more = !1, t.setData({
+                    is_loading_more = !1, that.setData({
                         show_loading_bar: !1
                     });
                 }
@@ -53,9 +57,9 @@ Page({
         }
     },
     play: function(o) {
-        var a = o.currentTarget.dataset.index;
+        var index = o.currentTarget.dataset.index;
         getApp().core.createVideoContext("video_" + this.data.show_video).pause(), this.setData({
-            show_video: a,
+            show_video: index,
             show: !0
         });
     },
@@ -63,13 +67,13 @@ Page({
         is_no_more || this.loadMoreGoodsList();
     },
     more: function(o) {
-        var a = this, t = o.target.dataset.index, i = a.data.video_list, e = getApp().core.createAnimation({
+        var that = this, index = o.target.dataset.index, video_list = that.data.video_list, animation = getApp().core.createAnimation({
             duration: 1e3,
             timingFunction: "ease"
         });
-        this.animation = e, -1 != i[t].show ? (e.rotate(0).step(), i[t].show = -1) : (e.rotate(0).step(), 
-        i[t].show = 0), a.setData({
-            video_list: i,
+        this.animation = animation, -1 !== video_list[index].show ? (animation.rotate(0).step(), video_list[index].show = -1) : (animation.rotate(0).step(),
+            video_list[index].show = 0), that.setData({
+            video_list: video_list,
             animationData: this.animation.export()
         });
     }

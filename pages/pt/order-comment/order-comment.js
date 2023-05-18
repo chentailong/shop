@@ -2,83 +2,87 @@ Page({
     data: {
         goods_list: []
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var o = this;
-        o.setData({
-            order_id: t.id
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        that.setData({
+            order_id: options.id
         }), getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.group.order.comment_preview,
             data: {
-                order_id: t.id
+                order_id: options.id
             },
-            success: function(t) {
-                if (getApp().core.hideLoading(), 1 == t.code && getApp().core.showModal({
+            success: function(res) {
+                if (getApp().core.hideLoading(), 1 == res.code && getApp().core.showModal({
                     title: "提示",
-                    content: t.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(t) {
                         t.confirm && getApp().core.navigateBack();
                     }
-                }), 0 == t.code) {
-                    for (var e in t.data.goods_list) t.data.goods_list[e].score = 3, t.data.goods_list[e].content = "", 
-                    t.data.goods_list[e].pic_list = [], t.data.goods_list[e].uploaded_pic_list = [];
-                    o.setData({
-                        goods_list: t.data.goods_list
+                }), 0 == res.code) {
+                    for (var e in res.data.goods_list) res.data.goods_list[e].score = 3, res.data.goods_list[e].content = "",
+                        res.data.goods_list[e].pic_list = [], res.data.goods_list[e].uploaded_pic_list = [];
+                    that.setData({
+                        goods_list: res.data.goods_list
                     });
                 }
             }
         });
     },
     setScore: function(t) {
-        var e = t.currentTarget.dataset.index, o = t.currentTarget.dataset.score, a = this.data.goods_list;
-        a[e].score = o, this.setData({
-            goods_list: a
+        var index = t.currentTarget.dataset.index, score = t.currentTarget.dataset.score, goods_list = this.data.goods_list;
+        goods_list[index].score = score, this.setData({
+            goods_list: goods_list
         });
     },
     contentInput: function(t) {
-        var e = this, o = t.currentTarget.dataset.index;
-        e.data.goods_list[o].content = t.detail.value, e.setData({
-            goods_list: e.data.goods_list
+        var that = this, index = t.currentTarget.dataset.index;
+        that.data.goods_list[index].content = t.detail.value, that.setData({
+            goods_list: that.data.goods_list
         });
     },
     chooseImage: function(t) {
-        var e = this, o = t.currentTarget.dataset.index, a = e.data.goods_list, i = a[o].pic_list.length;
+        var that = this, index = t.currentTarget.dataset.index, goods_list = that.data.goods_list, i = goods_list[index].pic_list.length;
         getApp().core.chooseImage({
             count: 6 - i,
             success: function(t) {
-                a[o].pic_list = a[o].pic_list.concat(t.tempFilePaths), e.setData({
-                    goods_list: a
+                goods_list[index].pic_list = goods_list[index].pic_list.concat(t.tempFilePaths), that.setData({
+                    goods_list: goods_list
                 });
             }
         });
     },
     deleteImage: function(t) {
-        var e = t.currentTarget.dataset.index, o = t.currentTarget.dataset.picIndex, a = this.data.goods_list;
-        a[e].pic_list.splice(o, 1), this.setData({
-            goods_list: a
+        var index = t.currentTarget.dataset.index, picIndex = t.currentTarget.dataset.picIndex, goods_list = this.data.goods_list;
+        goods_list[index].pic_list.splice(picIndex, 1), this.setData({
+            goods_list: goods_list
         });
     },
     commentSubmit: function(t) {
-        var e = this;
+        var that = this;
         getApp().core.showLoading({
             title: "正在提交",
             mask: !0
         });
-        var n = e.data.goods_list;
-        !function a(i) {
-            if (i == n.length) return void getApp().request({
+        var goods_list = that.data.goods_list;
+        !function submits(number) {
+            if (number === goods_list.length) return void getApp().request({
                 url: getApp().api.group.order.comment,
                 method: "post",
                 data: {
-                    order_id: e.data.order_id,
-                    goods_list: JSON.stringify(n)
+                    order_id: that.data.order_id,
+                    goods_list: JSON.stringify(goods_list)
                 },
                 success: function(t) {
-                    getApp().core.hideLoading(), 0 == t.code && getApp().core.showModal({
+                    getApp().core.hideLoading(), 0 === t.code && getApp().core.showModal({
                         title: "提示",
                         content: t.msg,
                         showCancel: !1,
@@ -87,25 +91,25 @@ Page({
                                 url: "/pages/pt/order/order?status=2"
                             });
                         }
-                    }), 1 == t.code && getApp().core.showToast({
+                    }), 1 === t.code && getApp().core.showToast({
                         title: t.msg,
                         image: "/images/icon-warning.png"
                     });
                 }
             });
-            var s = 0;
-            if (!n[i].pic_list.length || 0 == n[i].pic_list.length) return a(i + 1);
-            for (var t in n[i].pic_list) !function(o) {
+            var index = 0;
+            if (!goods_list[number].pic_list.length || 0 === goods_list[number].pic_list.length) return submits(number + 1);
+            for (var t in goods_list[number].pic_list) !function(o) {
                 getApp().core.uploadFile({
                     url: getApp().api.default.upload_image,
                     name: "image",
-                    filePath: n[i].pic_list[o],
+                    filePath: goods_list[number].pic_list[o],
                     complete: function(t) {
                         if (t.data) {
-                            var e = JSON.parse(t.data);
-                            0 == e.code && (n[i].uploaded_pic_list[o] = e.data.url);
+                            var data = JSON.parse(t.data);
+                            0 === data.code && (goods_list[number].uploaded_pic_list[o] = data.data.url);
                         }
-                        if (++s == n[i].pic_list.length) return a(i + 1);
+                        if (++index === goods_list[number].pic_list.length) return submits(number + 1);
                     }
                 });
             }(t);

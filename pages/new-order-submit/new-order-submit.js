@@ -2,6 +2,7 @@ var app = getApp(), api = getApp().api, longitude = "", latitude = "", util = ge
 
 Page({
     data: {
+        mch_list: {},
         total_price: 0,
         address: null,
         express_price: 0,
@@ -21,9 +22,12 @@ Page({
     dataList: {},
 
     onLoad: function (t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         wx.login({
             success(res) {
-                console.log(res)
                 if (res.code) {
                     wx.request({
                         url: getApp().api.passport.login,
@@ -32,7 +36,6 @@ Page({
                         },
                         method: 'POST',
                         success(res) {
-                            console.log(res)
                         }
                     })
                 }
@@ -45,7 +48,6 @@ Page({
             time: e
         }), is_loading_show = !1;
     },
-
 
     bindContentInput: function (t) {
         this.data.mch_list[t.currentTarget.dataset.index].content = t.detail.value, this.setData({
@@ -97,7 +99,7 @@ Page({
      * 显示支付密码输入层
      */
     showInputLayer: function () {
-        let demo = [1,2,3]
+        let demo = [1, 2, 3]
         demo.forEach(value => {
             console.log(value)
         })

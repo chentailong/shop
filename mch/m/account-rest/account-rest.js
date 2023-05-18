@@ -2,8 +2,12 @@ var app = getApp(), api = getApp().api;
 
 Page({
     data: {},
-    onLoad: function(n) {
-        getApp().page.onLoad(this, n);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
     },
     onReady: function() {
         getApp().page.onReady(this);

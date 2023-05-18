@@ -1,22 +1,22 @@
 module.exports = {
     currentPage: null,
     init: function(e) {
-        var r = this;
-        void 0 === (r.currentPage = e).viewImage && (e.viewImage = function(e) {
-            r.viewImage(e);
+        var that = this;
+        void 0 === (that.currentPage = e).viewImage && (e.viewImage = function(e) {
+            that.viewImage(e);
         }), void 0 === e.copyinfo && (e.copyinfo = function(e) {
-            r.copyinfo(e);
+            that.copyinfo(e);
         }), void 0 === e.bindExpressPickerChange && (e.bindExpressPickerChange = function(e) {
-            r.bindExpressPickerChange(e);
+            that.bindExpressPickerChange(e);
         }), void 0 === e.sendFormSubmit && (e.sendFormSubmit = function(e) {
-            r.sendFormSubmit(e);
+            that.sendFormSubmit(e);
         });
     },
     viewImage: function(e) {
-        var r = this.currentPage, t = e.currentTarget.dataset.index;
+        var currentPage = this.currentPage, index = e.currentTarget.dataset.index;
         getApp().core.previewImage({
-            current: r.data.order_refund.refund_pic_list[t],
-            urls: r.data.order_refund.refund_pic_list
+            current: currentPage.data.order_refund.refund_pic_list[index],
+            urls: currentPage.data.order_refund.refund_pic_list
         });
     },
     copyinfo: function(e) {
@@ -39,28 +39,29 @@ module.exports = {
         });
     },
     sendFormSubmit: function(e) {
-        var r = this.currentPage, t = e.detail.formId, i = r.data.order_refund, d = r.data.express_index, n = e.detail.value.express_no, o = r.data.pageType;
+        var currentPage = this.currentPage, formId = e.detail.formId, order_refund = currentPage.data.order_refund, express_index = currentPage.data.express_index, express_no = e.detail.value.express_no, pageType = currentPage.data.pageType;
         getApp().core.showLoading({
             title: "正在提交",
             mask: !0
         });
-        var a = "";
-        if ("STORE" === o) a = "/pages/order-refund-detail/order-refund-detail?id=" + i.order_refund_id; else if ("MIAOSHA" === o) a = "/pages/miaosha/order-refund-detail/order-refund-detail?id=" + i.order_refund_id; else {
-            if ("PINTUAN" !== o) return void getApp().core.showModal({
+        var url = "";
+        if ("STORE" === pageType) url = "/pages/order-refund-detail/order-refund-detail?id=" + order_refund.order_refund_id; else if ("MIAOSHA" === pageType)
+            url = "/pages/miaosha/order-refund-detail/order-refund-detail?id=" + order_refund.order_refund_id; else {
+            if ("PINTUAN" !== pageType) return void getApp().core.showModal({
                 title: "提示",
                 content: "pageType变量未定义或变量值不是预期的"
             });
-            a = "/pages/pt/order-refund-detail/order-refund-detail?id=" + i.order_refund_id;
+            url = "/pages/pt/order-refund-detail/order-refund-detail?id=" + order_refund.order_refund_id;
         }
         getApp().request({
             url: getApp().api.order.refund_send,
             method: "POST",
             data: {
-                order_refund_id: i.order_refund_id,
-                express: null !== d ? i.express_list[d].name : "",
-                express_no: n,
-                form_id: t,
-                orderType: o
+                order_refund_id: order_refund.order_refund_id,
+                express: null !== express_index ? order_refund.express_list[d].name : "",
+                express_no: express_no,
+                form_id: formId,
+                orderType: pageType
             },
             success: function(r) {
                 getApp().core.showModal({
@@ -69,7 +70,7 @@ module.exports = {
                     showCancel: !1,
                     success: function(e) {
                         0 == r.code && getApp().core.redirectTo({
-                            url: a
+                            url: url
                         });
                     }
                 });

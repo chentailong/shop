@@ -8,14 +8,18 @@ Page({
         no_orders: !1,
         no_more_orders: !1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
-        e.setData({
-            status: parseInt(t.status || 1),
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        that.setData({
+            status: parseInt(options.status || 1),
             loading_more: !0
-        }), e.loadOrderList(function() {
-            e.setData({
+        }), that.loadOrderList(function() {
+            that.setData({
                 loading_more: !1
             });
         });
@@ -39,28 +43,28 @@ Page({
             show_menu: !this.data.show_menu
         });
     },
-    loadOrderList: function(t) {
-        var e = this, o = e.data.status, a = (e.data.current_page || 0) + 1, r = e.data.keyword || "";
+    loadOrderList: function(event) {
+        var that = this, status = that.data.status, page = (that.data.current_page || 0) + 1, keyword = that.data.keyword || "";
         getApp().request({
             url: getApp().api.mch.order.list,
             data: {
-                status: o,
-                page: a,
-                keyword: r
+                status: status,
+                page: page,
+                keyword: keyword
             },
-            success: function(t) {
-                0 == t.code && (1 != a || t.data.list && t.data.list.length || e.setData({
+            success: function(res) {
+                0 === res.code && (1 != page || res.data.list && res.data.list.length || that.setData({
                     no_orders: !0
-                }), t.data.list && t.data.list.length ? (e.data.order_list = e.data.order_list || [], 
-                e.data.order_list = e.data.order_list.concat(t.data.list), e.setData({
-                    order_list: e.data.order_list,
-                    current_page: a
-                })) : e.setData({
+                }), res.data.list && res.data.list.length ? (that.data.order_list = that.data.order_list || [],
+                    that.data.order_list = that.data.order_list.concat(res.data.list), that.setData({
+                    order_list: that.data.order_list,
+                    current_page: page
+                })) : that.setData({
                     no_more_orders: !0
                 }));
             },
             complete: function() {
-                "function" == typeof t && t();
+                "function" == typeof event && event();
             }
         });
     },
@@ -76,22 +80,22 @@ Page({
             show_send_modal: !1
         });
     },
-    switchSendType: function(t) {
-        var e = t.currentTarget.dataset.type;
+    switchSendType: function(event) {
+        var type = event.currentTarget.dataset.type;
         this.setData({
-            send_type: e
+            send_type: type
         });
     },
     sendSubmit: function() {
-        var e = this;
-        if ("express" == e.data.send_type) return e.hideSendModal(), void getApp().core.navigateTo({
-            url: "/mch/m/order-send/order-send?id=" + e.data.order_list[e.data.order_index].id
+        var that = this;
+        if ("express" == that.data.send_type) return that.hideSendModal(), void getApp().core.navigateTo({
+            url: "/mch/m/order-send/order-send?id=" + that.data.order_list[that.data.order_index].id
         });
         getApp().core.showModal({
             title: "提示",
             content: "无需物流方式订单将直接标记成已发货，确认操作？",
-            success: function(t) {
-                t.confirm && (getApp().core.showLoading({
+            success: function(res) {
+                res.confirm && (getApp().core.showLoading({
                     title: "正在提交",
                     mask: !0
                 }), getApp().request({
@@ -99,14 +103,14 @@ Page({
                     method: "post",
                     data: {
                         send_type: "none",
-                        order_id: e.data.order_list[e.data.order_index].id
+                        order_id: that.data.order_list[that.data.order_index].id
                     },
-                    success: function(e) {
+                    success: function(es) {
                         getApp().core.showModal({
                             title: "提示",
-                            content: e.msg,
+                            content: es.msg,
                             success: function(t) {
-                                t.confirm && 0 == e.code && getApp().core.redirectTo({
+                                t.confirm && 0 == es.code && getApp().core.redirectTo({
                                     url: "/mch/m/order/order?status=2"
                                 });
                             }
@@ -128,20 +132,20 @@ Page({
             current: this.data.order_list[t.currentTarget.dataset.index].pic_list[t.currentTarget.dataset.pindex]
         });
     },
-    refundPass: function(t) {
-        var e = this, o = t.currentTarget.dataset.index, a = e.data.order_list[o].id, r = e.data.order_list[o].type;
+    refundPass: function(event) {
+        var that = this, index = event.currentTarget.dataset.index, id = that.data.order_list[index].id, type = that.data.order_list[index].type;
         getApp().core.showModal({
             title: "提示",
-            content: "确认同意" + (1 == r ? "退款？资金将原路返回！" : "换货？"),
-            success: function(t) {
-                t.confirm && (getApp().core.showLoading({
+            content: "确认同意" + (1 === type ? "退款？资金将原路返回！" : "换货？"),
+            success: function(res) {
+                res.confirm && (getApp().core.showLoading({
                     title: "正在处理",
                     mask: !0
                 }), getApp().request({
                     url: getApp().api.mch.order.refund,
                     method: "post",
                     data: {
-                        id: a,
+                        id: id,
                         action: "pass"
                     },
                     success: function(t) {
@@ -151,7 +155,7 @@ Page({
                             showCancel: !1,
                             success: function(t) {
                                 getApp().core.redirectTo({
-                                    url: "/" + e.route + "?" + getApp().helper.objectToUrlParams(e.options)
+                                    url: "/" + that.route + "?" + getApp().helper.objectToUrlParams(that.options)
                                 });
                             }
                         });
@@ -163,9 +167,9 @@ Page({
             }
         });
     },
-    refundDeny: function(t) {
-        var e = this, o = t.currentTarget.dataset.index, a = e.data.order_list[o].id;
-        e.data.order_list[o].type;
+    refundDeny: function(event) {
+        var that = this, index = event.currentTarget.dataset.index, id = that.data.order_list[index].id;
+        that.data.order_list[index].type;
         getApp().core.showModal({
             title: "提示",
             content: "确认拒绝？",
@@ -177,7 +181,7 @@ Page({
                     url: getApp().api.mch.order.refund,
                     method: "post",
                     data: {
-                        id: a,
+                        id: id,
                         action: "deny"
                     },
                     success: function(t) {
@@ -187,7 +191,7 @@ Page({
                             showCancel: !1,
                             success: function(t) {
                                 getApp().core.redirectTo({
-                                    url: "/" + e.route + "?" + getApp().helper.objectToUrlParams(e.options)
+                                    url: "/" + that.route + "?" + getApp().helper.objectToUrlParams(that.options)
                                 });
                             }
                         });
@@ -200,14 +204,14 @@ Page({
         });
     },
     searchSubmit: function(t) {
-        var e = this, o = t.detail.value;
-        e.setData({
-            keyword: o,
+        var that = this, value = t.detail.value;
+        that.setData({
+            keyword: value,
             loading_more: !0,
             order_list: [],
             current_page: 0
-        }), e.loadOrderList(function() {
-            e.setData({
+        }), that.loadOrderList(function() {
+            that.setData({
                 loading_more: !1
             });
         });

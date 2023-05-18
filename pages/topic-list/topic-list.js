@@ -9,60 +9,64 @@ Page({
         currentChannelIndex: 0,
         articlesHide: !1
     },
-    onLoad: function(a) {
-        getApp().page.onLoad(this, a);
-        var t = this, e = a.type;
-        void 0 !== e && e && t.setData({
-            typeid: e
-        }), t.loadTopicList({
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this, type = aoptions.type;
+        void 0 !== type && type && that.setData({
+            typeid: type
+        }), that.loadTopicList({
             page: 1,
             reload: !0
         }), getApp().core.getSystemInfo({
-            success: function(a) {
-                t.setData({
-                    windowWidth: a.windowWidth
+            success: function(res) {
+                that.setData({
+                    windowWidth: res.windowWidth
                 });
             }
         });
     },
     loadTopicList: function(i) {
-        var r = this;
-        r.data.is_loading || i.loadmore && !r.data.is_more || (r.setData({
+        var that = this;
+        that.data.is_loading || i.loadmore && !that.data.is_more || (that.setData({
             is_loading: !0
         }), getApp().request({
             url: getApp().api.default.topic_type,
-            success: function(a) {
-                0 == a.code && r.setData({
-                    navbarArray: a.data.list,
-                    navbarShowIndexArray: Array.from(Array(a.data.list.length).keys()),
-                    navigation: "" != a.data.list
+            success: function(res) {
+                0 === res.code && that.setData({
+                    navbarArray: res.data.list,
+                    navbarShowIndexArray: Array.from(Array(res.data.list.length).keys()),
+                    navigation: "" !== res.data.list
                 }), getApp().request({
                     url: getApp().api.default.topic_list,
                     data: {
                         page: i.page
                     },
-                    success: function(a) {
-                        if (0 == a.code) if (void 0 !== r.data.typeid) {
-                            for (var t = 0, e = 0; e < r.data.navbarArray.length && (t += 66, r.data.navbarArray[e].id != r.data.typeid); e++) ;
-                            r.setData({
-                                scrollNavbarLeft: t
-                            }), r.switchChannel(parseInt(r.data.typeid)), r.sortTopic({
+                    success: function(res) {
+                        if (0 === res.code) if (void 0 !== that.data.typeid) {
+                            for (var scrollNavbarLeft = 0, e = 0; e < that.data.navbarArray.length && (scrollNavbarLeft += 66, that.data.navbarArray[e].id !== that.data.typeid); e++) ;
+                            that.setData({
+                                scrollNavbarLeft: scrollNavbarLeft
+                            }), that.switchChannel(parseInt(that.data.typeid)), that.sortTopic({
                                 page: 1,
-                                type: r.data.typeid,
+                                type: that.data.typeid,
                                 reload: !0
                             });
-                        } else i.reload && r.setData({
-                            list: a.data.list,
+                        } else i.reload && that.setData({
+                            list: res.data.list,
                             page: i.page,
-                            is_more: 0 < a.data.list.length
-                        }), i.loadmore && r.setData({
-                            list: r.data.list.concat(a.data.list),
+                            is_more: 0 < res.data.list.length
+                        }), i.loadmore && that.setData({
+                            list: that.data.list.concat(res.data.list),
                             page: i.page,
-                            is_more: 0 < a.data.list.length
+                            is_more: 0 < res.data.list.length
                         });
                     },
                     complete: function() {
-                        r.setData({
+                        that.setData({
                             is_loading: !1
                         });
                     }
@@ -75,83 +79,83 @@ Page({
     },
     onPullDownRefresh: function() {
         getApp().page.onPullDownRefresh(this);
-        var a = this.data.currentChannelIndex;
-        this.switchChannel(parseInt(a)), this.sortTopic({
+        var index = this.data.currentChannelIndex;
+        this.switchChannel(parseInt(index)), this.sortTopic({
             page: 1,
-            type: parseInt(a),
+            type: parseInt(index),
             reload: !0
         }), getApp().core.stopPullDownRefresh();
     },
     onReachBottom: function() {
         getApp().page.onReachBottom(this);
-        var a = this.data.currentChannelIndex;
-        this.switchChannel(parseInt(a)), this.sortTopic({
+        var index = this.data.currentChannelIndex;
+        this.switchChannel(parseInt(index)), this.sortTopic({
             page: this.data.page + 1,
-            type: parseInt(a),
+            type: parseInt(index),
             loadmore: !0
         });
     },
     onTapNavbar: function(i) {
-        var r = this;
+        var that = this;
         if ("undefined" == typeof my) {
             var a = i.currentTarget.offsetLeft;
-            r.setData({
+            that.setData({
                 scrollNavbarLeft: a - 85
             });
         } else {
-            var n = r.data.navbarArray, s = !0;
-            n.forEach(function(a, t, e) {
-                i.currentTarget.id == a.id && (s = !1, 1 <= t ? r.setData({
-                    toView: n[t - 1].id
-                }) : r.setData({
+            var navbarArray = that.data.navbarArray, s = !0;
+            navbarArray.forEach(function(a, t, e) {
+                i.currentTarget.id === a.id && (s = !1, 1 <= t ? that.setData({
+                    toView: navbarArray[t - 1].id
+                }) : that.setData({
                     toView: -1
                 }));
-            }), s && r.setData({
+            }), s && that.setData({
                 toView: "0"
             });
         }
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
-        }), r.switchChannel(parseInt(i.currentTarget.id)), r.sortTopic({
+        }), that.switchChannel(parseInt(i.currentTarget.id)), that.sortTopic({
             page: 1,
             type: i.currentTarget.id,
             reload: !0
         });
     },
-    sortTopic: function(t) {
-        var e = this;
+    sortTopic: function(data) {
+        var that = this;
         getApp().request({
             url: getApp().api.default.topic_list,
-            data: t,
-            success: function(a) {
-                0 == a.code && (t.reload && e.setData({
-                    list: a.data.list,
-                    page: t.page,
-                    is_more: 0 < a.data.list.length
-                }), t.loadmore && e.setData({
-                    list: e.data.list.concat(a.data.list),
-                    page: t.page,
-                    is_more: 0 < a.data.list.length
+            data: data,
+            success: function(res) {
+                0 === res.code && (t.reload && that.setData({
+                    list: res.data.list,
+                    page: data.page,
+                    is_more: 0 < res.data.list.length
+                }), t.loadmore && that.setData({
+                    list: that.data.list.concat(res.data.list),
+                    page: data.page,
+                    is_more: 0 < res.data.list.length
                 }), getApp().core.hideLoading());
             }
         });
     },
-    switchChannel: function(i) {
-        var a = this.data.navbarArray, t = new Array();
-        -1 == i ? t[1] = "navbar-item-active" : 0 == i && (t[0] = "navbar-item-active"), 
-        a.forEach(function(a, t, e) {
-            a.type = "", a.id == i && (a.type = "navbar-item-active");
+    switchChannel: function(index) {
+        var navbarArray = this.data.navbarArray, backgrop = new Array();
+        -1 === index ? backgrop[1] = "navbar-item-active" : 0 === index && (backgrop[0] = "navbar-item-active"),
+            navbarArray.forEach(function(a, t, e) {
+            a.type = "", a.id === index && (a.type = "navbar-item-active");
         }), this.setData({
-            navbarArray: a,
-            currentChannelIndex: i,
-            backgrop: t
+            navbarArray: navbarArray,
+            currentChannelIndex: index,
+            backgrop: backgrop
         });
     },
     onShareAppMessage: function() {
         getApp().page.onShareAppMessage(this);
-        var a = this, t = {
-            path: "/pages/topic-list/topic-list?user_id=" + a.data.__user_info.id + "&type=" + (a.data.typeid ? a.data.typeid : ""),
+        var that = this, t = {
+            path: "/pages/topic-list/topic-list?user_id=" + that.data.__user_info.id + "&type=" + (that.data.typeid ? that.data.typeid : ""),
             success: function(a) {}
         };
         return console.log(t.path), t;

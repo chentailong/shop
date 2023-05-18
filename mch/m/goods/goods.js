@@ -7,14 +7,18 @@ Page({
         no_goods: !1,
         no_more_goods: !1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var o = this;
-        o.setData({
-            status: parseInt(t.status || 1),
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        that.setData({
+            status: parseInt(options.status || 1),
             loading_more: !0
-        }), o.loadGoodsList(function() {
-            o.setData({
+        }), that.loadGoodsList(function() {
+            that.setData({
                 loading_more: !1
             });
         });
@@ -33,47 +37,47 @@ Page({
     },
     onPullDownRefresh: function() {},
     onReachBottom: function(t) {
-        var o = this;
-        o.data.loading_more || (o.setData({
+        var that = this;
+        that.data.loading_more || (that.setData({
             loading_more: !0
-        }), o.loadGoodsList(function() {
-            o.setData({
+        }), that.loadGoodsList(function() {
+            that.setData({
                 loading_more: !1
             });
         }));
     },
-    searchSubmit: function(t) {
-        var o = this, a = t.detail.value;
-        o.setData({
-            keyword: a,
+    searchSubmit: function(event) {
+        var that = this, value = event.detail.value;
+        that.setData({
+            keyword: value,
             loading_more: !0,
             goods_list: [],
             current_page: 0
-        }), o.loadGoodsList(function() {
-            o.setData({
+        }), that.loadGoodsList(function() {
+            that.setData({
                 loading_more: !1
             });
         });
     },
     loadGoodsList: function(t) {
-        var o = this;
-        if (o.data.no_goods || o.data.no_more_goods) "function" == typeof t && t(); else {
-            var a = (o.data.current_page || 0) + 1;
+        var that = this;
+        if (that.data.no_goods || o.data.no_more_goods) "function" == typeof t && t(); else {
+            var page = (that.data.current_page || 0) + 1;
             getApp().request({
                 url: getApp().api.mch.goods.list,
                 data: {
-                    page: a,
-                    status: o.data.status,
-                    keyword: o.data.keyword || ""
+                    page: page,
+                    status: that.data.status,
+                    keyword: that.data.keyword || ""
                 },
-                success: function(t) {
-                    0 == t.code && (1 != a || t.data.list && t.data.list.length || o.setData({
+                success: function(res) {
+                    0 == res.code && (1 != page || res.data.list && res.data.list.length || that.setData({
                         no_goods: !0
-                    }), t.data.list && t.data.list.length ? (o.data.goods_list = o.data.goods_list || [], 
-                    o.data.goods_list = o.data.goods_list.concat(t.data.list), o.setData({
-                        goods_list: o.data.goods_list,
-                        current_page: a
-                    })) : o.setData({
+                    }), res.data.list && res.data.list.length ? (that.data.goods_list = that.data.goods_list || [],
+                        that.data.goods_list = that.data.goods_list.concat(res.data.list), that.setData({
+                        goods_list: that.data.goods_list,
+                        current_page: page
+                    })) : that.setData({
                         no_more_goods: !0
                     }));
                 },
@@ -83,40 +87,40 @@ Page({
             });
         }
     },
-    showMoreAlert: function(o) {
-        var a = this;
+    showMoreAlert: function(event) {
+        var that = this;
         setTimeout(function() {
-            var t = o.currentTarget.dataset.index;
-            a.data.goods_list[t].show_alert = !0, a.setData({
-                goods_list: a.data.goods_list
+            var index = event.currentTarget.dataset.index;
+            that.data.goods_list[index].show_alert = !0, that.setData({
+                goods_list: that.data.goods_list
             });
         }, 50);
     },
     hideMoreAlert: function(t) {
-        var o = this, a = !1;
-        for (var s in o.data.goods_list) o.data.goods_list[s].show_alert && (a = !(o.data.goods_list[s].show_alert = !1));
-        a && setTimeout(function() {
-            o.setData({
-                goods_list: o.data.goods_list
+        var that = this, page = !1;
+        for (var s in that.data.goods_list) that.data.goods_list[s].show_alert && (page = !(that.data.goods_list[s].show_alert = !1));
+        page && setTimeout(function() {
+            that.setData({
+                goods_list: that.data.goods_list
             });
         }, 100);
     },
-    setGoodsStatus: function(t) {
-        var o = this, a = t.currentTarget.dataset.targetStatus, s = t.currentTarget.dataset.index;
+    setGoodsStatus: function(event) {
+        var that = this, status = event.currentTarget.dataset.targetStatus, index = event.currentTarget.dataset.index;
         getApp().core.showLoading({
             title: "正在处理",
             mask: !0
         }), getApp().request({
             url: getApp().api.mch.goods.set_status,
             data: {
-                id: o.data.goods_list[s].id,
-                status: a
+                id: that.data.goods_list[index].id,
+                status: status
             },
-            success: function(t) {
-                0 == t.code && (o.data.goods_list[s].status = t.data.status, o.setData({
-                    goods_list: o.data.goods_list
-                })), o.showToast({
-                    title: t.msg,
+            success: function(res) {
+                0 == res.code && (that.data.goods_list[index].status = res.data.status, that.setData({
+                    goods_list: that.data.goods_list
+                })), that.showToast({
+                    title: res.msg,
                     duration: 1500
                 });
             },
@@ -125,8 +129,8 @@ Page({
             }
         });
     },
-    goodsDelete: function(t) {
-        var o = this, a = t.currentTarget.dataset.index;
+    goodsDelete: function(event) {
+        var that = this, index = event.currentTarget.dataset.index;
         getApp().core.showModal({
             title: "警告",
             content: "确认删除该商品？",
@@ -137,13 +141,13 @@ Page({
                 }), getApp().request({
                     url: getApp().api.mch.goods.delete,
                     data: {
-                        id: o.data.goods_list[a].id
+                        id: that.data.goods_list[index].id
                     },
                     success: function(t) {
-                        o.showToast({
+                        that.showToast({
                             title: t.msg
-                        }), 0 == t.code && (o.data.goods_list.splice(a, 1), o.setData({
-                            goods_list: o.data.goods_list
+                        }), 0 == t.code && (that.data.goods_list.splice(index, 1), that.setData({
+                            goods_list: that.data.goods_list
                         }));
                     },
                     complete: function() {

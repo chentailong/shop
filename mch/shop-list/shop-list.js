@@ -9,36 +9,40 @@ Page({
         no_more: !1,
         loading: !1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), t.cat_id && (this.data.cat_id = t.cat_id), this.loadShopList();
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), options.cat_id && (this.data.cat_id = options.cat_id), this.loadShopList();
     },
     loadShopList: function(t) {
-        var a = this;
-        a.data.no_more ? "function" == typeof t && t() : a.data.loading || (a.setData({
+        var that = this;
+        that.data.no_more ? "function" == typeof t && t() : that.data.loading || (that.setData({
             loading: !0
         }), getApp().request({
             url: getApp().api.mch.shop_list,
             data: {
-                keyword: a.data.keyword,
-                cat_id: a.data.cat_id,
-                page: a.data.page
+                keyword: that.data.keyword,
+                cat_id: that.data.cat_id,
+                page: that.data.page
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    if (!t.data.list || !t.data.list.length) return void a.setData({
+            success: function(res) {
+                if (0 == res.code) {
+                    if (!res.data.list || !res.data.list.length) return void that.setData({
                         no_more: !0,
-                        cat_list: t.data.cat_list
+                        cat_list: res.data.cat_list
                     });
-                    a.data.list || (a.data.list = []), a.data.list = a.data.list.concat(t.data.list), 
-                    a.setData({
-                        list: a.data.list,
-                        page: a.data.page + 1,
-                        cat_list: t.data.cat_list
+                    that.data.list || (that.data.list = []), that.data.list = that.data.list.concat(res.data.list),
+                        that.setData({
+                        list: that.data.list,
+                        page: that.data.page + 1,
+                        cat_list: res.data.cat_list
                     });
                 }
             },
             complete: function() {
-                a.setData({
+                that.setData({
                     loading: !1
                 }), "function" == typeof t && t();
             }
@@ -61,10 +65,10 @@ Page({
         this.loadShopList();
     },
     searchSubmit: function(t) {
-        var a = t.detail.value;
+        var value = t.detail.value;
         this.setData({
             list: [],
-            keyword: a,
+            keyword: value,
             page: 1,
             no_more: !1
         }), this.loadShopList(function() {});

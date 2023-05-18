@@ -6,12 +6,16 @@ Page({
         bail_currency: 0,
         join: !1
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
         var that = this, id = void 0;
-        null == e.id ? getApp().core.reLaunch({
+        null == options.id ? getApp().core.reLaunch({
             url: "../index/index"
-        }) : id = e.id, getApp().core.showLoading({
+        }) : id = options.id, getApp().core.showLoading({
             title: "数据加载中...",
             mask: !0
         }), getApp().request({
@@ -19,15 +23,15 @@ Page({
             data: {
                 activity_id: id
             },
-            success: function(e) {
+            success: function(res) {
                 getApp().core.hideLoading();
-                var open_date = e.data.list.open_date.replace(".", "/").replace(".", "/");
+                var open_date = res.data.list.open_date.replace(".", "/").replace(".", "/");
                 that.setData({
                     id: id,
-                    name: e.data.list.name,
+                    name: res.data.list.name,
                     open_date: open_date,
-                    step_num: e.data.list.step_num,
-                    bail_currency: e.data.list.bail_currency
+                    step_num: res.data.list.step_num,
+                    bail_currency: res.data.list.bail_currency
                 });
             }
         });
@@ -45,15 +49,15 @@ Page({
             data: {
                 activity_id: that.data.id
             },
-            success: function(e) {
-                var t = that.data.open_date.slice(5);
-                0 == e.code ? getApp().core.redirectTo({
-                    url: "../dare/dare?open_date=" + t + "&join=true"
-                }) : "活力币不足" == e.msg && that.data.store.option.step.currency_name ? getApp().core.showModal({
+            success: function(res) {
+                var open_date = that.data.open_date.slice(5);
+                0 === res.code ? getApp().core.redirectTo({
+                    url: "../dare/dare?open_date=" + open_date + "&join=true"
+                }) : "活力币不足" === res.msg && that.data.store.option.step.currency_name ? getApp().core.showModal({
                     content: that.data.store.option.step.currency_name + "不足",
                     showCancel: !1
                 }) : getApp().core.showModal({
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1
                 });
             }

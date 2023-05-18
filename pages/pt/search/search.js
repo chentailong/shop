@@ -11,6 +11,10 @@ Page({
         newSearch: !0
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
     },
     onReady: function(t) {
@@ -18,12 +22,12 @@ Page({
     },
     onShow: function(t) {
         getApp().page.onShow(this);
-        var a = this;
+        var that = this;
         getApp().core.getStorage({
             key: "history_info",
-            success: function(t) {
-                0 < t.data.length && a.setData({
-                    history_info: t.data,
+            success: function(res) {
+                0 < res.data.length && that.setData({
+                    history_info: res.data,
                     history_show: !0
                 });
             }
@@ -40,25 +44,25 @@ Page({
     },
     onReachBottom: function(t) {
         getApp().page.onReachBottom(this);
-        var a = this;
-        a.data.emptyGoods || (a.data.page_count <= pageNum && a.setData({
+        var that = this;
+        that.data.emptyGoods || (that.data.page_count <= pageNum && that.setData({
             emptyGoods: !0
-        }), pageNum++, a.getSearchGoods());
+        }), pageNum++, that.getSearchGoods());
     },
     toSearch: function(t) {
-        var a = t.detail.value, e = this;
-        if (a) {
-            var o = e.data.history_info;
-            for (var s in o.unshift(a), o) {
-                if (o.length <= 20) break;
-                o.splice(s, 1);
+        var value = t.detail.value, that = this;
+        if (value) {
+            var history_info = that.data.history_info;
+            for (var s in history_info.unshift(value), history_info) {
+                if (history_info.length <= 20) break;
+                history_info.splice(value, 1);
             }
-            getApp().core.setStorageSync(getApp().const.HISTORY_INFO, o), e.setData({
-                history_info: o,
+            getApp().core.setStorageSync(getApp().const.HISTORY_INFO, history_info), that.setData({
+                history_info: history_info,
                 history_show: !1,
-                keyword: a,
+                keyword: value,
                 list: []
-            }), e.getSearchGoods();
+            }), that.getSearchGoods();
         }
     },
     cancelSearchValue: function(t) {
@@ -67,40 +71,40 @@ Page({
         });
     },
     newSearch: function(t) {
-        var a = !1;
-        0 < this.data.history_info.length && (a = !0), pageNum = 1, this.setData({
-            history_show: a,
+        var history_show = !1;
+        0 < this.data.history_info.length && (history_show = !0), pageNum = 1, this.setData({
+            history_show: history_show,
             list: [],
             newSearch: [],
             emptyGoods: !1
         });
     },
     clearHistoryInfo: function(t) {
-        var a = [];
-        getApp().core.setStorageSync(getApp().const.HISTORY_INFO, a), this.setData({
-            history_info: a,
+        var history_info = [];
+        getApp().core.setStorageSync(getApp().const.HISTORY_INFO, history_info), this.setData({
+            history_info: history_info,
             history_show: !1
         });
     },
     getSearchGoods: function() {
-        var e = this, t = e.data.keyword;
-        t && (e.setData({
+        var that = this, keyword = that.data.keyword;
+        keyword && (that.setData({
             show_loading_bar: !0
         }), getApp().request({
             url: getApp().api.group.search,
             data: {
-                keyword: t,
+                keyword: keyword,
                 page: pageNum
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    if (e.data.newSearch) var a = t.data.list; else a = e.data.list.concat(t.data.list);
-                    e.setData({
-                        list: a,
-                        page_count: t.data.page_count,
+            success: function(res) {
+                if (0 === res.code) {
+                    if (that.data.newSearch) var list = res.data.list; else list = that.data.list.concat(res.data.list);
+                    that.setData({
+                        list: list,
+                        page_count: res.data.page_count,
                         emptyGoods: !0,
                         show_loading_bar: !1
-                    }), t.data.page_count > pageNum && e.setData({
+                    }), res.data.page_count > pageNum && that.setData({
                         newSearch: !1,
                         emptyGoods: !1
                     });
@@ -110,9 +114,9 @@ Page({
         }));
     },
     historyItem: function(t) {
-        var a = t.currentTarget.dataset.keyword;
+        var keyword = t.currentTarget.dataset.keyword;
         this.setData({
-            keyword: a,
+            keyword: keyword,
             history_show: !1
         }), this.getSearchGoods();
     }

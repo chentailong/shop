@@ -5,100 +5,104 @@ Page({
         naver: "order",
         status: -1,
         intval: [],
-        p: 1
+        page: 1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        null == t.status && (t.status = -1), this.setData(t), this.getList();
+    onLoad: function (res) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, res);
+        null == res.status && (res.status = -1), this.setData(res), this.getList();
     },
-    getList: function() {
-        var a = this;
+    getList: function () {
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.bargain.order_list,
             data: {
-                status: a.data.status || -1
+                status: that.data.status || -1
             },
-            success: function(t) {
-                0 == t.code ? (a.setData(t.data), a.setData({
-                    p: 1
-                }), a.getTimeList()) : a.showLoading({
+            success: function (t) {
+                0 == t.code ? (that.setData(t.data), that.setData({
+                    page: 1
+                }), that.getTimeList()) : that.showLoading({
                     title: t.msg
                 });
             },
-            complete: function(t) {
+            complete: function (t) {
                 getApp().core.hideLoading(), is_no_more = !1;
             }
         });
     },
-    getTimeList: function() {
+    getTimeList: function () {
         clearInterval(intval);
-        var i = this, s = i.data.list;
-        intval = setInterval(function() {
-            for (var t in s) if (0 < s[t].reset_time) {
-                var a = s[t].reset_time - 1, e = i.setTimeList(a);
-                s[t].reset_time = a, s[t].time_list = e;
+        var that = this, list = that.data.list;
+        intval = setInterval(function () {
+            for (var t in list) if (0 < list[t].reset_time) {
+                var reset_time = list[t].reset_time - 1, time_list = that.setTimeList(reset_time);
+                list[t].reset_time = reset_time, list[t].time_list = time_list;
             }
-            i.setData({
-                list: s
+            that.setData({
+                list: list
             });
         }, 1e3);
     },
-    onReady: function() {
+    onReady: function () {
         getApp().page.onReady(this);
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this);
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this);
     },
-    onReachBottom: function() {
+    onReachBottom: function () {
         is_no_more || this.loadData();
     },
-    loadData: function() {
-        var e = this;
+    loadData: function () {
+        var that = this;
         if (!is_loading) {
             is_loading = !0, getApp().core.showLoading({
                 title: "加载中"
             });
-            var i = e.data.p + 1;
+            var page = that.data.page + 1;
             getApp().request({
                 url: getApp().api.bargain.order_list,
                 data: {
-                    status: e.data.status,
-                    page: i
+                    status: that.data.status,
+                    page: page
                 },
-                success: function(t) {
+                success: function (t) {
                     if (0 == t.code) {
-                        var a = e.data.list.concat(t.data.list);
-                        e.setData({
-                            list: a,
-                            p: i
-                        }), 0 == t.data.list.length && (is_no_more = !0), e.getTimeList();
-                    } else e.showLoading({
+                        var list = that.data.list.concat(t.data.list);
+                        that.setData({
+                            list: list,
+                            page: page
+                        }), 0 == t.data.list.length && (is_no_more = !0), that.getTimeList();
+                    } else that.showLoading({
                         title: t.msg
                     });
                 },
-                complete: function(t) {
+                complete: function (t) {
                     getApp().core.hideLoading(), is_loading = !0;
                 }
             });
         }
     },
-    submit: function(t) {
-        var a = [], e = [];
-        e.push({
-            bargain_order_id: t.currentTarget.dataset.index
-        }), a.push({
+    submit: function (res) {
+        var list = [], goods_list = [];
+        goods_list.push({
+            bargain_order_id: res.currentTarget.dataset.index
+        }), list.push({
             mch_id: 0,
-            goods_list: e
+            goods_list: goods_list
         }), getApp().core.navigateTo({
-            url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(a)
+            url: "/pages/new-order-submit/new-order-submit?mch_list=" + JSON.stringify(list)
         });
     }
 });

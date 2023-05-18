@@ -2,26 +2,30 @@ var is_loading = !1, is_no_more = !0, interval_list = !1;
 
 Page({
     data: {
-        p: 1,
+        page: 1,
         naver: "index"
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
     },
     onShow: function() {
         getApp().page.onShow(this), getApp().core.showLoading({
             title: "加载中"
         });
-        var e = this;
-        e.data.p = 1, getApp().request({
+        var that = this;
+        that.data.page = 1, getApp().request({
             url: getApp().api.lottery.index,
-            success: function(t) {
-                if (0 == t.code) {
-                    e.setData(t.data), null != t.data.new_list && 0 < t.data.new_list.length && (is_no_more = !1);
-                    var i = [];
-                    t.data.new_list.forEach(function(t, e, a) {
-                        i.push(t.end_time);
-                    }), e.setTimeStart(i);
+            success: function(res) {
+                if (0 == res.code) {
+                    that.setData(res.data), null != res.data.new_list && 0 < res.data.new_list.length && (is_no_more = !1);
+                    var list = [];
+                    res.data.new_list.forEach(function(t, e, a) {
+                        list.push(t.end_time);
+                    }), that.setTimeStart(list);
                 }
             },
             complete: function(t) {
@@ -29,11 +33,11 @@ Page({
             }
         }), getApp().request({
             url: getApp().api.lottery.setting,
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = t.data.title;
-                    e && getApp().core.setNavigationBarTitle({
-                        title: e
+            success: function(res) {
+                if (0 == res.code) {
+                    var title = res.data.title;
+                    title && getApp().core.setNavigationBarTitle({
+                        title: title
                     });
                 }
             }
@@ -46,27 +50,28 @@ Page({
         getApp().page.onUnload(this), clearInterval(interval_list);
     },
     setTimeStart: function(t) {
-        var e = this, d = [];
+        var that = this, time_list = [];
         clearInterval(interval_list), interval_list = setInterval(function() {
             t.forEach(function(t, e, a) {
                 var i = new Date(), n = parseInt(t - i.getTime() / 1e3);
-                if (0 < n) var o = Math.floor(n / 86400), r = Math.floor(n / 3600) - 24 * o, s = Math.floor(n / 60) - 24 * o * 60 - 60 * r, l = Math.floor(n) - 24 * o * 60 * 60 - 60 * r * 60 - 60 * s;
-                var p = {
-                    day: o,
-                    hour: r,
-                    minute: s,
-                    second: l
+                if (0 < n) var day = Math.floor(n / 86400), hour = Math.floor(n / 3600) - 24 * day,
+                    minute = Math.floor(n / 60) - 24 * day * 60 - 60 * hour, second = Math.floor(n) - 24 * day * 60 * 60 - 60 * hour * 60 - 60 * minute;
+                var time = {
+                    day: day,
+                    hour: hour,
+                    minute: minute,
+                    second: second
                 };
-                d[e] = p;
-            }), e.setData({
-                time_list: d
+                time_list[e] = time;
+            }), that.setData({
+                time_list: time_list
             });
         }, 1e3);
     },
     submit: function(t) {
-        var e = t.detail.formId, a = t.currentTarget.dataset.lottery_id;
+        var formId = t.detail.formId, lottery_id = t.currentTarget.dataset.lottery_id;
         getApp().core.navigateTo({
-            url: "/lottery/detail/detail?lottery_id=" + a + "&form_id=" + e
+            url: "/lottery/detail/detail?lottery_id=" + lottery_id + "&form_id=" + formId
         });
     },
     onReachBottom: function() {
@@ -77,26 +82,26 @@ Page({
             is_loading = !0, getApp().core.showLoading({
                 title: "加载中"
             });
-            var a = this, n = a.data.p + 1;
+            var that = this, page = that.data.page + 1;
             getApp().request({
                 url: getApp().api.lottery.index,
                 data: {
-                    page: n
+                    page: page
                 },
-                success: function(t) {
-                    if (0 == t.code) {
-                        var e = a.data.new_list;
-                        if (null == t.data.new_list || 0 == t.data.new_list.length) return void (is_no_more = !0);
-                        e = e.concat(t.data.new_list), a.setData({
-                            new_list: e,
-                            p: n
+                success: function(res) {
+                    if (0 == res.code) {
+                        var new_list = that.data.new_list;
+                        if (null == res.data.new_list || 0 == t.data.new_list.length) return void (is_no_more = !0);
+                        new_list = new_list.concat(t.data.new_list), that.setData({
+                            new_list: new_list,
+                            page: page
                         });
-                        var i = [];
-                        e.forEach(function(t, e, a) {
-                            i.push(t.end_time);
-                        }), a.setTimeStart(i);
-                    } else a.showToast({
-                        title: t.msg
+                        var list = [];
+                        new_list.forEach(function(t, e, a) {
+                            list.push(t.end_time);
+                        }), that.setTimeStart(list);
+                    } else that.showToast({
+                        title: res.msg
                     });
                 },
                 complete: function(t) {

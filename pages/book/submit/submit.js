@@ -7,6 +7,10 @@ Page({
         is_date_start: !0
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t), this.getPreview(t);
     },
     onReady: function(t) {

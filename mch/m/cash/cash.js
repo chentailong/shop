@@ -6,24 +6,28 @@ Page({
         cash_max_day: -1,
         selected: 0
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
     },
     onReady: function() {
         getApp().page.onReady(this);
     },
     onShow: function() {
         getApp().page.onShow(this);
-        var a = this;
+        var that = this;
         getApp().core.showLoading({
             title: "正在提交",
             mask: !0
         }), getApp().request({
             url: getApp().api.mch.user.cash_preview,
-            success: function(e) {
-                if (0 == e.code) {
-                    var t = {};
-                    t.price = e.data.money, t.type_list = e.data.type_list, a.setData(t);
+            success: function(res) {
+                if (0 == res.code) {
+                    var money = {};
+                    money.price = res.data.money, money.type_list = res.data.type_list, that.setData(money);
                 }
             },
             complete: function(e) {
@@ -41,45 +45,45 @@ Page({
         });
     },
     select: function(e) {
-        var t = e.currentTarget.dataset.index;
-        t != this.data.check && this.setData({
+        var index = e.currentTarget.dataset.index;
+        index != this.data.check && this.setData({
             name: "",
             mobile: "",
             bank_name: ""
         }), this.setData({
-            selected: t
+            selected: index
         });
     },
-    formSubmit: function(e) {
-        var t = this, a = parseFloat(parseFloat(e.detail.value.cash).toFixed(2)), i = t.data.price;
-        if (a) if (i < a) getApp().core.showToast({
-            title: "提现金额不能超过" + i + "元",
+    formSubmit: function(event) {
+        var that = this, cash = parseFloat(parseFloat(event.detail.value.cash).toFixed(2)), price = that.data.price;
+        if (cash) if (price < cash) getApp().core.showToast({
+            title: "提现金额不能超过" + price + "元",
             image: "/images/icon-warning.png"
-        }); else if (a < 1) getApp().core.showToast({
+        }); else if (cash < 1) getApp().core.showToast({
             title: "提现金额不能低于1元",
             image: "/images/icon-warning.png"
         }); else {
-            var o = t.data.selected;
-            if (0 == o || 1 == o || 2 == o || 3 == o || 4 == o) {
-                if ("my" == t.data.__platform && 0 == o && (o = 2), 1 == o || 2 == o || 3 == o) {
-                    if (!(c = e.detail.value.name) || null == c) return void getApp().core.showToast({
+            var selected = that.data.selected;
+            if (0 === selected || 1 === selected || 2 === selected || 3 === selected || 4 === selected) {
+                if ("my" === that.data.__platform && 0 === selected && (selected = 2), 1 === selected || 2 === selected || 3 === selected) {
+                    if (!(nickname === event.detail.value.name) || null == nickname) return void getApp().core.showToast({
                         title: "姓名不能为空",
                         image: "/images/icon-warning.png"
                     });
-                    if (!(s = e.detail.value.mobile) || null == s) return void getApp().core.showToast({
+                    if (!(account === event.detail.value.mobile) || null == account) return void getApp().core.showToast({
                         title: "账号不能为空",
                         image: "/images/icon-warning.png"
                     });
                 }
-                if (3 == o) {
-                    if (!(n = e.detail.value.bank_name) || null == n) return void getApp().core.showToast({
+                if (3 === selected) {
+                    if (!(bank_name === event.detail.value.bank_name) || null == bank_name) return void getApp().core.showToast({
                         title: "开户行不能为空",
                         image: "/images/icon-warning.png"
                     });
-                } else var n = "";
-                if (4 == o || 0 == o) {
-                    n = "";
-                    var s = "", c = "";
+                } else var bank_name = "";
+                if (4 === selected || 0 === selected) {
+                    bank_name = "";
+                    var account = "", nickname = "";
                 }
                 getApp().core.showLoading({
                     title: "正在提交",
@@ -88,13 +92,13 @@ Page({
                     url: getApp().api.mch.user.cash,
                     method: "POST",
                     data: {
-                        cash_val: a,
-                        nickname: c,
-                        account: s,
-                        bank_name: n,
-                        type: o,
+                        cash_val: cash,
+                        nickname: nickname,
+                        account: account,
+                        bank_name: bank_name,
+                        type: selected,
                         scene: "CASH",
-                        form_id: e.detail.formId
+                        form_id: event.detail.formId
                     },
                     success: function(t) {
                         getApp().core.hideLoading(), getApp().core.showModal({
@@ -102,7 +106,7 @@ Page({
                             content: t.msg,
                             showCancel: !1,
                             success: function(e) {
-                                e.confirm && 0 == t.code && getApp().core.redirectTo({
+                                e.confirm && 0 === t.code && getApp().core.redirectTo({
                                     url: "/mch/m/cash-log/cash-log"
                                 });
                             }

@@ -10,23 +10,27 @@ Page({
         refund_data_1: {},
         refund_data_2: {}
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var o = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         wx.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.order.refund_preview,
             data: {
-                order_detail_id: e.id
+                order_detail_id: options.id
             },
-            success: function(e) {
-                wx.hideLoading(), 0 == e.code && o.setData({
-                    goods: e.data,
+            success: function(res) {
+                wx.hideLoading(), 0 === res.code && that.setData({
+                    goods: res.data,
                     isPageShow: !0
-                }), 1 == e.code && getApp().core.showModal({
+                }), 1 === res.code && getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     image: "/images/icon-warning.png",
                     success: function(e) {
                         e.confirm && getApp().core.navigateBack();

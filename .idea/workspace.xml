@@ -28,30 +28,200 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="新增设置密码页面">
+    <list default="true" id="a0dac186-9019-463a-9c2e-c3fb3065d3d9" name="默认更改列表" comment="修改源码">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/app.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ext.json" beforeDir="false" afterPath="$PROJECT_DIR$/ext.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siteinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/siteinfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bargain/activity/activity.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/activity/activity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bargain/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/goods/goods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bargain/list/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/list/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bargain/order-list/order-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/order-list/order-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bargain/rule/rule.js" beforeDir="false" afterPath="$PROJECT_DIR$/bargain/rule/rule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/_toast/_toast.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/_toast/_toast.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/area-picker/area-picker.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/area-picker/area-picker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/calendar/calendar-converter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/calendar/calendar-converter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/navbar.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/common/navbar.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/diy/diy.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/diy/diy.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/diy/diy.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/diy/diy.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_banner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_buy.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_buy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_buy.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_buy.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_info.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_info.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_info.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_info.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_info.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_recommend.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_recommend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_refund.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_refund.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/goods_send.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/goods_send.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/goods/specifications_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/goods/specifications_model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/quick-navigation/quick-navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/quick-navigation/quick-navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/quick-navigation/quick-navigation.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/components/quick-navigation/quick-navigation.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/shopping_cart/shopping_cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/shopping_cart/shopping_cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/specifications_model/specifications_model.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/specifications_model/specifications_model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/trigger.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/trigger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ext.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lottery/detail/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/lottery/detail/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lottery/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/lottery/goods/goods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lottery/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lottery/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lottery/lucky-code/lucky-code.js" beforeDir="false" afterPath="$PROJECT_DIR$/lottery/lucky-code/lucky-code.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lottery/prize/prize.js" beforeDir="false" afterPath="$PROJECT_DIR$/lottery/prize/prize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lottery/rule/rule.js" beforeDir="false" afterPath="$PROJECT_DIR$/lottery/rule/rule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/apply/apply.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/apply/apply.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/account-log/account-log.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/account-log/account-log.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/account-rest/account-rest.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/account-rest/account-rest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/account/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/account/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/cash-log/cash-log.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/cash-log/cash-log.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/cash/cash.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/cash/cash.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/goods/goods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/myshop/myshop.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/myshop/myshop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/order-detail/order-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/order-detail/order-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/order-refund/order-refund.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/order-refund/order-refund.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/order-send/order-send.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/order-send/order-send.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/setting/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/setting/setting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/settle_detail/settle_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/settle_detail/settle_detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/shop-qrcode/shop-qrcode.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/shop-qrcode/shop-qrcode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/m/tongji/tongji.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/m/tongji/tongji.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/shop-cat/shop-cat.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/shop-cat/shop-cat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/shop-list/shop-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/shop-list/shop-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/shop-summary/shop-summary.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/shop-summary/shop-summary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/mch/shop/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mch/shop/shop.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/mch/shop/shop.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/add-share/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/add-share/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/address-edit/address-edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-edit/address-edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/address-picker/address-picker.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address-picker/address-picker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/address/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/address/address.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/article-detail/article-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/article-detail/article-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/article-list/article-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/article-list/article-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/balance/balance.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/balance/balance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/balance/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/balance/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/bangding/bangding.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bangding/bangding.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/clerk/clerk.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/clerk/clerk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/comment/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/comment/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/details/details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/details/details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/order-comment/order-comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/order-comment/order-comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/order/details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/order/details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/shop/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/book/submit/submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/book/submit/submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/card-clerk/card-clerk.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card-clerk/card-clerk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/card-detail/card-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card-detail/card-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/card/card.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card/card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cart/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cart/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cash-detail/cash-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash-detail/cash-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cash/cash.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cash/cash.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cat/cat.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cat/cat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cat/cat.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cat/cat.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/cat/cat.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/cat/cat.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/clerk/clerk.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/clerk/clerk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/coupon-detail/coupon-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/coupon-detail/coupon-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/coupon-list/coupon-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/coupon-list/coupon-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/coupon/coupon.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/coupon/coupon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/demo/demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/demo/demo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/express-detail/express-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/express-detail/express-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/favorite/favorite.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/favorite/favorite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/fxhb/detail/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/fxhb/detail/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/fxhb/open/open.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/fxhb/open/open.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/goods/goods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/goods/goods.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/goods/goods.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/goods/goods.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/goods/goods.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/clerk/clerk.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/clerk/clerk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/coupon-info/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/coupon-info/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/detail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/detail/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/exchange/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/exchange/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/goods-info/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/goods-info/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/order-submit/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/order-submit/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/register/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integral-mall/shuoming/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/integral-mall/shuoming/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/list/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/list/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/member/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/member/member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/member/member.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/member/member.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/member/member.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/member/member.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/details/details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/details/details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/express-detail/express-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/express-detail/express-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/miaosha.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/miaosha.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order-comment/order-comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-comment/order-comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order-detail/order-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-detail/order-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order-refund-detail/order-refund-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-refund-detail/order-refund-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order-refund/order-refund.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-refund/order-refund.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order-submit/order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order-submit/order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/miaosha/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/miaosha/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/new-order-submit/new-order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-comment/order-comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-comment/order-comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-comment/order-comment.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-comment/order-comment.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-detail/order-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-detail/order-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-refund-detail/order-refund-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-refund-detail/order-refund-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-refund/order-refund.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-refund/order-refund.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order-submit/order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order-submit/order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/clerk/clerk.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/clerk/clerk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/comment/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/comment/comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/details/details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/details/details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/express-detail/express-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/express-detail/express-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/group/details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/group/details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/list/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/list/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/order-comment/order-comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/order-comment/order-comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/order-details/order-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/order-details/order-details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/order-refund-detail/order-refund-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/order-refund-detail/order-refund-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/order-refund/order-refund.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/order-refund/order-refund.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/order-submit/order-submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/order-submit/order-submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/pt/search/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pt/search/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/quick-purchase/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/quick-purchase/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/recharge/recharge.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/recharge/recharge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/search.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/search.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/set-pwd/set-pwd.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/set-pwd/set-pwd.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share-money/share-money.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share-money/share-money.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share-order/share-order.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share-order/share-order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share-order/share-order.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share-order/share-order.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share-qrcode/share-qrcode.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share-qrcode/share-qrcode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share-qrcode/share-qrcode.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share-qrcode/share-qrcode.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share-team/share-team.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share-team/share-team.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/share/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/share/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shop-detail/shop-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop-detail/shop-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shop-detail/shop-detail.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop-detail/shop-detail.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/shop/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/shop/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/store-disabled/store-disabled.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/store-disabled/store-disabled.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/store-disabled/store-disabled.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/store-disabled/store-disabled.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/topic-list/topic-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/topic-list/topic-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/topic-list/topic-list.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/topic-list/topic-list.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/topic/topic.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/topic/topic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/user.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/user.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/video/video-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/video/video-list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/video/video-list.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/video/video-list.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/web/authorization/authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/web/authorization/authorization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/web/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/web/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pond/pond/pond.js" beforeDir="false" afterPath="$PROJECT_DIR$/pond/pond/pond.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pond/prize/prize.js" beforeDir="false" afterPath="$PROJECT_DIR$/pond/prize/prize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pond/rule/rule.js" beforeDir="false" afterPath="$PROJECT_DIR$/pond/rule/rule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/index/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/index/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch/prize/prize.js" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/prize/prize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch/rule/rule.js" beforeDir="false" afterPath="$PROJECT_DIR$/scratch/rule/rule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/dare/dare.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/dare/dare.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/detail/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/detail/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/friend/friend.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/friend/friend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/step/goods/goods.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/goods/goods.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/step/index/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/index/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/index/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/index/index.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/step/join/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/join/join.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/join/join.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/join/join.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/log/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/log/log.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/log/log.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/log/log.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/step/rules/rules.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/rules/rules.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/rules/rules.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/rules/rules.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/step/share/share.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/share/share.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/share/share.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/share/share.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/top/top.js" beforeDir="false" afterPath="$PROJECT_DIR$/step/top/top.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/step/top/top.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/step/top/top.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/uploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxParse/html2json.js" beforeDir="false" afterPath="$PROJECT_DIR$/wxParse/html2json.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxParse/wxParse.js" beforeDir="false" afterPath="$PROJECT_DIR$/wxParse/wxParse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wxParse/wxParse.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/wxParse/wxParse.wxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +236,7 @@
       <list>
         <option value="tsconfig.json" />
         <option value="package.json" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -78,17 +249,26 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1kovTJiAtU3FWmmrKqoh8WmR75r" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../uni.app/lotus" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/miniprogram_npm/@vant/weapp" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -101,7 +281,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\商城DIY\gxit-muzi-renren-mall-wechat-master\muzi-renren-mall-wechat\pages" />
+      <recent name="F:\wechat\muzi_shop\miniprogram_npm\@vant\weapp" />
+      <recent name="F:\wechat\muzi_shop\miniprogram_npm\@vant\weapp\action-sheet" />
+      <recent name="F:\wechat\muzi_shop\pages" />
+      <recent name="F:\wechat\muzi_shop\pages\manage" />
+      <recent name="F:\wechat\muzi_shop" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\wechat\muzi_shop" />
+      <recent name="F:\wechat\muzi_shop\pages" />
+      <recent name="F:\wechat\muzi_shop\manage" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -193,6 +382,48 @@
       <workItem from="1616135747819" duration="780000" />
       <workItem from="1616136548671" duration="1312000" />
       <workItem from="1616374437480" duration="9951000" />
+      <workItem from="1616393698073" duration="4989000" />
+      <workItem from="1616461850688" duration="1196000" />
+      <workItem from="1616659259880" duration="5507000" />
+      <workItem from="1616720644251" duration="3086000" />
+      <workItem from="1616980481512" duration="6352000" />
+      <workItem from="1617066508679" duration="678000" />
+      <workItem from="1617172067435" duration="4432000" />
+      <workItem from="1617242591990" duration="641000" />
+      <workItem from="1617244195472" duration="1724000" />
+      <workItem from="1617258894562" duration="594000" />
+      <workItem from="1617776448323" duration="5777000" />
+      <workItem from="1618194700872" duration="1685000" />
+      <workItem from="1618275500335" duration="831000" />
+      <workItem from="1618363201198" duration="1262000" />
+      <workItem from="1618391326437" duration="1660000" />
+      <workItem from="1618453907638" duration="259000" />
+      <workItem from="1618457392990" duration="9224000" />
+      <workItem from="1618536025791" duration="651000" />
+      <workItem from="1618557709208" duration="6906000" />
+      <workItem from="1618565736176" duration="1590000" />
+      <workItem from="1618795496216" duration="6660000" />
+      <workItem from="1618880466632" duration="21209000" />
+      <workItem from="1618966818291" duration="15788000" />
+      <workItem from="1619053065262" duration="19777000" />
+      <workItem from="1619141112004" duration="15456000" />
+      <workItem from="1619251120918" duration="6214000" />
+      <workItem from="1619257363214" duration="7000" />
+      <workItem from="1619312859958" duration="14994000" />
+      <workItem from="1619398992130" duration="19160000" />
+      <workItem from="1619430924793" duration="205000" />
+      <workItem from="1619485335582" duration="19179000" />
+      <workItem from="1619517619875" duration="72000" />
+      <workItem from="1619571825624" duration="20755000" />
+      <workItem from="1619658000901" duration="22648000" />
+      <workItem from="1619697264598" duration="2891000" />
+      <workItem from="1619744499320" duration="25169000" />
+      <workItem from="1619780891580" duration="37983000" />
+      <workItem from="1619941042309" duration="12000" />
+      <workItem from="1620262503912" duration="16471000" />
+      <workItem from="1620348933615" duration="12318000" />
+      <workItem from="1620385558616" duration="8756000" />
+      <workItem from="1620439611196" duration="8161000" />
     </task>
     <task id="LOCAL-00001" summary="更新积分商城中分类">
       <created>1606469250408</created>
@@ -271,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610950777048</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="修改源码">
+      <created>1616393867483</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1616393867483</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +552,7 @@
     <MESSAGE value="更新了DIY模块,已经更新了分销商中数据的显示问题" />
     <MESSAGE value="增加了密码支付功能" />
     <MESSAGE value="新增设置密码页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增设置密码页面" />
+    <MESSAGE value="修改源码" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改源码" />
   </component>
 </project>

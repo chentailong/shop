@@ -41,18 +41,36 @@ var modules = [{
         file: "./core/order-pay.js"
     }],
     args = {
+        globalData: {
+            active:0,
+            actives:0,
+            id:0,
+            userInfo: null
+        },
         _version: "2.8.9",
         platform: platform,
         query: null,
         onLaunch: function () {
             this.getStoreData();
+            // 展示本地存储能力
+            const logs = wx.getStorageSync('logs') || []
+            logs.unshift(Date.now())
+            wx.setStorageSync('logs', logs)
+
+            // 登录
+            wx.login({
+                success: res => {
+                    // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                }
+            })
         },
         onShow: function (data) {
             data.scene && (this.onShowData = data), data && data.query && (this.query = data.query), this.getUser() && this.trigger.run(this.trigger.events.login);
         },
         is_login: !1,
         login_complete: !1,
-        is_form_id_request: !0
+        is_form_id_request: !0,
+
     };
 for (var i in modules) args[modules[i].name] = require(modules[i].file);
 var _web_root = args.api.index.substr(0, args.api.index.indexOf("/index.php"));

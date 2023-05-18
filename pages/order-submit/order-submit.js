@@ -20,27 +20,31 @@ Page({
         lottery_id: !1,
         setp_id: !1
     },
-    onLoad: function (t) {
-        getApp().page.onLoad(this, t);
-        var a = this, e = util.formatData(new Date());
-        getApp().core.removeStorageSync(getApp().const.INPUT_DATA), t.pond_id && a.setData({
-            pond_id: t.pond_id
-        }), t.scratch_id && a.setData({
-            scratch_id: t.scratch_id
-        }), t.lottery_id && a.setData({
-            lottery_id: t.lottery_id
-        }), t.step_id && a.setData({
-            step_id: t.step_id
-        }), a.setData({
-            options: t,
-            time: e
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this, time = util.formatData(new Date());
+        getApp().core.removeStorageSync(getApp().const.INPUT_DATA), options.pond_id && that.setData({
+            pond_id: options.pond_id
+        }), options.scratch_id && that.setData({
+            scratch_id: options.scratch_id
+        }), options.lottery_id && that.setData({
+            lottery_id: options.lottery_id
+        }), options.step_id && that.setData({
+            step_id: options.step_id
+        }), that.setData({
+            options: options,
+            time: time
         });
     },
     bindkeyinput: function (t) {
-        var a = t.currentTarget.dataset.mchIndex;
-        -1 == a ? this.setData({
+        var mchIndex = t.currentTarget.dataset.mchIndex;
+        -1 == mchIndex ? this.setData({
             content: t.detail.value
-        }) : (this.data.mch_list[a] && (this.data.mch_list[a].content = t.detail.value),
+        }) : (this.data.mch_list[mchIndex] && (this.data.mch_list[mchIndex].content = t.detail.value),
             this.setData({
                 mch_list: this.data.mch_list
             }));
@@ -56,26 +60,26 @@ Page({
         });
     },
     getOffline: function (t) {
-        var a = this.data.express_price, e = this.data.express_price_1;
+        var pric = this.data.express_price, express_price = this.data.express_price_1;
         1 == t.currentTarget.dataset.index ? this.setData({
             offline: 1,
             express_price: 0,
-            express_price_1: a,
+            express_price_1: pric,
             is_area: 0
         }) : this.setData({
             offline: 0,
-            express_price: e
+            express_price: express_price
         }), this.getPrice();
     },
     dingwei: function () {
-        var a = this;
+        var that = this;
         getApp().getauth({
             content: "需要获取您的地理位置授权，请到小程序设置中打开授权",
             author: "scope.userLocation",
-            success: function (t) {
-                t && (t.authSetting["scope.userLocation"] ? getApp().core.chooseLocation({
+            success: function (res) {
+                res && (res.authSetting["scope.userLocation"] ? getApp().core.chooseLocation({
                     success: function (t) {
-                        longitude = t.longitude, latitude = t.latitude, a.setData({
+                        longitude = t.longitude, latitude = t.latitude, that.setData({
                             location: t.address
                         });
                     }
@@ -87,97 +91,99 @@ Page({
         });
     },
     orderSubmit: function (t) {
-        var a = this, e = a.data.offline, i = {};
-        if (0 == e) {
-            if (1 == a.data.is_area) return void getApp().core.showToast({
+        var that = this, offline = that.data.offline, order_list = {};
+        if (0 === offline) {
+            if (1 === that.data.is_area) return void getApp().core.showToast({
                 title: "所选地区无货",
                 image: "/images/icon-warning.png"
             });
-            if (!a.data.address || !a.data.address.id) return void getApp().core.showToast({
+            if (!that.data.address || !that.data.address.id) return void getApp().core.showToast({
                 title: "请选择收货地址",
                 image: "/images/icon-warning.png"
             });
-            i.address_id = a.data.address.id;
+            order_list.address_id = that.data.address.id;
         } else {
-            if (i.address_name = a.data.name, i.address_mobile = a.data.mobile, !a.data.shop.id) return void getApp().core.showModal({
+            if (order_list.address_name = that.data.name, order_list.address_mobile = that.data.mobile, !that.data.shop.id) return void getApp().core.showModal({
                 title: "警告",
                 content: "请选择门店",
                 showCancel: !1
             });
-            if (i.shop_id = a.data.shop.id, !i.address_name || null == i.address_name) return void a.showToast({
+            if (order_list.shop_id = that.data.shop.id, !order_list.address_name || null == order_list.address_name) return void that.showToast({
                 title: "请填写联系人",
                 image: "/images/icon-warning.png"
             });
-            if (!i.address_mobile || null == i.address_mobile) return void a.showToast({
+            if (!order_list.address_mobile || null == order_list.address_mobile) return void that.showToast({
                 title: "请填写联系方式",
                 image: "/images/icon-warning.png"
             });
-            if (!/^\+?\d[\d -]{8,12}\d/.test(i.address_mobile)) return void getApp().core.showModal({
+            if (!/^\+?\d[\d -]{8,12}\d/.test(order_list.address_mobile)) return void getApp().core.showModal({
                 title: "提示",
                 content: "手机号格式不正确",
                 showCancel: !1
             });
         }
-        i.offline = e;
-        var s = a.data.form;
-        if (1 == s.is_form && a.data.goods_list && a.data.goods_list.length) {
-            var o = s.list;
-            for (var d in o) if ("date" == o[d].type && (o[d].default = o[d].default ? o[d].default : a.data.time),
-            "time" == o[d].type && (o[d].default = o[d].default ? o[d].default : "00:00"), 1 == o[d].required) if ("radio" == o[d].type || "checkboxc" == o[d].type) {
+        order_list.offline = offline;
+        var form = that.data.form;
+        if (1 === form.is_form && that.data.goods_list && that.data.goods_list.length) {
+            var list = form.list;
+            for (var d in list) if ("date" === list[d].type && (list[d].default = list[d].default ? list[d].default : that.data.time),
+            "time" === list[d].type && (list[d].default = list[d].default ? list[d].default : "00:00"), 1 === list[d].required) if ("radio" === list[d].type || "checkboxc" === list[d].type) {
                 var r = !1;
-                for (var n in o[d].default_list) 1 == o[d].default_list[n].is_selected && (r = !0);
+                for (var n in list[d].default_list) 1 === list[d].default_list[n].is_selected && (r = !0);
                 if (!r) return getApp().core.showModal({
                     title: "提示",
-                    content: "请填写" + s.name + "，加‘*’为必填项",
+                    content: "请填写" + form.name + "，加‘*’为必填项",
                     showCancel: !1
                 }), !1;
-            } else if (!o[d].default || null == o[d].default) return getApp().core.showModal({
+            } else if (!list[d].default || null == list[d].default) return getApp().core.showModal({
                 title: "提示",
-                content: "请填写" + s.name + "，加‘*’为必填项",
+                content: "请填写" + form.name + "，加‘*’为必填项",
                 showCancel: !1
             }), !1;
         }
-        if (0 < a.data.pond_id || 0 < a.data.scratch_id || 0 < a.data.lottery_id || 0 < a.data.step_id) {
-            if (0 < a.data.express_price && -1 == a.data.payment) return a.setData({
+        if (0 < that.data.pond_id || 0 < that.data.scratch_id || 0 < that.data.lottery_id || 0 < that.data.step_id) {
+            if (0 < that.data.express_price && -1 === that.data.payment) return that.setData({
                 show_payment: !0
             }), !1;
-        } else if (-1 == a.data.payment) return a.setData({
+        } else if (-1 === that.data.payment) return that.setData({
             show_payment: !0
         }), !1;
-        if (i.form = JSON.stringify(s), a.data.cart_id_list && (i.cart_id_list = JSON.stringify(a.data.cart_id_list)),
-        a.data.mch_list && a.data.mch_list.length) {
-            var c = [];
-            for (var d in a.data.mch_list) if (a.data.mch_list[d].cart_id_list) {
-                var p = {
-                    id: a.data.mch_list[d].id,
-                    cart_id_list: a.data.mch_list[d].cart_id_list
+        if (order_list.form = JSON.stringify(form), that.data.cart_id_list && (order_list.cart_id_list = JSON.stringify(that.data.cart_id_list)),
+        that.data.mch_list && that.data.mch_list.length) {
+            var list = [];
+            for (var d in that.data.mch_list) if (that.data.mch_list[d].cart_id_list) {
+                var mch_list = {
+                    id: that.data.mch_list[d].id,
+                    cart_id_list: that.data.mch_list[d].cart_id_list
                 };
-                a.data.mch_list[d].content && (p.content = a.data.mch_list[d].content), c.push(p);
+                that.data.mch_list[d].content && (mch_list.content = that.data.mch_list[d].content), list.push(mch_list);
             }
-            c.length ? i.mch_list = JSON.stringify(c) : i.mch_list = "";
+            list.length ? order_list.mch_list = JSON.stringify(list) : order_list.mch_list = "";
         }
-        a.data.goods_info && (i.goods_info = JSON.stringify(a.data.goods_info)), a.data.picker_coupon && (i.user_coupon_id = a.data.picker_coupon.user_coupon_id),
-        a.data.content && (i.content = a.data.content), a.data.cart_list && (i.cart_list = JSON.stringify(a.data.cart_list)),
-            1 == a.data.integral_radio ? i.use_integral = 1 : i.use_integral = 2, a.data.goods_list && a.data.goods_list.length || !a.data.mch_list || 1 != a.data.mch_list.length || (i.content = a.data.mch_list[0].content ? a.data.mch_list[0].content : ""),
-            i.payment = a.data.payment, i.formId = t.detail.formId, i.pond_id = a.data.pond_id,
-            i.scratch_id = a.data.scratch_id, i.step_id = a.data.step_id, i.lottery_id = a.data.lottery_id,
-            i.pond_id ? a.order_submit(i, "pond") : i.scratch_id ? a.order_submit(i, "scratch") : i.lottery_id ? a.order_submit(i, "lottery") : i.step_id ? a.order_submit(i, "step") : a.order_submit(i, "s");
+        that.data.goods_info && (order_list.goods_info = JSON.stringify(that.data.goods_info)), that.data.picker_coupon && (order_list.user_coupon_id = that.data.picker_coupon.user_coupon_id),
+        that.data.content && (order_list.content = that.data.content), that.data.cart_list && (order_list.cart_list = JSON.stringify(that.data.cart_list)),
+            1 === that.data.integral_radio ? order_list.use_integral = 1 : order_list.use_integral = 2, that.data.goods_list && that.data.goods_list.length ||
+        !that.data.mch_list || 1 !== that.data.mch_list.length || (order_list.content = that.data.mch_list[0].content ? that.data.mch_list[0].content : ""),
+            order_list.payment = that.data.payment, order_list.formId = t.detail.formId, order_list.pond_id = that.data.pond_id,
+            order_list.scratch_id = that.data.scratch_id, order_list.step_id = that.data.step_id, order_list.lottery_id = that.data.lottery_id,
+            order_list.pond_id ? that.order_submit(order_list, "pond") : order_list.scratch_id ? that.order_submit(order_list, "scratch") : order_list.lottery_id ?
+                that.order_submit(order_list, "lottery") : order_list.step_id ? that.order_submit(order_list, "step") : that.order_submit(order_list, "s");
     },
 
     onReady: function () {
     },
     onShow: function (t) {
-        if (!getApp().onShowData || !getApp().onShowData.scene || 1034 != getApp().onShowData.scene && "pay" != getApp().onShowData.scene) if (loadingImg) loadingImg = !1; else {
+        if (!getApp().onShowData || !getApp().onShowData.scene || 1034 !== getApp().onShowData.scene && "pay" !== getApp().onShowData.scene) if (loadingImg) loadingImg = !1; else {
             getCurrentPages();
             getApp().page.onShow(this);
-            var a = this, e = getApp().core.getStorageSync(getApp().const.PICKER_ADDRESS);
-            if (e) {
-                a.data.is_area_city_id;
-                var i = {};
-                i.address = e, i.name = e.name, i.mobile = e.mobile, getApp().core.removeStorageSync(getApp().const.PICKER_ADDRESS),
-                    a.setData(i), a.getInputData();
+            var that = this, address = getApp().core.getStorageSync(getApp().const.PICKER_ADDRESS);
+            if (address) {
+                that.data.is_area_city_id;
+                var data = {};
+                data.address = address, data.name = address.name, data.mobile = address.mobile, getApp().core.removeStorageSync(getApp().const.PICKER_ADDRESS),
+                    that.setData(data), that.getInputData();
             }
-            a.getOrderData(a.data.options);
+            that.getOrderData(that.data.options);
         }
     },
     getOrderData: function (t) {
@@ -203,13 +209,13 @@ Page({
                 url: getApp().api.order.submit_preview,
                 data: a,
                 success: function (t) {
-                    if (getApp().core.hideLoading(), 0 == t.code) {
+                    if (getApp().core.hideLoading(), 0 === t.code) {
                         var a = getApp().core.getStorageSync(getApp().const.INPUT_DATA);
                         getApp().core.removeStorageSync(getApp().const.INPUT_DATA);
                         var e = [], i = t.data.coupon_list;
                         for (var s in i) null != i[s] && e.push(i[s]);
                         var o = t.data.shop_list, d = {};
-                        o && 1 == o.length && (d = o[0]), t.data.is_shop && (d = t.data.is_shop), a || (1 < (a = {
+                        o && 1 === o.length && (d = o[0]), t.data.is_shop && (d = t.data.is_shop), a || (1 < (a = {
                             shop: d,
                             address: t.data.address || null,
                             name: t.data.address ? t.data.address.name : "",
@@ -228,13 +234,13 @@ Page({
                             cart_id_list: t.data.cart_id_list
                         }), t.data.cart_list && r.setData({
                             cart_list: t.data.cart_list
-                        }), 1 == t.data.send_type && r.setData({
+                        }), 1 === t.data.send_type && r.setData({
                             offline: 0
-                        }), 2 == t.data.send_type && r.setData({
+                        }), 2 === t.data.send_type && r.setData({
                             offline: 1
                         }), r.getPrice();
                     }
-                    1 == t.code && getApp().core.showModal({
+                    1 === t.code && getApp().core.showModal({
                         title: "提示",
                         content: t.msg,
                         showCancel: !1,
@@ -272,7 +278,7 @@ Page({
     },
     pickCoupon: function (t) {
         var a = t.currentTarget.dataset.index, e = getApp().core.getStorageSync(getApp().const.INPUT_DATA);
-        getApp().core.removeStorageSync(getApp().const.INPUT_DATA), e.picker_coupon = "-1" != a && -1 != a && this.data.coupon_list[a],
+        getApp().core.removeStorageSync(getApp().const.INPUT_DATA), e.picker_coupon = "-1" !== a && -1 != a && this.data.coupon_list[a],
             e.show_coupon_picker = !1, this.setData(e), this.getPrice();
     },
     numSub: function (t, a, e) {
@@ -286,11 +292,11 @@ Page({
     },
     pickShop: function (t) {
         var a = t.currentTarget.dataset.index, e = getApp().core.getStorageSync(getApp().const.INPUT_DATA);
-        getApp().core.removeStorageSync(getApp().const.INPUT_DATA), e.shop = "-1" != a && -1 != a && this.data.shop_list[a],
+        getApp().core.removeStorageSync(getApp().const.INPUT_DATA), e.shop = "-1" !== a && -1 != a && this.data.shop_list[a],
             e.show_shop = !1, this.setData(e), this.getPrice();
     },
     integralSwitchChange: function (t) {
-        0 != t.detail.value ? this.setData({
+        0 !== t.detail.value ? this.setData({
             integral_radio: 1
         }) : this.setData({
             integral_radio: 2
@@ -313,8 +319,8 @@ Page({
         var t = this, a = t.data.total_price, e = t.data.express_price, i = t.data.picker_coupon, s = t.data.integral,
             o = t.data.integral_radio, d = t.data.level, r = t.data.offline;
         if (t.data.goods_list && 0 < t.data.goods_list.length && (i && (a -= i.sub_price),
-        s && 1 == o && (a -= parseFloat(s.forehead)), d && (a = a * d.discount / 10), a <= .01 && (a = .01),
-        0 == r && (a += e)), t.data.mch_list && t.data.mch_list.length) for (var n in t.data.mch_list) a += t.data.mch_list[n].total_price + t.data.mch_list[n].express_price;
+        s && 1 === o && (a -= parseFloat(s.forehead)), d && (a = a * d.discount / 10), a <= .01 && (a = .01),
+        0 === r && (a += e)), t.data.mch_list && t.data.mch_list.length) for (var n in t.data.mch_list) a += t.data.mch_list[n].total_price + t.data.mch_list[n].express_price;
         t.setData({
             new_total_price: parseFloat(a.toFixed(2))
         });
@@ -341,12 +347,12 @@ Page({
     },
     selectForm: function (t) {
         var a = t.currentTarget.dataset.index, e = t.currentTarget.dataset.k, i = this.data.form, s = i.list;
-        if ("radio" == s[a].type) {
+        if ("radio" === s[a].type) {
             var o = s[a].default_list;
             for (var d in o) d == e ? o[e].is_selected = 1 : o[d].is_selected = 0;
             s[a].default_list = o;
         }
-        "checkbox" == s[a].type && (1 == (o = s[a].default_list)[e].is_selected ? o[e].is_selected = 0 : o[e].is_selected = 1,
+        "checkbox" === s[a].type && (1 == (o = s[a].default_list)[e].is_selected ? o[e].is_selected = 0 : o[e].is_selected = 1,
             s[a].default_list = o);
         i.list = s, this.setData({
             form: i
@@ -400,7 +406,7 @@ Page({
                 });
             },
             success: function (t) {
-                0 == t.code ? (i.list[e].default = t.data.url, a.setData({
+                0 === t.code ? (i.list[e].default = t.data.url, a.setData({
                     form: i
                 })) : a.showToast({
                     title: t.msg

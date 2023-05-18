@@ -4,8 +4,12 @@ Page({
         hide: 1,
         qrcode: ""
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e), this.options = e;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), this.options = options;
     },
     onReady: function(e) {
         getApp().page.onReady(this);
@@ -28,31 +32,31 @@ Page({
     },
     onShareAppMessage: function(e) {
         getApp().page.onShareAppMessage(this);
-        var t = this, o = "/pages/pt/group/details?oid=" + t.data.order_info.order_id;
+        var that = this, url = "/pages/pt/group/details?oid=" + that.data.order_info.order_id;
         return {
-            title: t.data.order_info.goods_list[0].name,
-            path: o,
-            imageUrl: t.data.order_info.goods_list[0].goods_pic,
+            title: that.data.order_info.goods_list[0].name,
+            path: url,
+            imageUrl: that.data.order_info.goods_list[0].goods_pic,
             success: function(e) {}
         };
     },
     loadOrderDetails: function() {
-        var t = this;
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.group.order.detail,
             data: {
-                order_id: t.options.id
+                order_id: that.options.id
             },
-            success: function(e) {
-                0 == e.code ? (3 != e.data.status && t.countDownRun(e.data.limit_time_ms), t.setData({
-                    order_info: e.data,
-                    limit_time: e.data.limit_time
+            success: function(res) {
+                0 === res.code ? (3 !== res.data.status && that.countDownRun(res.data.limit_time_ms), that.setData({
+                    order_info: res.data,
+                    limit_time: res.data.limit_time
                 })) : getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(e) {
                         e.confirm && getApp().core.redirectTo({
@@ -67,9 +71,9 @@ Page({
         });
     },
     copyText: function(e) {
-        var t = e.currentTarget.dataset.text;
+        var text = e.currentTarget.dataset.text;
         getApp().core.setClipboardData({
-            data: t,
+            data: text,
             success: function() {
                 getApp().core.showToast({
                     title: "已复制"
@@ -78,14 +82,15 @@ Page({
         });
     },
     countDownRun: function(n) {
-        var r = this;
+        var that = this;
         setInterval(function() {
-            var e = new Date(n[0], n[1] - 1, n[2], n[3], n[4], n[5]) - new Date(), t = parseInt(e / 1e3 / 60 / 60 % 24, 10), o = parseInt(e / 1e3 / 60 % 60, 10), i = parseInt(e / 1e3 % 60, 10);
-            t = r.checkTime(t), o = r.checkTime(o), i = r.checkTime(i), r.setData({
+            var time = new Date(n[0], n[1] - 1, n[2], n[3], n[4], n[5]) - new Date(), hours = parseInt(time / 1e3 / 60 / 60 % 24, 10),
+                mins = parseInt(time / 1e3 / 60 % 60, 10), secs = parseInt(time / 1e3 % 60, 10);
+            hours = that.checkTime(hours), mins = that.checkTime(mins), secs = that.checkTime(secs), that.setData({
                 limit_time: {
-                    hours: 0 < t ? t : 0,
-                    mins: 0 < o ? o : 0,
-                    secs: 0 < i ? i : 0
+                    hours: 0 < hours ? hours : 0,
+                    mins: 0 < mins ? mins : 0,
+                    secs: 0 < secs ? secs : 0
                 }
             });
         }, 1e3);
@@ -93,33 +98,33 @@ Page({
     checkTime: function(e) {
         return e < 10 && (e = "0" + e), e;
     },
-    toConfirm: function(e) {
-        var t = this;
+    toConfirm: function(event) {
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.group.order.confirm,
             data: {
-                order_id: t.data.order_info.order_id
+                order_id: that.data.order_info.order_id
             },
-            success: function(e) {
-                0 == e.code ? getApp().core.showModal({
+            success: function(res) {
+                0 === res.code ? getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(e) {
                         e.confirm && getApp().core.redirectTo({
-                            url: "/pages/pt/order-details/order-details?id=" + t.data.order_info.order_id
+                            url: "/pages/pt/order-details/order-details?id=" + that.data.order_info.order_id
                         });
                     }
                 }) : getApp().core.showModal({
                     title: "提示",
-                    content: e.msg,
+                    content: res.msg,
                     showCancel: !1,
                     success: function(e) {
                         e.confirm && getApp().core.redirectTo({
-                            url: "/pages/pt/order-details/order-details?id=" + t.data.order_info.order_id
+                            url: "/pages/pt/order-details/order-details?id=" + that.data.order_info.order_id
                         });
                     }
                 });
@@ -138,28 +143,28 @@ Page({
         });
     },
     location: function() {
-        var e = this.data.order_info.shop;
+        var shop = this.data.order_info.shop;
         getApp().core.openLocation({
-            latitude: parseFloat(e.latitude),
-            longitude: parseFloat(e.longitude),
-            address: e.address,
-            name: e.name
+            latitude: parseFloat(shop.latitude),
+            longitude: parseFloat(shop.longitude),
+            address: shop.address,
+            name: shop.name
         });
     },
-    getOfflineQrcode: function(e) {
-        var t = this;
+    getOfflineQrcode: function(event) {
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), getApp().request({
             url: getApp().api.group.order.get_qrcode,
             data: {
-                order_no: e.currentTarget.dataset.id
+                order_no: event.currentTarget.dataset.id
             },
-            success: function(e) {
-                0 == e.code ? t.setData({
+            success: function(res) {
+                0 == res.code ? that.setData({
                     hide: 0,
-                    qrcode: e.data.url
+                    qrcode: res.data.url
                 }) : getApp().core.showModal({
                     title: "提示",
                     content: e.msg
@@ -176,19 +181,19 @@ Page({
         });
     },
     orderRevoke: function() {
-        var t = this;
+        var that = this;
         getApp().core.showModal({
             title: "提示",
             content: "是否取消该订单？",
             cancelText: "否",
             confirmtext: "是",
-            success: function(e) {
-                e.confirm && (getApp().core.showLoading({
+            success: function(res) {
+                res.confirm && (getApp().core.showLoading({
                     title: "操作中"
                 }), getApp().request({
                     url: getApp().api.group.order.revoke,
                     data: {
-                        order_id: t.data.order_info.order_id
+                        order_id: that.data.order_info.order_id
                     },
                     success: function(e) {
                         getApp().core.hideLoading(), getApp().core.showModal({
@@ -196,7 +201,7 @@ Page({
                             content: e.msg,
                             showCancel: !1,
                             success: function(e) {
-                                e.confirm && t.loadOrderDetails();
+                                e.confirm && that.loadOrderDetails();
                             }
                         });
                     }

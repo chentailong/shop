@@ -6,23 +6,27 @@ Page({
         list: [],
         page: 1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t), this.setData({
-            status: t.status || 0
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options), this.setData({
+            status: options.status || 0
         });
-        var a = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.lottery.prize,
             data: {
-                status: a.data.status,
-                page: a.data.page
+                status: that.data.status,
+                page: that.data.page
             },
-            success: function(t) {
-                0 == t.code && (a.setData({
-                    list: t.data.list
-                }), null != t.data.list && 0 < t.data.list.length && (is_no_more = !1));
+            success: function(res) {
+                0 == res.code && (that.setData({
+                    list: res.data.list
+                }), null != res.data.list && 0 < res.data.list.length && (is_no_more = !1));
             },
             complete: function() {
                 getApp().core.hideLoading();
@@ -37,21 +41,21 @@ Page({
             is_loading = !0, getApp().core.showLoading({
                 title: "加载中"
             });
-            var a = this, e = a.data.page + 1;
+            var that = this, page = that.data.page + 1;
             getApp().request({
                 url: getApp().api.lottery.prize,
                 data: {
-                    status: a.data.status,
-                    page: e
+                    status: that.data.status,
+                    page: page
                 },
                 success: function(t) {
                     if (0 == t.code) {
                         if (null == t.data.list || 0 == t.data.list.length) return void (is_no_more = !0);
-                        a.setData({
-                            list: a.data.list.concat(t.data.list),
-                            page: e
+                        that.setData({
+                            list: that.data.list.concat(t.data.list),
+                            page: page
                         });
-                    } else a.showToast({
+                    } else that.showToast({
                         title: t.msg
                     });
                 },

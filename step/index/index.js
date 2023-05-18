@@ -146,7 +146,7 @@ Page(_defineProperty({
                         page: r + 1,
                         over: o,
                         loading: !1
-                    });
+                    }); 
                 }
             });
         }
@@ -312,6 +312,10 @@ Page(_defineProperty({
         });
     },
     onLoad: function (e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
         var o = 0;
         if (null !== e.scene) {

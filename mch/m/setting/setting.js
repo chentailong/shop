@@ -2,38 +2,42 @@ var area_picker = require("./../../../components/area-picker/area-picker.js"), a
 
 Page({
     data: {},
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
-        e.getDistrictData(function(t) {
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        that.getDistrictData(function (data) {
             area_picker.init({
-                page: e,
-                data: t
+                page: that,
+                data: data
             });
         }), getApp().core.showLoading({
             title: "正在加载"
         }), getApp().request({
             url: getApp().api.mch.user.setting,
-            success: function(t) {
-                getApp().core.hideLoading(), e.setData(t.data);
+            success: function (res) {
+                getApp().core.hideLoading(), that.setData(res.data);
             }
         });
     },
-    getDistrictData: function(e) {
-        var a = getApp().core.getStorageSync(getApp().const.DISTRICT);
-        if (!a) return getApp().core.showLoading({
+    getDistrictData: function (event) {
+        var district = getApp().core.getStorageSync(getApp().const.DISTRICT);
+        if (!district) return getApp().core.showLoading({
             title: "正在加载",
             mask: !0
         }), void getApp().request({
             url: getApp().api.default.district,
-            success: function(t) {
-                getApp().core.hideLoading(), 0 == t.code && (a = t.data, getApp().core.setStorageSync(getApp().const.DISTRICT, a), 
-                e(a));
+            success: function (res) {
+                getApp().core.hideLoading(), 0 === res.code && (district = res.data, getApp().core.setStorageSync(getApp().const.DISTRICT, district),
+                    event(district));
             }
         });
-        e(a);
+        event(district);
     },
-    onAreaPickerConfirm: function(t) {
+    onAreaPickerConfirm: function (t) {
         this.setData({
             edit_district: {
                 province: {
@@ -51,97 +55,98 @@ Page({
             }
         });
     },
-    mchCommonCatChange: function(t) {
+    mchCommonCatChange: function (t) {
         this.setData({
             mch_common_cat_index: t.detail.value
         });
     },
-    formSubmit: function(t) {
-        var e = this;
+    formSubmit: function (event) {
+        var that = this;
         getApp().core.showLoading({
             title: "正在提交",
             mask: !0
-        }), t.detail.value.form_id = t.detail.formId, t.detail.value.mch_common_cat_id = e.data.mch_common_cat_index ? e.data.mch_common_cat_list[e.data.mch_common_cat_index].id : e.data.mch && e.data.mch.mch_common_cat_id ? e.data.mch.mch_common_cat_id : "", 
-        getApp().request({
-            url: getApp().api.mch.user.setting_submit,
-            method: "post",
-            data: t.detail.value,
-            success: function(t) {
-                getApp().core.hideLoading(), 0 == t.code ? getApp().core.showModal({
-                    title: "提示",
-                    content: t.msg,
-                    showCancel: !1,
-                    success: function(t) {
-                        t.confirm && getApp().core.navigateBack({
-                            delta: 1
-                        });
-                    }
-                }) : e.showToast({
-                    title: t.msg
-                });
-            }
-        });
+        }), event.detail.value.form_id = event.detail.formId, event.detail.value.mch_common_cat_id = that.data.mch_common_cat_index ?
+            that.data.mch_common_cat_list[that.data.mch_common_cat_index].id : that.data.mch && that.data.mch.mch_common_cat_id ? that.data.mch.mch_common_cat_id : "",
+            getApp().request({
+                url: getApp().api.mch.user.setting_submit,
+                method: "post",
+                data: event.detail.value,
+                success: function (res) {
+                    getApp().core.hideLoading(), 0 == res.code ? getApp().core.showModal({
+                        title: "提示",
+                        content: res.msg,
+                        showCancel: !1,
+                        success: function (t) {
+                            t.confirm && getApp().core.navigateBack({
+                                delta: 1
+                            });
+                        }
+                    }) : that.showToast({
+                        title: res.msg
+                    });
+                }
+            });
     },
-    onReady: function() {
+    onReady: function () {
         getApp().page.onReady(this);
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this);
     },
-    onHide: function() {
+    onHide: function () {
         getApp().page.onHide(this);
     },
-    onUnload: function() {
+    onUnload: function () {
         getApp().page.onUnload(this);
     },
-    uploadLogo: function() {
-        var e = this;
+    uploadLogo: function () {
+        var that = this;
         getApp().uploader.upload({
-            start: function(t) {
+            start: function (t) {
                 getApp().core.showLoading({
                     title: "正在上传",
                     mask: !0
                 });
             },
-            success: function(t) {
-                0 == t.code ? (e.data.mch.logo = t.data.url, e.setData({
-                    mch: e.data.mch
-                })) : e.showToast({
-                    title: t.msg
+            success: function (res) {
+                0 === res.code ? (that.data.mch.logo = res.data.url, that.setData({
+                    mch: that.data.mch
+                })) : that.showToast({
+                    title: res.msg
                 });
             },
-            error: function(t) {
-                e.showToast({
-                    title: t
+            error: function (err) {
+                that.showToast({
+                    title: err
                 });
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading();
             }
         });
     },
-    uploadHeaderBg: function() {
-        var e = this;
+    uploadHeaderBg: function () {
+        var that = this;
         getApp().uploader.upload({
-            start: function(t) {
+            start: function (t) {
                 getApp().core.showLoading({
                     title: "正在上传",
                     mask: !0
                 });
             },
-            success: function(t) {
-                0 == t.code ? (e.data.mch.header_bg = t.data.url, e.setData({
-                    mch: e.data.mch
-                })) : e.showToast({
-                    title: t.msg
+            success: function (res) {
+                0 == res.code ? (that.data.mch.header_bg = res.data.url, that.setData({
+                    mch: res.data.mch
+                })) : that.showToast({
+                    title: res.msg
                 });
             },
-            error: function(t) {
-                e.showToast({
-                    title: t
+            error: function (err) {
+                that.showToast({
+                    title: err
                 });
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading();
             }
         });

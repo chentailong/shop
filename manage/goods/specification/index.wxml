@@ -1,0 +1,49 @@
+<view class="content">
+
+    <view wx:for="{{size_list}}" wx:key="index">
+        <view class="size" wx:if="{{item.show}}">
+            <van-cell-group>
+                <van-field
+                        value="{{ item.name }}"
+                        placeholder="请输入规格"
+                        border="{{ false }}"
+                        data-id="{{item.id}}"
+                        bind:input="sizeName"
+                        label="规格名">
+                    <van-icon slot="left-icon" name="close" color="red" bindtap="deleteSize"
+                              custom-style="font-size:20px;margin-right:10px" data-id="{{item.id}}"/>
+                </van-field>
+                <van-field
+                        bindtap="size_edit"
+                        readonly
+                        label="规格值">
+                    <label slot="input">{{item.sizeValue}}</label>
+                    <label slot="right-icon" wx:if="{{item.sizeValue==null}}">未选择</label>
+                    <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+                    <van-icon slot="left-icon" name="close" color="rgba(0,0,0,0)"
+                              custom-style="font-size:20px;margin-right:10px"/>
+                </van-field>
+            </van-cell-group>
+        </view>
+    </view>
+
+    <view class="title">设置价格、库存等规格明细</view>
+    <view class="basic">
+        <van-field
+                bindtap="detail"
+                readonly
+                label="规格明细">
+            <label slot="right-icon">未设置，点击设置</label>
+            <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+        </van-field>
+    </view>
+    <view class="basics">
+        <van-button icon="plus" type="info" plain round bind:click="addSize" custom-style="height:35px;width:170px;">
+            增加规格
+        </van-button>
+    </view>
+</view>
+
+<view class="footer">
+    <van-button round size="large" type="info" custom-style="width:94%;height:40px;margin-top:20px">保存</van-button>
+</view>

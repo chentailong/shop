@@ -1,0 +1,112 @@
+<include src="/manage/tabBar/index.wxml"></include>
+<view class="container">
+    <!--    用户信息   -->
+    <view class="userinfo"
+          style="background-image:url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fphoto.16pic.com%2F00%2F55%2F40%2F16pic_5540539_b.jpg&refer=http%3A%2F%2Fphoto.16pic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619322913&t=9ee3e4b4a26346b702ee6e6002b4f6d7')">
+        <block wx:if="{{canIUseOpenData}}" calss="userinfo">
+            <view class="userinfo-avatar">
+                <open-data type="userAvatarUrl"></open-data>
+            </view>
+            <open-data type="userNickName" class="userinfo-nickname"></open-data>
+        </block>
+        <block wx:elif="{{!hasUserInfo}}">
+            <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">获取头像昵称</button>
+            <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取头像昵称</button>
+            <view wx:else>请使用1.4.4及以上版本基础库</view>
+        </block>
+        <block wx:else>
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+    </view>
+    <!--    导航图标   -->
+    <view class="navigation">
+        <navigator class="nav" style=" background-color:dodgerblue;" url="/manage/index/order-message/order-message">
+            <van-icon class="icon" name="orders-o" color="white" size="60rpx" info="{{order_number}}"/>
+            <text class="nav-font">订单消息</text>
+        </navigator>
+        <navigator class="nav" style=" background-color:green;" url="/manage/index/share/share">
+            <van-icon class="icon" name="manager-o" color="white" size="60rpx" info=""/>
+            <text class="nav-font">审核消息</text>
+        </navigator>
+        <navigator class="nav" style=" background-color:red;" url="/manage/index/withdraw/withdraw">
+            <van-icon class="icon" name="balance-pay" color="white" size="60rpx" info=""/>
+            <text class="nav-font">提现申请</text>
+        </navigator>
+        <navigator class="nav" style=" background-color:#ffc93c;" url="/manage/index/comment/comment">
+            <van-icon class="icon" name="comment-o" color="white" size="60rpx" info=""/>
+            <text class="nav-font">评论管理</text>
+        </navigator>
+        <navigator class="nav" style=" background-color:violet;" url="/manage/index/user_manage/user_manage">
+            <van-icon class="icon" name="user-o" color="white" size="60rpx" info=""/>
+            <text class="nav-font">用户管理</text>
+        </navigator>
+    </view>
+
+    <!--  支付信息  -->
+    <view class="payMessage">
+        <view class="left_payMoney">
+            <van-dropdown-menu active-color="#1989fa">
+                <van-dropdown-item value="{{value1}}" options="{{option1}}"/>
+            </van-dropdown-menu>
+        </view>
+
+        <view class="right_all">
+            <van-dropdown-menu active-color="#1989fa">
+                <van-dropdown-item value="{{value2}}" options="{{option2}}"/>
+            </van-dropdown-menu>
+        </view>
+        <van-tabs type="card" color="#1989fa">
+            <van-tab title="今日"/>
+            <van-tab title="昨日"/>
+            <van-tab title="7日"/>
+            <van-tab title="30日"/>
+        </van-tabs>
+    </view>
+
+    <!--    销售统计   -->
+    <view class="statistics">
+        <view class="sell">
+            <van-dropdown-menu active-color="#1989fa">
+                <text class="sell_title">销售统计</text>
+            </van-dropdown-menu>
+        </view>
+
+        <view class="right_all">
+            <van-dropdown-menu active-color="#1989fa">
+                <van-dropdown-item value="{{value2}}" options="{{option2}}"/>
+            </van-dropdown-menu>
+        </view>
+        <van-tabs type="card" color="#1989fa">
+            <van-tab title="汇总"/>
+            <van-tab title="今日"/>
+            <van-tab title="昨日"/>
+            <van-tab title="7日"/>
+            <van-tab title="30日"/>
+        </van-tabs>
+        <view class="order_money">
+            <text>支付订单数</text><text class="order_number">{{payOrder}}</text>
+            <text>|</text>
+            <text class="pay_money">支付金额</text><text class="pay_money_number">{{payMoney}}</text>
+        </view>
+
+        <view style="background-color:white;padding-bottom: 90px;">
+            <view class="obligation" bindtap="obligation">
+                <text class="number_order">{{obligation}}</text>
+                <text class="order_name">待付款</text>
+                <van-icon name="arrow" size="10px"/>
+            </view>
+            <view class="obligation" bindtap="drop_shipping">
+                <text class="number_order">{{drop_shipping}}</text>
+                <text class="order_name">代发货</text>
+                <van-icon name="arrow" size="10px"/>
+            </view>
+            <view class="obligation" bindtap="protect_rights">
+                <text class="number_order">{{protect_rights}}</text>
+                <text class="order_name">维权订单</text>
+                <van-icon name="arrow" size="10px"/>
+            </view>
+        </view>
+    </view>
+</view>
+

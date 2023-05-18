@@ -9,6 +9,10 @@ Page({
     },
 
     onLoad: function (address) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, address);
         var that = this;
 

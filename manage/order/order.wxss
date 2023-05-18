@@ -1,0 +1,111 @@
+page {
+    height: 90%;
+    background: white;
+}
+
+.orderClass {
+    width: 100%;
+    margin: 0 auto;
+    padding: 30rpx 0;
+}
+
+.order_class {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.search {
+    padding-top: 30rpx;
+}
+
+.screen {
+    color: #1989fa;
+    margin: 0 30rpx;
+}
+
+.order_list {
+    width: 95%;
+    height: 510rpx;
+    margin: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+.top_list_left {
+    font-size: 12px;
+    width: 70%;
+    height: 30px;
+    padding: 20px;
+}
+
+.top_list_right {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+
+.user_message {
+    width: 94%;
+    height: 30px;
+    margin: 10px 10px 0 10px;
+    /*background-color: white;*/
+}
+
+.name {
+    font-size: 13px;
+    margin: 0 10px;
+}
+
+.phone {
+    font-size: 12px;
+    display: inline-block;
+}
+
+.img {
+    width: 180rpx;
+    height: 180rpx;
+    margin-left: 20px;
+}
+
+.order_name {
+    display: inline-block;
+    width: 67%;
+    line-height: 24px;
+}
+
+.order_message {
+    padding: 5px 10px;
+    font-size: 13px;
+    color: gray;
+}
+
+.order_message_name {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+.price {
+    display: inline-block;
+    float: right;
+}
+
+.total {
+    float: right;
+    font-size: 13px;
+    color: gray;
+    margin-right: 17px;
+}
+
+.all_btn {
+    float: right;
+    margin: 10px 13px 0 0;
+}
+
+.dialog_search {
+    margin: 30px 0;
+}
+
+.order {
+    margin-bottom: 180rpx;
+}

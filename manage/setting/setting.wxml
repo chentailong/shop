@@ -1,0 +1,250 @@
+<include src="/manage/tabBar/index.wxml"></include>
+<view class="content">
+    <view class="head" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlV7dpuhDmBKwXeTavkLjctMaHSqoILWP2PA&usqp=CAU')">
+        <view class="head_photo">
+            <image class="head_img" bindtap="picture"
+                   src="{{project_img}}"/>
+            <view class="project_name" bindtap="edit_name">
+                <text> {{project_name}} </text>
+                <van-icon name="edit" custom-style="font-size:17px"/>
+            </view>
+        </view>
+
+        <!--   短信通知   -->
+        <view class="note">
+            <van-cell title="短信通知">
+                <van-icon name="comment-o" slot="icon" color="#ffcc29" size="20px" custom-style="margin-right:10px"/>
+                <van-switch checked="{{ switch_note }}" size="24px" bind:change="switch_note"/>
+            </van-cell>
+        </view>
+
+        <!--    售后    -->
+        <view class="sort">
+            <van-field
+                    readonly
+                    title-width="200px"
+                    label="删除未支付订单限时" bindtap="delete_order">
+                <van-icon name="gold-coin-o" slot="left-icon" color="#ffcc29" size="20px"
+                          custom-style="margin-right:10px"/>
+                <label slot="right-icon">{{binding_time}}分</label>
+                <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+            </van-field>
+            <van-field
+                    readonly
+                    title-width="200px"
+                    label="自动确认收货时间" bindtap="receipt">
+                <van-icon name="comment-o" slot="left-icon" color="#4a47a3" size="20px"
+                          custom-style="margin-right:10px"/>
+                <label slot="right-icon">{{receipt_time}}天</label>
+                <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+            </van-field>
+            <van-field
+                    readonly
+                    title-width="200px"
+                    label="可申请售后时间" bindtap="after">
+                <van-icon name="ecard-pay" slot="left-icon" color="#289672" size="20px"
+                          custom-style="margin-right:10px"/>
+                <label slot="right-icon">{{after_time}}天</label>
+                <van-icon slot="right-icon" name="arrow" custom-style="font-size:13px"/>
+            </van-field>
+        </view>
+
+        <!--    支付方式    -->
+        <view class="sort">
+            <van-cell title="支付方式" label="线上支付/货到付款/余额支付" center="{{true}}" bind:click="pay_way">
+                <van-icon name="balance-pay" slot="icon" color="#f14668" size="20px" custom-style="margin-right:10px"/>
+                <van-icon slot="right-icon" name="arrow" class="custom-icon"/>
+            </van-cell>
+        </view>
+
+        <!--    发货退货    -->
+        <view class="sort">
+            <van-cell title="发货方式" bind:click="shipments">
+                <van-icon name="free-postage" slot="icon" color="#48426d" size="20px" custom-style="margin-right:10px"/>
+                <label slot="right-icon">已选择</label>
+                <van-icon slot="right-icon" name="arrow" class="custom-icon"/>
+            </van-cell>
+            <van-cell title="退货地址" bind:click="address">
+                <van-icon name="location-o" slot="icon" color="#da723c" size="20px" custom-style="margin-right:10px"/>
+                <label slot="right-icon">已填写</label>
+                <van-icon slot="right-icon" name="arrow" class="custom-icon"/>
+            </van-cell>
+        </view>
+
+        <!--    积分    -->
+        <view class="sorts">
+            <van-cell title="积分抵扣" bind:click="integrals">
+                <van-icon name="after-sale" slot="icon" color="#ef4f4f" size="20px" custom-style="margin-right:10px"/>
+                <label slot="right-icon">{{integral}}积分抵扣1元</label>
+                <van-icon slot="right-icon" name="arrow" class="custom-icon"/>
+            </van-cell>
+            <van-cell title="积分使用规则" bind:click="integral_use">
+                <van-icon name="cashier-o" slot="icon" color="#cae4db" size="20px" custom-style="margin-right:10px"/>
+                <label slot="right-icon">未填写</label>
+                <van-icon slot="right-icon" name="arrow" class="custom-icon"/>
+            </van-cell>
+        </view>
+
+    </view>
+
+
+    <!--  修改名称  -->
+    <van-dialog
+            use-slot
+            title="修改商城名称"
+            show="{{ edit_name_show }}"
+            show-cancel-button
+            bind:close="onClose"
+            bind:confirm="edit_affirm"
+    >
+        <van-field
+                value="{{ project_name }}"
+                placeholder="最多输入15个字符"
+                border="{{ false }}"
+                bind:change="name_change"
+        />
+    </van-dialog>
+
+    <!--  删除订单弹窗  -->
+    <van-dialog
+            use-slot
+            title="删除未支付订单限时"
+            show="{{ delete_order_show }}"
+            show-cancel-button
+            bind:close="onClose"
+            confirm-button-color="#1687a7"
+            bind:confirm="delete_affirm">
+        <van-field
+                custom-style="background-color:#e8eae6;width:70%;margin:15px 45px"
+                value="{{ binding_time }}"
+                bind:change="delete_order_change">
+            <label slot="right-icon">分钟</label>
+        </van-field>
+    </van-dialog>
+
+    <!--  确认收货弹窗  -->
+    <van-dialog
+            use-slot
+            title="自动确认收货时间"
+            show="{{ confirm_receipt_show }}"
+            show-cancel-button
+            bind:close="onClose"
+            confirm-button-color="#1687a7"
+            bind:confirm="receipt_affirm">
+        <van-field
+                custom-style="background-color:#e8eae6;width:70%;margin:15px 45px"
+                value="{{ receipt_time }}"
+                bind:change="receipt_change">
+            <label slot="right-icon">天</label>
+        </van-field>
+    </van-dialog>
+
+    <!--  申请售后弹窗  -->
+    <van-dialog
+            use-slot
+            title="可申请售后天数"
+            show="{{ after_sale_show }}"
+            show-cancel-button
+            bind:close="onClose"
+            confirm-button-color="#1687a7"
+            bind:confirm="after_affirm">
+        <van-field
+                custom-style="background-color:#e8eae6;width:70%;margin:15px 45px"
+                value="{{ after_time }}"
+                bind:change="after_change">
+            <label slot="right-icon">天</label>
+        </van-field>
+    </van-dialog>
+
+    <!--  积分抵扣弹窗  -->
+    <van-dialog
+            use-slot
+            title="积分抵扣"
+            show="{{ integral_show }}"
+            show-cancel-button
+            bind:close="onClose"
+            confirm-button-color="#1687a7"
+            bind:confirm="integral_affirm">
+        <van-field
+                custom-style="background-color:#e8eae6;width:70%;margin:15px 45px"
+                value="{{ integral }}"
+                bind:change="integral_change">
+            <label slot="right-icon">天</label>
+        </van-field>
+    </van-dialog>
+
+    <!--  积分使用规则  -->
+    <van-dialog
+            use-slot
+            title="积分使用规则"
+            show="{{ integral_use_show }}"
+            show-cancel-button
+            bind:close="onClose"
+            confirm-button-color="#1989fa"
+            bind:confirm="integral_use_affirm">
+        <van-field
+                custom-style="width:90%;margin:15px;height:180px;border:1px solid gray"
+                value="{{ integral_use }}"
+                autosize
+                type="textarea"
+                bind:change="integral_use_change">
+        </van-field>
+    </van-dialog>
+
+    <!--  支付方式弹窗  -->
+    <van-dialog
+            use-slot
+            title="支付方式"
+            show="{{ pay_way_show }}"
+            show-cancel-button
+            confirm-button-color="#1989fa"
+            bind:confirm="">
+        <van-checkbox-group value="{{ pay_on_list }}" bind:change="pay_on">
+            <van-cell-group>
+                <van-cell
+                        wx:for="{{ pay_list }}"
+                        wx:key="index"
+                        title=" {{ item.name }}"
+                        value-class="value-class"
+                        clickable
+                        data-index="{{ index }}"
+                        bind:click="pay_toggle">
+                    <image src="{{item.icon}}" class="pay_icon" slot="icon"/>
+<!--                    <van-icon slot="icon" color="#16c79a" name="balance-pay" size="30px"-->
+<!--                              custom-style="margin-right:15px"/>-->
+                    <van-checkbox
+                            class="checkboxes-{{ index }}"
+                            name="{{ item.name }}"/>
+                </van-cell>
+            </van-cell-group>
+        </van-checkbox-group>
+    </van-dialog>
+
+    <!--  发货方式弹窗  -->
+    <van-dialog
+            use-slot
+            title="发货方式"
+            show="{{ shipments_way_show }}"
+            show-cancel-button
+            confirm-button-color="#1989fa"
+            bind:confirm="">
+        <van-checkbox-group value="{{ shipments_on_list }}" bind:change="shipments_on">
+            <van-cell-group>
+                <van-cell
+                        wx:for="{{ shipments }}"
+                        wx:key="index"
+                        title=" {{ item }}"
+                        value-class="value-class"
+                        clickable
+                        data-index="{{ index }}"
+                        bind:click="shipments_toggle">
+                    <van-icon slot="icon" color="#ee9595" name="logistics" size="30px"
+                              custom-style="margin-right:15px"/>
+                    <van-checkbox
+                            class="checkboxes-{{ index }}"
+                            name="{{ item }}"/>
+                </van-cell>
+            </van-cell-group>
+        </van-checkbox-group>
+    </van-dialog>
+</view>

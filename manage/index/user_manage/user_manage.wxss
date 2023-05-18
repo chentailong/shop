@@ -1,0 +1,136 @@
+page {
+    background-color: #e2e2e2;
+}
+
+.user_list {
+    background-color: #FFFFFF;
+    margin: 10px;
+    height: 370rpx;
+    width: 95%;
+
+}
+
+.distributor_list {
+    background-color: #f1f1f1;
+    margin: 0 auto;
+    width: 90%;
+    height: 200rpx;
+}
+
+.user_img {
+    margin: 15px 15px 0 15px;
+    width: 60px;
+    height: 60px;
+}
+
+.distributor_img {
+    width: 200rpx;
+    height: 200rpx;
+}
+
+.user_info {
+    display: inline-block;
+    position: fixed;
+    margin-top: 25px;
+}
+
+.user_info_phone {
+    color: gray;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.label {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.label_money {
+    color: gray;
+    margin-left: 5px;
+    width: 30px;
+}
+
+.label_integral {
+    color: gray;
+    width: 30px;
+    margin-left: 5px;
+}
+
+.all_btn {
+    float: right;
+    margin: 10px 13px 0 0;
+}
+
+.label-list {
+    display: inline-block;
+    width: 180px;
+}
+
+.distributor_info {
+    display: inline-block;
+    position: fixed;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.distributor_label {
+    color: gray;
+    margin: 5px 0;
+}
+
+.sort {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.sort_deal {
+    display: inline-block;
+    line-height: 41px;
+    width: 50%;
+    text-align: center;
+}
+
+.sort_order {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.sort_reimburse {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+}
+
+.sort_up {
+    height: 7px;
+    font-size: 12px;
+    color: gray;
+}
+.sort_down {
+    height: 7px;
+    font-size: 12px;
+    color: gray;
+}
+
+.click_sort_up {
+    height: 7px;
+    font-size: 12px;
+    color: black;
+}
+.click_sort_down {
+    height: 7px;
+    font-size: 12px;
+    color: black;
+}
+
+
+.sort_icon {
+    display: inline-block;
+    position: fixed;
+    margin-left: 10px;
+}

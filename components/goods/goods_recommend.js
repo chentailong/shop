@@ -1,36 +1,36 @@
 module.exports = {
     currentPage: null,
-    init: function(o) {
-        var t = this;
-        void 0 === (t.currentPage = o).goods_recommend && (o.goods_recommend = function(o) {
-            t.goods_recommend(o);
+    init: function(init) {
+        var that = this;
+        void 0 === (that.currentPage = init).goods_recommend && (init.goods_recommend = function(o) {
+            that.goods_recommend(o);
         });
     },
-    goods_recommend: function(a) {
-        var e = this.currentPage;
-        e.setData({
+    goods_recommend: function(res) {
+        var currentPage = this.currentPage;
+        currentPage.setData({
             is_loading: !0
         });
-        var d = e.data.page || 2;
+        var page = currentPage.data.page || 2;
         getApp().request({
             url: getApp().api.default.goods_recommend,
             data: {
-                goods_id: a.goods_id,
-                page: d
+                goods_id: res.goods_id,
+                page: page
             },
-            success: function(o) {
-                if (0 == o.code) {
-                    if (a.reload) var t = o.data.list;
-                    if (a.loadmore) t = e.data.goods_list.concat(o.data.list);
-                    e.data.drop = !0, e.setData({
-                        goods_list: t
-                    }), e.setData({
-                        page: d + 1
+            success: function(res) {
+                if (0 == res.code) {
+                    if (res.reload) var list = res.data.list;
+                    if (res.loadmore) list = currentPage.data.goods_list.concat(res.data.list);
+                    currentPage.data.drop = !0, currentPage.setData({
+                        goods_list: list
+                    }), currentPage.setData({
+                        page: page + 1
                     });
                 }
             },
             complete: function() {
-                e.setData({
+                currentPage.setData({
                     is_loading: !1
                 });
             }

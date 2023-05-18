@@ -4,50 +4,51 @@ Page({
         is_bind: "",
         app: {}
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e), this.checkBind();
-        var t = getApp().core.getStorageSync(getApp().const.USER_INFO);
+    onLoad: function(options) {
+        getApp().page.onLoad(this, options), this.checkBind();
+        var user_info = getApp().core.getStorageSync(getApp().const.USER_INFO);
         this.setData({
-            user: t
+            user: user_info
         });
     },
     checkBind: function() {
-        var t = this;
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.user.check_bind,
-            success: function(e) {
-                getApp().core.hideLoading(), 0 === e.code && t.setData({
-                    is_bind: e.data.is_bind,
-                    app: e.data.app
+            success: function(res) {
+                getApp().core.hideLoading(), 0 === res.code && that.setData({
+                    is_bind: res.data.is_bind,
+                    app: res.data.app
                 });
             }
         });
     },
-    getUserInfo: function(o) {
+    getUserInfo: function(user) {
+        console.log(user)
         getApp().core.showLoading({
             title: "加载中"
         });
-        var n = this;
+        var that = this;
         getApp().core.login({
-            success: function(e) {
-                var t = e.code;
+            success: function(res) {
+                var code = res.code;
                 getApp().request({
                     url: getApp().api.passport.login,
                     method: "POST",
                     data: {
-                        code: t,
-                        user_info: o.detail.rawData,
-                        encrypted_data: o.detail.encryptedData,
-                        iv: o.detail.iv,
-                        signature: o.detail.signature
+                        code: code,
+                        user_info: user.detail.rawData,
+                        encrypted_data: user.detail.encryptedData,
+                        iv: user.detail.iv,
+                        signature: user.detail.signature
                     },
                     success: function(e) {
                         getApp().core.hideLoading(), 0 === e.code ? (getApp().core.showToast({
                             title: "登录成功,请稍等...",
                             icon: "none"
-                        }), n.bind()) : getApp().core.showToast({
+                        }), that.bind()) : getApp().core.showToast({
                             title: "服务器出错，请再次点击绑定",
                             icon: "none"
                         });
@@ -60,14 +61,14 @@ Page({
         getApp().request({
             url: getApp().api.user.authorization_bind,
             data: {},
-            success: function(e) {
-                if (0 === e.code) {
-                    var t = encodeURIComponent(e.data.bind_url);
+            success: function(res) {
+                if (0 === res.code) {
+                    var bind_url = encodeURIComponent(res.data.bind_url);
                     getApp().core.redirectTo({
-                        url: "/pages/web/web?url=" + t
+                        url: "/pages/web/web?url=" + bind_url
                     });
                 } else getApp().core.showToast({
-                    title: e.msg,
+                    title: res.msg,
                     icon: "none"
                 });
             }

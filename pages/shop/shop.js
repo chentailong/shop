@@ -6,177 +6,182 @@ Page({
         page_count: 1,
         longitude: "",
         latitude: "",
-        score: [ 1, 2, 3, 4, 5 ],
+        score: [1, 2, 3, 4, 5],
         keyword: ""
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var e = this;
-        t.user_id;
+    onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
+        options.user_id;
         getApp().core.getLocation({
-            success: function(t) {
-                e.setData({
-                    longitude: t.longitude,
-                    latitude: t.latitude
+            success: function (res) {
+                that.setData({
+                    longitude: res.longitude,
+                    latitude: res.latitude
                 });
             },
-            complete: function() {
-                e.loadData();
+            complete: function () {
+                that.loadData();
             }
         });
     },
-    onShow: function() {
+    onShow: function () {
         getApp().page.onShow(this);
     },
-    loadData: function() {
-        var e = this;
+    loadData: function () {
+        var that = this;
         getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.default.shop_list,
             method: "GET",
             data: {
-                longitude: e.data.longitude,
-                latitude: e.data.latitude
+                longitude: that.data.longitude,
+                latitude: that.data.latitude
             },
-            success: function(t) {
-                0 == t.code && e.setData(t.data);
+            success: function (t) {
+                0 == t.code && that.setData(t.data);
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading();
             }
         });
     },
-    onPullDownRefresh: function() {
-        var e = this;
-        e.setData({
+    onPullDownRefresh: function () {
+        var that = this;
+        that.setData({
             keyword: "",
             page: 1
         }), getApp().core.getLocation({
-            success: function(t) {
-                e.setData({
-                    longitude: t.longitude,
-                    latitude: t.latitude
+            success: function (res) {
+                that.setData({
+                    longitude: res.longitude,
+                    latitude: res.latitude
                 });
             },
-            complete: function() {
-                e.loadData(), getApp().core.stopPullDownRefresh();
+            complete: function () {
+                that.loadData(), getApp().core.stopPullDownRefresh();
             }
         });
     },
-    onReachBottom: function() {
-        var t = this;
-        t.data.page >= t.data.page_count || t.loadMoreData();
+    onReachBottom: function () {
+        var that = this;
+        that.data.page >= that.data.page_count || that.loadMoreData();
     },
-    loadMoreData: function() {
-        var a = this, o = a.data.page;
+    loadMoreData: function () {
+        var that = this, page = that.data.page;
         is_loading || (is_loading = !0, getApp().core.showLoading({
             title: "加载中"
         }), getApp().request({
             url: getApp().api.default.shop_list,
             method: "GET",
             data: {
-                page: o,
-                longitude: a.data.longitude,
-                latitude: a.data.latitude
+                page: page,
+                longitude: that.data.longitude,
+                latitude: that.data.latitude
             },
-            success: function(t) {
-                if (0 == t.code) {
-                    var e = a.data.list.concat(t.data.list);
-                    a.setData({
-                        list: e,
-                        page_count: t.data.page_count,
-                        row_count: t.data.row_count,
-                        page: o + 1
+            success: function (res) {
+                if (0 === rest.code) {
+                    var list = that.data.list.concat(res.data.list);
+                    that.setData({
+                        list: list,
+                        page_count: res.data.page_count,
+                        row_count: res.data.row_count,
+                        page: page + 1
                     });
                 }
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading(), is_loading = !1;
             }
         }));
     },
-    goto: function(e) {
-        var a = this;
-        "undefined" != typeof my ? a.location(e) : getApp().core.getSetting({
-            success: function(t) {
-                t.authSetting["scope.userLocation"] ? a.location(e) : getApp().getauth({
+    goto: function (e) {
+        var that = this;
+        "undefined" != typeof my ? that.location(e) : getApp().core.getSetting({
+            success: function (t) {
+                t.authSetting["scope.userLocation"] ? that.location(e) : getApp().getauth({
                     content: "需要获取您的地理位置授权，请到小程序设置中打开授权！",
                     cancel: !1,
                     author: "scope.userLocation",
-                    success: function(t) {
-                        t.authSetting["scope.userLocation"] && a.location(e);
+                    success: function (t) {
+                        t.authSetting["scope.userLocation"] && that.location(e);
                     }
                 });
             }
         });
     },
-    location: function(t) {
-        var e = this.data.list, a = t.currentTarget.dataset.index;
+    location: function (t) {
+        var list = this.data.list, index = t.currentTarget.dataset.index;
         getApp().core.openLocation({
-            latitude: parseFloat(e[a].latitude),
-            longitude: parseFloat(e[a].longitude),
-            name: e[a].name,
-            address: e[a].address
+            latitude: parseFloat(list[index].latitude),
+            longitude: parseFloat(list[index].longitude),
+            name: list[index].name,
+            address: list[index].address
         });
     },
-    inputFocus: function(t) {
+    inputFocus: function (t) {
         this.setData({
             show: !0
         });
     },
-    inputBlur: function(t) {
+    inputBlur: function (t) {
         this.setData({
             show: !1
         });
     },
-    inputConfirm: function(t) {
+    inputConfirm: function (t) {
         this.search();
     },
-    input: function(t) {
+    input: function (t) {
         this.setData({
             keyword: t.detail.value
         });
     },
-    search: function(t) {
-        var e = this;
+    search: function (t) {
+        var that = this;
         getApp().core.showLoading({
             title: "搜索中"
         }), getApp().request({
             url: getApp().api.default.shop_list,
             method: "GET",
             data: {
-                keyword: e.data.keyword,
-                longitude: e.data.longitude,
-                latitude: e.data.latitude
+                keyword: that.data.keyword,
+                longitude: that.data.longitude,
+                latitude: that.data.latitude
             },
-            success: function(t) {
-                0 == t.code && e.setData(t.data);
+            success: function (res) {
+                0 === res.code && that.setData(res.data);
             },
-            complete: function() {
+            complete: function () {
                 getApp().core.hideLoading();
             }
         });
     },
-    go: function(t) {
-        var e = t.currentTarget.dataset.index, a = this.data.list;
+    go: function (t) {
+        var index = t.currentTarget.dataset.index, list = this.data.list;
         getApp().core.navigateTo({
-            url: "/pages/shop-detail/shop-detail?shop_id=" + a[e].id
+            url: "/pages/shop-detail/shop-detail?shop_id=" + list[index].id
         });
     },
-    navigatorClick: function(t) {
-        var e = t.currentTarget.dataset.open_type, a = t.currentTarget.dataset.url;
-        return "wxapp" != e || ((a = function(t) {
+    navigatorClick: function (event) {
+        var open_type = event.currentTarget.dataset.open_type, url = event.currentTarget.dataset.url;
+        return "wxapp" !== open_type || ((url = function (t) {
             var e = /([^&=]+)=([\w\W]*?)(&|$|#)/g, a = /^[^\?]+\?([\w\W]+)$/.exec(t), o = {};
-            if (a && a[1]) for (var n, i = a[1]; null != (n = e.exec(i)); ) o[n[1]] = n[2];
+            if (a && a[1]) for (var n, i = a[1]; null != (n = e.exec(i));) o[n[1]] = n[2];
             return o;
-        }(a)).path = a.path ? decodeURIComponent(a.path) : "", getApp().core.navigateToMiniProgram({
-            appId: a.appId,
-            path: a.path,
-            complete: function(t) {}
+        }(url)).path = url.path ? decodeURIComponent(url.path) : "", getApp().core.navigateToMiniProgram({
+            appId: url.appId,
+            path: url.path,
+            complete: function (t) {
+            }
         }), !1);
     },
-    onShareAppMessage: function(t) {
+    onShareAppMessage: function (t) {
         return getApp().page.onShareAppMessage(this), {
             path: "/pages/shop/shop?user_id=" + getApp().core.getStorageSync(getApp().const.USER_INFO).id
         };

@@ -1,6 +1,7 @@
 module.exports = {
     currentPage: null,
     currentPageOptions: {},
+    userinfo : {},
     navbarPages: [
         "pages/index/index",
         "pages/cat/cat",
@@ -31,9 +32,10 @@ module.exports = {
         if (this.setUserInfo(), this.setWxappImg(), this.setStore(), this.setParentId(currentPageOptions),
             this.getNavigationBarColor(), this.setDeviceInfo(), this.setPageClasses(), this.setPageNavbar(),
             this.setBarTitle(), "function" == typeof currentPage.onSelfLoad && currentPage.onSelfLoad(currentPageOptions), that._setFormIdSubmit(),
-        "undefined" != typeof my && "pages/login/login" != currentPage.route && currentPageOptions && (currentPage.options || (currentPage.options = currentPageOptions),
-            getApp().core.setStorageSync("last_page_options", currentPageOptions)), "lottery/goods/goods" == currentPage.route && currentPageOptions) {
-            if (currentPageOptions.user_id) var user_id = currentPageOptions.user_id, lottery_id = currentPageOptions.id; else if (currentPageOptions.scene && isNaN(currentPageOptions.scene)) {
+        "undefined" != typeof my && "pages/login/login" !== currentPage.route && currentPageOptions && (currentPage.options || (currentPage.options = currentPageOptions),
+            getApp().core.setStorageSync("last_page_options", currentPageOptions)), "lottery/goods/goods" === currentPage.route && currentPageOptions) {
+            if (currentPageOptions.user_id) var user_id = currentPageOptions.user_id,
+                lottery_id = currentPageOptions.id; else if (currentPageOptions.scene && isNaN(currentPageOptions.scene)) {
                 var scene = decodeURIComponent(currentPageOptions.scene);
                 if (scene && (scene = getApp().helper.scene_decode(scene)) && scene.uid) user_id = scene.uid, lottery_id = scene.gid;
             }
@@ -70,8 +72,8 @@ module.exports = {
             that.modalShow(e);
         }), void 0 === currentPage.myLogin && (currentPage.myLogin = function () {
             that.myLogin();
-        }), void 0 === currentPage.getUserInfo && (currentPage.getUserInfo = function (e) {
-            that.getUserInfo(e);
+        }), void 0 === currentPage.getUserProfile && (currentPage.getUserProfile = function (e) {
+            that.getUserProfile(e);
         }), void 0 === currentPage.getPhoneNumber && (currentPage.getPhoneNumber = function (e) {
             that.getPhoneNumber(e);
         }), void 0 === currentPage.bindParent && (currentPage.bindParent = function (e) {
@@ -161,7 +163,7 @@ module.exports = {
             if (info.user_id) id = info.user_id; else if (info.scene) {
                 if (isNaN(info.scene)) {
                     var scene = decodeURIComponent(info.scene);
-                    scene (scene = getApp().helper.scene_decode(scene)) && scene.uid && (id = scene.uid);
+                    scene(scene = getApp().helper.scene_decode(scene)) && scene.uid && (id = scene.uid);
                 } else -1 == currentPage.route.indexOf("clerk") && (id = info.scene);
                 this.setOfficalAccount();
             } else if (null !== getApp().query) {
@@ -178,8 +180,9 @@ module.exports = {
         }
     },
     showToast: function (hint) {
-        var currentPage = this.currentPage, duration = hint.duration || 2500, title = hint.title || "", returned = (hint.success,
-            hint.fail, hint.complete || null);
+        var currentPage = this.currentPage, duration = hint.duration || 2500, title = hint.title || "",
+            returned = (hint.success,
+                hint.fail, hint.complete || null);
         currentPage._toast_timer && clearTimeout(currentPage._toast_timer), currentPage.setData({
             _toast: {
                 title: title
@@ -420,27 +423,52 @@ module.exports = {
             modal_show: !0
         }), console.log("点击会弹出弹框");
     },
-    getUserInfo: function (o) {
+
+    getUserProfile: function (o) {
         var n = this;
-        "getUserInfo:ok" == o.detail.errMsg && getApp().core.login({
-            success: function (e) {
-                var t = e.code;
-                n.unionLogin({
-                    code: t,
-                    user_info: o.detail.rawData,
-                    encrypted_data: o.detail.encryptedData,
-                    iv: o.detail.iv,
-                    signature: o.detail.signature
+        wx.getUserInfo({
+            success(res) {
+                "getUserInfo:ok" === res.errMsg && getApp().core.login({
+                    success: function (e) {
+                        var t = e.code;
+                        n.unionLogin({
+                            code: t,
+                            user_info: res.rawData,
+                            encrypted_data: res.encryptedData,
+                            iv:res.iv,
+                            signature: res.signature
+                        });
+                    },
+                    fail: function (e) {
+                    }
                 });
-            },
-            fail: function (e) {
             }
-        });
+        })
     },
+
+    //   getUserProfile: function (e){
+    //     var that =this
+    //     wx.getUserProfile({
+    //         desc: "获取你的昵称、头像、地区及性别",
+    //         success(res) {
+    //             "getUserProfile:ok" === res.errMsg && getApp().core.login({
+    //                 success: function (e) {
+    //                     var t = e.code;
+    //                     that.unionLogin({
+    //                         code: t,
+    //                         user_info: res.rawData,
+    //                         encrypted_data: res.encryptedData,
+    //                         iv: res.iv,
+    //                         signature: res.signature
+    //                     });
+    //                 },
+    //             })
+    //         }
+    //     })
+    // },
+
     myLogin: function () {
-
         console.log(411);
-
         var t = this;
         "my" === getApp().platform && (console.log(getApp().login_complete), getApp().login_complete || (getApp().login_complete = !0,
             my.getAuthCode({
@@ -458,6 +486,7 @@ module.exports = {
             })));
     },
     unionLogin: function (e) {
+        console.log(e)
         var o = this.currentPage, n = this;
         getApp().core.showLoading({
             title: "正在登录",
@@ -467,7 +496,7 @@ module.exports = {
             method: "POST",
             data: e,
             success: function (e) {
-                if (0 == e.code) {
+                if (0 === e.code) {
                     o.setData({
                         __user_info: e.data
                     }), getApp().setUser(e.data), getApp().core.setStorageSync(getApp().const.ACCESS_TOKEN, e.data.access_token),
@@ -475,11 +504,13 @@ module.exports = {
                     var t = getApp().core.getStorageSync(getApp().const.STORE);
                     e.data.binding || !t.option.phone_auth || t.option.phone_auth && 0 == t.option.phone_auth ? n.loadRoute() : ("undefined" == typeof wx && n.loadRoute(),
                         n.setPhone()), n.setUserInfoShowFalse();
-                } else getApp().login_complete = !1, getApp().core.showModal({
-                    title: "提示",
-                    content: e.msg,
-                    showCancel: !1
-                });
+                } else {
+                    getApp().login_complete = !1, getApp().core.showModal({
+                        title: "提示",
+                        content: e.msg,
+                        showCancel: !1
+                    });
+                }
             },
             fail: function () {
                 getApp().login_complete = !1;
@@ -488,7 +519,8 @@ module.exports = {
                 getApp().core.hideLoading();
             }
         });
-    },
+    }
+    ,
     getPhoneNumber: function (o) {
         var n = this.currentPage, a = this;
         "getPhoneNumber:fail user deny" == o.detail.errMsg ? getApp().core.showModal({
@@ -531,44 +563,54 @@ module.exports = {
                 });
             }
         }));
-    },
+    }
+    ,
     setUserInfoShow: function () {
         var e = this.currentPage;
-        "wx" == getApp().platform ? e.setData({
+        "wx" === getApp().platform ? e.setData({
             user_info_show: !0
         }) : this.myLogin();
-    },
+        console.log("执行了显示")
+    }
+    ,
     setPhone: function () {
         var e = this.currentPage;
         "undefined" == typeof my && e.setData({
             user_bind_show: !0
         });
-    },
+    }
+    ,
     setUserInfoShowFalse: function () {
         this.currentPage.setData({
             user_info_show: !1
         });
-    },
+    }
+    ,
     closeCouponBox: function (e) {
         this.currentPage.setData({
             get_coupon_list: ""
         });
-    },
+    }
+    ,
     relevanceSuccess: function (e) {
         console.log(e);
-    },
+    }
+    ,
     relevanceError: function (e) {
         console.log(e);
-    },
+    }
+    ,
     setOfficalAccount: function (e) {
         this.currentPage.setData({
             __is_offical_account: !0
         });
-    },
+    }
+    ,
     loadRoute: function () {
         var e = this.currentPage;
         "pages/index/index" == e.route || getApp().core.redirectTo({
             url: "/" + e.route + "?" + getApp().helper.objectToUrlParams(e.options)
         }), this.setUserInfoShowFalse();
     }
-};
+}
+;

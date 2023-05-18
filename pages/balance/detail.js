@@ -3,6 +3,10 @@ var is_more = !1;
 Page({
     data: {},
     onLoad: function(e) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, e);
         var t = this;
         t.setData(e), getApp().core.showLoading({

@@ -1,79 +1,82 @@
-module.exports = function(a) {
-    a.data || (a.data = {});
-    var o = this.core,
-        e = this.core.getStorageSync(this.const.ACCESS_TOKEN),
-        t = this.core.getStorageSync(this.const.FORM_ID_LIST);
-        if(a.data.hideLogin && a.data.hideLogin==1){
-            e && (a.data.access_token = e), a.data._version = this._version, a.data._platform = this.platform, !this.is_login && this.page.currentPage ;
-   
-        }else{
-            e && (a.data.access_token = e), a.data._version = this._version, a.data._platform = this.platform, !this.is_login && this.page.currentPage && (this.is_login = !0, this.login({}));
-   
-        }
-     
+module.exports = function (options) {
+    options.data || (options.data = {});
+    var core = this.core,
+        access_token = this.core.getStorageSync(this.const.ACCESS_TOKEN),
+        form_id_list = this.core.getStorageSync(this.const.FORM_ID_LIST);
+    if (options.data.hideLogin && options.data.hideLogin == 1) {
+        access_token && (options.data.access_token = access_token), options.data._version = this._version,
+            options.data._platform = this.platform, !this.is_login && this.page.currentPage;
+    } else {
+        access_token && (options.data.access_token = access_token), options.data._version = this._version, options.data._platform = this.platform,
+        !this.is_login && this.page.currentPage && (this.is_login = !0, this.login({}));
 
-    var s = this;
-    t && 1 <= t.length && s.is_form_id_request && (s.is_form_id_request = !1, s.request({
-        url: s.api.default.form_id,
+    }
+
+
+    var that = this;
+    form_id_list && 1 <= form_id_list.length && that.is_form_id_request && (that.is_form_id_request = !1, that.request({
+        url: that.api.default.form_id,
         method: "POST",
         data: {
-            formIdList: JSON.stringify(t)
+            formIdList: JSON.stringify(form_id_list)
         },
-        success: function(e) {
-            s.core.removeStorageSync(s.const.FORM_ID_LIST);
+        success: function (e) {
+            that.core.removeStorageSync(that.const.FORM_ID_LIST);
         },
-        complete: function() {
-            s.is_form_id_request = !0;
+        complete: function () {
+            that.is_form_id_request = !0;
         }
-    })), o.request({
-        url: a.url,
-        header: a.header || {
+    })), core.request({
+        url: options.url,
+        header: options.header || {
             "content-type": "application/x-www-form-urlencoded"
         },
-        data: a.data || {},
-        method: a.method || "GET",
-        dataType: a.dataType || "json",
-        success: function(e) {
-            -1 == e.data.code ? (s.core.hideLoading(), s.page.setUserInfoShow(), s.is_login = !1) : -2 == e.data.code ? o.redirectTo({
+        data: options.data || {},
+        method: options.method || "GET",
+        dataType: options.dataType || "json",
+        success: function (res) {
+            -1 == res.data.code ? (that.core.hideLoading(), that.page.setUserInfoShow(), that.is_login = !1) : -2 == res.data.code ? core.redirectTo({
                 url: "/pages/store-disabled/store-disabled"
-            }) : a.success && a.success(e.data);
+            }) : options.success && options.success(res.data);
         },
-        fail: function(e) {
-            if (console.warn("--- request fail >>>"), console.warn("--- " + a.url + " ---"), console.warn(e), console.warn("<<< request fail ---"), a && a.noHandlerFail) "function" == typeof a.fail && a.fail(e.data);
+        fail: function (err) {
+            if (console.warn("--- request fail >>>"), console.warn("--- " + options.url + " ---"),
+                console.warn(err), console.warn("<<< request fail ---"),
+            options && options.noHandlerFail) "function" == typeof options.fail && options.fail(err.data);
             else {
-                var t = getApp();
-                t.is_on_launch ? (t.is_on_launch = !1, o.showModal({
+                var app = getApp();
+                app.is_on_launch ? (app.is_on_launch = !1, core.showModal({
                     title: "网络请求出错",
-                    content: e.errMsg || "",
+                    content: err.errMsg || "",
                     showCancel: !1,
-                    success: function(e) {
-                        e.confirm && a.fail && a.fail(e);
+                    success: function (e) {
+                        e.confirm && options.fail && options.fail(e);
                     }
-                })) : (o.showToast({
-                    title: e.errMsg,
+                })) : (core.showToast({
+                    title: err.errMsg,
                     image: "/images/icon-warning.png"
-                }), a.fail && a.fail(e));
+                }), options.fail && options.fail(err));
             }
         },
-        complete: function(t) {
-            if (200 != t.statusCode && t.data && t.data.code && 500 == t.data.code) {
-                var e = t.data.data.message;
-                o.showModal({
+        complete: function (res) {
+            if (200 != res.statusCode && res.data && res.data.code && 500 == res.data.code) {
+                var message = res.data.data.message;
+                core.showModal({
                     title: "系统错误",
-                    content: e + ";\r\n请将错误内容复制发送给我们，以便进行问题追踪。",
+                    content: message + ";\r\n请将错误内容复制发送给我们，以便进行问题追踪。",
                     cancelText: "关闭",
                     confirmText: "复制",
-                    success: function(e) {
-                        e.confirm && o.setClipboardData({
+                    success: function (e) {
+                        e.confirm && core.setClipboardData({
                             data: JSON.stringify({
-                                data: t.data.data,
-                                object: a
+                                data: res.data.data,
+                                object: options
                             })
                         });
                     }
                 });
             }
-            a.complete && a.complete(t);
+            options.complete && options.complete(res);
         }
     });
 };

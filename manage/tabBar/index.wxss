@@ -1,0 +1,30 @@
+.tab {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    color: #555;
+    z-index: 2000;
+    border-top: 1rpx solid rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    padding-bottom: 65rpx
+}
+
+.tab_icon {
+    box-sizing: border-box;
+    width: 64rpx;
+    height: 64rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.tab_text {
+    box-sizing: border-box;
+    font-size: 8pt;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #ff4544;
+}

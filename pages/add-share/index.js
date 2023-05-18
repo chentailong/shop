@@ -12,6 +12,10 @@ Page({
         show_modal: !1
     },
     onLoad: function(add_shareData) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, add_shareData);
     },
     onReady: function() {

@@ -3,6 +3,10 @@ Page({
         second: 60
     },
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         var e = this;
         getApp().request({

@@ -1,0 +1,78 @@
+<view class="container">
+    <van-tabs active="{{ active }}" bind:change="changeTab" color="#1989fa" title-active-color="#1989fa">
+        <van-tab title="下单提醒">
+            <view class="pull-down">
+                <van-dropdown-menu active-color="#1989fa">
+                    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}"/>
+                </van-dropdown-menu>
+            </view>
+            <block wx:if="{{order.length!==0}}">
+                <view wx:for="{{order}}" wx:key="index">
+                    <view class="new_order">
+                        <view class="message">
+                            <van-tag plain type="warning">{{item.mch.name}}</van-tag>
+                            <text class="hint"> 有新订单啦 </text>
+                        </view>
+                        <text class="time">{{item.addtime}}</text>
+                        <view class="info">
+                            <image class="img" src="{{item.goods_list[0].goods_pic}}"></image>
+                            <view class="info_name">
+                                <view>{{item.goods_list[0].goods_name}}</view>
+                                <view class="user">来自用户{{item.user}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <van-empty description="没有任何消息哦~" wx:if="{{!order_amount}}"/>
+            </block>
+        </van-tab>
+
+
+        <van-tab title="退款提醒">
+            <view class="pull-down">
+                <van-dropdown-menu active-color="#1989fa">
+                    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}"/>
+                </van-dropdown-menu>
+            </view>
+            <block wx:if="{{refund.length!==0}}">
+
+            </block>
+            <block wx:else>
+                <van-empty description="没有任何消息哦~"/>
+            </block>
+        </van-tab>
+
+
+        <van-tab title="售后提醒">
+            <view class="pull-down">
+                <van-dropdown-menu active-color="#1989fa">
+                    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}"/>
+                </van-dropdown-menu>
+            </view>
+            <block wx:if="{{after_sale.length!==0}}">
+                <view wx:for="{{after_sale}}" wx:key="index">
+                    <view class="new_order">
+                        <view class="message">
+                            <van-tag plain type="warning">{{item.mch.name}}</van-tag>
+                            <text class="hint"> 有新的售后信息 </text>
+                        </view>
+                        <text class="time">{{item.addtime}}</text>
+                        <view class="info">
+                            <image class="img" src="{{item.goods_list[0].goods_pic}}"></image>
+                            <view class="info_name">
+                                <view>{{item.goods_list[0].goods_name}}</view>
+                                <view class="user">来自用户{{item.user}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <van-empty description="没有任何消息哦~"/>
+            </block>
+        </van-tab>
+    </van-tabs>
+</view>
+

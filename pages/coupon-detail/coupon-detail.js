@@ -1,6 +1,10 @@
 Page({
     data: {},
     onLoad: function(t) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
         getApp().page.onLoad(this, t);
         var e = this, o = t.user_coupon_id ? t.user_coupon_id : 0, a = t.coupon_id ? t.coupon_id : 0;
         (o || a) && (getApp().core.showLoading({

@@ -1,6 +1,6 @@
 <view class="page">
-    <include src="/components/common/common"></include>
-    <include src="/components/header/header"></include>
+    <include src="/components/common/common.wxml"></include>
+    <include src="/components/header/header.wxml"></include>
     <view class="body after-navber {{fixed?'fixed-tab-'+tab:''}}">
         <view class="header-h flex-y-bottom">
             <image class="header-bg" src="{{shop.header_bg}}"></image>
@@ -174,7 +174,7 @@
                             <view style="font-size:12pt;color:#353535">店家电话: {{shop.tel}}</view>
                         </view>
                         <view style="text-align:center;padding-bottom:48rpx;padding-top:35rpx">
-                            <view bindtap="copyinfo" class="copy-info" data-info="{{shop.wechat_name}}">一键复制</view>
+                            <view bindtap="copyInfo" class="copy-info" data-info="{{shop.wechat_name}}">一键复制</view>
                             <view style="display:inline-block;width:30rpx"></view>
                             <view bindtap="callPhone" class="copy-info" data-info="{{shop.tel}}">拨打电话</view>
                         </view>
@@ -183,6 +183,6 @@
             </view>
         </view>
     </view>
-    <include src="./../..//components/quick-navigation/quick-navigation.wxml"></include>
-    <include src="/components/footer/footer"></include>
+    <include src="./../../components/quick-navigation/quick-navigation.wxml"></include>
+    <include src="/components/footer/footer.wxml"></include>
 </view>

@@ -9,16 +9,20 @@ Page({
         list: Array,
         no_more: !1
     },
-    onLoad: function(t) {
-        getApp().page.onLoad(this, t);
-        var a = getApp().core.getStorageSync(getApp().const.SHARE_SETTING);
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var setting = getApp().core.getStorageSync(getApp().const.SHARE_SETTING);
         this.setData({
-            share_setting: a
-        }), is_no_more = is_loading = !1, p = 2, this.GetList(t.status || 1);
+            share_setting: setting
+        }), is_no_more = is_loading = !1, p = 2, this.GetList(options.status || 1);
     },
     GetList: function(t) {
-        var a = this;
-        is_loading || (is_loading = !0, a.setData({
+        var that = this;
+        is_loading || (is_loading = !0, that.setData({
             status: parseInt(t || 1)
         }), getApp().core.showLoading({
             title: "正在加载",
@@ -26,16 +30,16 @@ Page({
         }), getApp().request({
             url: getApp().api.share.get_team,
             data: {
-                status: a.data.status,
+                status: that.data.status,
                 page: 1
             },
-            success: function(t) {
-                a.setData({
-                    first_count: t.data.first,
-                    second_count: t.data.second,
-                    third_count: t.data.third,
-                    list: t.data.list
-                }), 0 == t.data.list.length && (is_no_more = !0, a.setData({
+            success: function(res) {
+                that.setData({
+                    first_count: res.data.first,
+                    second_count: res.data.second,
+                    third_count: res.data.third,
+                    list: res.data.list
+                }), 0 === res.data.list.length && (is_no_more = !0, that.setData({
                     no_more: !0
                 }));
             },
@@ -50,23 +54,23 @@ Page({
     loadData: function() {
         if (!is_loading) {
             is_loading = !0;
-            var a = this;
+            var that = this;
             getApp().core.showLoading({
                 title: "正在加载",
                 mask: !0
             }), getApp().request({
                 url: getApp().api.share.get_team,
                 data: {
-                    status: a.data.status,
+                    status: that.data.status,
                     page: p
                 },
-                success: function(t) {
-                    a.setData({
-                        first_count: t.data.first,
-                        second_count: t.data.second,
-                        third_count: t.data.third,
-                        list: a.data.list.concat(t.data.list)
-                    }), 0 == t.data.list.length && (is_no_more = !0, a.setData({
+                success: function(res) {
+                    that.setData({
+                        first_count: res.data.first,
+                        second_count: res.data.second,
+                        third_count: res.data.third,
+                        list: that.data.list.concat(res.data.list)
+                    }), 0 === res.data.list.length && (is_no_more = !0, that.setData({
                         no_more: !0
                     }));
                 },

@@ -7,19 +7,23 @@ Page({
         order_refund: null,
         express_index: null
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var o = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载"
         }), getApp().request({
             url: getApp().api.order.refund_detail,
             data: {
-                order_refund_id: e.id
+                order_refund_id: options.id
             },
-            success: function(e) {
-                0 == e.code && o.setData({
-                    order_refund: e.data,
+            success: function(res) {
+                0 === res.code && that.setData({
+                    order_refund: res.data,
                     isPageShow: !0
                 });
             },

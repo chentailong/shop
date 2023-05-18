@@ -1,0 +1,77 @@
+<include src="/manage/tabBar/index.wxml"></include>
+<view class="content">
+    <van-search
+            background="Gainsboro"
+            value="{{ search_text }}"
+            shape="round"
+            use-action-slot
+            placeholder="请输入搜索关键词">
+        <view slot="action" bindtap="screen" class="screen">
+            <van-icon name="add-o"/>添加商品
+        </view>
+    </van-search>
+    <van-dialog id="van-dialog"/>
+
+    <van-tabs active="{{ active }}" bind:change="onChange_tab" color="#1989fa" title-active-color="#1989fa">
+        <!--    出售中     -->
+        <van-tab title="出售中">
+            <block wx:if="{{goods_list.length !== 0}}">
+                <view class="list">
+                    <view class="goods_list" wx:for="{{goods_list}}" wx:key="index">
+                        <image src="{{item.pic_url}}" class="goods_img"></image>
+                        <view class="goods_info">
+                            <view>{{item.name}}</view>
+                            <view class="goods_price">￥{{item.price}}</view>
+                            <view class="goods_inventory">库存:{{item.goods_inventory}}</view>
+                        </view>
+                        <view class="more" bindtap="showPopup" data-id="{{item.id}}">...</view>
+
+                        <van-action-sheet show="{{ function_show }}" bind:close="onClose">
+                            <view class="operations">
+                                <navigator url="/pages/goods/add/add?id={{edit_id}}" class="operation"><van-icon
+                                        name="edit"/>编辑
+                                </navigator>
+                                <view class="operation" bindtap="XJia" data-id="{{edit_id}}"><van-icon name="down"/>下架
+                                </view>
+                                <view class="operation" bindtap="deletes" data-id="{{edit_id}}">
+                                    <van-icon name="delete-o"/>
+                                    删除
+                                </view>
+                            </view>
+                        </van-action-sheet>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <van-empty
+                        class="custom-image"
+                        image="https://img.yzcdn.cn/vant/custom-empty-image.png"
+                        description="没有任何商品哦~"/>
+            </block>
+        </van-tab>
+
+
+        <!--    已下架    -->
+        <van-tab title="已下架">
+            <block wx:if="{{goods_list.length !== 0}}">
+                <view class="list">
+                    <view class="goods_list" wx:for="{{goods_list}}" wx:key="index">
+                        <image src="{{item.img}}" class="goods_img"></image>
+                        <view class="goods_info">
+                            <view>{{item.goods_name}}</view>
+                            <view class="goods_price">￥{{item.goods_price}}</view>
+                            <view class="goods_inventory">库存:{{item.goods_inventory}}</view>
+                        </view>
+                        <view class="more" bindtap="showPopup">...</view>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <van-empty
+                        class="custom-image"
+                        image="https://img.yzcdn.cn/vant/custom-empty-image.png"
+                        description="没有任何商品哦~"/>
+            </block>
+        </van-tab>
+    </van-tabs>
+</view>

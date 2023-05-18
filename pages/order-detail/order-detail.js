@@ -8,23 +8,27 @@ Page({
             return this.data.order.total_price;
         }
     },
-    onLoad: function(e) {
-        getApp().page.onLoad(this, e);
-        var t = this;
+    onLoad: function(options) {
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+        getApp().page.onLoad(this, options);
+        var that = this;
         getApp().core.showLoading({
             title: "正在加载"
         });
-        var o = getCurrentPages(), a = o[o.length - 2];
+        var Pages = getCurrentPages(), route = Pages[Pages.length - 2];
         getApp().request({
             url: getApp().api.order.detail,
             data: {
-                order_id: e.id,
-                route: a.route
+                order_id: options.id,
+                route: route.route
             },
-            success: function(e) {
-                console.log(e)
-                0 == e.code && t.setData({
-                    order: e.data,
+            success: function(res) {
+                console.log(res)
+                0 === res.code && that.setData({
+                    order: res.data,
                     isPageShow: !0
                 });
             },
@@ -34,9 +38,9 @@ Page({
         });
     },
     copyText: function(e) {
-        var t = e.currentTarget.dataset.text;
+        var text = e.currentTarget.dataset.text;
         getApp().core.setClipboardData({
-            data: t,
+            data: text,
             success: function() {
                 getApp().core.showToast({
                     title: "已复制"
@@ -45,24 +49,24 @@ Page({
         });
     },
     location: function() {
-        var e = this.data.order.shop;
+        var shop = this.data.order.shop;
         getApp().core.openLocation({
-            latitude: parseFloat(e.latitude),
-            longitude: parseFloat(e.longitude),
-            address: e.address,
-            name: e.name
+            latitude: parseFloat(shop.latitude),
+            longitude: parseFloat(shop.longitude),
+            address: shop.address,
+            name: shop.name
         });
     },
     orderRevoke: function(t) {
-        var o = this;
+        var that = this;
         getApp().core.showModal({
             title: "提示",
             content: "是否退款该订单？",
             cancelText: "否",
             confirmText: "是",
-            success: function(e) {
-                if (e.cancel) return !0;
-                e.confirm && (getApp().core.showLoading({
+            success: function(res) {
+                if (res.cancel) return !0;
+                res.confirm && (getApp().core.showLoading({
                     title: "操作中"
                 }), getApp().request({
                     url: getApp().api.order.revoke,
@@ -75,8 +79,8 @@ Page({
                             content: e.msg,
                             showCancel: !1,
                             success: function(e) {
-                                e.confirm && o.onLoad({
-                                    id: o.data.order.order_id
+                                e.confirm && that.onLoad({
+                                    id: that.data.order.order_id
                                 });
                             }
                         });

@@ -113,7 +113,10 @@
             <navigator class="goods-item" openType="navigate" url="/pages/goods/goods?id={{item.id}}" wx:for="{{goods_list}}" wx:key="{{item.id}}">
                 <image class="goods-pic" mode="aspectFill" src="{{item.pic_url}}"></image>
                 <view class="goods-info" style="padding:5rpx 20rpx;">
-                    <text class="mb-10 text-more-2" style="height:2.8em;line-height:1.4;">{{item.name}}</text>
+                    <text class="mb-10 text-more-2" style="height:30px;line-height:1.4;">{{item.name}}</text>
+                    <view class="member_money"><image class="img" src="https://gpyx.gxmuzi.com/web/statics/wxapp/images/member_price.png"></image>
+                        <text>  ￥{{value.attr[0].member1}}</text>
+                    </view>
                     <view class="flex-row">
                         <view class="flex-grow-1" style="color:#ff334b">
                             <block wx:if="{{item.is_negotiable!=1}}">￥</block>{{item.price}}</view>
